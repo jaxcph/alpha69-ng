@@ -8,4 +8,3 @@ export interface Member {
     photoUrl?: string;
     created: Date;
  }
- 

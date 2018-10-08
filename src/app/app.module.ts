@@ -16,10 +16,16 @@ import { ModelsComponent } from './models/models.component';
 
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { environment } from '../environments/environment';
 import { FormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { DropZoneDirective } from './files/drop-zone.directive';
+import { FileUploadComponent } from './files/file-upload/file-upload.component';
+import { ProfileComponent } from './auth/profile/profile.component';
+import { FileSizePipe } from './files/file-size.pipe';
+
 
 @NgModule({
   declarations: [
@@ -29,7 +35,11 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     WelcomeComponent,
     SignupComponent,
     LoginComponent,
-    ModelsComponent
+    ModelsComponent,
+    DropZoneDirective,
+    FileUploadComponent,
+    ProfileComponent,
+    FileSizePipe
   ],
   imports: [
     BrowserModule,
@@ -40,7 +50,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     FlexLayoutModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
-    AngularFireAuthModule
+    AngularFireAuthModule,
+    AngularFireStorageModule
   ],
   providers: [AuthService],
   bootstrap: [AppComponent]
