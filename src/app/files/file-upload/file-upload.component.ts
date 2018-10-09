@@ -1,11 +1,13 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, OnDestroy } from '@angular/core';
 import { AngularFireStorage, AngularFireUploadTask, AngularFireStorageReference } from '@angular/fire/storage';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { ThrowStmt } from '@angular/compiler';
 import { UIService } from '../../common/ui.service';
 import { AuthService } from '../../auth/auth.service';
 import { auth } from 'firebase';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFireAuth } from '@angular/fire/auth';
 
 // https://angularfirebase.com/lessons/firebase-storage-with-angularfire-dropzone-file-uploader/
 
@@ -14,7 +16,8 @@ import { auth } from 'firebase';
   templateUrl: './file-upload.component.html',
   styleUrls: ['./file-upload.component.scss']
 })
-export class FileUploadComponent implements OnInit {
+export class FileUploadComponent implements OnInit, OnDestroy {
+
 
   // @Output() uploadCompleted = new EventEmitter<string>();
 
@@ -22,14 +25,20 @@ export class FileUploadComponent implements OnInit {
   private ref: AngularFireStorageReference;
   private percentage: Observable<number>;
   private snapshot: Observable<any>;
-  private downloadURL: Observable<string>;
+  private downloadUrl$: Observable<string>;
+
+  public downloadURL: string;
 
   private isHovering: boolean;
+  private getDownloadUrlSub: Subscription;
 
 
 
-
-  constructor(private storage: AngularFireStorage, private uiService: UIService, private authService: AuthService) { }
+  constructor(private storage: AngularFireStorage,
+    private uiService: UIService,
+    private authService: AuthService,
+    private db: AngularFirestore,
+    private afAuth: AngularFireAuth) { }
 
   ngOnInit() {
   }
@@ -49,20 +58,28 @@ export class FileUploadComponent implements OnInit {
     }
 
     const path = `images/profile/${new Date().getTime()}_${file.name}`;
-    const customMetadata = {app: 'alpha69-ng'};
-
     this.ref = this.storage.ref(path);
     this.task = this.ref.put(file);
-
     this.percentage = this.task.percentageChanges();
     this.snapshot = this.task.snapshotChanges();
 
+
     this.snapshot = this.task.snapshotChanges().pipe(
       tap(snap => {
+
         if (snap.bytesTransferred === snap.totalBytes) {
-         this.downloadURL = this.ref.getDownloadURL();
+         this.downloadUrl$ = this.ref.getDownloadURL();
+         this.getDownloadUrlSub = this.ref.getDownloadURL().subscribe( value => {
+            this.downloadURL = value;
+
+            // update photoUrl on the users db record, and also on the user record
+            this.db.doc(`users/${this.authService.getUser().uid}`).update({photoUrl: value});
+           // this.authService.setUserProfilePhotoURL(value);
+          }, error => {
+            this.uiService.showSnackbarError(error);
+          });
+
          this.uiService.showSnackbar(`Picture Uploaded. ${snap.totalBytes} bytes`, null, 3000);
-         console.log(this.authService.getUser());
         }
       })
     );
@@ -71,5 +88,10 @@ export class FileUploadComponent implements OnInit {
 
   isActive(snapshot) {
     return snapshot.state === 'running' && snapshot.bytesTransferred < snapshot.totalBytes;
+  }
+
+  ngOnDestroy(): void {
+    if ( this.getDownloadUrlSub ) { this.getDownloadUrlSub.unsubscribe(); }
+
   }
 }

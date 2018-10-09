@@ -14,10 +14,6 @@ export class AuthService {
   public changed = new Subject<boolean>();
   private isLoggedin = false;
 
-  private _user: firebase.User;
-  private _member: Member;
-
-
   constructor(private router: Router,
               private afAuth: AngularFireAuth,
               private db: AngularFirestore,
@@ -26,17 +22,13 @@ export class AuthService {
 
 
   initAuthListener() {
-
     this.afAuth.authState.subscribe( user => {
       if (user) {
-        this._user = user;
         this.uiService.showSnackbar('Authenticated', null, 3000);
         this.isLoggedin = true;
         this.changed.next(true);
         this.router.navigate(['/models']);
       } else {
-        this._user = null;
-        this._member = null;
         this.isLoggedin = false;
         this.changed.next(false);
         this.router.navigate(['/login']);
@@ -49,6 +41,8 @@ export class AuthService {
     this.afAuth.auth.createUserWithEmailAndPassword(email, password)
     .then( (userCredential) => {
 
+        // userCredential.user.updateProfile({displayName: displayName, photoURL: null });
+
         const data = {
           email: email,
           displayName: displayName,
@@ -57,32 +51,18 @@ export class AuthService {
           isModel: isModel,
           created: new Date()
         };
+
         this.db.doc(`users/${userCredential.user.uid}`).set(data).then( () => {
           this.uiService.loadingStateChange.next(false);
-          this._user = userCredential.user;
-          this._member = {
-              uid: userCredential.user.uid,
-              email: email,
-              displayName: displayName,
-              level: data.level,
-              score: data.score,
-              isModel: isModel,
-              created: data.created
-          };
-        })
+              })
         .catch( error => {
-          this._member = null;
-          this._user = null;
           this.uiService.loadingStateChange.next(false);
           this.uiService.showSnackbarError(error);
         });
     })
     .catch( error => {
-      this._member = null;
-      this._user = null;
       this.uiService.loadingStateChange.next(false);
       this.uiService.showSnackbarError(error);
-      console.error(error);
     });
   }
 
@@ -91,21 +71,17 @@ export class AuthService {
     this.uiService.loadingStateChange.next(true);
     this.afAuth.auth.signInWithEmailAndPassword(email, password)
     .then( userCredential => {
-      this._user = userCredential.user;
       // TODO: load member from db
+
       this.uiService.loadingStateChange.next(false);
     })
     .catch( error => {
-      this._member = null;
-      this._user = null;
       this.uiService.loadingStateChange.next(false);
       this.uiService.showSnackbarError(error);
     });
   }
 
   logout() {
-    this._member = null;
-    this._user = null;
     this.afAuth.auth.signOut();
   }
 
@@ -115,10 +91,11 @@ export class AuthService {
   }
 
   getUser() {
-    return {...this._user};
+    return {...this.afAuth.auth.currentUser};
   }
-  getMember() {
-    return {...this._member};
+
+  getUserId() {
+    return this.afAuth.auth.currentUser.uid;
   }
 
 

@@ -38,7 +38,7 @@
   {{ snap.bytesTransferred | fileSize }} of {{ snap.totalBytes | fileSize }} 
 
   
-  <div *ngIf="downloadURL | async as url">
+  <div *ngIf="downloadUrl$ | async as url">
     <h3>Results!</h3>
     <img [src]="url"><br>
     <a [href]="url" target="_blank" rel="noopener">Download Me!</a>
