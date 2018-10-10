@@ -4,7 +4,9 @@ export interface Member {
     displayName: string;
     level: number;
     score: number;
-    isModel: boolean;
     photoUrl?: string;
+    dob: Date;
+    isModel: boolean;
+   
     created: Date;
  }

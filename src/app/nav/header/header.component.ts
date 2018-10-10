@@ -12,6 +12,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
   @Output() toggleSidebar = new EventEmitter<void>();
 
   public isAuth = false;
+  public isModel = false;
+
   private authServiceChangedSub: Subscription;
 
   constructor(private authService: AuthService) { }
@@ -20,6 +22,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.authServiceChangedSub = this.authService.changed.subscribe( status => {
       this.isAuth = status;
     });
+
+
   }
 
   onToggleSidenav() {

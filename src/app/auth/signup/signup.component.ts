@@ -20,12 +20,13 @@ export class SignupComponent implements OnInit, OnDestroy {
     this.authService.signUp( form.value.email,
        form.value.password,
        form.value.displayName,
-       form.value.isModel);
+       form.value.isModel,
+       form.value.dob);
   }
 
 
     ngOnDestroy(): void {
-      // this.loadingSub.unsubscribe();
+
     }
 
 }

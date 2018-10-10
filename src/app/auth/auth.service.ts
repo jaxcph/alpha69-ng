@@ -36,7 +36,7 @@ export class AuthService {
     });
   }
 
-  signUp(email: string, password: string, displayName: string, isModel: boolean ) {
+  signUp(email: string, password: string, displayName: string, isModel: boolean,dob: Date ) {
     this.uiService.loadingStateChange.next(true);
     this.afAuth.auth.createUserWithEmailAndPassword(email, password)
     .then( (userCredential) => {
@@ -48,11 +48,12 @@ export class AuthService {
           displayName: displayName,
           level: 0,
           score: 0,
+          dob: dob,
           isModel: isModel,
           created: new Date()
         };
 
-        this.db.doc(`users/${userCredential.user.uid}`).set(data).then( () => {
+        this.db.doc(`members/${userCredential.user.uid}`).set(data).then( () => {
           this.uiService.loadingStateChange.next(false);
               })
         .catch( error => {
@@ -63,6 +64,7 @@ export class AuthService {
     .catch( error => {
       this.uiService.loadingStateChange.next(false);
       this.uiService.showSnackbarError(error);
+      
     });
   }
 

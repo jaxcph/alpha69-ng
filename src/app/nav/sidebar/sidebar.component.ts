@@ -10,6 +10,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
   @Output() close =new EventEmitter<void>();
   
   public isLoggedIn = false;
+  public isModel = false;
 
   constructor() { }
 

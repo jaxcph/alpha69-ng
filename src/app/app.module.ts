@@ -26,6 +26,13 @@ import { FileUploadComponent } from './files/file-upload/file-upload.component';
 import { ProfileComponent } from './auth/profile/profile.component';
 import { FileSizePipe } from './files/file-size.pipe';
 
+import { AccountComponent } from './member/account/account.component';
+import { MemberService } from './member/member.service';
+import { SessionComponent } from './member/session/session/session.component';
+import { NewSessionComponent } from './member/session/new-session/new-session.component';
+import { CurrentSessionComponent } from './member/session/current-session/current-session.component';
+import { PastSessionComponent } from './member/session/past-session/past-session.component';
+
 
 @NgModule({
   declarations: [
@@ -39,7 +46,12 @@ import { FileSizePipe } from './files/file-size.pipe';
     DropZoneDirective,
     FileUploadComponent,
     ProfileComponent,
-    FileSizePipe
+    FileSizePipe,
+    SessionComponent,
+    NewSessionComponent,
+    CurrentSessionComponent,
+    PastSessionComponent,
+    AccountComponent
   ],
   imports: [
     BrowserModule,
@@ -53,7 +65,7 @@ import { FileSizePipe } from './files/file-size.pipe';
     AngularFireAuthModule,
     AngularFireStorageModule
   ],
-  providers: [AuthService],
+  providers: [AuthService, MemberService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

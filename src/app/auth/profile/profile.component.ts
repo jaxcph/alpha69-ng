@@ -19,7 +19,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
   constructor(private authService: AuthService, private db: AngularFirestore ) { }
 
   ngOnInit() {
-    this._userSub = this.db.doc(`users/${this.authService.getUserId()}`).valueChanges()
+    this._userSub = this.db.doc(`members/${this.authService.getUserId()}`).valueChanges()
     .subscribe( data => {
        this.user = data;
        console.log(data);
