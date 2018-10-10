@@ -13,7 +13,7 @@
         <li *ngIf="!isAuth"><a routerLink="/login">Login</a></li>
         <li *ngIf="!isAuth"><a routerLink="/models">Models</a></li>
         <li *ngIf="isAuth"><a routerLink="/profile">Profile</a></li>
-        <li *ngIf="isAuth && isModel"><a routerLink="/session">Session Control</a></li>
+        <li *ngIf="isAuth"><a routerLink="/member/session">Session Control</a></li>
         <li *ngIf="isAuth" class="logout" (click)="onLogout()"><a>Logout</a></li>
     </ul>
   </div>

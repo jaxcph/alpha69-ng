@@ -73,7 +73,7 @@ export class FileUploadComponent implements OnInit, OnDestroy {
             this.downloadURL = value;
 
             // update photoUrl on the users db record, and also on the user record
-            this.db.doc(`users/${this.authService.getUser().uid}`).update({photoUrl: value});
+            this.db.doc(`members/${this.authService.getUser().uid}`).update({photoUrl: value});
            // this.authService.setUserProfilePhotoURL(value);
           }, error => {
             this.uiService.showSnackbarError(error);

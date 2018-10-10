@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Subject, Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { Member } from './member.model';
+import { Member } from '../member/member.model';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { UIService } from '../common/ui.service';
 
@@ -24,11 +24,13 @@ export class AuthService {
   initAuthListener() {
     this.afAuth.authState.subscribe( user => {
       if (user) {
+        localStorage.setItem('uid', user.uid);
         this.uiService.showSnackbar('Authenticated', null, 3000);
         this.isLoggedin = true;
         this.changed.next(true);
         this.router.navigate(['/models']);
       } else {
+        localStorage.removeItem('uid');
         this.isLoggedin = false;
         this.changed.next(false);
         this.router.navigate(['/login']);
@@ -36,7 +38,7 @@ export class AuthService {
     });
   }
 
-  signUp(email: string, password: string, displayName: string, isModel: boolean,dob: Date ) {
+  signUp(email: string, password: string, displayName: string, isModel: boolean, dob: Date ) {
     this.uiService.loadingStateChange.next(true);
     this.afAuth.auth.createUserWithEmailAndPassword(email, password)
     .then( (userCredential) => {
@@ -64,7 +66,6 @@ export class AuthService {
     .catch( error => {
       this.uiService.loadingStateChange.next(false);
       this.uiService.showSnackbarError(error);
-      
     });
   }
 
@@ -74,7 +75,6 @@ export class AuthService {
     this.afAuth.auth.signInWithEmailAndPassword(email, password)
     .then( userCredential => {
       // TODO: load member from db
-
       this.uiService.loadingStateChange.next(false);
     })
     .catch( error => {
@@ -84,6 +84,7 @@ export class AuthService {
   }
 
   logout() {
+    localStorage.removeItem('uid');
     this.afAuth.auth.signOut();
   }
 
