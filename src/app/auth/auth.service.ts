@@ -46,7 +46,6 @@ export class AuthService {
         // userCredential.user.updateProfile({displayName: displayName, photoURL: null });
 
         const data = {
-          email: email,
           displayName: displayName,
           level: 0,
           score: 0,

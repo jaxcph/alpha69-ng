@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { Observable, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-new-session',
@@ -12,4 +14,8 @@ export class NewSessionComponent implements OnInit {
   ngOnInit() {
   }
 
+  onSubmit(form: NgForm) {
+      console.log(form);
+  }
+  
 }

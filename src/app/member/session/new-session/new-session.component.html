@@ -1,3 +1,48 @@
-<p>
-  new-session works!
-</p>
+<section class="new-session-form">
+
+    <form fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px" #f="ngForm" (ngSubmit)="onSubmit(f)">
+     
+     <mat-form-field>
+        <input type="text" matInput placeholder="Display name" ngModel name="displayName"/>
+     </mat-form-field>
+         
+      <mat-form-field>
+        <input type="text" matInput placeholder="Title" ngModel name="title" required />
+      </mat-form-field>
+     
+      <mat-form-field>
+        <input type="number" matInput placeholder="Initial Goal" ngModel name="goal" value="0" required />
+      </mat-form-field>
+           
+      <mat-slide-toggle labelPosition="after" color="accent" ngModel name="ppm"  value="false">Enable Pay-Per-Minute</mat-slide-toggle>
+
+      <mat-form-field *ngIf="f.value.ppm">
+          <input type="number" matInput placeholder="Tokens to Pay-Per-Minute" ngModel name="ppmAmount" value="0" />
+      </mat-form-field>
+      
+      <mat-form-field>
+          <mat-select placeholder="Access type" ngModel name="accessType" required >
+              <mat-option value="eveyrone">Everyone</mat-option>
+              <mat-option value="member">Member</mat-option>
+              <mat-option value="level">Member min. level</mat-option>
+              <mat-option value="invite">Invite only</mat-option>
+            </mat-select>
+      </mat-form-field>
+
+      <mat-form-field *ngIf="f.value.accessType=='level'">
+          <input type="number" matInput placeholder="Min. req. member Level" ngModel name="minlevel" value="0" />
+      </mat-form-field>
+
+      <mat-form-field *ngIf="f.value.accessType=='invite'">
+          <mat-select placeholder="Invited members" ngModel name="invitedUsers" required >
+              <mat-option value="user01">list of users</mat-option>
+              
+            </mat-select>
+      </mat-form-field>
+     
+      <button type="submit" mat-raised-button color="primary" [disabled]="f.invalid">Submit</button>
+
+    </form>
+  </section>
+  
+  

@@ -1,9 +1,12 @@
 export interface Member {
-    email: string;
+
+    ///email: string;// get email from user if needed
+    // photoUrl: string; // get photourl from user if needed
+
     displayName: string;
     level: number;
     score: number;
-    photoUrl: string;
+   
     dob: Date;
     isModel: boolean;
     isLive: boolean;
