@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { AuthService } from '../auth.service';
+import { AuthService} from '../auth.service';
 
 @Component({
   selector: 'app-signup',
@@ -17,10 +17,11 @@ export class SignupComponent implements OnInit, OnDestroy {
 
   onSubmit(form: NgForm) {
 
+
     this.authService.signUp( form.value.email,
        form.value.password,
        form.value.displayName,
-       form.value.isModel,
+       (form.value.isModel === true ? true : false),
        form.value.dob);
   }
 

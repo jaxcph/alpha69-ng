@@ -1,14 +1,28 @@
 export interface Member {
-
-    ///email: string;// get email from user if needed
-    // photoUrl: string; // get photourl from user if needed
-
     displayName: string;
     level: number;
     score: number;
-   
     dob: Date;
     isModel: boolean;
-    isLive: boolean;
+    session?: StreamSession;
     created: Date;
  }
+
+ export interface StreamSession {
+    title: string;
+    accessType:  ['public', 'member', 'level', 'onrequest'];
+    minLevel?: number;
+    ppmUse: boolean;
+    ppmAmount: number;
+    goal?: StreamSessionGoal;
+    isStreaming: boolean;
+    created: Date;
+
+}
+
+export interface StreamSessionGoal {
+    amount: number;
+    left: number;
+    descr: string;
+    doneFx: string;
+}

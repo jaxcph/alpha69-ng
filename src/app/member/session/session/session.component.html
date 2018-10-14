@@ -1,10 +1,10 @@
 <mat-tab-group *ngIf="isModel">
 
-  <mat-tab label="New Session" *ngIf="!isLive">
+  <mat-tab label="New Session" *ngIf="!hasSession">
     <app-new-session></app-new-session>
   </mat-tab>
-  <mat-tab label="Past Sessions" *ngIf="!isLive">
+  <mat-tab label="Past Sessions" *ngIf="!hasSession">
     <app-past-session></app-past-session>
   </mat-tab>
 </mat-tab-group>
-<app-current-session  *ngIf="isLive && isModel"></app-current-session>
+<app-current-session  *ngIf="hasSession && isModel"></app-current-session>

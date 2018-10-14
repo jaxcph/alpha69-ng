@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { Member } from '../../member.model';
+import { Member, StreamSession } from '../../member.model';
 
 @Component({
   selector: 'app-session',
@@ -12,7 +12,7 @@ import { Member } from '../../member.model';
 export class SessionComponent implements OnInit, OnDestroy {
 
   public isModel: boolean;
-  public isLive: boolean;
+  public hasSession: boolean;
 
   private _memberSubscription: Subscription;
   constructor(private db: AngularFirestore) { }
@@ -23,9 +23,10 @@ export class SessionComponent implements OnInit, OnDestroy {
     .valueChanges()
     .subscribe( (member: Member) => {
       this.isModel = member.isModel ? true : false;
-      this.isLive = member.isLive ? true : false;
+      this.hasSession = (member.session) ? true : false;
+
       console.log(member);
-      console.log('is live: ' + this.isLive);
+      console.log('is live: ' + this.hasSession);
       console.log('is model:' + this.isModel);
       });
   }
