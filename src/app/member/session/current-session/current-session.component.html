@@ -1,3 +1,52 @@
-<p>
-  current-session works!
-</p>
+
+<section class="current-session" fxLayoutGap="10px">
+
+  <mat-card fxFlex.xs="100%" fxFlex="400px"*ngIf="session" >
+    <mat-card-title  fxLayoutAlign="center">
+         Pay Per Minute
+    </mat-card-title>
+        
+    <mat-card-content>
+      
+      <mat-slide-toggle labelPosition="before" color="accent" [(ngModel)]="session.usePpm" (change)="saveSession('session.usePpm')">Enable Pay-Per-Minute</mat-slide-toggle>
+
+      <mat-form-field *ngIf="session.usePpm">
+        <input type="number" matInput placeholder="Tokens to Pay-Per-Minute" [(ngModel)]="session.ppm.amount" (change)="saveSession('session.ppm.amount')"  />
+      </mat-form-field>
+
+    </mat-card-content>
+  </mat-card>
+
+
+
+  <mat-card fxFlex.xs="100%" fxFlex="400px" *ngIf="session" >
+      <mat-card-title>
+           Goal
+      </mat-card-title>
+          
+      <mat-card-content>
+          <mat-slide-toggle labelPosition="before" color="accent" [(ngModel)]="session.useGoal"  (change)="saveSession('session.useGoal')">Do you want to set a Goal?</mat-slide-toggle>
+          <ng-container *ngIf="session.useGoal">
+              <mat-form-field>
+                  <input type="number" matInput placeholder="Goal Amount token (Target)" [(ngModel)]="session.goal.amount"   (change)="saveSession('session.goal.amount')" />
+              </mat-form-field>
+              <mat-form-field>
+                  <input type="text"  matInput placeholder="Goal description" [(ngModel)]="session.goal.descr"  (change)="saveSession('session.goal.descr')" />
+              </mat-form-field>
+              <mat-form-field>
+                      <mat-select placeholder="Show Fx on goal complete?"  [(ngModel)]="session.goal.doneFx"  (selectionChange)="saveSession('session.goal.doneFx')" >
+                              <mat-option value="None">No</mat-option>
+                              <mat-option value="fx1">1 TBD</mat-option>
+                              <mat-option value="fx2">2 TBD</mat-option>
+                              <mat-option value="fx3">3 TBD</mat-option>
+                              <mat-option value="fx3">4 TBD</mat-option>
+                            </mat-select>
+              </mat-form-field>
+         </ng-container>   
+     </mat-card-content>
+    </mat-card>
+  
+  
+
+
+</section>

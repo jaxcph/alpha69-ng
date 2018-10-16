@@ -3,11 +3,14 @@
     <form fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px" #f="ngForm" (ngSubmit)="onSubmit(f)">
      
              
+      <mat-form-field *ngIf="currentMember">
+        <input type="text" matInput placeholder="Model name to use" ngModel name="modelName" required [(ngModel)]="currentMember.displayName"/> 
+      </mat-form-field>
+             
       <mat-form-field>
         <input type="text" matInput placeholder="Title" ngModel name="title" required />
       </mat-form-field>
      
-
       <mat-form-field>
           <mat-select placeholder="Who can view?" ngModel name="accessType" required >
               <mat-option value="public"><u>Everyone</u> can view</mat-option>
