@@ -32,7 +32,8 @@ import { SessionComponent } from './member/session/session/session.component';
 import { NewSessionComponent } from './member/session/new-session/new-session.component';
 import { CurrentSessionComponent } from './member/session/current-session/current-session.component';
 import { PastSessionComponent } from './member/session/past-session/past-session.component';
-
+import { StreamService } from './member/session/stream.service';
+import { StopSessionDialogComponent } from './member/session/stop-session-dialog/stop-session-dialog.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import { PastSessionComponent } from './member/session/past-session/past-session
     NewSessionComponent,
     CurrentSessionComponent,
     PastSessionComponent,
-    AccountComponent
+    AccountComponent,
+    StopSessionDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -65,7 +67,8 @@ import { PastSessionComponent } from './member/session/past-session/past-session
     AngularFireAuthModule,
     AngularFireStorageModule
   ],
-  providers: [AuthService, MemberService],
-  bootstrap: [AppComponent]
+  providers: [AuthService, MemberService, StreamService],
+  bootstrap: [AppComponent],
+  entryComponents: [StopSessionDialogComponent]
 })
 export class AppModule { }

@@ -1,7 +1,63 @@
+<section class='page-title'>
+<h1>Session Control</h1>
+</section>
+<section class="current-session" fxLayoutGap="10px" fxLayout="row wrap">
 
-<section class="current-session" fxLayoutGap="10px">
+  <!--
+  <mat-card fxFlex.xs="100%" fxFlex="400px" *ngIf="session" class="readonly-card">
+    <mat-card-title>
+         Stream Connection (*read only)
+    </mat-card-title>
+        
+    <mat-card-content>
+            <mat-form-field>
+                <input type="text" matInput placeholder="Stream Url" [ngModel]="session.stream.url" readonly />
+            </mat-form-field>
+            <mat-form-field>
+                <input type="text"  matInput placeholder="Stream Key" [ngModel]="session.stream.key" readonly/>
+            </mat-form-field>
+      
+   </mat-card-content>
+  </mat-card>
+  -->
 
-  <mat-card fxFlex.xs="100%" fxFlex="400px"*ngIf="session" >
+  <mat-card fxFlex.xs="100%" fxFlex="400px" *ngIf="session" >
+    <mat-card-title>
+         Name & Title
+    </mat-card-title>
+        
+    <mat-card-content>
+        <mat-form-field>
+            <input type="text" matInput placeholder="Model name to use" [(ngModel)]="session.modelName"  (change)="saveSession('session.modelName')"/> 
+          </mat-form-field>
+                 
+          <mat-form-field>
+            <input type="text" matInput placeholder="Title"  [(ngModel)]="session.title"  (change)="saveSession('session.title')" />
+          </mat-form-field>
+   </mat-card-content>
+  </mat-card>
+  
+  <mat-card fxFlex.xs="100%" fxFlex="400px" *ngIf="session" >
+    <mat-card-title>
+        View settings
+    </mat-card-title>
+        
+    <mat-card-content>
+        <mat-form-field>
+            <mat-select placeholder="Who can view?"  [(ngModel)]="session.accessType" (selectionChange)="saveSession('session.accessType')" >
+                <mat-option value="public"><u>Everyone</u> can view</mat-option>
+                <mat-option value="member">all <u>Members</u> can view</mat-option>
+                <mat-option value="level">only <u>Members</u> => <u>level</u> </mat-option>
+                <mat-option value="onrequest"><u>Members</u> can <u>Request to join</u></mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field *ngIf="session.accessType === 'level'">
+            <input type="number" matInput placeholder="Required level?"  [(ngModel)]="session.minLevel"  (change)="saveSession('session.minLevel')" />  
+        </mat-form-field>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card fxFlex.xs="100%" fxFlex="400px" *ngIf="session" >
     <mat-card-title  fxLayoutAlign="center">
          Pay Per Minute
     </mat-card-title>
@@ -45,8 +101,36 @@
          </ng-container>   
      </mat-card-content>
     </mat-card>
-  
-  
+
+    <mat-card fxFlex.xs="100%" fxFlex="400px" *ngIf="session" class="stream-card">
+            <mat-card-title>
+                 Session
+            </mat-card-title>
+      
+            <mat-card-content>
+                    <mat-form-field>
+                            <input type="text" matInput placeholder="Stream Url" [ngModel]="session.stream.url" readonly />
+                        </mat-form-field>
+                        <mat-form-field>
+                            <input type="text"  matInput placeholder="Stream Key" [ngModel]="session.stream.key" readonly/>
+                        </mat-form-field>
+                    <button mat-raised-button color="primary" (click)="getNewStreamKey()">Get new stream key</button><br/><br/>
+                    <button mat-raised-button color="accent" (click)="stopSession()">Stop Session!</button>
+           </mat-card-content>
+          </mat-card>
+      
+
+
+    <mat-card fxFlex.xs="100%" fxFlex="400px" *ngIf="session">
+        <mat-card-title>
+            pictures
+       </mat-card-title>
+ 
+       <mat-card-content>
+            TBD  
+      </mat-card-content>
+    </mat-card>
+
 
 
 </section>

@@ -5,6 +5,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { UIService } from 'src/app/common/ui.service';
 import { Router } from '@angular/router';
 import { Member } from '../../member.model';
+import { StreamService } from '../stream.service';
 
 @Component({
   selector: 'app-new-session',
@@ -12,18 +13,17 @@ import { Member } from '../../member.model';
   styleUrls: ['./new-session.component.css']
 })
 export class NewSessionComponent implements OnInit, OnDestroy {
-  
-  currentMember:Member;
+  currentMember: Member;
   private currentMemberSub: Subscription;
 
-  constructor(private db: AngularFirestore, private uiService: UIService, private router: Router) {
+  constructor(private db: AngularFirestore, private uiService: UIService, private router: Router, private stream: StreamService) {
 
    }
 
   ngOnInit() {
-    this.currentMemberSub=this.db.doc(`members/${localStorage.getItem('uid')}`).valueChanges().subscribe( (data: Member) => {
+    this.currentMemberSub = this.db.doc(`members/${localStorage.getItem('uid')}`).valueChanges().subscribe( (data: Member) => {
       this.currentMember = data;
-    });  
+    });
   }
 
   ngOnDestroy(): void {
@@ -39,16 +39,16 @@ export class NewSessionComponent implements OnInit, OnDestroy {
           modelName: form.value.modelName,
           accessType: form.value.accessType,
           minLevel: (form.value.minLevel) ? form.value.minLevel : 0,
-          usePpm: form.value.ppmUse?true:false,
-          ppm:(form.value.ppmUse === true) ? {amount: form.value.ppmAmount}: null,
-          useGoal: form.value.goalUse?true:false,
+          usePpm: form.value.ppmUse ? true : false,
+          ppm: (form.value.ppmUse === true) ? {amount: form.value.ppmAmount} : null,
+          useGoal: form.value.goalUse ? true : false,
           goal: (form.value.goalUse === true) ? {
             amount: form.value.goalAmount,
             left: form.value.goalAmount,
             descr: form.value.goalDescription,
             doneFx: form.value.goalDoneFx
           } : null ,
-          isStreaming: false,
+          stream: this.stream.fetchNewStream(),
           created: new Date()
         }
       }).then( () => {

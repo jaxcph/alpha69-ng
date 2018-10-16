@@ -5,3 +5,15 @@ mat-form-field {
   .current-session {
     padding-top:  30px
   }
+
+  mat-card {
+    margin: 10px 10px 10px 10px;
+  }
+
+  .stream-card {
+    background-color:lightyellow ;
+  }
+
+  .page-title{
+  text-align: center
+}

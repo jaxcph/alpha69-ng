@@ -13,14 +13,13 @@ export interface Member {
     modelName: string;
     accessType:  ['public', 'member', 'level', 'onrequest'];
     minLevel?: number;
-    usePpm:boolean;
-    ppm?: StreamSessionPPM    
-    useGoal:boolean;
+    usePpm: boolean;
+    ppm?: StreamSessionPPM;
+    useGoal: boolean;
     goal?: StreamSessionGoal;
-    isStreaming: boolean;
+    stream: StreamConnection;
     created: Date;
-    modified?: Date
-
+    modified?: Date;
 }
 
 export interface StreamSessionGoal {
@@ -32,4 +31,9 @@ export interface StreamSessionGoal {
 
 export interface StreamSessionPPM {
     amount: number;
+}
+
+export interface StreamConnection {
+    url: string;
+    key: string;
 }
