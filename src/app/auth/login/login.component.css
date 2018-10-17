@@ -5,3 +5,7 @@ mat-form-field {
 .login-form {
     padding-top:30px;
 }
+
+.page-title {
+    text-align: center
+  }

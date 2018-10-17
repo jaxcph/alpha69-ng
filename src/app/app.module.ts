@@ -33,7 +33,7 @@ import { NewSessionComponent } from './member/session/new-session/new-session.co
 import { CurrentSessionComponent } from './member/session/current-session/current-session.component';
 import { PastSessionComponent } from './member/session/past-session/past-session.component';
 import { StreamService } from './member/session/stream.service';
-import { StopSessionDialogComponent } from './member/session/stop-session-dialog/stop-session-dialog.component';
+import { YesNoDialogComponent } from 'src/app/common/yesno-dialog/yesno-dialog.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +53,7 @@ import { StopSessionDialogComponent } from './member/session/stop-session-dialog
     CurrentSessionComponent,
     PastSessionComponent,
     AccountComponent,
-    StopSessionDialogComponent
+    YesNoDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -69,6 +69,6 @@ import { StopSessionDialogComponent } from './member/session/stop-session-dialog
   ],
   providers: [AuthService, MemberService, StreamService],
   bootstrap: [AppComponent],
-  entryComponents: [StopSessionDialogComponent]
+  entryComponents: [YesNoDialogComponent]
 })
 export class AppModule { }

@@ -1,11 +1,18 @@
 export interface Member {
     displayName: string;
     level: number;
-    score: number;
-    dob: Date;
     isModel: boolean;
+    model?: Model;
     session?: StreamSession;
+    agreeMember: boolean;
+    agree18yo: boolean;
     created: Date;
+ }
+
+ export interface Model {
+     realname: string;
+     dob: Date;
+     agreeModel: boolean;
  }
 
  export interface StreamSession {
@@ -20,6 +27,7 @@ export interface Member {
     stream: StreamConnection;
     created: Date;
     modified?: Date;
+    agreedStream: boolean;
 }
 
 export interface StreamSessionGoal {

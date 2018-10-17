@@ -7,8 +7,9 @@ import { UIService } from 'src/app/common/ui.service';
 import { NumberFormatStyle } from '@angular/common';
 import { MatSlideToggleChange } from '@angular/material';
 import { StreamService } from '../stream.service';
-import { StopSessionDialogComponent } from '../stop-session-dialog/stop-session-dialog.component';
 import { MatDialog } from '@angular/material';
+import { YesNoDialogComponent } from 'src/app/common/yesno-dialog/yesno-dialog.component';
+
 
 @Component({
   selector: 'app-current-session',
@@ -71,7 +72,13 @@ export class CurrentSessionComponent implements OnInit, OnDestroy {
   stopSession() {
 
 
-    const dialogRef = this.dialog.open(StopSessionDialogComponent, { data: { }
+    const dialogRef = this.dialog.open(YesNoDialogComponent, {
+      data: {
+         title: 'Stop live session ?',
+         content: 'Please confirm that you want to stop streaming this live session',
+         yesLabel: 'I Confirm',
+         noLabel: 'No, keep session open'
+        }
     });
 
     dialogRef.afterClosed().subscribe( result => {
@@ -92,13 +99,24 @@ export class CurrentSessionComponent implements OnInit, OnDestroy {
   }
 
   getNewStreamKey() {
-      this.session.stream = this.ss.fetchNewStream();
-      this.session.modified = new Date();
-      this.db.doc(`members/${localStorage.getItem('uid')}`).update( {session: this.session});
-      console.log(`change to: [session.stream] saved`);
-      console.log(this.session);
-      this.uiService.showSnackbar('New stream key generated', null, 2000);
+    const dialogRef = this.dialog.open(YesNoDialogComponent, {
+      data: {
+         title: 'Renew stream key?',
+         content: 'Please confirm that you want a new key for the streaming service?',
+         yesLabel: 'I Confirm',
+         noLabel: 'No, keep existing stream key'
+        }
+    });
+
+    dialogRef.afterClosed().subscribe( result => {
+      if (result) {
+        this.session.stream = this.ss.fetchNewStream();
+        this.session.modified = new Date();
+        this.db.doc(`members/${localStorage.getItem('uid')}`).update( {session: this.session});
+        console.log(`change to: [session.stream] saved`);
+        console.log(this.session);
+        this.uiService.showSnackbar('New stream key generated', null, 2000);
+      }
+    });
   }
-
-
 }

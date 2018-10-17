@@ -49,7 +49,8 @@ export class NewSessionComponent implements OnInit, OnDestroy {
             doneFx: form.value.goalDoneFx
           } : null ,
           stream: this.stream.fetchNewStream(),
-          created: new Date()
+          created: new Date(),
+          agreedTC: form.value.agree ? true : false
         }
       }).then( () => {
 

@@ -38,7 +38,7 @@ export class AuthService {
     });
   }
 
-  signUp(email: string, password: string, displayName: string, isModel: boolean, dob: Date ) {
+  signUp(email: string, password: string, displayName: string, isModel: boolean, dob: Date, realfullname: string) {
     this.uiService.loadingStateChange.next(true);
     this.afAuth.auth.createUserWithEmailAndPassword(email, password)
     .then( (userCredential) => {
@@ -48,10 +48,15 @@ export class AuthService {
         const data = {
           displayName: displayName,
           level: 0,
-          score: 0,
-          dob: dob,
+          agree18yo: true,
+          agreeMember: true,
           isModel: isModel,
-          created: new Date()
+          created: new Date(),
+          model: (isModel) ? {
+            realname: realfullname,
+            dob: dob,
+            agreeModel: true
+          } : null
         };
 
         this.db.doc(`members/${userCredential.user.uid}`).set(data).then( () => {

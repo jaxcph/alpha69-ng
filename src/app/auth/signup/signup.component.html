@@ -1,3 +1,6 @@
+<section class="page-title">
+  <h1>Signup</h1>
+</section>
 <section class="signup-form">
   <form fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px" #f="ngForm" (ngSubmit)="onSubmit(f)">
    
@@ -23,16 +26,29 @@
       <input type="text" matInput placeholder="Display name" ngModel name="displayName" required/>
     </mat-form-field>
 
-    <mat-form-field>
-      <input matInput placeholder="Birthdate" [matDatepicker]="picker" [max]="maxDate" ngModel name="dob" required>
-      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-      <mat-datepicker #picker></mat-datepicker>
-    </mat-form-field>
-
     <mat-slide-toggle labelPosition="after" color="accent" ngModel name="isModel">Is Model</mat-slide-toggle>
     
+    <ng-container *ngIf="f.value.isModel">
+      <mat-form-field>
+        <input matInput placeholder="Birthdate" [matDatepicker]="picker" [max]="maxDate" ngModel name="dob" required>
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+
+      
+      <mat-form-field>
+        <input type="text" matInput placeholder="Real fullname" ngModel name="realfullname" required/>
+      </mat-form-field>
+      <p> TDB: missing fields for various model specific info, like pay-out information etc...</p>
+      <br/>
+      <br/>
+
+      <mat-checkbox labelPosition="after" ngModel name="agreeModel" required color="accent">Agree to Models <a href="#">Terms and Conditions.</a></mat-checkbox>
+
+  </ng-container>
     
-    <mat-checkbox labelPosition="after" ngModel name="agree" required color="primary">Agree to Terms and Conditions.</mat-checkbox>
+  <mat-checkbox labelPosition="after" ngModel name="agree18yo" required color="accent">I am 18 years or Older</mat-checkbox>
+    <mat-checkbox labelPosition="after" ngModel name="agreeMember" required color="accent">Agree to Membership <a href="#">Terms and Conditions.</a></mat-checkbox>
 
     <button *ngIf="!isLoadning" type="submit" mat-raised-button color="primary" [disabled]="f.invalid">Submit</button>
     <mat-progress-bar *ngIf="isLoading" mode="indeterminate" color="accent"></mat-progress-bar>

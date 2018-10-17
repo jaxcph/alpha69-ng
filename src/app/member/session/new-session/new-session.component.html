@@ -1,4 +1,7 @@
-<section class="new-session-form">
+<section class="page-title">
+  <h1>Setup new live streaming session</h1>
+</section>
+<section class="new-session">
 
     <form fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px" #f="ngForm" (ngSubmit)="onSubmit(f)">
      
@@ -52,6 +55,8 @@
           <input type="number" matInput placeholder="Tokens to Pay-Per-Minute" ngModel name="ppmAmount" value="0" />
       </mat-form-field>
       
+      <mat-checkbox color="accent" ngModel name="agree" labelPosition="after" required>Agree to <a href="#">Terms and Conditions.</a></mat-checkbox>
+
       <button type="submit" mat-raised-button color="primary" [disabled]="f.invalid">Submit</button>
 
     </form>
