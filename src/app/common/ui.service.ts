@@ -18,6 +18,6 @@ export class UIService {
 
   showSnackbar(message, action, duration) {
     this.snackbar.open(message, action, { duration: duration});
-    console.log(message);
+  //  console.log(message);
   }
 }

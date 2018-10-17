@@ -22,7 +22,8 @@ import {
         MatProgressBarModule,
         MatSlideToggleModule,
         MatSliderModule,
-        MatExpansionModule
+        MatExpansionModule,
+        MatDividerModule
     } from '@angular/material';
 
 
@@ -50,7 +51,8 @@ import {
            MatProgressBarModule,
            MatSlideToggleModule,
            MatSliderModule,
-           MatExpansionModule
+           MatExpansionModule,
+           MatDividerModule
         ],
  exports: [ MatButtonModule,
             MatIconModule,
@@ -74,8 +76,8 @@ import {
             MatProgressBarModule,
             MatSlideToggleModule,
             MatSliderModule,
-            MatExpansionModule
-
+            MatExpansionModule,
+            MatDividerModule
         ]
 })
 export class MaterialModule {}

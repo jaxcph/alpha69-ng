@@ -1,0 +1,67 @@
+mat-form-field {
+    width: 300px;
+  }
+  
+  .current-session {
+    padding-top:  30px
+  }
+
+
+  
+/* http://www.colorzilla.com/gradient-editor/ */
+
+.goal-meter {
+    background: #e4f5fc;
+    background: -moz-linear-gradient(top, #e4f5fc 0%, #7dc8e8 100%);
+    background: -webkit-linear-gradient(top, #e4f5fc 0%,#7dc8e8 100%);
+    background: linear-gradient(to bottom, #e4f5fc 0%,#7dc8e8 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e4f5fc', endColorstr='#7dc8e8',GradientType=0 );
+  }
+
+  .tipjar { 
+    background: #fefcea;
+    background: -moz-linear-gradient(top, #fefcea 0%, #ede4af 100%);
+    background: -webkit-linear-gradient(top, #fefcea 0%,#ede4af 100%);
+    background: linear-gradient(to bottom, #fefcea 0%,#ede4af 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fefcea', endColorstr='#ede4af',GradientType=0 );
+  }
+
+  .wallet { 
+    background: #eeeeee;
+    background: -moz-linear-gradient(top, #eeeeee 0%, #cccccc 100%);
+    background: -webkit-linear-gradient(top, #eeeeee 0%,#cccccc 100%);
+    background: linear-gradient(to bottom, #eeeeee 0%,#cccccc 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eeeeee', endColorstr='#cccccc',GradientType=0 );
+  }
+
+  .runtime { 
+    background: #cdeb8b;
+    background: -moz-linear-gradient(top, #cdeb8b 0%, #daeab4 100%);
+    background: -webkit-linear-gradient(top, #cdeb8b 0%,#daeab4 100%);
+    background: linear-gradient(to bottom, #cdeb8b 0%,#daeab4 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cdeb8b', endColorstr='#daeab4',GradientType=0 );
+   }
+
+
+.page-title{
+  text-align: center
+}
+.accordion .mat-expansion-panel-header-title, 
+.accordion .mat-expansion-panel-header-description {
+  flex-basis: 0;
+}
+
+.accordion .mat-expansion-panel-header-description {
+  justify-content: space-between;
+  align-items: center;
+}
+mat-expansion-panel {
+  margin: 5px 5px 5px 5px;
+ }
+
+ .content {
+   padding-left: 5px;
+   padding-right:5px;
+   padding-bottom: 10px;
+
+ }

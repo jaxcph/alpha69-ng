@@ -25,9 +25,9 @@ export class SessionComponent implements OnInit, OnDestroy {
       this.isModel = member.isModel ? true : false;
       this.hasSession = (member.session) ? true : false;
 
-      console.log(member);
-      console.log('is live: ' + this.hasSession);
-      console.log('is model:' + this.isModel);
+    //  console.log(member);
+    //  console.log('is live: ' + this.hasSession);
+    //  console.log('is model:' + this.isModel);
       });
   }
 

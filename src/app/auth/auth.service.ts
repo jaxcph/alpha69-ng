@@ -43,8 +43,6 @@ export class AuthService {
     this.afAuth.auth.createUserWithEmailAndPassword(email, password)
     .then( (userCredential) => {
 
-        // userCredential.user.updateProfile({displayName: displayName, photoURL: null });
-
         const data = {
           displayName: displayName,
           level: 0,
@@ -66,6 +64,19 @@ export class AuthService {
           this.uiService.loadingStateChange.next(false);
           this.uiService.showSnackbarError(error);
         });
+
+        this.db.doc(`member-wallets/${userCredential.user.uid}`).set({ balance: 0})
+        .catch(error => {
+          this.uiService.showSnackbarError(error);
+        });
+
+        if (isModel) {
+          this.db.doc(`model-tipjars/${userCredential.user.uid}`).set({ balance: 0})
+          .catch(error => {
+            this.uiService.showSnackbarError(error);
+          });
+        }
+
     })
     .catch( error => {
       this.uiService.loadingStateChange.next(false);

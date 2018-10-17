@@ -1,96 +1,94 @@
 <section class='page-title'>
-<h1>Session Control</h1>
+    <h1>Session Control</h1>
 </section>
-<section class="current-session" fxLayoutGap="10px" fxLayout="row wrap">
 
-  <!--
-  <mat-card fxFlex.xs="100%" fxFlex="400px" *ngIf="session" class="readonly-card">
-    <mat-card-title>
-         Stream Connection (*read only)
-    </mat-card-title>
-        
-    <mat-card-content>
-            <mat-form-field>
-                <input type="text" matInput placeholder="Stream Url" [ngModel]="session.stream.url" readonly />
-            </mat-form-field>
-            <mat-form-field>
-                <input type="text"  matInput placeholder="Stream Key" [ngModel]="session.stream.key" readonly/>
-            </mat-form-field>
-      
-   </mat-card-content>
-  </mat-card>
-  -->
+<section class="content">
+<mat-accordion class="accordion" multi="true" fxLayout="row wrap" fxLayoutGap="10px">
 
-  <mat-card fxFlex.xs="100%" fxFlex="400px" *ngIf="session" >
-    <mat-card-title>
-         Name & Title
-    </mat-card-title>
+    <mat-expansion-panel  *ngIf="session" fxFlex.xs="100%" fxFlex="400px">
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                Name & Title
+            </mat-panel-title>
+            <mat-panel-description>
+                 &nbsp; 
+                <mat-icon>face</mat-icon>
+            </mat-panel-description>
+        </mat-expansion-panel-header>
         
-    <mat-card-content>
         <mat-form-field>
             <input type="text" matInput placeholder="Model name to use" [(ngModel)]="session.modelName"  (change)="saveSession('session.modelName')"/> 
-          </mat-form-field>
+        </mat-form-field>
                  
-          <mat-form-field>
-            <input type="text" matInput placeholder="Title"  [(ngModel)]="session.title"  (change)="saveSession('session.title')" />
-          </mat-form-field>
-   </mat-card-content>
-  </mat-card>
-  
-  <mat-card fxFlex.xs="100%" fxFlex="400px" *ngIf="session" >
-    <mat-card-title>
-        View settings
-    </mat-card-title>
-        
-    <mat-card-content>
         <mat-form-field>
-            <mat-select placeholder="Who can view?"  [(ngModel)]="session.accessType" (selectionChange)="saveSession('session.accessType')" >
-                <mat-option value="public"><u>Everyone</u> can view</mat-option>
-                <mat-option value="member">all <u>Members</u> can view</mat-option>
-                <mat-option value="level">only <u>Members</u> => <u>level</u> </mat-option>
-                <mat-option value="onrequest"><u>Members</u> can <u>Request to join</u></mat-option>
-            </mat-select>
+            <input type="text" matInput placeholder="Title"  [(ngModel)]="session.title"  (change)="saveSession('session.title')" />
         </mat-form-field>
-        <mat-form-field *ngIf="session.accessType === 'level'">
-            <input type="number" matInput placeholder="Required level?"  [(ngModel)]="session.minLevel"  (change)="saveSession('session.minLevel')" />  
-        </mat-form-field>
-    </mat-card-content>
-  </mat-card>
+    </mat-expansion-panel>
 
-  <mat-card fxFlex.xs="100%" fxFlex="400px" *ngIf="session" >
-    <mat-card-title  fxLayoutAlign="center">
-         Pay Per Minute
-    </mat-card-title>
-        
-    <mat-card-content>
-      
-      <mat-slide-toggle labelPosition="before" color="accent" [(ngModel)]="session.usePpm" (change)="saveSession('session.usePpm')">Enable Pay-Per-Minute</mat-slide-toggle>
+    <mat-expansion-panel fxFlex.xs="100%" fxFlex="400px" *ngIf="session" >
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    View settings
+                </mat-panel-title>
+                <mat-panel-description>
+                    ({{session.accessType}})&nbsp;
+                    <mat-icon>visibility</mat-icon>
+                </mat-panel-description>
+            </mat-expansion-panel-header>
+            
+            <mat-form-field>
+                <mat-select placeholder="Who can view?"  [(ngModel)]="session.accessType" (selectionChange)="saveSession('session.accessType')" >
+                        <mat-option value="public"><u>Everyone</u> can view</mat-option>
+                        <mat-option value="member">all <u>Members</u> can view</mat-option>
+                        <mat-option value="level">only <u>Members</u> => <u>level</u> </mat-option>
+                        <mat-option value="onrequest"><u>Members</u> can <u>Request to join</u></mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field *ngIf="session.accessType === 'level'">
+                <input type="number" matInput placeholder="Required level?"  [(ngModel)]="session.minLevel"  (change)="saveSession('session.minLevel')" />  
+            </mat-form-field>
+    </mat-expansion-panel>
+    
 
-      <mat-form-field *ngIf="session.usePpm">
-        <input type="number" matInput placeholder="Tokens to Pay-Per-Minute" [(ngModel)]="session.ppm.amount" (change)="saveSession('session.ppm.amount')"  />
-      </mat-form-field>
+    <mat-expansion-panel fxFlex.xs="100%" fxFlex="400px" *ngIf="session">
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                  Pay Per Minute
+                </mat-panel-title>
+                <mat-panel-description>
+                    {{session.usePpm? '(Enabled)' :' ' }}&nbsp;
+                    <mat-icon>attach_money</mat-icon>
+                </mat-panel-description>
+            </mat-expansion-panel-header>
+            
+            <mat-slide-toggle labelPosition="before" color="accent" [(ngModel)]="session.usePpm" (change)="saveSession('session.usePpm')">Enable Pay-Per-Minute</mat-slide-toggle>
 
-    </mat-card-content>
-  </mat-card>
+            <mat-form-field *ngIf="session.usePpm">
+              <input type="number" matInput placeholder="Tokens to Pay-Per-Minute" [(ngModel)]="session.ppm.amount" (change)="saveSession('session.ppm.amount')"  />
+            </mat-form-field>
+    </mat-expansion-panel>
 
-
-
-  <mat-card fxFlex.xs="100%" fxFlex="400px" *ngIf="session" >
-      <mat-card-title>
-           Goal
-      </mat-card-title>
-          
-      <mat-card-content>
-          <mat-slide-toggle labelPosition="before" color="accent" [(ngModel)]="session.useGoal"  (change)="saveSession('session.useGoal')">Do you want to set a Goal?</mat-slide-toggle>
-          <ng-container *ngIf="session.useGoal">
+    <mat-expansion-panel fxFlex.xs="100%" fxFlex="400px" *ngIf="session">
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                  Goal
+                </mat-panel-title>
+                <mat-panel-description>
+                    {{session.useGoal? '(Enabled)' : '' }}&nbsp;
+                    <mat-icon>assistant_photo</mat-icon>
+                </mat-panel-description>
+            </mat-expansion-panel-header>
+            
+            <mat-slide-toggle labelPosition="before" color="accent" [(ngModel)]="session.useGoal"  (change)="saveSession('session.useGoal')">Do you want to set a Goal?</mat-slide-toggle>
+          <ng-container *ngIf="goal">
               <mat-form-field>
-                  <input type="number" matInput placeholder="Goal Amount token (Target)" [(ngModel)]="session.goal.amount"   (change)="saveSession('session.goal.amount')" />
+                  <input type="number" matInput placeholder="Goal Amount token (Target)" [(ngModel)]="goal.amount"   (change)="saveSession('goal.amount')" />
               </mat-form-field>
               <mat-form-field>
-                  <input type="text"  matInput placeholder="Goal description" [(ngModel)]="session.goal.descr"  (change)="saveSession('session.goal.descr')" />
+                  <input type="text"  matInput placeholder="Goal description" [(ngModel)]="goal.descr"  (change)="saveSession('goal.descr')" />
               </mat-form-field>
               <mat-form-field>
-                      <mat-select placeholder="Show Fx on goal complete?"  [(ngModel)]="session.goal.doneFx"  (selectionChange)="saveSession('session.goal.doneFx')" >
+                      <mat-select placeholder="Show Fx on goal complete?"  [(ngModel)]="goal.doneFx"  (selectionChange)="saveSession('goal.doneFx')" >
                               <mat-option value="None">No</mat-option>
                               <mat-option value="fx1">1 TBD</mat-option>
                               <mat-option value="fx2">2 TBD</mat-option>
@@ -99,38 +97,133 @@
                             </mat-select>
               </mat-form-field>
          </ng-container>   
-     </mat-card-content>
-    </mat-card>
+    </mat-expansion-panel>
 
-    <mat-card fxFlex.xs="100%" fxFlex="400px" *ngIf="session" class="stream-card">
-            <mat-card-title>
-                 Session
-            </mat-card-title>
-      
-            <mat-card-content>
-                    <mat-form-field>
-                            <input type="text" matInput placeholder="Stream Url" [ngModel]="session.stream.url" readonly />
-                        </mat-form-field>
-                        <mat-form-field>
-                            <input type="text"  matInput placeholder="Stream Key" [ngModel]="session.stream.key" readonly/>
-                        </mat-form-field>
-                    <button mat-raised-button color="primary" (click)="getNewStreamKey()">Get new stream key</button><br/><br/>
-                    <button mat-raised-button color="accent" (click)="stopSession()">Stop Session!</button>
-           </mat-card-content>
-          </mat-card>
-      
+    <mat-expansion-panel fxFlex.xs="100%" fxFlex="400px" *ngIf="session">
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                  Stream Control
+                </mat-panel-title>
+                <mat-panel-description>
+                    &nbsp;
+                    <mat-icon>cast</mat-icon>
+                </mat-panel-description>
+            </mat-expansion-panel-header>
+            
+            <mat-form-field>
+                    <input type="text" matInput placeholder="Stream Url" [ngModel]="session.stream.url" readonly />
+                </mat-form-field>
+                <mat-form-field>
+                    <input type="text"  matInput placeholder="Stream Key" [ngModel]="session.stream.key" readonly/>
+                </mat-form-field>
+            <button mat-raised-button color="primary" (click)="getNewStreamKey()">Get new stream key</button><br/><br/>
+            <button mat-raised-button color="accent" (click)="stopSession()">Stop Session!</button>
+        
+    </mat-expansion-panel>
 
-
-    <mat-card fxFlex.xs="100%" fxFlex="400px" *ngIf="session">
-        <mat-card-title>
-            pictures
-       </mat-card-title>
- 
-       <mat-card-content>
-            TBD  
-      </mat-card-content>
-    </mat-card>
+  
+</mat-accordion>
 
 
+<mat-divider></mat-divider>
+
+<section class='page-title'>
+    <h1>Live metrics</h1>
+</section>
+
+<mat-accordion class="accordion" multi="true" fxLayout="row wrap" fxLayoutGap="10px">
+
+        <mat-expansion-panel  *ngIf="goal" fxFlex.xs="100%" fxFlex="400px" expanded class="goal-meter">
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    Goal Meter
+                </mat-panel-title>
+                <mat-panel-description>
+                    {{goalCollectedPct}}% ({{goal.collected}}t / {{goal.amount}}t)&nbsp; 
+                    <mat-progress-spinner
+                    color="primary"
+                    mode="determinate"
+                    [value]="goalCollectedPct"
+                    strokeWidth=3
+                    diameter=20>
+                 </mat-progress-spinner>
+                </mat-panel-description>
+            </mat-expansion-panel-header>
+            
+            <div>
+                <table>
+                    <tr>
+                    <td>
+                        <mat-progress-spinner
+                        color="primary"
+                        mode="determinate"
+                        [value]="goalCollectedPct"
+                        strokeWidth=10
+                        diameter=80>
+                     </mat-progress-spinner></td>
+                    
+                    <td style="font-size: 48pt">{{goalCollectedPct}}%</td>
+                    <td style="font-size: 11pt;font-weight: normal;text-align: center;padding-left:10px">{{goal.collected}}<br/>out of<br/>{{goal.amount}} <img src="/src/assets/coin16.png"></td>
+                </tr>
+                <tr><td colspan="2" style="text-align:center;font-size:12pt;font-weight: bold">{{goal.descr}}</td></tr>
+                </table>
+            
+           
+            </div>
+            
+        </mat-expansion-panel>
+
+        <mat-expansion-panel  *ngIf="tipjar" fxFlex.xs="100%" fxFlex="400px" expanded class="tipjar">
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                       Tip jar
+                    </mat-panel-title>
+                    <mat-panel-description>
+                        {{tipjar.balance}} t &nbsp; 
+                        <mat-icon>attach_money</mat-icon>
+                    </mat-panel-description>
+                </mat-expansion-panel-header>
+              <div style="font-size: 48pt;padding-top:30px;text-align: center;">
+                {{tipjar.balance}}  <img src="/src/assets/coin32.png">
+              </div>
+            </mat-expansion-panel>
+
+
+            <mat-expansion-panel  *ngIf="wallet" fxFlex.xs="100%" fxFlex="400px" expanded class="wallet">
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                           Personal Wallet
+                        </mat-panel-title>
+                        <mat-panel-description>
+                            {{wallet.balance}} t &nbsp; 
+                            <mat-icon>attach_money</mat-icon>
+                        </mat-panel-description>
+                    </mat-expansion-panel-header>
+                  <div style="font-size: 48pt;padding-top:30px;text-align: center;">
+                    {{wallet.balance}} <img src="/src/assets/coin32.png">
+                  </div>
+                </mat-expansion-panel>
+
+                <mat-expansion-panel  *ngIf="session" fxFlex.xs="100%" fxFlex="400px" expanded class="runtime">
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                              Runtime & Clock
+                            </mat-panel-title>
+                            <mat-panel-description>
+                                {{runtimeHours}}h {{runtimeMinutes}}m  ({{clockHours}}:{{clockMinutes}})
+                                <mat-icon>access_time</mat-icon>
+                            </mat-panel-description>
+                        </mat-expansion-panel-header>
+                     
+                        <div style="font-size: 48pt;padding-top:30px;text-align: center;">
+                        <ng-container *ngIf="runtimeDays>0"> {{runtimeDays}}d </ng-container> {{runtimeHours}}h {{runtimeMinutes}}m
+                      </div>
+
+                      <div style="font-size: 14pt;padding-top:30px;text-align: center;">
+                        {{clockHours}}:{{clockMinutes}} {{timezone}} 
+                      </div>
+
+                    </mat-expansion-panel>
+</mat-accordion>
 
 </section>

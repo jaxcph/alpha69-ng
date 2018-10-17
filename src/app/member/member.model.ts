@@ -23,7 +23,7 @@ export interface Member {
     usePpm: boolean;
     ppm?: StreamSessionPPM;
     useGoal: boolean;
-    goal?: StreamSessionGoal;
+    // goal?: StreamSessionGoal;
     stream: StreamConnection;
     created: Date;
     modified?: Date;
@@ -32,7 +32,7 @@ export interface Member {
 
 export interface StreamSessionGoal {
     amount: number;
-    left: number;
+    collected: number;
     descr: string;
     doneFx: string;
 }
@@ -44,4 +44,12 @@ export interface StreamSessionPPM {
 export interface StreamConnection {
     url: string;
     key: string;
+}
+
+export interface Tipjar {
+    balance: number;
+}
+
+export interface Wallet {
+    balance: number;
 }

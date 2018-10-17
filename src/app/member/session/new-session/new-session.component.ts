@@ -6,6 +6,7 @@ import { UIService } from 'src/app/common/ui.service';
 import { Router } from '@angular/router';
 import { Member } from '../../member.model';
 import { StreamService } from '../stream.service';
+import { validateHorizontalPosition } from '@angular/cdk/overlay';
 
 @Component({
   selector: 'app-new-session',
@@ -31,8 +32,9 @@ export class NewSessionComponent implements OnInit, OnDestroy {
   }
 
   onSubmit(form: NgForm) {
-      console.log(form);
+      console.log(`#0: ${form.value.goalUse}`);
 
+      const hasGoal = form.value.goalUse ? true : false;
       this.db.doc(`members/${localStorage.getItem('uid')}`).update( {
         session : {
           title: form.value.title,
@@ -41,24 +43,30 @@ export class NewSessionComponent implements OnInit, OnDestroy {
           minLevel: (form.value.minLevel) ? form.value.minLevel : 0,
           usePpm: form.value.ppmUse ? true : false,
           ppm: (form.value.ppmUse === true) ? {amount: form.value.ppmAmount} : null,
-          useGoal: form.value.goalUse ? true : false,
-          goal: (form.value.goalUse === true) ? {
-            amount: form.value.goalAmount,
-            left: form.value.goalAmount,
-            descr: form.value.goalDescription,
-            doneFx: form.value.goalDoneFx
-          } : null ,
+          useGoal: hasGoal,
           stream: this.stream.fetchNewStream(),
           created: new Date(),
-          agreedTC: form.value.agree ? true : false
+          agreedStream: form.value.agree ? true : false
         }
-      }).then( () => {
-
-        this.uiService.showSnackbar('new session setup', null, 3000);
-        this.router.navigate(['member/session']);
       }).catch( error => {
         this.uiService.showSnackbarError(error);
       });
+
+      if (hasGoal) {
+        this.db.doc(`session-goals/${localStorage.getItem('uid')}`).set({
+          amount: form.value.goalAmount,
+          collected: 0,
+          descr: form.value.goalDescription,
+          doneFx: form.value.goalDoneFx
+        })
+        .catch( error => {
+          this.uiService.showSnackbarError(error);
+        });
+      }
+
+
+      this.uiService.showSnackbar('new session setup', null, 3000);
+      this.router.navigate(['member/session']);
 
   }
 
