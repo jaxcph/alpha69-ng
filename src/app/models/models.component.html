@@ -7,7 +7,7 @@
     <mat-card class="model-card" fxFlex.xs="100%" fxFlex="400px" *ngFor="let m of models" >
         <mat-card-header>
           <img mat-card-avatar *ngIf="m.model.avatarImg" [src]="m.model.avatarImg">
-          <mat-card-title>{{m.displayName}}</mat-card-title>
+          <mat-card-title>{{m.session ? m.session.modelName : m.displayName }}</mat-card-title>
           <mat-card-subtitle>{{m.model.subtitle?m.model.subtitle: "&nbsp;"}}</mat-card-subtitle>
         </mat-card-header>
         <img mat-card-image [src]="m.model.listingImg" alt="">
