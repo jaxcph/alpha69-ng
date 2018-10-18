@@ -151,7 +151,6 @@ export class CurrentSessionComponent implements OnInit, OnDestroy {
       this.session.modified = new Date();
       this.db.doc(`members/${localStorage.getItem('uid')}`).update( {session: this.session});
       console.log(`change to: [${scope}] saved`);
-    //  console.log(this.session);
       this.uiService.showSnackbar('Setings Saved', null, 2000);
   }
 
@@ -206,7 +205,6 @@ export class CurrentSessionComponent implements OnInit, OnDestroy {
         this.session.modified = new Date();
         this.db.doc(`members/${localStorage.getItem('uid')}`).update( {session: this.session});
         console.log(`change to: [session.stream] saved`);
-  //      console.log(this.session);
         this.uiService.showSnackbar('New stream key generated', null, 2000);
       }
     });
@@ -218,11 +216,11 @@ export class CurrentSessionComponent implements OnInit, OnDestroy {
 
 
   ngOnDestroy(): void {
-    this.currentMemberSub.unsubscribe();
-    this.goalSub.unsubscribe();
-    this.tipjarSub.unsubscribe();
-    this.walletSub.unsubscribe();
-    this.clockSub.unsubscribe();
+    if (this.currentMemberSub) { this.currentMemberSub.unsubscribe(); }
+    if (this.goalSub) { this.goalSub.unsubscribe(); }
+    if (this.tipjarSub) { this.tipjarSub.unsubscribe(); }
+    if (this.walletSub) {this.walletSub.unsubscribe(); }
+    if (this.clockSub) {this.clockSub.unsubscribe(); }
   }
 
 }

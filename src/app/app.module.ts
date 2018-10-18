@@ -12,7 +12,6 @@ import { WelcomeComponent } from './welcome/welcome.component';
 import { SignupComponent } from './auth/signup/signup.component';
 import { LoginComponent } from './auth/login/login.component';
 import { AuthService } from './auth/auth.service';
-import { ModelsComponent } from './models/models.component';
 
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
@@ -34,6 +33,11 @@ import { CurrentSessionComponent } from './member/session/current-session/curren
 import { PastSessionComponent } from './member/session/past-session/past-session.component';
 import { StreamService } from './member/session/stream.service';
 import { YesNoDialogComponent } from 'src/app/common/yesno-dialog/yesno-dialog.component';
+import { ListingsComponent } from './models/listings/listings.component';
+import { ModelsComponent } from './models/models.component';
+import { LiveComponent } from './models/live/live.component';
+
+
 
 @NgModule({
   declarations: [
@@ -43,7 +47,6 @@ import { YesNoDialogComponent } from 'src/app/common/yesno-dialog/yesno-dialog.c
     WelcomeComponent,
     SignupComponent,
     LoginComponent,
-    ModelsComponent,
     DropZoneDirective,
     FileUploadComponent,
     ProfileComponent,
@@ -53,8 +56,10 @@ import { YesNoDialogComponent } from 'src/app/common/yesno-dialog/yesno-dialog.c
     CurrentSessionComponent,
     PastSessionComponent,
     AccountComponent,
-    YesNoDialogComponent
-  ],
+    YesNoDialogComponent,
+    ListingsComponent,
+    ModelsComponent,
+    LiveComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

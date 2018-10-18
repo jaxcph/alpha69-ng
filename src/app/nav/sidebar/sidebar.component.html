@@ -1,7 +1,7 @@
 <mat-nav-list>
   <a mat-list-item  *ngIf="!isLoggedIn" routerLink="/signup" (click)="onClose()"><mat-icon>face</mat-icon><span class="navigation-caption">Signup</span></a>
   <a mat-list-item  *ngIf="!isLoggedIn" routerLink="/login" (click)="onClose()"><mat-icon>input</mat-icon><span class="navigation-caption">Login</span></a>
-  <a mat-list-item  routerLink="/models" (click)="onClose()"><mat-icon>people</mat-icon><span class="navigation-caption">Models</span></a>
+  <a mat-list-item  routerLink="/models/listings" (click)="onClose()"><mat-icon>people</mat-icon><span class="navigation-caption">Models</span></a>
   <mat-list-item  *ngIf="isLoggedIn">
     <button mat-icon-button  (click)="onLogout()"><mat-icon>eject</mat-icon><span class="navigation-caption">Logout</span></button>
   </mat-list-item>
