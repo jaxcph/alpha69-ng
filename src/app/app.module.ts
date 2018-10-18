@@ -33,7 +33,6 @@ import { CurrentSessionComponent } from './member/session/current-session/curren
 import { PastSessionComponent } from './member/session/past-session/past-session.component';
 import { StreamService } from './member/session/stream.service';
 import { YesNoDialogComponent } from 'src/app/common/yesno-dialog/yesno-dialog.component';
-import { ListingsComponent } from './models/listings/listings.component';
 import { ModelsComponent } from './models/models.component';
 import { LiveComponent } from './models/live/live.component';
 
@@ -57,7 +56,6 @@ import { LiveComponent } from './models/live/live.component';
     PastSessionComponent,
     AccountComponent,
     YesNoDialogComponent,
-    ListingsComponent,
     ModelsComponent,
     LiveComponent],
   imports: [

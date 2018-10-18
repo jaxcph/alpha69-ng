@@ -6,19 +6,19 @@ import { Component, OnInit, OnDestroy, EventEmitter, Output } from '@angular/cor
   styleUrls: ['./sidebar.component.css']
 })
 export class SidebarComponent implements OnInit, OnDestroy {
-  
-  @Output() close =new EventEmitter<void>();
-  
+
+  @Output() close = new EventEmitter<void>();
+
   public isLoggedIn = false;
   public isModel = false;
 
   constructor() { }
 
-  onClose(){
+  onClose() {
     this.close.emit();
   }
 
-  onLogout(){
+  onLogout() {
 
   }
 
@@ -26,7 +26,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    
+
   }
 
 

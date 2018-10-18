@@ -13,6 +13,10 @@ export interface Member {
      realname: string;
      dob: Date;
      agreeModel: boolean;
+     avatarImg?: string;
+     listingImg?: string;
+     subtitle?: string;
+     aboutMe?: string;
  }
 
  export interface StreamSession {

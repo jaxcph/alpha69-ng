@@ -15,6 +15,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   public isAuth = false;
   public isModel = false;
+  public displayName: string;
+  public level: number;
 
   private authServiceChangedSub: Subscription;
   private memberChangeSub: Subscription;
@@ -29,12 +31,14 @@ export class HeaderComponent implements OnInit, OnDestroy {
          this.memberChangeSub = this.db.doc(`members/${localStorage.getItem('uid')}`).valueChanges()
               .subscribe( (member: Member) => {
                 this.isModel = (member.isModel === true) ? true : false;
+                this.displayName = member.displayName;
+                this.level = member.level;
             } );
      }
      });
   }
 
-  onToggleSidenav() {
+  onToggleSidebar() {
     this.toggleSidebar.emit();
   }
 
