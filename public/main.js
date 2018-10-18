@@ -45,9 +45,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _member_session_current_session_current_session_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./member/session/current-session/current-session.component */ "./src/app/member/session/current-session/current-session.component.ts");
 /* harmony import */ var _member_session_past_session_past_session_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./member/session/past-session/past-session.component */ "./src/app/member/session/past-session/past-session.component.ts");
 /* harmony import */ var _member_account_account_component__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./member/account/account.component */ "./src/app/member/account/account.component.ts");
-/* harmony import */ var _models_listings_listings_component__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./models/listings/listings.component */ "./src/app/models/listings/listings.component.ts");
-/* harmony import */ var _models_live_live_component__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./models/live/live.component */ "./src/app/models/live/live.component.ts");
-/* harmony import */ var _models_models_component__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./models/models.component */ "./src/app/models/models.component.ts");
+/* harmony import */ var _models_live_live_component__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./models/live/live.component */ "./src/app/models/live/live.component.ts");
+/* harmony import */ var _models_models_component__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./models/models.component */ "./src/app/models/models.component.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -68,15 +67,13 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 
 
 
-
 var routes = [
     { path: '', component: _welcome_welcome_component__WEBPACK_IMPORTED_MODULE_2__["WelcomeComponent"] },
     { path: 'signup', component: _auth_signup_signup_component__WEBPACK_IMPORTED_MODULE_3__["SignupComponent"] },
     { path: 'login', component: _auth_login_login_component__WEBPACK_IMPORTED_MODULE_4__["LoginComponent"] },
+    { path: 'models', component: _models_models_component__WEBPACK_IMPORTED_MODULE_13__["ModelsComponent"] },
+    { path: 'models/live', component: _models_live_live_component__WEBPACK_IMPORTED_MODULE_12__["LiveComponent"] },
     { path: 'profile', component: _auth_profile_profile_component__WEBPACK_IMPORTED_MODULE_6__["ProfileComponent"], canActivate: [_auth_auth_guard__WEBPACK_IMPORTED_MODULE_5__["AuthGuard"]] },
-    { path: 'models', component: _models_models_component__WEBPACK_IMPORTED_MODULE_14__["ModelsComponent"], canActivate: [_auth_auth_guard__WEBPACK_IMPORTED_MODULE_5__["AuthGuard"]] },
-    { path: 'models/listings', component: _models_listings_listings_component__WEBPACK_IMPORTED_MODULE_12__["ListingsComponent"], canActivate: [_auth_auth_guard__WEBPACK_IMPORTED_MODULE_5__["AuthGuard"]] },
-    { path: 'models/live', component: _models_live_live_component__WEBPACK_IMPORTED_MODULE_13__["LiveComponent"], canActivate: [_auth_auth_guard__WEBPACK_IMPORTED_MODULE_5__["AuthGuard"]] },
     { path: 'member/account', component: _member_account_account_component__WEBPACK_IMPORTED_MODULE_11__["AccountComponent"], canActivate: [_auth_auth_guard__WEBPACK_IMPORTED_MODULE_5__["AuthGuard"]] },
     { path: 'member/session', component: _member_session_session_session_component__WEBPACK_IMPORTED_MODULE_7__["SessionComponent"], canActivate: [_auth_auth_guard__WEBPACK_IMPORTED_MODULE_5__["AuthGuard"]] },
     { path: 'member/session/new', component: _member_session_new_session_new_session_component__WEBPACK_IMPORTED_MODULE_8__["NewSessionComponent"], canActivate: [_auth_auth_guard__WEBPACK_IMPORTED_MODULE_5__["AuthGuard"]] },
@@ -117,7 +114,7 @@ module.exports = "\r\nmat-sidenav-container, mat-sidenav-content, mat-sidenav {\
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<mat-sidenav-container>\n    \n  <mat-sidenav  #sidebar role=\"navigation\">\n    <app-sidebar (close)=\"sidebar.close()\"></app-sidebar>\n  </mat-sidenav>\n\n  <mat-sidenav-container>\n      <app-header (toggleSidebar)=\"sidebar.toggle()\"></app-header>\n      <router-outlet></router-outlet>\n  </mat-sidenav-container>\n\n</mat-sidenav-container>\n\n\n\n"
+module.exports = "<mat-sidenav-container>\r\n    \r\n  <mat-sidenav  #sidebar role=\"navigation\">\r\n    <app-sidebar (close)=\"sidebar.close()\"></app-sidebar>\r\n  </mat-sidenav>\r\n\r\n  <mat-sidenav-container>\r\n      <app-header (toggleSidebar)=\"sidebar.toggle()\"></app-header>\r\n      <router-outlet></router-outlet>\r\n  </mat-sidenav-container>\r\n\r\n</mat-sidenav-container>\r\n\r\n\r\n\r\n"
 
 /***/ }),
 
@@ -208,16 +205,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _member_session_past_session_past_session_component__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! ./member/session/past-session/past-session.component */ "./src/app/member/session/past-session/past-session.component.ts");
 /* harmony import */ var _member_session_stream_service__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! ./member/session/stream.service */ "./src/app/member/session/stream.service.ts");
 /* harmony import */ var src_app_common_yesno_dialog_yesno_dialog_component__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__(/*! src/app/common/yesno-dialog/yesno-dialog.component */ "./src/app/common/yesno-dialog/yesno-dialog.component.ts");
-/* harmony import */ var _models_listings_listings_component__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__(/*! ./models/listings/listings.component */ "./src/app/models/listings/listings.component.ts");
-/* harmony import */ var _models_models_component__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__(/*! ./models/models.component */ "./src/app/models/models.component.ts");
-/* harmony import */ var _models_live_live_component__WEBPACK_IMPORTED_MODULE_33__ = __webpack_require__(/*! ./models/live/live.component */ "./src/app/models/live/live.component.ts");
+/* harmony import */ var _models_models_component__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__(/*! ./models/models.component */ "./src/app/models/models.component.ts");
+/* harmony import */ var _models_live_live_component__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__(/*! ./models/live/live.component */ "./src/app/models/live/live.component.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-
 
 
 
@@ -273,9 +268,8 @@ var AppModule = /** @class */ (function () {
                 _member_session_past_session_past_session_component__WEBPACK_IMPORTED_MODULE_28__["PastSessionComponent"],
                 _member_account_account_component__WEBPACK_IMPORTED_MODULE_23__["AccountComponent"],
                 src_app_common_yesno_dialog_yesno_dialog_component__WEBPACK_IMPORTED_MODULE_30__["YesNoDialogComponent"],
-                _models_listings_listings_component__WEBPACK_IMPORTED_MODULE_31__["ListingsComponent"],
-                _models_models_component__WEBPACK_IMPORTED_MODULE_32__["ModelsComponent"],
-                _models_live_live_component__WEBPACK_IMPORTED_MODULE_33__["LiveComponent"]
+                _models_models_component__WEBPACK_IMPORTED_MODULE_31__["ModelsComponent"],
+                _models_live_live_component__WEBPACK_IMPORTED_MODULE_32__["LiveComponent"]
             ],
             imports: [
                 _angular_platform_browser__WEBPACK_IMPORTED_MODULE_0__["BrowserModule"],
@@ -599,7 +593,7 @@ module.exports = ".profile-image {\r\n    width: 600px;\r\n}"
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<section fxLayout=\"column\" fxLayoutAlign=\"center center\">\r\n  <section class=\"member-info\" *ngIf=\"user\">\r\n    <h1>member info</h1>\r\n    <p> email: {{ user.email}}</p> \r\n    <p> displayName: {{ user.displayName}}</p> \r\n    <img [src]=\"user.photoUrl\" style=\"max-width: 100px;height:auto\" />\r\n\r\n  </section>\r\n  <section class=\"profile-image\" > \r\n      <app-file-upload></app-file-upload>\r\n  </section>\r\n  \r\n</section>"
+module.exports = "<section fxLayout=\"column\" fxLayoutAlign=\"center center\">\n  <section class=\"member-info\" *ngIf=\"user\">\n    <h1>member info</h1>\n    <p> email: {{ user.email}}</p> \n    <p> displayName: {{ user.displayName}}</p> \n    <img [src]=\"user.photoUrl\" style=\"max-width: 100px;height:auto\" />\n\n  </section>\n  <section class=\"profile-image\" > \n      <app-file-upload></app-file-upload>\n  </section>\n  \n</section>"
 
 /***/ }),
 
@@ -968,7 +962,7 @@ var FileSizePipe = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"dropzone\" \r\n     appDropZone\r\n     (hovered)=\"toggleHover($event)\"\r\n     (dropped)=\"startUpload($event)\"\r\n     [class.hovering]=\"isHovering\">\r\n\r\n     <h3>Drag and Drop a file or select a file</h3>\r\n \r\n     <div class=\"file\">\r\n        <label class=\"file-label\">\r\n\r\n        <input class=\"file-input\" type=\"file\" (change)=\"startUpload($event.target.files)\">\r\n\r\n          <span class=\"file-cta\">\r\n            <span class=\"file-icon\">\r\n              <i class=\"fa fa-upload\"></i>\r\n            </span>\r\n            <span class=\"file-label\">\r\n              or choose a file…\r\n            </span>\r\n          </span>\r\n        </label>\r\n      </div>\r\n</div>\r\n\r\n<div *ngIf=\"percentage | async as pct\">\r\n\r\n  <progress class=\"progress is-info\" \r\n            [value]=\"pct\" \r\n            max=\"100\">        \r\n  </progress>\r\n  {{ pct | number }}%\r\n\r\n</div>\r\n\r\n\r\n<div *ngIf=\"snapshot | async as snap\">\r\n  {{ snap.bytesTransferred | fileSize }} of {{ snap.totalBytes | fileSize }} \r\n\r\n  \r\n  <div *ngIf=\"downloadUrl$ | async as url\">\r\n    <h3>Results!</h3>\r\n    <img [src]=\"url\"><br>\r\n    <a [href]=\"url\" target=\"_blank\" rel=\"noopener\">Download Me!</a>\r\n  </div> \r\n\r\n  <button (click)=\"task.pause()\" class=\"button is-warning\" [disabled]=\"!isActive(snap)\">Pause</button>\r\n  <button (click)=\"task.cancel()\" class=\"button is-danger\" [disabled]=\"!isActive(snap)\">Cancel</button>\r\n  <button (click)=\"task.resume()\" class=\"button is-info\"   [disabled]=\"!(snap?.state === 'paused')\">Resume</button>\r\n\r\n</div>"
+module.exports = "<div class=\"dropzone\" \n     appDropZone\n     (hovered)=\"toggleHover($event)\"\n     (dropped)=\"startUpload($event)\"\n     [class.hovering]=\"isHovering\">\n\n     <h3>Drag and Drop a file or select a file</h3>\n \n     <div class=\"file\">\n        <label class=\"file-label\">\n\n        <input class=\"file-input\" type=\"file\" (change)=\"startUpload($event.target.files)\">\n\n          <span class=\"file-cta\">\n            <span class=\"file-icon\">\n              <i class=\"fa fa-upload\"></i>\n            </span>\n            <span class=\"file-label\">\n              or choose a file…\n            </span>\n          </span>\n        </label>\n      </div>\n</div>\n\n<div *ngIf=\"percentage | async as pct\">\n\n  <progress class=\"progress is-info\" \n            [value]=\"pct\" \n            max=\"100\">        \n  </progress>\n  {{ pct | number }}%\n\n</div>\n\n\n<div *ngIf=\"snapshot | async as snap\">\n  {{ snap.bytesTransferred | fileSize }} of {{ snap.totalBytes | fileSize }} \n\n  \n  <div *ngIf=\"downloadUrl$ | async as url\">\n    <h3>Results!</h3>\n    <img [src]=\"url\"><br>\n    <a [href]=\"url\" target=\"_blank\" rel=\"noopener\">Download Me!</a>\n  </div> \n\n  <button (click)=\"task.pause()\" class=\"button is-warning\" [disabled]=\"!isActive(snap)\">Pause</button>\n  <button (click)=\"task.cancel()\" class=\"button is-danger\" [disabled]=\"!isActive(snap)\">Cancel</button>\n  <button (click)=\"task.resume()\" class=\"button is-info\"   [disabled]=\"!(snap?.state === 'paused')\">Resume</button>\n\n</div>"
 
 /***/ }),
 
@@ -1188,7 +1182,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<p>\n  account works!\n</p>\n"
+module.exports = "<p>\r\n  account works!\r\n</p>\r\n"
 
 /***/ }),
 
@@ -1301,7 +1295,7 @@ var MemberService = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<section class='page-title'>\r\n    <h1>Session Control</h1>\r\n</section>\r\n\r\n<section class=\"content\">\r\n<mat-accordion class=\"accordion\" multi=\"true\" fxLayout=\"row wrap\" fxLayoutGap=\"10px\">\r\n\r\n    <mat-expansion-panel  *ngIf=\"session\" fxFlex.xs=\"100%\" fxFlex=\"400px\">\r\n        <mat-expansion-panel-header>\r\n            <mat-panel-title>\r\n                Name & Title\r\n            </mat-panel-title>\r\n            <mat-panel-description>\r\n                 &nbsp; \r\n                <mat-icon>face</mat-icon>\r\n            </mat-panel-description>\r\n        </mat-expansion-panel-header>\r\n        \r\n        <mat-form-field>\r\n            <input type=\"text\" matInput placeholder=\"Model name to use\" [(ngModel)]=\"session.modelName\"  (change)=\"saveSession('session.modelName')\"/> \r\n        </mat-form-field>\r\n                 \r\n        <mat-form-field>\r\n            <input type=\"text\" matInput placeholder=\"Title\"  [(ngModel)]=\"session.title\"  (change)=\"saveSession('session.title')\" />\r\n        </mat-form-field>\r\n    </mat-expansion-panel>\r\n\r\n    <mat-expansion-panel fxFlex.xs=\"100%\" fxFlex=\"400px\" *ngIf=\"session\" >\r\n            <mat-expansion-panel-header>\r\n                <mat-panel-title>\r\n                    View settings\r\n                </mat-panel-title>\r\n                <mat-panel-description>\r\n                    ({{session.accessType}})&nbsp;\r\n                    <mat-icon>visibility</mat-icon>\r\n                </mat-panel-description>\r\n            </mat-expansion-panel-header>\r\n            \r\n            <mat-form-field>\r\n                <mat-select placeholder=\"Who can view?\"  [(ngModel)]=\"session.accessType\" (selectionChange)=\"saveSession('session.accessType')\" >\r\n                        <mat-option value=\"public\"><u>Everyone</u> can view</mat-option>\r\n                        <mat-option value=\"member\">all <u>Members</u> can view</mat-option>\r\n                        <mat-option value=\"level\">only <u>Members</u> => <u>level</u> </mat-option>\r\n                        <mat-option value=\"onrequest\"><u>Members</u> can <u>Request to join</u></mat-option>\r\n                </mat-select>\r\n            </mat-form-field>\r\n            <mat-form-field *ngIf=\"session.accessType === 'level'\">\r\n                <input type=\"number\" matInput placeholder=\"Required level?\"  [(ngModel)]=\"session.minLevel\"  (change)=\"saveSession('session.minLevel')\" />  \r\n            </mat-form-field>\r\n    </mat-expansion-panel>\r\n    \r\n\r\n    <mat-expansion-panel fxFlex.xs=\"100%\" fxFlex=\"400px\" *ngIf=\"session\">\r\n            <mat-expansion-panel-header>\r\n                <mat-panel-title>\r\n                  Pay Per Minute\r\n                </mat-panel-title>\r\n                <mat-panel-description>\r\n                    {{session.usePpm? '(Enabled)' :' ' }}&nbsp;\r\n                    <mat-icon>attach_money</mat-icon>\r\n                </mat-panel-description>\r\n            </mat-expansion-panel-header>\r\n            \r\n            <mat-slide-toggle labelPosition=\"before\" color=\"accent\" [(ngModel)]=\"session.usePpm\" (change)=\"saveSession('session.usePpm')\">Enable Pay-Per-Minute</mat-slide-toggle>\r\n\r\n            <mat-form-field *ngIf=\"session.usePpm\">\r\n              <input type=\"number\" matInput placeholder=\"Tokens to Pay-Per-Minute\" [(ngModel)]=\"session.ppm.amount\" (change)=\"saveSession('session.ppm.amount')\"  />\r\n            </mat-form-field>\r\n    </mat-expansion-panel>\r\n\r\n    <mat-expansion-panel fxFlex.xs=\"100%\" fxFlex=\"400px\" *ngIf=\"session\">\r\n            <mat-expansion-panel-header>\r\n                <mat-panel-title>\r\n                  Goal\r\n                </mat-panel-title>\r\n                <mat-panel-description>\r\n                    {{session.useGoal? '(Enabled)' : '' }}&nbsp;\r\n                    <mat-icon>assistant_photo</mat-icon>\r\n                </mat-panel-description>\r\n            </mat-expansion-panel-header>\r\n            \r\n            <mat-slide-toggle labelPosition=\"before\" color=\"accent\" [(ngModel)]=\"session.useGoal\"  (change)=\"saveSession('session.useGoal')\">Do you want to set a Goal?</mat-slide-toggle>\r\n          <ng-container *ngIf=\"goal\">\r\n              <mat-form-field>\r\n                  <input type=\"number\" matInput placeholder=\"Goal Amount token (Target)\" [(ngModel)]=\"goal.amount\"   (change)=\"saveSession('goal.amount')\" />\r\n              </mat-form-field>\r\n              <mat-form-field>\r\n                  <input type=\"text\"  matInput placeholder=\"Goal description\" [(ngModel)]=\"goal.descr\"  (change)=\"saveSession('goal.descr')\" />\r\n              </mat-form-field>\r\n              <mat-form-field>\r\n                      <mat-select placeholder=\"Show Fx on goal complete?\"  [(ngModel)]=\"goal.doneFx\"  (selectionChange)=\"saveSession('goal.doneFx')\" >\r\n                              <mat-option value=\"None\">No</mat-option>\r\n                              <mat-option value=\"fx1\">1 TBD</mat-option>\r\n                              <mat-option value=\"fx2\">2 TBD</mat-option>\r\n                              <mat-option value=\"fx3\">3 TBD</mat-option>\r\n                              <mat-option value=\"fx3\">4 TBD</mat-option>\r\n                            </mat-select>\r\n              </mat-form-field>\r\n         </ng-container>   \r\n    </mat-expansion-panel>\r\n\r\n    <mat-expansion-panel fxFlex.xs=\"100%\" fxFlex=\"400px\" *ngIf=\"session\">\r\n            <mat-expansion-panel-header>\r\n                <mat-panel-title>\r\n                  Stream Control\r\n                </mat-panel-title>\r\n                <mat-panel-description>\r\n                    &nbsp;\r\n                    <mat-icon>cast</mat-icon>\r\n                </mat-panel-description>\r\n            </mat-expansion-panel-header>\r\n            \r\n            <mat-form-field>\r\n                    <input type=\"text\" matInput placeholder=\"Stream Url\" [ngModel]=\"session.stream.url\" readonly />\r\n                </mat-form-field>\r\n                <mat-form-field>\r\n                    <input type=\"text\"  matInput placeholder=\"Stream Key\" [ngModel]=\"session.stream.key\" readonly/>\r\n                </mat-form-field>\r\n            <button mat-raised-button color=\"primary\" (click)=\"getNewStreamKey()\">Get new stream key</button><br/><br/>\r\n            <button mat-raised-button color=\"accent\" (click)=\"stopSession()\">Stop Session!</button>\r\n        \r\n    </mat-expansion-panel>\r\n\r\n  \r\n</mat-accordion>\r\n\r\n\r\n<mat-divider></mat-divider>\r\n\r\n<section class='page-title'>\r\n    <h1>Live metrics</h1>\r\n</section>\r\n\r\n<mat-accordion class=\"accordion\" multi=\"true\" fxLayout=\"row wrap\" fxLayoutGap=\"10px\">\r\n\r\n        <mat-expansion-panel  *ngIf=\"goal\" fxFlex.xs=\"100%\" fxFlex=\"400px\" expanded class=\"goal-meter\">\r\n            <mat-expansion-panel-header>\r\n                <mat-panel-title>\r\n                    Goal Meter\r\n                </mat-panel-title>\r\n                <mat-panel-description>\r\n                    {{goalCollectedPct}}% ({{goal.collected}}t / {{goal.amount}}t)&nbsp; \r\n                    <mat-progress-spinner\r\n                    color=\"primary\"\r\n                    mode=\"determinate\"\r\n                    [value]=\"goalCollectedPct\"\r\n                    strokeWidth=3\r\n                    diameter=20>\r\n                 </mat-progress-spinner>\r\n                </mat-panel-description>\r\n            </mat-expansion-panel-header>\r\n            \r\n            <div>\r\n                <table>\r\n                    <tr>\r\n                    <td>\r\n                        <mat-progress-spinner\r\n                        color=\"primary\"\r\n                        mode=\"determinate\"\r\n                        [value]=\"goalCollectedPct\"\r\n                        strokeWidth=10\r\n                        diameter=80>\r\n                     </mat-progress-spinner></td>\r\n                    \r\n                    <td style=\"font-size: 48pt\">{{goalCollectedPct}}%</td>\r\n                    <td style=\"font-size: 11pt;font-weight: normal;text-align: center;padding-left:10px\">{{goal.collected}}<br/>out of<br/>{{goal.amount}} <img src=\"/src/assets/coin16.png\"></td>\r\n                </tr>\r\n                <tr><td colspan=\"2\" style=\"text-align:center;font-size:12pt;font-weight: bold\">{{goal.descr}}</td></tr>\r\n                </table>\r\n            \r\n           \r\n            </div>\r\n            \r\n        </mat-expansion-panel>\r\n\r\n        <mat-expansion-panel  *ngIf=\"tipjar\" fxFlex.xs=\"100%\" fxFlex=\"400px\" expanded class=\"tipjar\">\r\n                <mat-expansion-panel-header>\r\n                    <mat-panel-title>\r\n                       Tip jar\r\n                    </mat-panel-title>\r\n                    <mat-panel-description>\r\n                        {{tipjar.balance}} t &nbsp; \r\n                        <mat-icon>attach_money</mat-icon>\r\n                    </mat-panel-description>\r\n                </mat-expansion-panel-header>\r\n              <div style=\"font-size: 48pt;padding-top:30px;text-align: center;\">\r\n                {{tipjar.balance}}  <img src=\"/src/assets/coin32.png\">\r\n              </div>\r\n            </mat-expansion-panel>\r\n\r\n\r\n            <mat-expansion-panel  *ngIf=\"wallet\" fxFlex.xs=\"100%\" fxFlex=\"400px\" expanded class=\"wallet\">\r\n                    <mat-expansion-panel-header>\r\n                        <mat-panel-title>\r\n                           Personal Wallet\r\n                        </mat-panel-title>\r\n                        <mat-panel-description>\r\n                            {{wallet.balance}} t &nbsp; \r\n                            <mat-icon>attach_money</mat-icon>\r\n                        </mat-panel-description>\r\n                    </mat-expansion-panel-header>\r\n                  <div style=\"font-size: 48pt;padding-top:30px;text-align: center;\">\r\n                    {{wallet.balance}} <img src=\"/src/assets/coin32.png\">\r\n                  </div>\r\n                </mat-expansion-panel>\r\n\r\n                <mat-expansion-panel  *ngIf=\"session\" fxFlex.xs=\"100%\" fxFlex=\"400px\" expanded class=\"runtime\">\r\n                        <mat-expansion-panel-header>\r\n                            <mat-panel-title>\r\n                              Runtime & Clock\r\n                            </mat-panel-title>\r\n                            <mat-panel-description>\r\n                                {{runtimeHours}}h {{runtimeMinutes}}m  ({{clockHours}}:{{clockMinutes}})\r\n                                <mat-icon>access_time</mat-icon>\r\n                            </mat-panel-description>\r\n                        </mat-expansion-panel-header>\r\n                     \r\n                        <div style=\"font-size: 48pt;padding-top:30px;text-align: center;\">\r\n                        <ng-container *ngIf=\"runtimeDays>0\"> {{runtimeDays}}d </ng-container> {{runtimeHours}}h {{runtimeMinutes}}m\r\n                      </div>\r\n\r\n                      <div style=\"font-size: 14pt;padding-top:30px;text-align: center;\">\r\n                        {{clockHours}}:{{clockMinutes}} {{timezone}} \r\n                      </div>\r\n\r\n                    </mat-expansion-panel>\r\n</mat-accordion>\r\n\r\n</section>"
+module.exports = "<section class='page-title'>\r\n    <h1>Session Control</h1>\r\n</section>\r\n\r\n<section class=\"content\">\r\n<mat-accordion class=\"accordion\" multi=\"true\" fxLayout=\"row wrap\" fxLayoutGap=\"10px\">\r\n\r\n    <mat-expansion-panel  *ngIf=\"session\" fxFlex.xs=\"100%\" fxFlex=\"400px\">\r\n        <mat-expansion-panel-header>\r\n            <mat-panel-title>\r\n                Name & Title\r\n            </mat-panel-title>\r\n            <mat-panel-description>\r\n                 &nbsp; \r\n                <mat-icon>face</mat-icon>\r\n            </mat-panel-description>\r\n        </mat-expansion-panel-header>\r\n        \r\n        <mat-form-field>\r\n            <input type=\"text\" matInput placeholder=\"Model name to use\" [(ngModel)]=\"session.modelName\"  (change)=\"saveSession('session.modelName')\"/> \r\n        </mat-form-field>\r\n                 \r\n        <mat-form-field>\r\n            <input type=\"text\" matInput placeholder=\"Title\"  [(ngModel)]=\"session.title\"  (change)=\"saveSession('session.title')\" />\r\n        </mat-form-field>\r\n    </mat-expansion-panel>\r\n\r\n    <mat-expansion-panel fxFlex.xs=\"100%\" fxFlex=\"400px\" *ngIf=\"session\" >\r\n            <mat-expansion-panel-header>\r\n                <mat-panel-title>\r\n                    View settings\r\n                </mat-panel-title>\r\n                <mat-panel-description>\r\n                    ({{session.accessType}})&nbsp;\r\n                    <mat-icon>visibility</mat-icon>\r\n                </mat-panel-description>\r\n            </mat-expansion-panel-header>\r\n            \r\n            <mat-form-field>\r\n                <mat-select placeholder=\"Who can view?\"  [(ngModel)]=\"session.accessType\" (selectionChange)=\"saveSession('session.accessType')\" >\r\n                        <mat-option value=\"public\"><u>Everyone</u> can view</mat-option>\r\n                        <mat-option value=\"member\">all <u>Members</u> can view</mat-option>\r\n                        <mat-option value=\"level\">only <u>Members</u> => <u>level</u> </mat-option>\r\n                        <mat-option value=\"onrequest\"><u>Members</u> can <u>Request to join</u></mat-option>\r\n                </mat-select>\r\n            </mat-form-field>\r\n            <mat-form-field *ngIf=\"session.accessType === 'level'\">\r\n                <input type=\"number\" matInput placeholder=\"Required level?\"  [(ngModel)]=\"session.minLevel\"  (change)=\"saveSession('session.minLevel')\" />  \r\n            </mat-form-field>\r\n    </mat-expansion-panel>\r\n    \r\n\r\n    <mat-expansion-panel fxFlex.xs=\"100%\" fxFlex=\"400px\" *ngIf=\"session\">\r\n            <mat-expansion-panel-header>\r\n                <mat-panel-title>\r\n                  Pay Per Minute\r\n                </mat-panel-title>\r\n                <mat-panel-description>\r\n                    {{session.usePpm? '(Enabled)' :' ' }}&nbsp;\r\n                    <mat-icon>attach_money</mat-icon>\r\n                </mat-panel-description>\r\n            </mat-expansion-panel-header>\r\n            \r\n            <mat-slide-toggle labelPosition=\"before\" color=\"accent\" [(ngModel)]=\"session.usePpm\" (change)=\"saveSession('session.usePpm')\">Enable Pay-Per-Minute</mat-slide-toggle>\r\n\r\n            <mat-form-field *ngIf=\"session.usePpm\">\r\n              <input type=\"number\" matInput placeholder=\"Tokens to Pay-Per-Minute\" [(ngModel)]=\"session.ppm.amount\" (change)=\"saveSession('session.ppm.amount')\"  />\r\n            </mat-form-field>\r\n    </mat-expansion-panel>\r\n\r\n    <mat-expansion-panel fxFlex.xs=\"100%\" fxFlex=\"400px\" *ngIf=\"session\">\r\n            <mat-expansion-panel-header>\r\n                <mat-panel-title>\r\n                  Goal\r\n                </mat-panel-title>\r\n                <mat-panel-description>\r\n                    {{session.useGoal? '(Enabled)' : '' }}&nbsp;\r\n                    <mat-icon>assistant_photo</mat-icon>\r\n                </mat-panel-description>\r\n            </mat-expansion-panel-header>\r\n            \r\n            <mat-slide-toggle labelPosition=\"before\" color=\"accent\" [(ngModel)]=\"session.useGoal\"  (change)=\"saveSession('session.useGoal')\">Do you want to set a Goal?</mat-slide-toggle>\r\n          <ng-container *ngIf=\"goal\">\r\n              <mat-form-field>\r\n                  <input type=\"number\" matInput placeholder=\"Goal Amount token (Target)\" [(ngModel)]=\"goal.amount\"   (change)=\"saveSession('goal.amount')\" />\r\n              </mat-form-field>\r\n              <mat-form-field>\r\n                  <input type=\"text\"  matInput placeholder=\"Goal description\" [(ngModel)]=\"goal.descr\"  (change)=\"saveSession('goal.descr')\" />\r\n              </mat-form-field>\r\n              <mat-form-field>\r\n                      <mat-select placeholder=\"Show Fx on goal complete?\"  [(ngModel)]=\"goal.doneFx\"  (selectionChange)=\"saveSession('goal.doneFx')\" >\r\n                              <mat-option value=\"None\">No</mat-option>\r\n                              <mat-option value=\"fx1\">1 TBD</mat-option>\r\n                              <mat-option value=\"fx2\">2 TBD</mat-option>\r\n                              <mat-option value=\"fx3\">3 TBD</mat-option>\r\n                              <mat-option value=\"fx3\">4 TBD</mat-option>\r\n                            </mat-select>\r\n              </mat-form-field>\r\n         </ng-container>   \r\n    </mat-expansion-panel>\r\n\r\n    <mat-expansion-panel fxFlex.xs=\"100%\" fxFlex=\"400px\" *ngIf=\"session\">\r\n            <mat-expansion-panel-header>\r\n                <mat-panel-title>\r\n                  Stream Control\r\n                </mat-panel-title>\r\n                <mat-panel-description>\r\n                    &nbsp;\r\n                    <mat-icon>cast</mat-icon>\r\n                </mat-panel-description>\r\n            </mat-expansion-panel-header>\r\n            \r\n            <mat-form-field>\r\n                    <input type=\"text\" matInput placeholder=\"Stream Url\" [ngModel]=\"session.stream.url\" readonly />\r\n                </mat-form-field>\r\n                <mat-form-field>\r\n                    <input type=\"text\"  matInput placeholder=\"Stream Key\" [ngModel]=\"session.stream.key\" readonly/>\r\n                </mat-form-field>\r\n            <button mat-raised-button color=\"primary\" (click)=\"getNewStreamKey()\">Get new stream key</button><br/><br/>\r\n            <button mat-raised-button color=\"accent\" (click)=\"stopSession()\">Stop Session!</button>\r\n        \r\n    </mat-expansion-panel>\r\n\r\n  \r\n</mat-accordion>\r\n\r\n\r\n<mat-divider></mat-divider>\r\n\r\n<section class='page-title'>\r\n    <h1>Live metrics</h1>\r\n</section>\r\n\r\n<mat-accordion class=\"accordion\" multi=\"true\" fxLayout=\"row wrap\" fxLayoutGap=\"10px\">\r\n\r\n        <mat-expansion-panel  *ngIf=\"goal\" fxFlex.xs=\"100%\" fxFlex=\"400px\" expanded class=\"goal-meter\">\r\n            <mat-expansion-panel-header>\r\n                <mat-panel-title>\r\n                    Goal Meter\r\n                </mat-panel-title>\r\n                <mat-panel-description>\r\n                    {{goalCollectedPct}}% ({{goal.collected}}t / {{goal.amount}}t)&nbsp; \r\n                    <mat-progress-spinner\r\n                    color=\"primary\"\r\n                    mode=\"determinate\"\r\n                    [value]=\"goalCollectedPct\"\r\n                    strokeWidth=3\r\n                    diameter=20>\r\n                 </mat-progress-spinner>\r\n                </mat-panel-description>\r\n            </mat-expansion-panel-header>\r\n            \r\n            <div>\r\n                <table>\r\n                    <tr>\r\n                    <td>\r\n                        <mat-progress-spinner\r\n                        color=\"primary\"\r\n                        mode=\"determinate\"\r\n                        [value]=\"goalCollectedPct\"\r\n                        strokeWidth=10\r\n                        diameter=80>\r\n                     </mat-progress-spinner></td>\r\n                    \r\n                    <td style=\"font-size: 48pt\">{{goalCollectedPct}}%</td>\r\n                    <td style=\"font-size: 11pt;font-weight: normal;text-align: center;padding-left:10px\">{{goal.collected}}<br/>out of<br/>{{goal.amount}} <img src=\"https://firebasestorage.googleapis.com/v0/b/alpha69-ng.appspot.com/o/images%2Fcoin16.png?alt=media&token=45502c9f-a9d4-4c2e-9671-aa92141db4f5\"></td>\r\n                </tr>\r\n                <tr><td colspan=\"2\" style=\"text-align:center;font-size:12pt;font-weight: bold\">{{goal.descr}}</td></tr>\r\n                </table>\r\n            \r\n           \r\n            </div>\r\n            \r\n        </mat-expansion-panel>\r\n\r\n        <mat-expansion-panel  *ngIf=\"tipjar\" fxFlex.xs=\"100%\" fxFlex=\"400px\" expanded class=\"tipjar\">\r\n                <mat-expansion-panel-header>\r\n                    <mat-panel-title>\r\n                       Tip jar\r\n                    </mat-panel-title>\r\n                    <mat-panel-description>\r\n                        {{tipjar.balance}} t &nbsp; \r\n                        <mat-icon>attach_money</mat-icon>\r\n                    </mat-panel-description>\r\n                </mat-expansion-panel-header>\r\n              <div style=\"font-size: 48pt;padding-top:30px;text-align: center;\">\r\n                {{tipjar.balance}}  <img src=\"https://firebasestorage.googleapis.com/v0/b/alpha69-ng.appspot.com/o/images%2Fcoin32.png?alt=media&token=f4b3f892-a7d1-4908-a2c5-54d3dbd02b22\">\r\n              </div>\r\n            </mat-expansion-panel>\r\n\r\n\r\n            <mat-expansion-panel  *ngIf=\"wallet\" fxFlex.xs=\"100%\" fxFlex=\"400px\" expanded class=\"wallet\">\r\n                    <mat-expansion-panel-header>\r\n                        <mat-panel-title>\r\n                           Personal Wallet\r\n                        </mat-panel-title>\r\n                        <mat-panel-description>\r\n                            {{wallet.balance}} t &nbsp; \r\n                            <mat-icon>attach_money</mat-icon>\r\n                        </mat-panel-description>\r\n                    </mat-expansion-panel-header>\r\n                  <div style=\"font-size: 48pt;padding-top:30px;text-align: center;\">\r\n                    {{wallet.balance}} <img src=\"https://firebasestorage.googleapis.com/v0/b/alpha69-ng.appspot.com/o/images%2Fcoin32.png?alt=media&token=f4b3f892-a7d1-4908-a2c5-54d3dbd02b22\">\r\n                  </div>\r\n                </mat-expansion-panel>\r\n\r\n                <mat-expansion-panel  *ngIf=\"session\" fxFlex.xs=\"100%\" fxFlex=\"400px\" expanded class=\"runtime\">\r\n                        <mat-expansion-panel-header>\r\n                            <mat-panel-title>\r\n                              Runtime & Clock\r\n                            </mat-panel-title>\r\n                            <mat-panel-description>\r\n                                {{runtimeHours}}h {{runtimeMinutes}}m  ({{clockHours}}:{{clockMinutes}})\r\n                                <mat-icon>access_time</mat-icon>\r\n                            </mat-panel-description>\r\n                        </mat-expansion-panel-header>\r\n                     \r\n                        <div style=\"font-size: 48pt;padding-top:30px;text-align: center;\">\r\n                        <ng-container *ngIf=\"runtimeDays>0\"> {{runtimeDays}}d </ng-container> {{runtimeHours}}h {{runtimeMinutes}}m\r\n                      </div>\r\n\r\n                      <div style=\"font-size: 14pt;padding-top:30px;text-align: center;\">\r\n                        {{clockHours}}:{{clockMinutes}} {{timezone}} \r\n                      </div>\r\n\r\n                    </mat-expansion-panel>\r\n</mat-accordion>\r\n\r\n</section>"
 
 /***/ }),
 
@@ -1656,7 +1650,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<p>\n  past-session works!\n</p>\n"
+module.exports = "<p>\r\n  past-session works!\r\n</p>\r\n"
 
 /***/ }),
 
@@ -1828,69 +1822,6 @@ var StreamService = /** @class */ (function () {
 
 /***/ }),
 
-/***/ "./src/app/models/listings/listings.component.css":
-/*!********************************************************!*\
-  !*** ./src/app/models/listings/listings.component.css ***!
-  \********************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = ""
-
-/***/ }),
-
-/***/ "./src/app/models/listings/listings.component.html":
-/*!*********************************************************!*\
-  !*** ./src/app/models/listings/listings.component.html ***!
-  \*********************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = "<p>\n  listings works!\n</p>\n"
-
-/***/ }),
-
-/***/ "./src/app/models/listings/listings.component.ts":
-/*!*******************************************************!*\
-  !*** ./src/app/models/listings/listings.component.ts ***!
-  \*******************************************************/
-/*! exports provided: ListingsComponent */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ListingsComponent", function() { return ListingsComponent; });
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (undefined && undefined.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-var ListingsComponent = /** @class */ (function () {
-    function ListingsComponent() {
-    }
-    ListingsComponent.prototype.ngOnInit = function () {
-    };
-    ListingsComponent = __decorate([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
-            selector: 'app-listings',
-            template: __webpack_require__(/*! ./listings.component.html */ "./src/app/models/listings/listings.component.html"),
-            styles: [__webpack_require__(/*! ./listings.component.css */ "./src/app/models/listings/listings.component.css")]
-        }),
-        __metadata("design:paramtypes", [])
-    ], ListingsComponent);
-    return ListingsComponent;
-}());
-
-
-
-/***/ }),
-
 /***/ "./src/app/models/live/live.component.css":
 /*!************************************************!*\
   !*** ./src/app/models/live/live.component.css ***!
@@ -1909,7 +1840,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<p>\n  live works!\n</p>\n"
+module.exports = "<p>\r\n  live works!\r\n</p>\r\n"
 
 /***/ }),
 
@@ -1961,7 +1892,7 @@ var LiveComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ""
+module.exports = ".page-title{\r\n    text-align: center\r\n}\r\n.content {\r\n      \r\n}\r\nmat-card {\r\n    margin-top:10px;\r\n    margin-left:10px;\r\n    margin-right:10px;\r\n    margin-bottom:10px;\r\n}\r\nmat-card-title\r\n{\r\n    font-weight: bold;\r\n}\r\n.model-card {\r\n    max-width: 400px;\r\n  }\r\n  "
 
 /***/ }),
 
@@ -1972,7 +1903,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<p>\n  models works!\n</p>\n"
+module.exports = "<section class='page-title'>\r\n    <h1>Models</h1>\r\n</section>\r\n\r\n<section class='content'  fxLayout=\"row wrap\" fxLayoutAlign=\"center\" *ngIf=\"models\" >\r\n\r\n    <mat-card class=\"model-card\" fxFlex.xs=\"100%\" fxFlex=\"400px\" *ngFor=\"let m of models\" >\r\n        <mat-card-header>\r\n          <img mat-card-avatar *ngIf=\"m.model.avatarImg\" [src]=\"m.model.avatarImg\">\r\n          <mat-card-title>{{m.displayName}}</mat-card-title>\r\n          <mat-card-subtitle>{{m.model.subtitle?m.model.subtitle: \"&nbsp;\"}}</mat-card-subtitle>\r\n        </mat-card-header>\r\n        <img mat-card-image [src]=\"m.model.listingImg\" alt=\"\">\r\n        <mat-card-content>\r\n          <p>\r\n              {{m.model.aboutMe?m.model.aboutMe : \"&nbsp;\"}}\r\n          </p>\r\n        </mat-card-content>\r\n        <mat-card-actions>\r\n\r\n          <button mat-raised-button [disabled]='!m.session' class=\"live-button\" color=\"accent\">LIVE</button>\r\n          <button mat-button>PROFILE</button>\r\n          <button mat-button>SHARE</button>\r\n        </mat-card-actions>\r\n      </mat-card>\r\n\r\n</section>\r\n"
 
 /***/ }),
 
@@ -1987,6 +1918,7 @@ module.exports = "<p>\n  models works!\n</p>\n"
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ModelsComponent", function() { return ModelsComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/fire/firestore */ "./node_modules/@angular/fire/firestore/index.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1997,10 +1929,28 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
+
 var ModelsComponent = /** @class */ (function () {
-    function ModelsComponent() {
+    function ModelsComponent(db) {
+        this.db = db;
+        this.models = [];
     }
     ModelsComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.modelsSub = this.db.collection('members', function (ref) {
+            return ref
+                .where('isModel', '==', true);
+        })
+            .valueChanges()
+            .subscribe(function (data) {
+            _this.models = data;
+            console.log(_this.models);
+        });
+    };
+    ModelsComponent.prototype.ngOnDestroy = function () {
+        if (this.modelsSub) {
+            this.modelsSub.unsubscribe();
+        }
     };
     ModelsComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
@@ -2008,7 +1958,7 @@ var ModelsComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./models.component.html */ "./src/app/models/models.component.html"),
             styles: [__webpack_require__(/*! ./models.component.css */ "./src/app/models/models.component.css")]
         }),
-        __metadata("design:paramtypes", [])
+        __metadata("design:paramtypes", [_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_1__["AngularFirestore"]])
     ], ModelsComponent);
     return ModelsComponent;
 }());
@@ -2024,7 +1974,7 @@ var ModelsComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "a {\r\n    text-decoration: none;\r\n    color:white;\r\n}\r\na:hover,\r\na:active{\r\n    color:lightgray;\r\n}\r\n.navigation-items{\r\n    list-style: none;\r\n    padding: 0;\r\n    margin: 0;\r\n}\r\n.navigation-caption{\r\n    display: inline-block;\r\n    padding-left: 6px;\r\n}\r\n.logout{\r\n    cursor: pointer;\r\n}"
+module.exports = "a {\r\n    text-decoration: none;\r\n    color:white;\r\n}\r\na:hover,\r\na:active{\r\n    color:lightgray;\r\n}\r\n.navigation-items{\r\n    list-style: none;\r\n    padding: 0;\r\n    margin: 0;\r\n}\r\n.navigation-caption{\r\n    display: inline-block;\r\n    padding-left: 6px;\r\n}\r\n.logout{\r\n    cursor: pointer;\r\n}\r\n.navigation-items li\r\n{\r\n    padding-left: 5px;\r\n    padding-right: 5px;\r\n}"
 
 /***/ }),
 
@@ -2035,7 +1985,7 @@ module.exports = "a {\r\n    text-decoration: none;\r\n    color:white;\r\n}\r\n
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<mat-toolbar color=\"primary\">\r\n          \r\n  <div>\r\n      <button mat-icon-button (click)=\"onToggleSidebar()\">\r\n      <mat-icon>menu</mat-icon>\r\n  </button></div>\r\n  \r\n  <div><a routerLink=\"/\">LOGO</a></div>\r\n\r\n  <div fxFlex fxLayout fxLayoutAlign=\"flex-end\" fxHide.xs >\r\n      <ul fxLayout fxLayoutGap=\"10px\" class=\"navigation-items\">\r\n        <li *ngIf=\"!isAuth\"><a routerLink=\"/signup\">Signup</a></li>\r\n        <li *ngIf=\"!isAuth\"><a routerLink=\"/login\">Login</a></li>\r\n        <li *ngIf=\"!isAuth\"><a routerLink=\"/models/listings\">Models</a></li>\r\n        <li *ngIf=\"isAuth\"><a routerLink=\"/profile\">Profile</a></li>\r\n        <li *ngIf=\"isAuth && isModel\"><a routerLink=\"/member/session\">Session Control</a></li>\r\n        <li *ngIf=\"isAuth\" class=\"logout\" (click)=\"onLogout()\"><a>Logout</a></li>\r\n    </ul>\r\n  </div>\r\n</mat-toolbar>"
+module.exports = "<mat-toolbar color=\"primary\">\r\n          \r\n  <div>\r\n      <button mat-icon-button (click)=\"onToggleSidebar()\">\r\n      <mat-icon>menu</mat-icon>\r\n  </button></div>\r\n  \r\n  <div><a routerLink=\"/\">LOGO</a></div>\r\n\r\n  <div fxFlex fxLayout fxLayoutAlign=\"flex-end\" fxHide.xs >\r\n      <ul fxLayout fxLayoutGap=\"10px\" class=\"navigation-items\">\r\n        <li *ngIf=\"isAuth\">Hi <a routerLink=\"/profile\"><u>{{ displayName }}</u></a>!</li>\r\n        <li *ngIf=\"!isAuth\"><a routerLink=\"/signup\">Signup</a></li>\r\n        <li *ngIf=\"!isAuth\"><a routerLink=\"/login\">Login</a></li>\r\n        <li><a routerLink=\"/models\">Models</a></li>\r\n        <li *ngIf=\"isAuth && isModel\"><a routerLink=\"/member/session\">Session</a></li>\r\n        <li *ngIf=\"isAuth\" class=\"logout\" (click)=\"onLogout()\"><a>Logout</a></li>\r\n    </ul>\r\n  </div>\r\n</mat-toolbar>"
 
 /***/ }),
 
@@ -2080,11 +2030,13 @@ var HeaderComponent = /** @class */ (function () {
                 _this.memberChangeSub = _this.db.doc("members/" + localStorage.getItem('uid')).valueChanges()
                     .subscribe(function (member) {
                     _this.isModel = (member.isModel === true) ? true : false;
+                    _this.displayName = member.displayName;
+                    _this.level = member.level;
                 });
             }
         });
     };
-    HeaderComponent.prototype.onToggleSidenav = function () {
+    HeaderComponent.prototype.onToggleSidebar = function () {
         this.toggleSidebar.emit();
     };
     HeaderComponent.prototype.onLogout = function () {
@@ -2132,7 +2084,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<mat-nav-list>\n  <a mat-list-item  *ngIf=\"!isLoggedIn\" routerLink=\"/signup\" (click)=\"onClose()\"><mat-icon>face</mat-icon><span class=\"navigation-caption\">Signup</span></a>\n  <a mat-list-item  *ngIf=\"!isLoggedIn\" routerLink=\"/login\" (click)=\"onClose()\"><mat-icon>input</mat-icon><span class=\"navigation-caption\">Login</span></a>\n  <a mat-list-item  routerLink=\"/models/listings\" (click)=\"onClose()\"><mat-icon>people</mat-icon><span class=\"navigation-caption\">Models</span></a>\n  <mat-list-item  *ngIf=\"isLoggedIn\">\n    <button mat-icon-button  (click)=\"onLogout()\"><mat-icon>eject</mat-icon><span class=\"navigation-caption\">Logout</span></button>\n  </mat-list-item>\n  \n</mat-nav-list>"
+module.exports = "<mat-nav-list>\r\n  <a mat-list-item>To Be Done</a>\r\n  \r\n <!-- <a mat-list-item  *ngIf=\"!isLoggedIn\" routerLink=\"/signup\" (click)=\"onClose()\"><mat-icon>face</mat-icon><span class=\"navigation-caption\">Signup</span></a>\r\n  <a mat-list-item  *ngIf=\"!isLoggedIn\" routerLink=\"/login\" (click)=\"onClose()\"><mat-icon>input</mat-icon><span class=\"navigation-caption\">Login</span></a>\r\n  <a mat-list-item  routerLink=\"/models/listings\" (click)=\"onClose()\"><mat-icon>people</mat-icon><span class=\"navigation-caption\">Models</span></a>\r\n  <mat-list-item  *ngIf=\"isLoggedIn\">\r\n    <button mat-icon-button  (click)=\"onLogout()\"><mat-icon>eject</mat-icon><span class=\"navigation-caption\">Logout</span></button>\r\n  </mat-list-item>\r\n-->\r\n</mat-nav-list>"
 
 /***/ }),
 
@@ -2326,7 +2278,7 @@ Object(_angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_1__["platformB
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! c:\Users\d400041\Downloads\alpha69-ng\src\main.ts */"./src/main.ts");
+module.exports = __webpack_require__(/*! C:\Users\jaxcph\code\alpha69-ng\src\main.ts */"./src/main.ts");
 
 
 /***/ })
