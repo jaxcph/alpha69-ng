@@ -1,6 +1,7 @@
 <section class="page-title">
   <h1>Signup</h1>
 </section>
+
 <section class="signup-form">
   <form fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px" #f="ngForm" (ngSubmit)="onSubmit(f)">
    
@@ -39,7 +40,16 @@
       <mat-form-field>
         <input type="text" matInput placeholder="Real fullname" ngModel name="realfullname" required/>
       </mat-form-field>
-      <p> TDB: missing fields for various model specific info, like pay-out information etc...</p>
+      <mat-form-field>
+        <input type="text" matInput placeholder="short About Me" ngModel name="aboutMe" maxlength=200 required/>
+      </mat-form-field>
+      <mat-form-field>
+        <input type="text" matInput placeholder="Avatar image Url" ngModel url name="avatarImg" maxlength=9999 required/>
+      </mat-form-field>
+      <mat-form-field>
+        <input type="text" matInput placeholder="Model listing image Url" url ngModel name="listingImg" maxlength=9999 required/>
+      </mat-form-field>
+      <p> TDB: missing fields for various model specific info, like pay-out information. and A proper image handling setup etc...</p>
       <br/>
       <br/>
 
@@ -47,11 +57,11 @@
 
   </ng-container>
     
-  <mat-checkbox labelPosition="after" ngModel name="agree18yo" required color="accent">I am 18 years or Older</mat-checkbox>
+    <mat-checkbox labelPosition="after" ngModel name="agree18yo" required color="accent">I am 18 years or Older</mat-checkbox>
     <mat-checkbox labelPosition="after" ngModel name="agreeMember" required color="accent">Agree to Membership <a href="#">Terms and Conditions.</a></mat-checkbox>
 
     <button *ngIf="!isLoadning" type="submit" mat-raised-button color="primary" [disabled]="f.invalid">Submit</button>
-    <mat-progress-bar *ngIf="isLoading" mode="indeterminate" color="accent"></mat-progress-bar>
+  
   </form>
 </section>
 

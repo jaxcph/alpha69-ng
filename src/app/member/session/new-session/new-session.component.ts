@@ -37,6 +37,7 @@ export class NewSessionComponent implements OnInit, OnDestroy {
       const hasGoal = form.value.goalUse ? true : false;
       this.db.doc(`members/${localStorage.getItem('uid')}`).update( {
         session : {
+          id: new Date().getTime(),
           title: form.value.title,
           modelName: form.value.modelName,
           accessType: form.value.accessType,

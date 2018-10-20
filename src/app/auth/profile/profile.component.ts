@@ -13,21 +13,20 @@ import { Observable, Subscription } from 'rxjs';
 })
 export class ProfileComponent implements OnInit, OnDestroy {
 
-  public user: any = null;
-  private _userSub: Subscription;
+  public currentMember: Member = null;
+  private currrentMemberSub: Subscription;
 
   constructor(private authService: AuthService, private db: AngularFirestore ) { }
 
   ngOnInit() {
-    this._userSub = this.db.doc(`members/${this.authService.getUserId()}`).valueChanges()
-    .subscribe( data => {
-       this.user = data;
-       console.log(data);
+    this.currrentMemberSub = this.db.doc(`members/${this.authService.getUserId()}`).valueChanges()
+    .subscribe( (data: Member) => {
+       this.currentMember = data;
     });
   }
 
   ngOnDestroy(): void {
-    this._userSub.unsubscribe();
+    if ( this.currrentMemberSub ) { this.currrentMemberSub.unsubscribe(); }
   }
 
 }

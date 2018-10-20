@@ -8,19 +8,39 @@
         <mat-card-header>
           <img mat-card-avatar *ngIf="m.model.avatarImg" [src]="m.model.avatarImg">
           <mat-card-title>{{m.session ? m.session.modelName : m.displayName }}</mat-card-title>
-          <mat-card-subtitle>{{m.model.subtitle?m.model.subtitle: "&nbsp;"}}</mat-card-subtitle>
+          <mat-card-subtitle>{{m.session ? m.session.title: "&nbsp;"}}</mat-card-subtitle>
         </mat-card-header>
         <img mat-card-image [src]="m.model.listingImg" alt="">
         <mat-card-content>
           <p>
               {{m.model.aboutMe?m.model.aboutMe : "&nbsp;"}}
           </p>
+          <div class="ppm" *ngIf="m.session && m.session.ppm && m.session.ppm.amount>0">
+            <label class="ppm-label">Pay Per Minute:</label><span class="ppm-value">{{m.session.ppm.amount}} token</span>
+          </div>
         </mat-card-content>
         <mat-card-actions>
 
-          <button mat-raised-button [disabled]='!m.session' class="live-button" color="accent">LIVE</button>
-          <button mat-button>PROFILE</button>
-          <button mat-button>SHARE</button>
+        <ng-container *ngIf="analyzeJoinOption(m) =='join'">
+            <button mat-raised-button class="live-button" color="accent" (click)="onJoin(m)">JOIN</button>
+        </ng-container>
+
+        <ng-container *ngIf="analyzeJoinOption(m) =='login'">
+            <button mat-raised-button class="live-button" color="warn" (click)="navLogin()">LOGIN</button>
+        </ng-container>
+
+        <ng-container *ngIf="analyzeJoinOption(m) =='onrequest'">
+          <button mat-stroked-button class="live-button" color="warn" (click)="onRequestToJoin(m)">REQUEST</button>
+        </ng-container>
+
+        <ng-container *ngIf="analyzeJoinOption(m) =='lowscore'">
+            <button mat-stroked-button class="live-button" color="link" (click)="onLowlevel(m)"> <mat-icon>star</mat-icon>{{m.session.minLevel}}</button>
+
+        </ng-container>
+
+
+          <button mat-button (click)="onProfile(m)" color="primary">PROFILE</button>
+          <button mat-button (click)="onShare(m)"  color="primary">SHARE</button>
         </mat-card-actions>
       </mat-card>
 

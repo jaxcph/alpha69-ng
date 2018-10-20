@@ -1,13 +1,14 @@
 <section fxLayout="column" fxLayoutAlign="center center">
-  <section class="member-info" *ngIf="user">
+  <section class="member-info" *ngIf="currentMember">
     <h1>member info</h1>
-    <p> email: {{ user.email}}</p> 
-    <p> displayName: {{ user.displayName}}</p> 
-    <img [src]="user.photoUrl" style="max-width: 100px;height:auto" />
-
+ <!--   <p> email: {{ currentMember.email}}</p>-->
+    <p> displayName: {{ currentMember.displayName}}</p>
+    <!-- <img [src]="currentMember.photoUrl" style="max-width: 100px;height:auto" />-->
+    <h1>TO-BE-DONE</h1>
   </section>
-  <section class="profile-image" > 
+
+  <section class="profile-image" >
       <app-file-upload></app-file-upload>
   </section>
-  
+
 </section>

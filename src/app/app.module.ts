@@ -35,6 +35,7 @@ import { StreamService } from './member/session/stream.service';
 import { YesNoDialogComponent } from 'src/app/common/yesno-dialog/yesno-dialog.component';
 import { ModelsComponent } from './models/models.component';
 import { LiveComponent } from './models/live/live.component';
+import { OKDialogComponent } from './common/ok-dialog/ok-dialog.component';
 
 
 
@@ -57,7 +58,8 @@ import { LiveComponent } from './models/live/live.component';
     AccountComponent,
     YesNoDialogComponent,
     ModelsComponent,
-    LiveComponent],
+    LiveComponent,
+    OKDialogComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -72,6 +74,6 @@ import { LiveComponent } from './models/live/live.component';
   ],
   providers: [AuthService, MemberService, StreamService],
   bootstrap: [AppComponent],
-  entryComponents: [YesNoDialogComponent]
+  entryComponents: [YesNoDialogComponent, OKDialogComponent]
 })
 export class AppModule { }

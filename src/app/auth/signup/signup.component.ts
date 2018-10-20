@@ -34,7 +34,10 @@ export class SignupComponent implements OnInit, OnDestroy {
        form.value.displayName,
        (form.value.isModel === true ? true : false),
        form.value.dob,
-       form.value.realfullname);
+       form.value.realfullname,
+       form.value.aboutMe,
+       form.value.avatarImg,
+       form.value.listingImg);
   }
 
 

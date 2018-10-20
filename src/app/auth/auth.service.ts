@@ -38,7 +38,10 @@ export class AuthService {
     });
   }
 
-  signUp(email: string, password: string, displayName: string, isModel: boolean, dob: Date, realfullname: string) {
+  signUp(email: string, password: string,
+     displayName: string, isModel: boolean,
+     dob: Date, realfullname: string, aboutMe:
+     string, avatarImg: string, listingImg: string) {
     this.uiService.loadingStateChange.next(true);
     this.afAuth.auth.createUserWithEmailAndPassword(email, password)
     .then( (userCredential) => {
@@ -53,6 +56,9 @@ export class AuthService {
           model: (isModel) ? {
             realname: realfullname,
             dob: dob,
+            aboutMe: aboutMe,
+            avatarImg: avatarImg,
+            listingImg: listingImg,
             agreeModel: true
           } : null
         };
