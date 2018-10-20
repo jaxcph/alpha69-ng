@@ -11,7 +11,8 @@ export const environment = {
     projectId: 'alpha69-ng',
     storageBucket: 'alpha69-ng.appspot.com',
     messagingSenderId: '964085174298'
-  }
+  },
+  version: '0.20.2359'
 };
 
 /*

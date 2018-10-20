@@ -29,7 +29,7 @@ export interface Member {
     usePpm: boolean;
     ppm?: StreamSessionPPM;
     useGoal: boolean;
-    // goal?: StreamSessionGoal;
+    minTipAmount: number;
     stream: StreamConnection;
     created: Date;
     modified?: Date;

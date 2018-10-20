@@ -147,6 +147,8 @@ var AppComponent = /** @class */ (function () {
         this.title = 'alpha69-ng';
     }
     AppComponent.prototype.ngOnInit = function () {
+        // localStorage.removeItem('uid');
+        localStorage.removeItem('mid');
         this.authService.initAuthListener();
     };
     AppComponent = __decorate([
@@ -418,7 +420,7 @@ var AuthService = /** @class */ (function () {
             }
         });
     };
-    AuthService.prototype.signUp = function (email, password, displayName, isModel, dob, realfullname) {
+    AuthService.prototype.signUp = function (email, password, displayName, isModel, dob, realfullname, aboutMe, avatarImg, listingImg) {
         var _this = this;
         this.uiService.loadingStateChange.next(true);
         this.afAuth.auth.createUserWithEmailAndPassword(email, password)
@@ -433,6 +435,9 @@ var AuthService = /** @class */ (function () {
                 model: (isModel) ? {
                     realname: realfullname,
                     dob: dob,
+                    aboutMe: aboutMe,
+                    avatarImg: avatarImg,
+                    listingImg: listingImg,
                     agreeModel: true
                 } : null
             };
@@ -599,7 +604,7 @@ module.exports = ".profile-image {\r\n    width: 600px;\r\n}\r\n/*# sourceMappin
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<section fxLayout=\"column\" fxLayoutAlign=\"center center\">\r\n  <section class=\"member-info\" *ngIf=\"user\">\r\n    <h1>member info</h1>\r\n    <p> email: {{ user.email}}</p> \r\n    <p> displayName: {{ user.displayName}}</p> \r\n    <img [src]=\"user.photoUrl\" style=\"max-width: 100px;height:auto\" />\r\n\r\n  </section>\r\n  <section class=\"profile-image\" > \r\n      <app-file-upload></app-file-upload>\r\n  </section>\r\n  \r\n</section>"
+module.exports = "<section fxLayout=\"column\" fxLayoutAlign=\"center center\">\r\n  <section class=\"member-info\" *ngIf=\"currentMember\">\r\n    <h1>member info</h1>\r\n <!--   <p> email: {{ currentMember.email}}</p>-->\r\n    <p> displayName: {{ currentMember.displayName}}</p>\r\n    <!-- <img [src]=\"currentMember.photoUrl\" style=\"max-width: 100px;height:auto\" />-->\r\n    <h1>TO-BE-DONE</h1>\r\n\r\n    <h1>Version: {{version}}</h1>\r\n  </section>\r\n\r\n  <section class=\"profile-image\" >\r\n      <app-file-upload></app-file-upload>\r\n  </section>\r\n\r\n</section>\r\n"
 
 /***/ }),
 
@@ -616,6 +621,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _auth_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../auth.service */ "./src/app/auth/auth.service.ts");
 /* harmony import */ var _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/fire/firestore */ "./node_modules/@angular/fire/firestore/index.js");
+/* harmony import */ var src_environments_environment__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/environments/environment */ "./src/environments/environment.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -628,22 +634,25 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
 var ProfileComponent = /** @class */ (function () {
     function ProfileComponent(authService, db) {
         this.authService = authService;
         this.db = db;
-        this.user = null;
+        this.currentMember = null;
     }
     ProfileComponent.prototype.ngOnInit = function () {
         var _this = this;
-        this._userSub = this.db.doc("members/" + this.authService.getUserId()).valueChanges()
+        this.version = src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].version;
+        this.currrentMemberSub = this.db.doc("members/" + this.authService.getUserId()).valueChanges()
             .subscribe(function (data) {
-            _this.user = data;
-            console.log(data);
+            _this.currentMember = data;
         });
     };
     ProfileComponent.prototype.ngOnDestroy = function () {
-        this._userSub.unsubscribe();
+        if (this.currrentMemberSub) {
+            this.currrentMemberSub.unsubscribe();
+        }
     };
     ProfileComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
@@ -678,7 +687,7 @@ module.exports = "mat-form-field {\r\n  width: 300px;\r\n}\r\n\r\n.signup-form {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<section class=\"page-title\">\r\n  <h1>Signup</h1>\r\n</section>\r\n<section class=\"signup-form\">\r\n  <form fxLayout=\"column\" fxLayoutAlign=\"center center\" fxLayoutGap=\"10px\" #f=\"ngForm\" (ngSubmit)=\"onSubmit(f)\">\r\n   \r\n\r\n    <mat-form-field>\r\n      <input type=\"email\" matInput placeholder=\"Email\" ngModel name=\"email\" email required #emailInput=\"ngModel\"/>\r\n      <mat-error *ngIf=\"!emailInput.hasError('required')\">Invalid email</mat-error>\r\n    </mat-form-field>\r\n   \r\n    <mat-form-field hintLabel=\"Should be at least 6 characters long\"> \r\n        <input type=\"password\"\r\n         matInput \r\n         placeholder=\"Password\"\r\n         ngModel\r\n         name=\"password\"\r\n         required\r\n         minlength=\"6\"\r\n         #pwInput=\"ngModel\">\r\n         <mat-hint align=\"end\">{{pwInput.value?.length}}/6</mat-hint>\r\n    </mat-form-field>\r\n\r\n    <mat-form-field>\r\n      <input type=\"text\" matInput placeholder=\"Display name\" ngModel name=\"displayName\" required/>\r\n    </mat-form-field>\r\n\r\n    <mat-slide-toggle labelPosition=\"after\" color=\"accent\" ngModel name=\"isModel\">Register as Cam Model</mat-slide-toggle>\r\n    \r\n    <ng-container *ngIf=\"f.value.isModel\">\r\n      <mat-form-field>\r\n        <input matInput placeholder=\"Birthdate\" [matDatepicker]=\"picker\" [max]=\"maxDate\" ngModel name=\"dob\" required>\r\n        <mat-datepicker-toggle matSuffix [for]=\"picker\"></mat-datepicker-toggle>\r\n        <mat-datepicker #picker></mat-datepicker>\r\n      </mat-form-field>\r\n\r\n      \r\n      <mat-form-field>\r\n        <input type=\"text\" matInput placeholder=\"Real fullname\" ngModel name=\"realfullname\" required/>\r\n      </mat-form-field>\r\n      <p> TDB: missing fields for various model specific info, like pay-out information etc...</p>\r\n      <br/>\r\n      <br/>\r\n\r\n      <mat-checkbox labelPosition=\"after\" ngModel name=\"agreeModel\" required color=\"accent\">Agree to Models <a href=\"#\">Terms and Conditions.</a></mat-checkbox>\r\n\r\n  </ng-container>\r\n    \r\n  <mat-checkbox labelPosition=\"after\" ngModel name=\"agree18yo\" required color=\"accent\">I am 18 years or Older</mat-checkbox>\r\n    <mat-checkbox labelPosition=\"after\" ngModel name=\"agreeMember\" required color=\"accent\">Agree to Membership <a href=\"#\">Terms and Conditions.</a></mat-checkbox>\r\n\r\n    <button *ngIf=\"!isLoadning\" type=\"submit\" mat-raised-button color=\"primary\" [disabled]=\"f.invalid\">Submit</button>\r\n    <mat-progress-bar *ngIf=\"isLoading\" mode=\"indeterminate\" color=\"accent\"></mat-progress-bar>\r\n  </form>\r\n</section>\r\n\r\n"
+module.exports = "<section class=\"page-title\">\r\n  <h1>Signup</h1>\r\n</section>\r\n\r\n<section class=\"signup-form\">\r\n  <form fxLayout=\"column\" fxLayoutAlign=\"center center\" fxLayoutGap=\"10px\" #f=\"ngForm\" (ngSubmit)=\"onSubmit(f)\">\r\n   \r\n\r\n    <mat-form-field>\r\n      <input type=\"email\" matInput placeholder=\"Email\" ngModel name=\"email\" email required #emailInput=\"ngModel\"/>\r\n      <mat-error *ngIf=\"!emailInput.hasError('required')\">Invalid email</mat-error>\r\n    </mat-form-field>\r\n   \r\n    <mat-form-field hintLabel=\"Should be at least 6 characters long\"> \r\n        <input type=\"password\"\r\n         matInput \r\n         placeholder=\"Password\"\r\n         ngModel\r\n         name=\"password\"\r\n         required\r\n         minlength=\"6\"\r\n         #pwInput=\"ngModel\">\r\n         <mat-hint align=\"end\">{{pwInput.value?.length}}/6</mat-hint>\r\n    </mat-form-field>\r\n\r\n    <mat-form-field>\r\n      <input type=\"text\" matInput placeholder=\"Display name\" ngModel name=\"displayName\" required/>\r\n    </mat-form-field>\r\n\r\n    <mat-slide-toggle labelPosition=\"after\" color=\"accent\" ngModel name=\"isModel\">Register as Cam Model</mat-slide-toggle>\r\n    \r\n    <ng-container *ngIf=\"f.value.isModel\">\r\n      <mat-form-field>\r\n        <input matInput placeholder=\"Birthdate\" [matDatepicker]=\"picker\" [max]=\"maxDate\" ngModel name=\"dob\" required>\r\n        <mat-datepicker-toggle matSuffix [for]=\"picker\"></mat-datepicker-toggle>\r\n        <mat-datepicker #picker></mat-datepicker>\r\n      </mat-form-field>\r\n\r\n      \r\n      <mat-form-field>\r\n        <input type=\"text\" matInput placeholder=\"Real fullname\" ngModel name=\"realfullname\" required/>\r\n      </mat-form-field>\r\n      <mat-form-field>\r\n        <input type=\"text\" matInput placeholder=\"short About Me\" ngModel name=\"aboutMe\" maxlength=200 required/>\r\n      </mat-form-field>\r\n      <mat-form-field>\r\n        <input type=\"text\" matInput placeholder=\"Avatar image Url\" ngModel url name=\"avatarImg\" maxlength=9999 required/>\r\n      </mat-form-field>\r\n      <mat-form-field>\r\n        <input type=\"text\" matInput placeholder=\"Model listing image Url\" url ngModel name=\"listingImg\" maxlength=9999 required/>\r\n      </mat-form-field>\r\n      <p> TDB: missing fields for various model specific info, like pay-out information. and A proper image handling setup etc...</p>\r\n      <br/>\r\n      <br/>\r\n\r\n      <mat-checkbox labelPosition=\"after\" ngModel name=\"agreeModel\" required color=\"accent\">Agree to Models <a href=\"#\">Terms and Conditions.</a></mat-checkbox>\r\n\r\n  </ng-container>\r\n    \r\n    <mat-checkbox labelPosition=\"after\" ngModel name=\"agree18yo\" required color=\"accent\">I am 18 years or Older</mat-checkbox>\r\n    <mat-checkbox labelPosition=\"after\" ngModel name=\"agreeMember\" required color=\"accent\">Agree to Membership <a href=\"#\">Terms and Conditions.</a></mat-checkbox>\r\n\r\n    <button *ngIf=\"!isLoadning\" type=\"submit\" mat-raised-button color=\"primary\" [disabled]=\"f.invalid\">Submit</button>\r\n  \r\n  </form>\r\n</section>\r\n\r\n"
 
 /***/ }),
 
@@ -722,7 +731,7 @@ var SignupComponent = /** @class */ (function () {
              ok = true;
            }
          }*/
-        this.authService.signUp(form.value.email, form.value.password, form.value.displayName, (form.value.isModel === true ? true : false), form.value.dob, form.value.realfullname);
+        this.authService.signUp(form.value.email, form.value.password, form.value.displayName, (form.value.isModel === true ? true : false), form.value.dob, form.value.realfullname, form.value.aboutMe, form.value.avatarImg, form.value.listingImg);
     };
     SignupComponent.prototype.ngOnDestroy = function () {
     };
@@ -1013,7 +1022,7 @@ var FileSizePipe = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"dropzone\" \r\n     appDropZone\r\n     (hovered)=\"toggleHover($event)\"\r\n     (dropped)=\"startUpload($event)\"\r\n     [class.hovering]=\"isHovering\">\r\n\r\n     <h3>Drag and Drop a file or select a file</h3>\r\n \r\n     <div class=\"file\">\r\n        <label class=\"file-label\">\r\n\r\n        <input class=\"file-input\" type=\"file\" (change)=\"startUpload($event.target.files)\">\r\n\r\n          <span class=\"file-cta\">\r\n            <span class=\"file-icon\">\r\n              <i class=\"fa fa-upload\"></i>\r\n            </span>\r\n            <span class=\"file-label\">\r\n              or choose a file…\r\n            </span>\r\n          </span>\r\n        </label>\r\n      </div>\r\n</div>\r\n\r\n<div *ngIf=\"percentage | async as pct\">\r\n\r\n  <progress class=\"progress is-info\" \r\n            [value]=\"pct\" \r\n            max=\"100\">        \r\n  </progress>\r\n  {{ pct | number }}%\r\n\r\n</div>\r\n\r\n\r\n<div *ngIf=\"snapshot | async as snap\">\r\n  {{ snap.bytesTransferred | fileSize }} of {{ snap.totalBytes | fileSize }} \r\n\r\n  \r\n  <div *ngIf=\"downloadUrl$ | async as url\">\r\n    <h3>Results!</h3>\r\n    <img [src]=\"url\"><br>\r\n    <a [href]=\"url\" target=\"_blank\" rel=\"noopener\">Download Me!</a>\r\n  </div> \r\n\r\n  <button (click)=\"task.pause()\" class=\"button is-warning\" [disabled]=\"!isActive(snap)\">Pause</button>\r\n  <button (click)=\"task.cancel()\" class=\"button is-danger\" [disabled]=\"!isActive(snap)\">Cancel</button>\r\n  <button (click)=\"task.resume()\" class=\"button is-info\"   [disabled]=\"!(snap?.state === 'paused')\">Resume</button>\r\n\r\n</div>"
+module.exports = "<div class=\"dropzone\" \n     appDropZone\n     (hovered)=\"toggleHover($event)\"\n     (dropped)=\"startUpload($event)\"\n     [class.hovering]=\"isHovering\">\n\n     <h3>Drag and Drop a file or select a file</h3>\n \n     <div class=\"file\">\n        <label class=\"file-label\">\n\n        <input class=\"file-input\" type=\"file\" (change)=\"startUpload($event.target.files)\">\n\n          <span class=\"file-cta\">\n            <span class=\"file-icon\">\n              <i class=\"fa fa-upload\"></i>\n            </span>\n            <span class=\"file-label\">\n              or choose a file…\n            </span>\n          </span>\n        </label>\n      </div>\n</div>\n\n<div *ngIf=\"percentage | async as pct\">\n\n  <progress class=\"progress is-info\" \n            [value]=\"pct\" \n            max=\"100\">        \n  </progress>\n  {{ pct | number }}%\n\n</div>\n\n\n<div *ngIf=\"snapshot | async as snap\">\n  {{ snap.bytesTransferred | fileSize }} of {{ snap.totalBytes | fileSize }} \n\n  \n  <div *ngIf=\"downloadUrl$ | async as url\">\n    <h3>Results!</h3>\n    <img [src]=\"url\"><br>\n    <a [href]=\"url\" target=\"_blank\" rel=\"noopener\">Download Me!</a>\n  </div> \n\n  <button (click)=\"task.pause()\" class=\"button is-warning\" [disabled]=\"!isActive(snap)\">Pause</button>\n  <button (click)=\"task.cancel()\" class=\"button is-danger\" [disabled]=\"!isActive(snap)\">Cancel</button>\n  <button (click)=\"task.resume()\" class=\"button is-info\"   [disabled]=\"!(snap?.state === 'paused')\">Resume</button>\n\n</div>"
 
 /***/ }),
 
@@ -1024,7 +1033,7 @@ module.exports = "<div class=\"dropzone\" \r\n     appDropZone\r\n     (hovered)
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".dropzone {\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  flex-direction: column;\n  height: 300px;\n  border: 2px dashed #f16624;\n  border-radius: 5px;\n  background: white;\n  margin: 10px 0; }\n  .dropzone.hovering {\n    border: 2px solid #f16624;\n    color: #dadada !important; }\n  progress::-webkit-progress-value {\n  transition: width 0.1s ease; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvZmlsZXMvZmlsZS11cGxvYWQvQzpcXFVzZXJzXFxqcGNvcFxcY29kZVxcYWxwaGE2OS1uZy9zcmNcXGFwcFxcZmlsZXNcXGZpbGUtdXBsb2FkXFxmaWxlLXVwbG9hZC5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNJLGNBQWE7RUFDYixvQkFBbUI7RUFDbkIsd0JBQXVCO0VBQ3ZCLHVCQUFzQjtFQUN0QixjQUFhO0VBQ2IsMkJBQTBCO0VBQzFCLG1CQUFrQjtFQUNsQixrQkFBaUI7RUFDakIsZUFBYyxFQU1qQjtFQWZEO0lBWVEsMEJBQXlCO0lBQ3pCLDBCQUF5QixFQUM1QjtFQUdMO0VBQ0ksNEJBQTJCLEVBQzlCIiwiZmlsZSI6InNyYy9hcHAvZmlsZXMvZmlsZS11cGxvYWQvZmlsZS11cGxvYWQuY29tcG9uZW50LnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyIuZHJvcHpvbmUgeyBcclxuICAgIGRpc3BsYXk6IGZsZXg7XHJcbiAgICBhbGlnbi1pdGVtczogY2VudGVyO1xyXG4gICAganVzdGlmeS1jb250ZW50OiBjZW50ZXI7XHJcbiAgICBmbGV4LWRpcmVjdGlvbjogY29sdW1uOyBcclxuICAgIGhlaWdodDogMzAwcHg7XHJcbiAgICBib3JkZXI6IDJweCBkYXNoZWQgI2YxNjYyNDtcclxuICAgIGJvcmRlci1yYWRpdXM6IDVweDtcclxuICAgIGJhY2tncm91bmQ6IHdoaXRlO1xyXG4gICAgbWFyZ2luOiAxMHB4IDA7XHJcblxyXG4gICAgJi5ob3ZlcmluZyB7XHJcbiAgICAgICAgYm9yZGVyOiAycHggc29saWQgI2YxNjYyNDtcclxuICAgICAgICBjb2xvcjogI2RhZGFkYSAhaW1wb3J0YW50O1xyXG4gICAgfVxyXG59XHJcblxyXG5wcm9ncmVzczo6LXdlYmtpdC1wcm9ncmVzcy12YWx1ZSB7XHJcbiAgICB0cmFuc2l0aW9uOiB3aWR0aCAwLjFzIGVhc2U7XHJcbn0iXX0= */"
+module.exports = ".dropzone {\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  flex-direction: column;\n  height: 300px;\n  border: 2px dashed #f16624;\n  border-radius: 5px;\n  background: white;\n  margin: 10px 0; }\n  .dropzone.hovering {\n    border: 2px solid #f16624;\n    color: #dadada !important; }\n  progress::-webkit-progress-value {\n  transition: width 0.1s ease; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvZmlsZXMvZmlsZS11cGxvYWQvQzpcXFVzZXJzXFxqYXhjcGhcXGNvZGVcXGFscGhhNjktbmcvc3JjXFxhcHBcXGZpbGVzXFxmaWxlLXVwbG9hZFxcZmlsZS11cGxvYWQuY29tcG9uZW50LnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDSSxjQUFhO0VBQ2Isb0JBQW1CO0VBQ25CLHdCQUF1QjtFQUN2Qix1QkFBc0I7RUFDdEIsY0FBYTtFQUNiLDJCQUEwQjtFQUMxQixtQkFBa0I7RUFDbEIsa0JBQWlCO0VBQ2pCLGVBQWMsRUFNakI7RUFmRDtJQVlRLDBCQUF5QjtJQUN6QiwwQkFBeUIsRUFDNUI7RUFHTDtFQUNJLDRCQUEyQixFQUM5QiIsImZpbGUiOiJzcmMvYXBwL2ZpbGVzL2ZpbGUtdXBsb2FkL2ZpbGUtdXBsb2FkLmNvbXBvbmVudC5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLmRyb3B6b25lIHsgXHJcbiAgICBkaXNwbGF5OiBmbGV4O1xyXG4gICAgYWxpZ24taXRlbXM6IGNlbnRlcjtcclxuICAgIGp1c3RpZnktY29udGVudDogY2VudGVyO1xyXG4gICAgZmxleC1kaXJlY3Rpb246IGNvbHVtbjsgXHJcbiAgICBoZWlnaHQ6IDMwMHB4O1xyXG4gICAgYm9yZGVyOiAycHggZGFzaGVkICNmMTY2MjQ7XHJcbiAgICBib3JkZXItcmFkaXVzOiA1cHg7XHJcbiAgICBiYWNrZ3JvdW5kOiB3aGl0ZTtcclxuICAgIG1hcmdpbjogMTBweCAwO1xyXG5cclxuICAgICYuaG92ZXJpbmcge1xyXG4gICAgICAgIGJvcmRlcjogMnB4IHNvbGlkICNmMTY2MjQ7XHJcbiAgICAgICAgY29sb3I6ICNkYWRhZGEgIWltcG9ydGFudDtcclxuICAgIH1cclxufVxyXG5cclxucHJvZ3Jlc3M6Oi13ZWJraXQtcHJvZ3Jlc3MtdmFsdWUge1xyXG4gICAgdHJhbnNpdGlvbjogd2lkdGggMC4xcyBlYXNlO1xyXG59Il19 */"
 
 /***/ }),
 
@@ -1346,7 +1355,7 @@ var MemberService = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<section class='page-title'>\r\n    <h1>Session Control</h1>\r\n</section>\r\n\r\n<section class=\"content\">\r\n<mat-accordion class=\"accordion\" multi=\"true\" fxLayout=\"row wrap\" fxLayoutGap=\"10px\">\r\n\r\n    <mat-expansion-panel  *ngIf=\"session\" fxFlex.xs=\"100%\" fxFlex=\"400px\">\r\n        <mat-expansion-panel-header>\r\n            <mat-panel-title>\r\n                Name & Title\r\n            </mat-panel-title>\r\n            <mat-panel-description>\r\n                 &nbsp; \r\n                <mat-icon>face</mat-icon>\r\n            </mat-panel-description>\r\n        </mat-expansion-panel-header>\r\n        \r\n        <mat-form-field>\r\n            <input type=\"text\" matInput placeholder=\"Model name to use\" [(ngModel)]=\"session.modelName\"  (change)=\"saveSession('session.modelName')\"/> \r\n        </mat-form-field>\r\n                 \r\n        <mat-form-field>\r\n            <input type=\"text\" matInput placeholder=\"Title\"  [(ngModel)]=\"session.title\"  (change)=\"saveSession('session.title')\" />\r\n        </mat-form-field>\r\n    </mat-expansion-panel>\r\n\r\n    <mat-expansion-panel fxFlex.xs=\"100%\" fxFlex=\"400px\" *ngIf=\"session\" >\r\n            <mat-expansion-panel-header>\r\n                <mat-panel-title>\r\n                    View settings\r\n                </mat-panel-title>\r\n                <mat-panel-description>\r\n                    ({{session.accessType}})&nbsp;\r\n                    <mat-icon>visibility</mat-icon>\r\n                </mat-panel-description>\r\n            </mat-expansion-panel-header>\r\n            \r\n            <mat-form-field>\r\n                <mat-select placeholder=\"Who can view?\"  [(ngModel)]=\"session.accessType\" (selectionChange)=\"saveSession('session.accessType')\" >\r\n                        <mat-option value=\"public\"><u>Everyone</u> can view</mat-option>\r\n                        <mat-option value=\"member\">all <u>Members</u> can view</mat-option>\r\n                        <mat-option value=\"level\">only <u>Members</u> => <u>level</u> </mat-option>\r\n                        <mat-option value=\"onrequest\"><u>Members</u> can <u>Request to join</u></mat-option>\r\n                </mat-select>\r\n            </mat-form-field>\r\n            <mat-form-field *ngIf=\"session.accessType === 'level'\">\r\n                <input type=\"number\" matInput placeholder=\"Required level?\"  [(ngModel)]=\"session.minLevel\"  (change)=\"saveSession('session.minLevel')\" />  \r\n            </mat-form-field>\r\n    </mat-expansion-panel>\r\n    \r\n\r\n    <mat-expansion-panel fxFlex.xs=\"100%\" fxFlex=\"400px\" *ngIf=\"session\">\r\n            <mat-expansion-panel-header>\r\n                <mat-panel-title>\r\n                  Pay Per Minute\r\n                </mat-panel-title>\r\n                <mat-panel-description>\r\n                    {{session.usePpm? '(Enabled)' :' ' }}&nbsp;\r\n                    <mat-icon>attach_money</mat-icon>\r\n                </mat-panel-description>\r\n            </mat-expansion-panel-header>\r\n            \r\n            <mat-slide-toggle labelPosition=\"before\" color=\"accent\" [(ngModel)]=\"session.usePpm\" (change)=\"saveSession('session.usePpm')\">Enable Pay-Per-Minute</mat-slide-toggle>\r\n\r\n            <mat-form-field *ngIf=\"session.usePpm\">\r\n              <input type=\"number\" matInput placeholder=\"Tokens to Pay-Per-Minute\" [(ngModel)]=\"session.ppm.amount\" (change)=\"saveSession('session.ppm.amount')\"  />\r\n            </mat-form-field>\r\n    </mat-expansion-panel>\r\n\r\n    <mat-expansion-panel fxFlex.xs=\"100%\" fxFlex=\"400px\" *ngIf=\"session\">\r\n            <mat-expansion-panel-header>\r\n                <mat-panel-title>\r\n                  Goal\r\n                </mat-panel-title>\r\n                <mat-panel-description>\r\n                    {{session.useGoal? '(Enabled)' : '' }}&nbsp;\r\n                    <mat-icon>assistant_photo</mat-icon>\r\n                </mat-panel-description>\r\n            </mat-expansion-panel-header>\r\n            \r\n            <mat-slide-toggle labelPosition=\"before\" color=\"accent\" [(ngModel)]=\"session.useGoal\"  (change)=\"saveSession('session.useGoal')\">Do you want to set a Goal?</mat-slide-toggle>\r\n          <ng-container *ngIf=\"goal\">\r\n              <mat-form-field>\r\n                  <input type=\"number\" matInput placeholder=\"Goal Amount token (Target)\" [(ngModel)]=\"goal.amount\"   (change)=\"saveSession('goal.amount')\" />\r\n              </mat-form-field>\r\n              <mat-form-field>\r\n                  <input type=\"text\"  matInput placeholder=\"Goal description\" [(ngModel)]=\"goal.descr\"  (change)=\"saveSession('goal.descr')\" />\r\n              </mat-form-field>\r\n              <mat-form-field>\r\n                      <mat-select placeholder=\"Show Fx on goal complete?\"  [(ngModel)]=\"goal.doneFx\"  (selectionChange)=\"saveSession('goal.doneFx')\" >\r\n                              <mat-option value=\"None\">No</mat-option>\r\n                              <mat-option value=\"fx1\">1 TBD</mat-option>\r\n                              <mat-option value=\"fx2\">2 TBD</mat-option>\r\n                              <mat-option value=\"fx3\">3 TBD</mat-option>\r\n                              <mat-option value=\"fx3\">4 TBD</mat-option>\r\n                            </mat-select>\r\n              </mat-form-field>\r\n         </ng-container>   \r\n    </mat-expansion-panel>\r\n\r\n    <mat-expansion-panel fxFlex.xs=\"100%\" fxFlex=\"400px\" *ngIf=\"session\">\r\n            <mat-expansion-panel-header>\r\n                <mat-panel-title>\r\n                  Stream Control\r\n                </mat-panel-title>\r\n                <mat-panel-description>\r\n                    &nbsp;\r\n                    <mat-icon>cast</mat-icon>\r\n                </mat-panel-description>\r\n            </mat-expansion-panel-header>\r\n            \r\n            <mat-form-field>\r\n                    <input type=\"text\" matInput placeholder=\"Stream Url\" [ngModel]=\"session.stream.url\" readonly />\r\n                </mat-form-field>\r\n                <mat-form-field>\r\n                    <input type=\"text\"  matInput placeholder=\"Stream Key\" [ngModel]=\"session.stream.key\" readonly/>\r\n                </mat-form-field>\r\n            <button mat-raised-button color=\"primary\" (click)=\"getNewStreamKey()\">Get new stream key</button><br/><br/>\r\n            <button mat-raised-button color=\"accent\" (click)=\"stopSession()\">Stop Session!</button>\r\n        \r\n    </mat-expansion-panel>\r\n\r\n  \r\n</mat-accordion>\r\n\r\n\r\n<mat-divider></mat-divider>\r\n\r\n<section class='page-title'>\r\n    <h1>Live metrics</h1>\r\n</section>\r\n\r\n<mat-accordion class=\"accordion\" multi=\"true\" fxLayout=\"row wrap\" fxLayoutGap=\"10px\">\r\n\r\n        <mat-expansion-panel  *ngIf=\"goal\" fxFlex.xs=\"100%\" fxFlex=\"400px\" expanded class=\"goal-meter\">\r\n            <mat-expansion-panel-header>\r\n                <mat-panel-title>\r\n                    Goal Meter\r\n                </mat-panel-title>\r\n                <mat-panel-description>\r\n                    {{goalCollectedPct}}% ({{goal.collected}}t / {{goal.amount}}t)&nbsp; \r\n                    <mat-progress-spinner\r\n                    color=\"primary\"\r\n                    mode=\"determinate\"\r\n                    [value]=\"goalCollectedPct\"\r\n                    strokeWidth=3\r\n                    diameter=20>\r\n                 </mat-progress-spinner>\r\n                </mat-panel-description>\r\n            </mat-expansion-panel-header>\r\n            \r\n            <div>\r\n                <table>\r\n                    <tr>\r\n                    <td>\r\n                        <mat-progress-spinner\r\n                        color=\"primary\"\r\n                        mode=\"determinate\"\r\n                        [value]=\"goalCollectedPct\"\r\n                        strokeWidth=10\r\n                        diameter=80>\r\n                     </mat-progress-spinner></td>\r\n                    \r\n                    <td style=\"font-size: 48pt\">{{goalCollectedPct}}%</td>\r\n                    <td style=\"font-size: 11pt;font-weight: normal;text-align: center;padding-left:10px\">{{goal.collected}}<br/>out of<br/>{{goal.amount}} <img src=\"https://firebasestorage.googleapis.com/v0/b/alpha69-ng.appspot.com/o/images%2Fcoin16.png?alt=media&token=45502c9f-a9d4-4c2e-9671-aa92141db4f5\"></td>\r\n                </tr>\r\n                <tr><td colspan=\"2\" style=\"text-align:center;font-size:12pt;font-weight: bold\">{{goal.descr}}</td></tr>\r\n                </table>\r\n            \r\n           \r\n            </div>\r\n            \r\n        </mat-expansion-panel>\r\n\r\n        <mat-expansion-panel  *ngIf=\"tipjar\" fxFlex.xs=\"100%\" fxFlex=\"400px\" expanded class=\"tipjar\">\r\n                <mat-expansion-panel-header>\r\n                    <mat-panel-title>\r\n                       Tip jar\r\n                    </mat-panel-title>\r\n                    <mat-panel-description>\r\n                        {{tipjar.balance}} t &nbsp; \r\n                        <mat-icon>attach_money</mat-icon>\r\n                    </mat-panel-description>\r\n                </mat-expansion-panel-header>\r\n              <div style=\"font-size: 48pt;padding-top:30px;text-align: center;\">\r\n                {{tipjar.balance}}  <img src=\"https://firebasestorage.googleapis.com/v0/b/alpha69-ng.appspot.com/o/images%2Fcoin32.png?alt=media&token=f4b3f892-a7d1-4908-a2c5-54d3dbd02b22\">\r\n              </div>\r\n            </mat-expansion-panel>\r\n\r\n\r\n            <mat-expansion-panel  *ngIf=\"wallet\" fxFlex.xs=\"100%\" fxFlex=\"400px\" expanded class=\"wallet\">\r\n                    <mat-expansion-panel-header>\r\n                        <mat-panel-title>\r\n                           Personal Wallet\r\n                        </mat-panel-title>\r\n                        <mat-panel-description>\r\n                            {{wallet.balance}} t &nbsp; \r\n                            <mat-icon>attach_money</mat-icon>\r\n                        </mat-panel-description>\r\n                    </mat-expansion-panel-header>\r\n                  <div style=\"font-size: 48pt;padding-top:30px;text-align: center;\">\r\n                    {{wallet.balance}} <img src=\"https://firebasestorage.googleapis.com/v0/b/alpha69-ng.appspot.com/o/images%2Fcoin32.png?alt=media&token=f4b3f892-a7d1-4908-a2c5-54d3dbd02b22\">\r\n                  </div>\r\n                </mat-expansion-panel>\r\n\r\n                <mat-expansion-panel  *ngIf=\"session\" fxFlex.xs=\"100%\" fxFlex=\"400px\" expanded class=\"runtime\">\r\n                        <mat-expansion-panel-header>\r\n                            <mat-panel-title>\r\n                              Runtime & Clock\r\n                            </mat-panel-title>\r\n                            <mat-panel-description>\r\n                                {{runtimeHours}}h {{runtimeMinutes}}m  ({{clockHours}}:{{clockMinutes}})\r\n                                <mat-icon>access_time</mat-icon>\r\n                            </mat-panel-description>\r\n                        </mat-expansion-panel-header>\r\n                     \r\n                        <div style=\"font-size: 48pt;padding-top:30px;text-align: center;\">\r\n                        <ng-container *ngIf=\"runtimeDays>0\"> {{runtimeDays}}d </ng-container> {{runtimeHours}}h {{runtimeMinutes}}m\r\n                      </div>\r\n\r\n                      <div style=\"font-size: 14pt;padding-top:30px;text-align: center;\">\r\n                        {{clockHours}}:{{clockMinutes}} {{timezone}} \r\n                      </div>\r\n\r\n                    </mat-expansion-panel>\r\n</mat-accordion>\r\n\r\n</section>"
+module.exports = "<section class='page-title'>\r\n    <h1>Session Control</h1>\r\n</section>\r\n\r\n<section class=\"content\">\r\n<mat-accordion class=\"accordion\" multi=\"true\" fxLayout=\"row wrap\" fxLayoutGap=\"10px\">\r\n\r\n    <mat-expansion-panel  *ngIf=\"session\" fxFlex.xs=\"100%\" fxFlex=\"400px\">\r\n        <mat-expansion-panel-header>\r\n            <mat-panel-title>\r\n                Name & Title\r\n            </mat-panel-title>\r\n            <mat-panel-description>\r\n                 &nbsp; \r\n                <mat-icon>face</mat-icon>\r\n            </mat-panel-description>\r\n        </mat-expansion-panel-header>\r\n        \r\n        <mat-form-field>\r\n            <input type=\"text\" matInput placeholder=\"Model name to use\" [(ngModel)]=\"session.modelName\"  (change)=\"saveSession('session.modelName')\"/> \r\n        </mat-form-field>\r\n                 \r\n        <mat-form-field>\r\n            <input type=\"text\" matInput placeholder=\"Title\"  [(ngModel)]=\"session.title\"  (change)=\"saveSession('session.title')\" />\r\n        </mat-form-field>\r\n    </mat-expansion-panel>\r\n\r\n    <mat-expansion-panel fxFlex.xs=\"100%\" fxFlex=\"400px\" *ngIf=\"session\" >\r\n            <mat-expansion-panel-header>\r\n                <mat-panel-title>\r\n                    View settings\r\n                </mat-panel-title>\r\n                <mat-panel-description>\r\n                    ({{session.accessType}})&nbsp;\r\n                    <mat-icon>visibility</mat-icon>\r\n                </mat-panel-description>\r\n            </mat-expansion-panel-header>\r\n            \r\n            <mat-form-field>\r\n                <mat-select placeholder=\"Who can view?\"  [(ngModel)]=\"session.accessType\" (selectionChange)=\"saveSession('session.accessType')\" >\r\n                        <mat-option value=\"public\"><u>Everyone</u> can view</mat-option>\r\n                        <mat-option value=\"member\">all <u>Members</u> can view</mat-option>\r\n                        <mat-option value=\"level\">only <u>Members</u> => <u>level</u> </mat-option>\r\n                        <mat-option value=\"onrequest\"><u>Members</u> can <u>Request to join</u></mat-option>\r\n                </mat-select>\r\n            </mat-form-field>\r\n            <mat-form-field *ngIf=\"session.accessType === 'level'\">\r\n                <input type=\"number\" matInput placeholder=\"Required level?\"  [(ngModel)]=\"session.minLevel\"  (change)=\"saveSession('session.minLevel')\" />  \r\n            </mat-form-field>\r\n    </mat-expansion-panel>\r\n    \r\n\r\n    <mat-expansion-panel fxFlex.xs=\"100%\" fxFlex=\"400px\" *ngIf=\"session\">\r\n            <mat-expansion-panel-header>\r\n                <mat-panel-title>\r\n                  Pay Per Minute\r\n                </mat-panel-title>\r\n                <mat-panel-description>\r\n                    {{session.usePpm? '(Enabled)' :' ' }}&nbsp;\r\n                    <mat-icon>attach_money</mat-icon>\r\n                </mat-panel-description>\r\n            </mat-expansion-panel-header>\r\n            \r\n            <mat-slide-toggle labelPosition=\"before\" color=\"accent\" [(ngModel)]=\"session.usePpm\" (change)=\"saveSession('session.usePpm')\">Enable Pay-Per-Minute</mat-slide-toggle>\r\n\r\n            <mat-form-field *ngIf=\"session.usePpm\">\r\n              <input type=\"number\" matInput placeholder=\"Tokens to Pay-Per-Minute\" [(ngModel)]=\"session.ppm.amount\" (change)=\"saveSession('session.ppm.amount')\"  />\r\n            </mat-form-field>\r\n    </mat-expansion-panel>\r\n\r\n    <mat-expansion-panel fxFlex.xs=\"100%\" fxFlex=\"400px\" *ngIf=\"session\">\r\n            <mat-expansion-panel-header>\r\n                <mat-panel-title>\r\n                  Goal\r\n                </mat-panel-title>\r\n                <mat-panel-description>\r\n                    {{session.useGoal? '(Enabled)' : '' }}&nbsp;\r\n                    <mat-icon>assistant_photo</mat-icon>\r\n                </mat-panel-description>\r\n            </mat-expansion-panel-header>\r\n            \r\n            <mat-slide-toggle labelPosition=\"before\" color=\"accent\" [(ngModel)]=\"session.useGoal\"  (change)=\"saveSession('session.useGoal')\">Do you want to set a Goal?</mat-slide-toggle>\r\n          <ng-container *ngIf=\"goal\">\r\n              <mat-form-field>\r\n                  <input type=\"number\" matInput placeholder=\"Goal Amount token (Target)\" [(ngModel)]=\"goal.amount\"   (change)=\"saveSession('goal.amount')\" />\r\n              </mat-form-field>\r\n              <mat-form-field>\r\n                  <input type=\"text\"  matInput placeholder=\"Goal description\" [(ngModel)]=\"goal.descr\"  (change)=\"saveSession('goal.descr')\" />\r\n              </mat-form-field>\r\n              <mat-form-field>\r\n                      <mat-select placeholder=\"Show Fx on goal complete?\"  [(ngModel)]=\"goal.doneFx\"  (selectionChange)=\"saveSession('goal.doneFx')\" >\r\n                              <mat-option value=\"None\">No</mat-option>\r\n                              <mat-option value=\"fx1\">1 TBD</mat-option>\r\n                              <mat-option value=\"fx2\">2 TBD</mat-option>\r\n                              <mat-option value=\"fx3\">3 TBD</mat-option>\r\n                              <mat-option value=\"fx3\">4 TBD</mat-option>\r\n                            </mat-select>\r\n              </mat-form-field>\r\n         </ng-container>   \r\n    </mat-expansion-panel>\r\n\r\n    <mat-expansion-panel fxFlex.xs=\"100%\" fxFlex=\"400px\" *ngIf=\"session\">\r\n            <mat-expansion-panel-header>\r\n                <mat-panel-title>\r\n                  Stream Control\r\n                </mat-panel-title>\r\n                <mat-panel-description>\r\n                    &nbsp;\r\n                    <mat-icon>cast</mat-icon>\r\n                </mat-panel-description>\r\n            </mat-expansion-panel-header>\r\n            \r\n            <mat-form-field>\r\n                    <input type=\"text\" matInput placeholder=\"Stream Url\" [ngModel]=\"session.stream.url\" readonly />\r\n                </mat-form-field>\r\n                <mat-form-field>\r\n                    <input type=\"text\"  matInput placeholder=\"Stream Key\" [ngModel]=\"session.stream.key\" readonly/>\r\n                </mat-form-field>\r\n            <button mat-raised-button color=\"primary\" (click)=\"getNewStreamKey()\">Get new stream key</button><br/><br/>\r\n            <button mat-raised-button color=\"accent\" (click)=\"stopSession()\">Stop Session!</button>\r\n        \r\n    </mat-expansion-panel>\r\n\r\n  \r\n</mat-accordion>\r\n\r\n\r\n<mat-divider></mat-divider>\r\n\r\n<section class='page-title'>\r\n    <h1>Live metrics</h1>\r\n</section>\r\n\r\n<mat-accordion class=\"accordion\" multi=\"true\" fxLayout=\"row wrap\" fxLayoutGap=\"10px\">\r\n\r\n        <mat-expansion-panel  *ngIf=\"goal\" fxFlex.xs=\"100%\" fxFlex=\"400px\" expanded class=\"goal-meter\">\r\n            <mat-expansion-panel-header>\r\n                <mat-panel-title>\r\n                    Goal Meter\r\n                </mat-panel-title>\r\n                <mat-panel-description>\r\n                    {{goalCollectedPct}}% ({{goal.collected}}t / {{goal.amount}}t)&nbsp; \r\n                    <mat-progress-spinner\r\n                    color=\"primary\"\r\n                    mode=\"determinate\"\r\n                    [value]=\"goalCollectedPct\"\r\n                    strokeWidth=3\r\n                    diameter=20>\r\n                 </mat-progress-spinner>\r\n                </mat-panel-description>\r\n            </mat-expansion-panel-header>\r\n            \r\n            <div>\r\n                <table>\r\n                    <tr>\r\n                    <td>\r\n                        <mat-progress-spinner\r\n                        color=\"primary\"\r\n                        mode=\"determinate\"\r\n                        [value]=\"goalCollectedPct\"\r\n                        strokeWidth=10\r\n                        diameter=80>\r\n                     </mat-progress-spinner></td>\r\n                    \r\n                    <td style=\"font-size: 48pt\">{{goalCollectedPct}}%</td>\r\n                    <td style=\"font-size: 11pt;font-weight: normal;text-align: center;padding-left:10px\">{{goal.collected}}<br/>out of<br/>{{goal.amount}} <img src=\"https://firebasestorage.googleapis.com/v0/b/alpha69-ng.appspot.com/o/images%2Fcoin16.png?alt=media&token=45502c9f-a9d4-4c2e-9671-aa92141db4f5\"></td>\r\n                </tr>\r\n                <tr><td colspan=\"2\" style=\"text-align:center;font-size:12pt;font-weight: bold\">{{goal.descr}}</td></tr>\r\n                </table>\r\n            \r\n           \r\n            </div>\r\n            \r\n        </mat-expansion-panel>\r\n\r\n        <mat-expansion-panel  *ngIf=\"tipjar\" fxFlex.xs=\"100%\" fxFlex=\"400px\" expanded class=\"tipjar\" >\r\n                <mat-expansion-panel-header>\r\n                    <mat-panel-title>\r\n                       Tip jar\r\n                    </mat-panel-title>\r\n                    <mat-panel-description>\r\n                        {{tipjar.balance}} t &nbsp; \r\n                        <mat-icon>attach_money</mat-icon>\r\n                    </mat-panel-description>\r\n                </mat-expansion-panel-header>\r\n              <div style=\"font-size: 48pt;padding-top:30px;text-align: center;\">\r\n                {{tipjar.balance}}  <img src=\"https://firebasestorage.googleapis.com/v0/b/alpha69-ng.appspot.com/o/images%2Fcoin32.png?alt=media&token=f4b3f892-a7d1-4908-a2c5-54d3dbd02b22\">\r\n              </div>\r\n            </mat-expansion-panel>\r\n\r\n\r\n            <mat-expansion-panel  *ngIf=\"wallet\" fxFlex.xs=\"100%\" fxFlex=\"400px\" expanded class=\"wallet\">\r\n                    <mat-expansion-panel-header>\r\n                        <mat-panel-title>\r\n                           Personal Wallet\r\n                        </mat-panel-title>\r\n                        <mat-panel-description>\r\n                            {{wallet.balance}} t &nbsp; \r\n                            <mat-icon>attach_money</mat-icon>\r\n                        </mat-panel-description>\r\n                    </mat-expansion-panel-header>\r\n                  <div style=\"font-size: 48pt;padding-top:30px;text-align: center;\">\r\n                    {{wallet.balance}} <img src=\"https://firebasestorage.googleapis.com/v0/b/alpha69-ng.appspot.com/o/images%2Fcoin32.png?alt=media&token=f4b3f892-a7d1-4908-a2c5-54d3dbd02b22\">\r\n                  </div>\r\n                </mat-expansion-panel>\r\n\r\n                <mat-expansion-panel  *ngIf=\"session\" fxFlex.xs=\"100%\" fxFlex=\"400px\" expanded class=\"runtime\">\r\n                        <mat-expansion-panel-header>\r\n                            <mat-panel-title>\r\n                              Runtime & Clock\r\n                            </mat-panel-title>\r\n                            <mat-panel-description>\r\n                                {{runtimeHours}}h {{runtimeMinutes}}m  ({{clockHours}}:{{clockMinutes}})\r\n                                <mat-icon>access_time</mat-icon>\r\n                            </mat-panel-description>\r\n                        </mat-expansion-panel-header>\r\n                     \r\n                        <div style=\"font-size: 48pt;padding-top:30px;text-align: center;\">\r\n                        <ng-container *ngIf=\"runtimeDays>0\"> {{runtimeDays}}d </ng-container> {{runtimeHours}}h {{runtimeMinutes}}m\r\n                      </div>\r\n\r\n                      <div style=\"font-size: 14pt;padding-top:30px;text-align: center;\">\r\n                        {{clockHours}}:{{clockMinutes}} {{timezone}} \r\n                      </div>\r\n\r\n                    </mat-expansion-panel>\r\n</mat-accordion>\r\n\r\n</section>"
 
 /***/ }),
 
@@ -1357,7 +1366,7 @@ module.exports = "<section class='page-title'>\r\n    <h1>Session Control</h1>\r
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "mat-form-field {\n  width: 300px; }\n\n.current-session {\n  padding-top: 30px; }\n\n/* http://www.colorzilla.com/gradient-editor/ */\n\n.goal-meter {\n  background: #e4f5fc;\n  background: linear-gradient(to bottom, #e4f5fc 0%, #7dc8e8 100%);\n  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e4f5fc', endColorstr='#7dc8e8',GradientType=0 ); }\n\n.tipjar {\n  background: #fefcea;\n  background: linear-gradient(to bottom, #fefcea 0%, #ede4af 100%);\n  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fefcea', endColorstr='#ede4af',GradientType=0 ); }\n\n.wallet {\n  background: #eeeeee;\n  background: linear-gradient(to bottom, #eeeeee 0%, #cccccc 100%);\n  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eeeeee', endColorstr='#cccccc',GradientType=0 ); }\n\n.runtime {\n  background: #cdeb8b;\n  background: linear-gradient(to bottom, #cdeb8b 0%, #daeab4 100%);\n  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cdeb8b', endColorstr='#daeab4',GradientType=0 ); }\n\n.page-title {\n  text-align: center; }\n\n.accordion .mat-expansion-panel-header-title,\n.accordion .mat-expansion-panel-header-description {\n  flex-basis: 0; }\n\n.accordion .mat-expansion-panel-header-description {\n  justify-content: space-between;\n  align-items: center; }\n\nmat-expansion-panel {\n  margin: 5px 5px 5px 5px; }\n\n.content {\n  padding-left: 5px;\n  padding-right: 5px;\n  padding-bottom: 10px; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvbWVtYmVyL3Nlc3Npb24vY3VycmVudC1zZXNzaW9uL0M6XFxVc2Vyc1xcanBjb3BcXGNvZGVcXGFscGhhNjktbmcvc3JjXFxhcHBcXG1lbWJlclxcc2Vzc2lvblxcY3VycmVudC1zZXNzaW9uXFxjdXJyZW50LXNlc3Npb24uY29tcG9uZW50LnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDSSxhQUFZLEVBQ2I7O0FBRUQ7RUFDRSxrQkFDRixFQUFDOztBQUlILGdEQUFnRDs7QUFFaEQ7RUFDSSxvQkFBbUI7RUFHbkIsaUVBQStEO0VBQy9ELG9IQUFtSCxFQUNwSDs7QUFFRDtFQUNFLG9CQUFtQjtFQUduQixpRUFBK0Q7RUFDL0Qsb0hBQW1ILEVBQ3BIOztBQUVEO0VBQ0Usb0JBQW1CO0VBR25CLGlFQUErRDtFQUMvRCxvSEFBbUgsRUFDcEg7O0FBRUQ7RUFDRSxvQkFBbUI7RUFHbkIsaUVBQStEO0VBQy9ELG9IQUFtSCxFQUNuSDs7QUFHSjtFQUNFLG1CQUNGLEVBQUM7O0FBQ0Q7O0VBRUUsY0FBYSxFQUNkOztBQUVEO0VBQ0UsK0JBQThCO0VBQzlCLG9CQUFtQixFQUNwQjs7QUFDRDtFQUNFLHdCQUF1QixFQUN2Qjs7QUFFRDtFQUNFLGtCQUFpQjtFQUNqQixtQkFBaUI7RUFDakIscUJBQW9CLEVBRXJCIiwiZmlsZSI6InNyYy9hcHAvbWVtYmVyL3Nlc3Npb24vY3VycmVudC1zZXNzaW9uL2N1cnJlbnQtc2Vzc2lvbi5jb21wb25lbnQuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIm1hdC1mb3JtLWZpZWxkIHtcclxuICAgIHdpZHRoOiAzMDBweDtcclxuICB9XHJcbiAgXHJcbiAgLmN1cnJlbnQtc2Vzc2lvbiB7XHJcbiAgICBwYWRkaW5nLXRvcDogIDMwcHhcclxuICB9XHJcblxyXG5cclxuICBcclxuLyogaHR0cDovL3d3dy5jb2xvcnppbGxhLmNvbS9ncmFkaWVudC1lZGl0b3IvICovXHJcblxyXG4uZ29hbC1tZXRlciB7XHJcbiAgICBiYWNrZ3JvdW5kOiAjZTRmNWZjO1xyXG4gICAgYmFja2dyb3VuZDogLW1vei1saW5lYXItZ3JhZGllbnQodG9wLCAjZTRmNWZjIDAlLCAjN2RjOGU4IDEwMCUpO1xyXG4gICAgYmFja2dyb3VuZDogLXdlYmtpdC1saW5lYXItZ3JhZGllbnQodG9wLCAjZTRmNWZjIDAlLCM3ZGM4ZTggMTAwJSk7XHJcbiAgICBiYWNrZ3JvdW5kOiBsaW5lYXItZ3JhZGllbnQodG8gYm90dG9tLCAjZTRmNWZjIDAlLCM3ZGM4ZTggMTAwJSk7XHJcbiAgICBmaWx0ZXI6IHByb2dpZDpEWEltYWdlVHJhbnNmb3JtLk1pY3Jvc29mdC5ncmFkaWVudCggc3RhcnRDb2xvcnN0cj0nI2U0ZjVmYycsIGVuZENvbG9yc3RyPScjN2RjOGU4JyxHcmFkaWVudFR5cGU9MCApO1xyXG4gIH1cclxuXHJcbiAgLnRpcGphciB7IFxyXG4gICAgYmFja2dyb3VuZDogI2ZlZmNlYTtcclxuICAgIGJhY2tncm91bmQ6IC1tb3otbGluZWFyLWdyYWRpZW50KHRvcCwgI2ZlZmNlYSAwJSwgI2VkZTRhZiAxMDAlKTtcclxuICAgIGJhY2tncm91bmQ6IC13ZWJraXQtbGluZWFyLWdyYWRpZW50KHRvcCwgI2ZlZmNlYSAwJSwjZWRlNGFmIDEwMCUpO1xyXG4gICAgYmFja2dyb3VuZDogbGluZWFyLWdyYWRpZW50KHRvIGJvdHRvbSwgI2ZlZmNlYSAwJSwjZWRlNGFmIDEwMCUpO1xyXG4gICAgZmlsdGVyOiBwcm9naWQ6RFhJbWFnZVRyYW5zZm9ybS5NaWNyb3NvZnQuZ3JhZGllbnQoIHN0YXJ0Q29sb3JzdHI9JyNmZWZjZWEnLCBlbmRDb2xvcnN0cj0nI2VkZTRhZicsR3JhZGllbnRUeXBlPTAgKTtcclxuICB9XHJcblxyXG4gIC53YWxsZXQgeyBcclxuICAgIGJhY2tncm91bmQ6ICNlZWVlZWU7XHJcbiAgICBiYWNrZ3JvdW5kOiAtbW96LWxpbmVhci1ncmFkaWVudCh0b3AsICNlZWVlZWUgMCUsICNjY2NjY2MgMTAwJSk7XHJcbiAgICBiYWNrZ3JvdW5kOiAtd2Via2l0LWxpbmVhci1ncmFkaWVudCh0b3AsICNlZWVlZWUgMCUsI2NjY2NjYyAxMDAlKTtcclxuICAgIGJhY2tncm91bmQ6IGxpbmVhci1ncmFkaWVudCh0byBib3R0b20sICNlZWVlZWUgMCUsI2NjY2NjYyAxMDAlKTtcclxuICAgIGZpbHRlcjogcHJvZ2lkOkRYSW1hZ2VUcmFuc2Zvcm0uTWljcm9zb2Z0LmdyYWRpZW50KCBzdGFydENvbG9yc3RyPScjZWVlZWVlJywgZW5kQ29sb3JzdHI9JyNjY2NjY2MnLEdyYWRpZW50VHlwZT0wICk7XHJcbiAgfVxyXG5cclxuICAucnVudGltZSB7IFxyXG4gICAgYmFja2dyb3VuZDogI2NkZWI4YjtcclxuICAgIGJhY2tncm91bmQ6IC1tb3otbGluZWFyLWdyYWRpZW50KHRvcCwgI2NkZWI4YiAwJSwgI2RhZWFiNCAxMDAlKTtcclxuICAgIGJhY2tncm91bmQ6IC13ZWJraXQtbGluZWFyLWdyYWRpZW50KHRvcCwgI2NkZWI4YiAwJSwjZGFlYWI0IDEwMCUpO1xyXG4gICAgYmFja2dyb3VuZDogbGluZWFyLWdyYWRpZW50KHRvIGJvdHRvbSwgI2NkZWI4YiAwJSwjZGFlYWI0IDEwMCUpO1xyXG4gICAgZmlsdGVyOiBwcm9naWQ6RFhJbWFnZVRyYW5zZm9ybS5NaWNyb3NvZnQuZ3JhZGllbnQoIHN0YXJ0Q29sb3JzdHI9JyNjZGViOGInLCBlbmRDb2xvcnN0cj0nI2RhZWFiNCcsR3JhZGllbnRUeXBlPTAgKTtcclxuICAgfVxyXG5cclxuXHJcbi5wYWdlLXRpdGxle1xyXG4gIHRleHQtYWxpZ246IGNlbnRlclxyXG59XHJcbi5hY2NvcmRpb24gLm1hdC1leHBhbnNpb24tcGFuZWwtaGVhZGVyLXRpdGxlLCBcclxuLmFjY29yZGlvbiAubWF0LWV4cGFuc2lvbi1wYW5lbC1oZWFkZXItZGVzY3JpcHRpb24ge1xyXG4gIGZsZXgtYmFzaXM6IDA7XHJcbn1cclxuXHJcbi5hY2NvcmRpb24gLm1hdC1leHBhbnNpb24tcGFuZWwtaGVhZGVyLWRlc2NyaXB0aW9uIHtcclxuICBqdXN0aWZ5LWNvbnRlbnQ6IHNwYWNlLWJldHdlZW47XHJcbiAgYWxpZ24taXRlbXM6IGNlbnRlcjtcclxufVxyXG5tYXQtZXhwYW5zaW9uLXBhbmVsIHtcclxuICBtYXJnaW46IDVweCA1cHggNXB4IDVweDtcclxuIH1cclxuXHJcbiAuY29udGVudCB7XHJcbiAgIHBhZGRpbmctbGVmdDogNXB4O1xyXG4gICBwYWRkaW5nLXJpZ2h0OjVweDtcclxuICAgcGFkZGluZy1ib3R0b206IDEwcHg7XHJcblxyXG4gfSJdfQ== */"
+module.exports = "mat-form-field {\n  width: 300px; }\n\n.current-session {\n  padding-top: 30px; }\n\n/* http://www.colorzilla.com/gradient-editor/ */\n\n.goal-meter {\n  background: #e4f5fc;\n  background: linear-gradient(to bottom, #e4f5fc 0%, #7dc8e8 100%);\n  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e4f5fc', endColorstr='#7dc8e8',GradientType=0 ); }\n\n.tipjar {\n  background: #fefcea;\n  background: linear-gradient(to bottom, #fefcea 0%, #ede4af 100%);\n  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fefcea', endColorstr='#ede4af',GradientType=0 ); }\n\n.wallet {\n  background: #eeeeee;\n  background: linear-gradient(to bottom, #eeeeee 0%, #cccccc 100%);\n  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eeeeee', endColorstr='#cccccc',GradientType=0 ); }\n\n.runtime {\n  background: #cdeb8b;\n  background: linear-gradient(to bottom, #cdeb8b 0%, #daeab4 100%);\n  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cdeb8b', endColorstr='#daeab4',GradientType=0 ); }\n\n.page-title {\n  text-align: center; }\n\n.accordion .mat-expansion-panel-header-title,\n.accordion .mat-expansion-panel-header-description {\n  flex-basis: 0; }\n\n.accordion .mat-expansion-panel-header-description {\n  justify-content: space-between;\n  align-items: center; }\n\nmat-expansion-panel {\n  margin: 5px 5px 5px 5px; }\n\n.content {\n  padding-left: 5px;\n  padding-right: 5px;\n  padding-bottom: 10px; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvbWVtYmVyL3Nlc3Npb24vY3VycmVudC1zZXNzaW9uL0M6XFxVc2Vyc1xcamF4Y3BoXFxjb2RlXFxhbHBoYTY5LW5nL3NyY1xcYXBwXFxtZW1iZXJcXHNlc3Npb25cXGN1cnJlbnQtc2Vzc2lvblxcY3VycmVudC1zZXNzaW9uLmNvbXBvbmVudC5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0ksYUFBWSxFQUNiOztBQUVEO0VBQ0Usa0JBQ0YsRUFBQzs7QUFJSCxnREFBZ0Q7O0FBRWhEO0VBQ0ksb0JBQW1CO0VBR25CLGlFQUErRDtFQUMvRCxvSEFBbUgsRUFDcEg7O0FBRUQ7RUFDRSxvQkFBbUI7RUFHbkIsaUVBQStEO0VBQy9ELG9IQUFtSCxFQUNwSDs7QUFFRDtFQUNFLG9CQUFtQjtFQUduQixpRUFBK0Q7RUFDL0Qsb0hBQW1ILEVBQ3BIOztBQUVEO0VBQ0Usb0JBQW1CO0VBR25CLGlFQUErRDtFQUMvRCxvSEFBbUgsRUFDbkg7O0FBR0o7RUFDRSxtQkFDRixFQUFDOztBQUNEOztFQUVFLGNBQWEsRUFDZDs7QUFFRDtFQUNFLCtCQUE4QjtFQUM5QixvQkFBbUIsRUFDcEI7O0FBQ0Q7RUFDRSx3QkFBdUIsRUFDdkI7O0FBRUQ7RUFDRSxrQkFBaUI7RUFDakIsbUJBQWlCO0VBQ2pCLHFCQUFvQixFQUVyQiIsImZpbGUiOiJzcmMvYXBwL21lbWJlci9zZXNzaW9uL2N1cnJlbnQtc2Vzc2lvbi9jdXJyZW50LXNlc3Npb24uY29tcG9uZW50LnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyJtYXQtZm9ybS1maWVsZCB7XHJcbiAgICB3aWR0aDogMzAwcHg7XHJcbiAgfVxyXG4gIFxyXG4gIC5jdXJyZW50LXNlc3Npb24ge1xyXG4gICAgcGFkZGluZy10b3A6ICAzMHB4XHJcbiAgfVxyXG5cclxuXHJcbiAgXHJcbi8qIGh0dHA6Ly93d3cuY29sb3J6aWxsYS5jb20vZ3JhZGllbnQtZWRpdG9yLyAqL1xyXG5cclxuLmdvYWwtbWV0ZXIge1xyXG4gICAgYmFja2dyb3VuZDogI2U0ZjVmYztcclxuICAgIGJhY2tncm91bmQ6IC1tb3otbGluZWFyLWdyYWRpZW50KHRvcCwgI2U0ZjVmYyAwJSwgIzdkYzhlOCAxMDAlKTtcclxuICAgIGJhY2tncm91bmQ6IC13ZWJraXQtbGluZWFyLWdyYWRpZW50KHRvcCwgI2U0ZjVmYyAwJSwjN2RjOGU4IDEwMCUpO1xyXG4gICAgYmFja2dyb3VuZDogbGluZWFyLWdyYWRpZW50KHRvIGJvdHRvbSwgI2U0ZjVmYyAwJSwjN2RjOGU4IDEwMCUpO1xyXG4gICAgZmlsdGVyOiBwcm9naWQ6RFhJbWFnZVRyYW5zZm9ybS5NaWNyb3NvZnQuZ3JhZGllbnQoIHN0YXJ0Q29sb3JzdHI9JyNlNGY1ZmMnLCBlbmRDb2xvcnN0cj0nIzdkYzhlOCcsR3JhZGllbnRUeXBlPTAgKTtcclxuICB9XHJcblxyXG4gIC50aXBqYXIgeyBcclxuICAgIGJhY2tncm91bmQ6ICNmZWZjZWE7XHJcbiAgICBiYWNrZ3JvdW5kOiAtbW96LWxpbmVhci1ncmFkaWVudCh0b3AsICNmZWZjZWEgMCUsICNlZGU0YWYgMTAwJSk7XHJcbiAgICBiYWNrZ3JvdW5kOiAtd2Via2l0LWxpbmVhci1ncmFkaWVudCh0b3AsICNmZWZjZWEgMCUsI2VkZTRhZiAxMDAlKTtcclxuICAgIGJhY2tncm91bmQ6IGxpbmVhci1ncmFkaWVudCh0byBib3R0b20sICNmZWZjZWEgMCUsI2VkZTRhZiAxMDAlKTtcclxuICAgIGZpbHRlcjogcHJvZ2lkOkRYSW1hZ2VUcmFuc2Zvcm0uTWljcm9zb2Z0LmdyYWRpZW50KCBzdGFydENvbG9yc3RyPScjZmVmY2VhJywgZW5kQ29sb3JzdHI9JyNlZGU0YWYnLEdyYWRpZW50VHlwZT0wICk7XHJcbiAgfVxyXG5cclxuICAud2FsbGV0IHsgXHJcbiAgICBiYWNrZ3JvdW5kOiAjZWVlZWVlO1xyXG4gICAgYmFja2dyb3VuZDogLW1vei1saW5lYXItZ3JhZGllbnQodG9wLCAjZWVlZWVlIDAlLCAjY2NjY2NjIDEwMCUpO1xyXG4gICAgYmFja2dyb3VuZDogLXdlYmtpdC1saW5lYXItZ3JhZGllbnQodG9wLCAjZWVlZWVlIDAlLCNjY2NjY2MgMTAwJSk7XHJcbiAgICBiYWNrZ3JvdW5kOiBsaW5lYXItZ3JhZGllbnQodG8gYm90dG9tLCAjZWVlZWVlIDAlLCNjY2NjY2MgMTAwJSk7XHJcbiAgICBmaWx0ZXI6IHByb2dpZDpEWEltYWdlVHJhbnNmb3JtLk1pY3Jvc29mdC5ncmFkaWVudCggc3RhcnRDb2xvcnN0cj0nI2VlZWVlZScsIGVuZENvbG9yc3RyPScjY2NjY2NjJyxHcmFkaWVudFR5cGU9MCApO1xyXG4gIH1cclxuXHJcbiAgLnJ1bnRpbWUgeyBcclxuICAgIGJhY2tncm91bmQ6ICNjZGViOGI7XHJcbiAgICBiYWNrZ3JvdW5kOiAtbW96LWxpbmVhci1ncmFkaWVudCh0b3AsICNjZGViOGIgMCUsICNkYWVhYjQgMTAwJSk7XHJcbiAgICBiYWNrZ3JvdW5kOiAtd2Via2l0LWxpbmVhci1ncmFkaWVudCh0b3AsICNjZGViOGIgMCUsI2RhZWFiNCAxMDAlKTtcclxuICAgIGJhY2tncm91bmQ6IGxpbmVhci1ncmFkaWVudCh0byBib3R0b20sICNjZGViOGIgMCUsI2RhZWFiNCAxMDAlKTtcclxuICAgIGZpbHRlcjogcHJvZ2lkOkRYSW1hZ2VUcmFuc2Zvcm0uTWljcm9zb2Z0LmdyYWRpZW50KCBzdGFydENvbG9yc3RyPScjY2RlYjhiJywgZW5kQ29sb3JzdHI9JyNkYWVhYjQnLEdyYWRpZW50VHlwZT0wICk7XHJcbiAgIH1cclxuXHJcblxyXG4ucGFnZS10aXRsZXtcclxuICB0ZXh0LWFsaWduOiBjZW50ZXJcclxufVxyXG4uYWNjb3JkaW9uIC5tYXQtZXhwYW5zaW9uLXBhbmVsLWhlYWRlci10aXRsZSwgXHJcbi5hY2NvcmRpb24gLm1hdC1leHBhbnNpb24tcGFuZWwtaGVhZGVyLWRlc2NyaXB0aW9uIHtcclxuICBmbGV4LWJhc2lzOiAwO1xyXG59XHJcblxyXG4uYWNjb3JkaW9uIC5tYXQtZXhwYW5zaW9uLXBhbmVsLWhlYWRlci1kZXNjcmlwdGlvbiB7XHJcbiAganVzdGlmeS1jb250ZW50OiBzcGFjZS1iZXR3ZWVuO1xyXG4gIGFsaWduLWl0ZW1zOiBjZW50ZXI7XHJcbn1cclxubWF0LWV4cGFuc2lvbi1wYW5lbCB7XHJcbiAgbWFyZ2luOiA1cHggNXB4IDVweCA1cHg7XHJcbiB9XHJcblxyXG4gLmNvbnRlbnQge1xyXG4gICBwYWRkaW5nLWxlZnQ6IDVweDtcclxuICAgcGFkZGluZy1yaWdodDo1cHg7XHJcbiAgIHBhZGRpbmctYm90dG9tOiAxMHB4O1xyXG5cclxuIH0iXX0= */"
 
 /***/ }),
 
@@ -1643,6 +1652,7 @@ var NewSessionComponent = /** @class */ (function () {
         var hasGoal = form.value.goalUse ? true : false;
         this.db.doc("members/" + localStorage.getItem('uid')).update({
             session: {
+                id: new Date().getTime(),
                 title: form.value.title,
                 modelName: form.value.modelName,
                 accessType: form.value.accessType,
@@ -1883,7 +1893,7 @@ var StreamService = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL21vZGVscy9saXZlL2xpdmUuY29tcG9uZW50LmNzcyJ9 */"
+module.exports = "mat-form-field {\r\n    width: 300px;\r\n  }\r\n\r\n\r\n  .page-title{\r\n    text-align: center\r\n  }\r\n\r\n\r\n  .accordion .mat-expansion-panel-header-title, \r\n  .accordion .mat-expansion-panel-header-description {\r\n    flex-basis: 0;\r\n  }\r\n\r\n\r\n  .accordion .mat-expansion-panel-header-description {\r\n    justify-content: space-between;\r\n    align-items: center;\r\n  }\r\n\r\n\r\n  mat-expansion-panel {\r\n    margin: 5px 5px 5px 5px;\r\n   }\r\n\r\n\r\n  .content {\r\n     padding-left: 5px;\r\n     padding-right:5px;\r\n     padding-bottom: 10px;\r\n  \r\n   }\r\n\r\n\r\n  .wallet-balance {\r\n    font-size: 36pt;\r\n    font-weight: normal;\r\n    text-align: center;\r\n    margin:10px;\r\n   }\r\n\r\n\r\n  .wallet-balance-label {\r\n    font-size: 12pt;\r\n    font-weight: bold;\r\n    text-align: center;\r\n    margin:0px;\r\n   }\r\n\r\n\r\n  .tipwall-list {\r\n     list-style-type: none;\r\n     font-size: 10pt;\r\n   }\r\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvbW9kZWxzL2xpdmUvbGl2ZS5jb21wb25lbnQuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0lBQ0ksYUFBYTtHQUNkOzs7RUFHRDtJQUNFLGtCQUFrQjtHQUNuQjs7O0VBQ0Q7O0lBRUUsY0FBYztHQUNmOzs7RUFFRDtJQUNFLCtCQUErQjtJQUMvQixvQkFBb0I7R0FDckI7OztFQUNEO0lBQ0Usd0JBQXdCO0lBQ3hCOzs7RUFFSDtLQUNJLGtCQUFrQjtLQUNsQixrQkFBa0I7S0FDbEIscUJBQXFCOztJQUV0Qjs7O0VBRUQ7SUFDQyxnQkFBZ0I7SUFDaEIsb0JBQW9CO0lBQ3BCLG1CQUFtQjtJQUNuQixZQUFZO0lBQ1o7OztFQUVEO0lBQ0MsZ0JBQWdCO0lBQ2hCLGtCQUFrQjtJQUNsQixtQkFBbUI7SUFDbkIsV0FBVztJQUNYOzs7RUFFRDtLQUNFLHNCQUFzQjtLQUN0QixnQkFBZ0I7SUFDakIiLCJmaWxlIjoic3JjL2FwcC9tb2RlbHMvbGl2ZS9saXZlLmNvbXBvbmVudC5jc3MiLCJzb3VyY2VzQ29udGVudCI6WyJtYXQtZm9ybS1maWVsZCB7XHJcbiAgICB3aWR0aDogMzAwcHg7XHJcbiAgfVxyXG5cclxuXHJcbiAgLnBhZ2UtdGl0bGV7XHJcbiAgICB0ZXh0LWFsaWduOiBjZW50ZXJcclxuICB9XHJcbiAgLmFjY29yZGlvbiAubWF0LWV4cGFuc2lvbi1wYW5lbC1oZWFkZXItdGl0bGUsIFxyXG4gIC5hY2NvcmRpb24gLm1hdC1leHBhbnNpb24tcGFuZWwtaGVhZGVyLWRlc2NyaXB0aW9uIHtcclxuICAgIGZsZXgtYmFzaXM6IDA7XHJcbiAgfVxyXG4gIFxyXG4gIC5hY2NvcmRpb24gLm1hdC1leHBhbnNpb24tcGFuZWwtaGVhZGVyLWRlc2NyaXB0aW9uIHtcclxuICAgIGp1c3RpZnktY29udGVudDogc3BhY2UtYmV0d2VlbjtcclxuICAgIGFsaWduLWl0ZW1zOiBjZW50ZXI7XHJcbiAgfVxyXG4gIG1hdC1leHBhbnNpb24tcGFuZWwge1xyXG4gICAgbWFyZ2luOiA1cHggNXB4IDVweCA1cHg7XHJcbiAgIH1cclxuICBcclxuIC5jb250ZW50IHtcclxuICAgICBwYWRkaW5nLWxlZnQ6IDVweDtcclxuICAgICBwYWRkaW5nLXJpZ2h0OjVweDtcclxuICAgICBwYWRkaW5nLWJvdHRvbTogMTBweDtcclxuICBcclxuICAgfVxyXG5cclxuICAgLndhbGxldC1iYWxhbmNlIHtcclxuICAgIGZvbnQtc2l6ZTogMzZwdDtcclxuICAgIGZvbnQtd2VpZ2h0OiBub3JtYWw7XHJcbiAgICB0ZXh0LWFsaWduOiBjZW50ZXI7XHJcbiAgICBtYXJnaW46MTBweDtcclxuICAgfVxyXG5cclxuICAgLndhbGxldC1iYWxhbmNlLWxhYmVsIHtcclxuICAgIGZvbnQtc2l6ZTogMTJwdDtcclxuICAgIGZvbnQtd2VpZ2h0OiBib2xkO1xyXG4gICAgdGV4dC1hbGlnbjogY2VudGVyO1xyXG4gICAgbWFyZ2luOjBweDtcclxuICAgfVxyXG5cclxuICAgLnRpcHdhbGwtbGlzdCB7XHJcbiAgICAgbGlzdC1zdHlsZS10eXBlOiBub25lO1xyXG4gICAgIGZvbnQtc2l6ZTogMTBwdDtcclxuICAgfSJdfQ== */"
 
 /***/ }),
 
@@ -1894,7 +1904,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<p>\r\n  live works!\r\n</p>\r\n"
+module.exports = "<section class='page-title'>\r\n    <h3 *ngIf=\"model\">Live with {{model.session.modelName}}</h3>\r\n</section>\r\n\r\n<section class=\"content\">\r\n missing PPM handling and transaction safe tipping\r\n<mat-accordion class=\"accordion\" multi=\"true\" fxLayout=\"row wrap\" fxLayoutGap=\"10px\">\r\n\r\n  <mat-expansion-panel  *ngIf=\"wallet\" fxFlex.xs=\"100%\" fxFlex=\"400px\" expanded>\r\n      <mat-expansion-panel-header>\r\n          <mat-panel-title>\r\n              Wallet\r\n          </mat-panel-title>\r\n          <mat-panel-description>\r\n              &nbsp; \r\n              <mat-icon>attach_money</mat-icon>\r\n          </mat-panel-description>\r\n       </mat-expansion-panel-header>\r\n      \r\n       <p class=\"wallet-balance-label\">Balance</p>\r\n       <p class=\"wallet-balance\">\r\n          {{wallet.balance}} <img src=\"https://firebasestorage.googleapis.com/v0/b/alpha69-ng.appspot.com/o/images%2Fcoin32.png?alt=media&token=f4b3f892-a7d1-4908-a2c5-54d3dbd02b22\">\r\n      </p>\r\n    \r\n\r\n      <form fxLayout=\"column\" fxLayoutAlign=\"center center\" fxLayoutGap=\"10px\" #tipform=\"ngForm\" (ngSubmit)=\"onTip(tipform)\">\r\n\r\n          <mat-form-field>\r\n            <input type=\"number\" matInput placeholder=\"tip amount\" ngModel name=\"amount\" required/>\r\n            <mat-hint align=\"end\">minimum tip amount: {{model.session.minTipAmount? model.session.minTipAmount : 1}}</mat-hint>\r\n          </mat-form-field>\r\n      \r\n          <mat-form-field>\r\n            <input type=\"text\" matInput placeholder=\"tip message\" ngModel name=\"message\" maxlength=\"140\" />\r\n          </mat-form-field>\r\n      \r\n          <button type=\"submit\" mat-raised-button color=\"primary\" [disabled]=\"tipform.invalid ||\r\n            (tipform.value.amount > wallet.balance) ||\r\n            (tipform.value.amount < (model.session.minTipAmount? model.session.minTipAmount : 1) )\">Tip</button>\r\n\r\n      </form>\r\n  </mat-expansion-panel>\r\n\r\n  <mat-expansion-panel  *ngIf=\"transactions\" fxFlex.xs=\"100%\" fxFlex=\"600px\" expanded>\r\n        <mat-expansion-panel-header>\r\n            <mat-panel-title>\r\n                Tip wall\r\n            </mat-panel-title>\r\n            <mat-panel-description>\r\n                &nbsp; \r\n                <mat-icon>attach_money</mat-icon>\r\n            </mat-panel-description>\r\n         </mat-expansion-panel-header>\r\n        \r\n         <ul class=\"tipwall-list\">\r\n             <li *ngFor=\"let trans of transactions\">{{trans.dt.toDate() | date: 'hh:mm:ss'}}, {{trans.nme}}: {{trans.amt}} {{trans.msg? trans.msg : \"\"}}</li>\r\n         </ul>\r\n    </mat-expansion-panel>\r\n\r\n</mat-accordion>\r\n\r\n</section>"
 
 /***/ }),
 
@@ -1909,6 +1919,9 @@ module.exports = "<p>\r\n  live works!\r\n</p>\r\n"
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LiveComponent", function() { return LiveComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var src_app_auth_auth_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/app/auth/auth.service */ "./src/app/auth/auth.service.ts");
+/* harmony import */ var _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/fire/firestore */ "./node_modules/@angular/fire/firestore/index.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1919,10 +1932,143 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
+
+
+
 var LiveComponent = /** @class */ (function () {
-    function LiveComponent() {
+    function LiveComponent(db, router, auth) {
+        this.db = db;
+        this.router = router;
+        this.auth = auth;
+        this.subs$ = [];
     }
+    LiveComponent.prototype.onTip = function (form) {
+        console.log(form);
+        // TO DO RUN IN TRANSACTION perhaps in FUNCTION
+        // in transaction :
+        //  1 check wallet balance,
+        //  2 reduce wallet
+        //  2 increase tipjar
+        //  3 check for goal, and post to goal
+        //  4 write transaction
+        // end transaction
+        // 5 delay 500 msec
+        var uid = localStorage.getItem('uid');
+        var mid = localStorage.getItem('mid');
+        // set new balance
+        var newBalance = this.wallet.balance - form.value.amount;
+        this.db.doc("member-wallets/" + uid).update({ balance: newBalance });
+        // set the users shade on the tipjar
+        var tipjarShadeAmount = this.tipjarShade ? this.tipjarShade.amount + form.value.amount : form.value.amount;
+        if (this.tipjarShade) {
+            this.db.doc("model-tipjars/" + mid + "/tippers/" + uid).update({ amount: tipjarShadeAmount });
+        }
+        else {
+            this.db.doc("model-tipjars/" + mid + "/tippers/" + uid).set({ amount: tipjarShadeAmount });
+        }
+        // set the users shade on the goal, if there is goal for this session
+        if (this.goal) {
+            var goalShadeAmount = this.goalShade ? this.goalShade.amount + form.value.amount : form.value.amount;
+            if (this.goalShade) {
+                this.db.doc("session-goals/" + mid + "/tippers/" + uid).update({ amount: goalShadeAmount });
+            }
+            else {
+                this.db.doc("session-goals/" + mid + "/tippers/" + uid).set({ amount: goalShadeAmount });
+            }
+        }
+        // transactions
+        if (form.value.message) {
+            this.db.collection('session-tips').add({
+                dt: new Date(),
+                sid: this.model.session.id,
+                amt: form.value.amount,
+                uid: uid,
+                nme: this.member.displayName,
+                msg: form.value.message
+            });
+        }
+        else {
+            this.db.collection('session-tips').add({
+                dt: new Date(),
+                sid: this.model.session.id,
+                amt: form.value.amount,
+                uid: uid,
+                nme: this.member.displayName
+            });
+        }
+    };
     LiveComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        var uid = localStorage.getItem('uid');
+        var mid = localStorage.getItem('mid');
+        // this user
+        this.subs$.push(this.db.doc("members/" + uid)
+            .valueChanges()
+            .subscribe(function (data) {
+            _this.member = data;
+            console.log('MEMBER ' + uid + ' =');
+            console.log(_this.member);
+        }));
+        // model
+        this.subs$.push(this.db.doc("members/" + mid)
+            .valueChanges()
+            .subscribe(function (data) {
+            _this.model = data;
+            console.log('MODEL ' + mid + ' =');
+            console.log(_this.model);
+            // transactions, get last 100
+            _this.subs$.push(_this.db.collection('session-tips', function (ref) { return ref
+                .where('sid', '==', _this.model.session.id)
+                .orderBy('dt')
+                .limit(100); })
+                .valueChanges()
+                .subscribe(function (items) {
+                console.log('TRANSACTION=');
+                console.log(items);
+                _this.transactions = items;
+            }));
+        }));
+        // users personal wallet
+        this.subs$.push(this.db.doc("member-wallets/" + uid)
+            .valueChanges()
+            .subscribe(function (data) {
+            _this.wallet = data;
+            console.log('WALLET=');
+            console.log(_this.wallet);
+        }));
+        // users personal wallet
+        this.subs$.push(this.db.doc("session-goals/" + mid)
+            .valueChanges()
+            .subscribe(function (data) {
+            _this.goal = data;
+            console.log('GOAL=');
+            console.log(_this.goal);
+        }));
+        // tipjar shade
+        this.subs$.push(this.db.doc("model-tipjars/" + mid + "/tippers/" + uid)
+            .valueChanges()
+            .subscribe(function (data) {
+            _this.tipjarShade = data;
+            console.log('TIPJAR-SHADE=');
+            console.log(_this.tipjarShade);
+        }));
+        // goal shade
+        this.subs$.push(this.db.doc("session-goals/" + mid + "/tippers/" + uid)
+            .valueChanges()
+            .subscribe(function (data) {
+            _this.goalShade = data;
+            console.log('GOAL-SHADE=');
+            console.log(_this.goalShade);
+        }));
+    };
+    LiveComponent.prototype.ngOnDestroy = function () {
+        if (this.subs$) {
+            for (var _i = 0, _a = this.subs$; _i < _a.length; _i++) {
+                var s = _a[_i];
+                s.unsubscribe();
+            }
+            this.subs$ = null;
+        }
     };
     LiveComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
@@ -1930,7 +2076,7 @@ var LiveComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./live.component.html */ "./src/app/models/live/live.component.html"),
             styles: [__webpack_require__(/*! ./live.component.css */ "./src/app/models/live/live.component.css")]
         }),
-        __metadata("design:paramtypes", [])
+        __metadata("design:paramtypes", [_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_3__["AngularFirestore"], _angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"], src_app_auth_auth_service__WEBPACK_IMPORTED_MODULE_2__["AuthService"]])
     ], LiveComponent);
     return LiveComponent;
 }());
@@ -1946,7 +2092,7 @@ var LiveComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".page-title{\r\n    text-align: center\r\n}\r\n.content {\r\n      \r\n}\r\nmat-card {\r\n    margin-top:10px;\r\n    margin-left:10px;\r\n    margin-right:10px;\r\n    margin-bottom:10px;\r\n}\r\nmat-card-title\r\n{\r\n    font-weight: bold;\r\n}\r\n.model-card {\r\n    max-width: 400px;\r\n  }\r\n  \r\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvbW9kZWxzL21vZGVscy5jb21wb25lbnQuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0lBQ0ksa0JBQWtCO0NBQ3JCO0FBQ0Q7O0NBRUM7QUFDRDtJQUNJLGdCQUFnQjtJQUNoQixpQkFBaUI7SUFDakIsa0JBQWtCO0lBQ2xCLG1CQUFtQjtDQUN0QjtBQUVEOztJQUVJLGtCQUFrQjtDQUNyQjtBQUNEO0lBQ0ksaUJBQWlCO0dBQ2xCIiwiZmlsZSI6InNyYy9hcHAvbW9kZWxzL21vZGVscy5jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLnBhZ2UtdGl0bGV7XHJcbiAgICB0ZXh0LWFsaWduOiBjZW50ZXJcclxufVxyXG4uY29udGVudCB7XHJcbiAgICAgIFxyXG59XHJcbm1hdC1jYXJkIHtcclxuICAgIG1hcmdpbi10b3A6MTBweDtcclxuICAgIG1hcmdpbi1sZWZ0OjEwcHg7XHJcbiAgICBtYXJnaW4tcmlnaHQ6MTBweDtcclxuICAgIG1hcmdpbi1ib3R0b206MTBweDtcclxufVxyXG5cclxubWF0LWNhcmQtdGl0bGVcclxue1xyXG4gICAgZm9udC13ZWlnaHQ6IGJvbGQ7XHJcbn1cclxuLm1vZGVsLWNhcmQge1xyXG4gICAgbWF4LXdpZHRoOiA0MDBweDtcclxuICB9XHJcbiAgIl19 */"
+module.exports = ".page-title{\r\n    text-align: center\r\n}\r\n.content {\r\n\r\n}\r\nmat-card {\r\n    margin-top:10px;\r\n    margin-left:10px;\r\n    margin-right:10px;\r\n    margin-bottom:10px;\r\n}\r\nmat-card-title\r\n{\r\n    font-weight: bold;\r\n}\r\n.model-card {\r\n    max-width: 400px;\r\n  }\r\n.ppm {\r\n  text-align: center;\r\n  padding-top:2px;\r\n  padding-bottom:2px;\r\n}\r\n.ppm-value {\r\n  font-weight: normal;\r\n  padding-left: 3px;\r\n}\r\n.ppm-label {\r\n  font-weight: bold;\r\n}\r\n\r\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvbW9kZWxzL21vZGVscy5jb21wb25lbnQuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0lBQ0ksa0JBQWtCO0NBQ3JCO0FBQ0Q7O0NBRUM7QUFDRDtJQUNJLGdCQUFnQjtJQUNoQixpQkFBaUI7SUFDakIsa0JBQWtCO0lBQ2xCLG1CQUFtQjtDQUN0QjtBQUVEOztJQUVJLGtCQUFrQjtDQUNyQjtBQUNEO0lBQ0ksaUJBQWlCO0dBQ2xCO0FBR0g7RUFDRSxtQkFBbUI7RUFDbkIsZ0JBQWdCO0VBQ2hCLG1CQUFtQjtDQUNwQjtBQUVEO0VBQ0Usb0JBQW9CO0VBQ3BCLGtCQUFrQjtDQUNuQjtBQUNEO0VBQ0Usa0JBQWtCO0NBQ25CIiwiZmlsZSI6InNyYy9hcHAvbW9kZWxzL21vZGVscy5jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLnBhZ2UtdGl0bGV7XHJcbiAgICB0ZXh0LWFsaWduOiBjZW50ZXJcclxufVxyXG4uY29udGVudCB7XHJcblxyXG59XHJcbm1hdC1jYXJkIHtcclxuICAgIG1hcmdpbi10b3A6MTBweDtcclxuICAgIG1hcmdpbi1sZWZ0OjEwcHg7XHJcbiAgICBtYXJnaW4tcmlnaHQ6MTBweDtcclxuICAgIG1hcmdpbi1ib3R0b206MTBweDtcclxufVxyXG5cclxubWF0LWNhcmQtdGl0bGVcclxue1xyXG4gICAgZm9udC13ZWlnaHQ6IGJvbGQ7XHJcbn1cclxuLm1vZGVsLWNhcmQge1xyXG4gICAgbWF4LXdpZHRoOiA0MDBweDtcclxuICB9XHJcblxyXG5cclxuLnBwbSB7XHJcbiAgdGV4dC1hbGlnbjogY2VudGVyO1xyXG4gIHBhZGRpbmctdG9wOjJweDtcclxuICBwYWRkaW5nLWJvdHRvbToycHg7XHJcbn1cclxuXHJcbi5wcG0tdmFsdWUge1xyXG4gIGZvbnQtd2VpZ2h0OiBub3JtYWw7XHJcbiAgcGFkZGluZy1sZWZ0OiAzcHg7XHJcbn1cclxuLnBwbS1sYWJlbCB7XHJcbiAgZm9udC13ZWlnaHQ6IGJvbGQ7XHJcbn1cclxuIl19 */"
 
 /***/ }),
 
@@ -1957,7 +2103,7 @@ module.exports = ".page-title{\r\n    text-align: center\r\n}\r\n.content {\r\n 
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<section class='page-title'>\r\n    <h1>Models</h1>\r\n</section>\r\n\r\n<section class='content'  fxLayout=\"row wrap\" fxLayoutAlign=\"center\" *ngIf=\"models\" >\r\n\r\n    <mat-card class=\"model-card\" fxFlex.xs=\"100%\" fxFlex=\"400px\" *ngFor=\"let m of models\" >\r\n        <mat-card-header>\r\n          <img mat-card-avatar *ngIf=\"m.model.avatarImg\" [src]=\"m.model.avatarImg\">\r\n          <mat-card-title>{{m.session ? m.session.modelName : m.displayName }}</mat-card-title>\r\n          <mat-card-subtitle>{{m.session ? m.session.title: \"&nbsp;\"}}</mat-card-subtitle>\r\n        </mat-card-header>\r\n        <img mat-card-image [src]=\"m.model.listingImg\" alt=\"\">\r\n        <mat-card-content>\r\n          <p>\r\n              {{m.model.aboutMe?m.model.aboutMe : \"&nbsp;\"}}\r\n          </p>\r\n        </mat-card-content>\r\n        <mat-card-actions>\r\n\r\n        <ng-container *ngIf=\"analyzeJoinOption(m) =='join'\">\r\n            <button mat-raised-button class=\"live-button\" color=\"accent\" (click)=\"onJoin(m)\">JOIN</button>\r\n        </ng-container>\r\n\r\n        <ng-container *ngIf=\"analyzeJoinOption(m) =='login'\">\r\n            <button mat-stroked-button class=\"live-button\" color=\"warn\" (click)=\"navLogin()\">LOGIN</button>\r\n        </ng-container>\r\n\r\n        <ng-container *ngIf=\"analyzeJoinOption(m) =='onrequest'\">\r\n          <button mat-stroked-button class=\"live-button\" color=\"warn\" (click)=\"onRequestToJoin(m)\">REQUEST TO JOIN</button>\r\n        </ng-container>\r\n\r\n        <ng-container *ngIf=\"analyzeJoinOption(m) =='lowscore'\">\r\n            <button mat-stroked-button class=\"live-button\" color=\"link\" (click)=\"onLowlevel(m)\"> <mat-icon>star</mat-icon>{{m.session.minLevel}}</button>\r\n\r\n        </ng-container>\r\n\r\n\r\n          <button mat-button (click)=\"onProfile(m)\" color=\"primary\">PROFILE</button>\r\n          <button mat-button (click)=\"onShare(m)\"  color=\"warn\">SHARE</button>\r\n        </mat-card-actions>\r\n      </mat-card>\r\n\r\n</section>\r\n"
+module.exports = "<section class='page-title'>\r\n    <h1>Models</h1>\r\n</section>\r\n\r\n<section class='content'  fxLayout=\"row wrap\" fxLayoutAlign=\"center\" *ngIf=\"models\" >\r\n\r\n    <mat-card class=\"model-card\" fxFlex.xs=\"100%\" fxFlex=\"400px\" *ngFor=\"let m of models\" >\r\n        <mat-card-header>\r\n          <img mat-card-avatar *ngIf=\"m.model.avatarImg\" [src]=\"m.model.avatarImg\">\r\n          <mat-card-title>{{m.session ? m.session.modelName : m.displayName }}</mat-card-title>\r\n          <mat-card-subtitle>{{m.session ? m.session.title: \"&nbsp;\"}}</mat-card-subtitle>\r\n        </mat-card-header>\r\n        <img mat-card-image [src]=\"m.model.listingImg\" alt=\"\">\r\n        <mat-card-content>\r\n          <p>\r\n              {{m.model.aboutMe?m.model.aboutMe : \"&nbsp;\"}}\r\n          </p>\r\n          <div class=\"ppm\" *ngIf=\"m.session && m.session.ppm && m.session.ppm.amount>0\">\r\n            <label class=\"ppm-label\">Pay Per Minute:</label><span class=\"ppm-value\">{{m.session.ppm.amount}} token</span>\r\n          </div>\r\n        </mat-card-content>\r\n        <mat-card-actions>\r\n\r\n        <ng-container *ngIf=\"analyzeJoinOption(m) =='join'\">\r\n            <button mat-raised-button class=\"live-button\" color=\"accent\" (click)=\"onJoin(m)\">JOIN</button>\r\n        </ng-container>\r\n\r\n        <ng-container *ngIf=\"analyzeJoinOption(m) =='login'\">\r\n            <button mat-raised-button class=\"live-button\" color=\"warn\" (click)=\"navLogin()\">LOGIN</button>\r\n        </ng-container>\r\n\r\n        <ng-container *ngIf=\"analyzeJoinOption(m) =='onrequest'\">\r\n          <button mat-stroked-button class=\"live-button\" color=\"warn\" (click)=\"onRequestToJoin(m)\">REQUEST</button>\r\n        </ng-container>\r\n\r\n        <ng-container *ngIf=\"analyzeJoinOption(m) =='lowscore'\">\r\n            <button mat-stroked-button class=\"live-button\" color=\"link\" (click)=\"onLowlevel(m)\"> <mat-icon>star</mat-icon>{{m.session.minLevel}}</button>\r\n\r\n        </ng-container>\r\n\r\n\r\n          <button mat-button (click)=\"onProfile(m)\" color=\"primary\">PROFILE</button>\r\n          <button mat-button (click)=\"onShare(m)\"  color=\"primary\">SHARE</button>\r\n        </mat-card-actions>\r\n      </mat-card>\r\n\r\n</section>\r\n"
 
 /***/ }),
 
@@ -1978,6 +2124,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
 /* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm5/material.es5.js");
 /* harmony import */ var _common_ok_dialog_ok_dialog_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../common/ok-dialog/ok-dialog.component */ "./src/app/common/ok-dialog/ok-dialog.component.ts");
+/* harmony import */ var _common_yesno_dialog_yesno_dialog_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../common/yesno-dialog/yesno-dialog.component */ "./src/app/common/yesno-dialog/yesno-dialog.component.ts");
 var __assign = (undefined && undefined.__assign) || function () {
     __assign = Object.assign || function(t) {
         for (var s, i = 1, n = arguments.length; i < n; i++) {
@@ -2005,6 +2152,7 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
 var ModelsComponent = /** @class */ (function () {
     function ModelsComponent(db, auth, router, dialog) {
         this.db = db;
@@ -2015,6 +2163,7 @@ var ModelsComponent = /** @class */ (function () {
     }
     ModelsComponent.prototype.ngOnInit = function () {
         var _this = this;
+        localStorage.removeItem('mid');
         if (localStorage.getItem('uid')) {
             this.currentMemberSub = this.db.doc("members/" + localStorage.getItem('uid'))
                 .valueChanges()
@@ -2062,6 +2211,27 @@ var ModelsComponent = /** @class */ (function () {
         }
     };
     ModelsComponent.prototype.onJoin = function (m) {
+        var _this = this;
+        if (m.session.ppm && m.session.ppm.amount > 0) {
+            var dialogRef = this.dialog.open(_common_yesno_dialog_yesno_dialog_component__WEBPACK_IMPORTED_MODULE_7__["YesNoDialogComponent"], {
+                data: {
+                    title: 'CONFIRM! Pay-Per-Minute',
+                    content: "You will automatically be chardged " + m.session.ppm.amount + " tokens per minut on this live session",
+                    yesLabel: "I Accept to " + m.session.ppm.amount + " token pay per minute",
+                    noLabel: 'No, I will leave'
+                }
+            });
+            dialogRef.afterClosed().subscribe(function (result) {
+                if (result) {
+                    localStorage.setItem('mid', m.id);
+                    _this.router.navigate(['/models/live']);
+                }
+            });
+        }
+        else {
+            localStorage.setItem('mid', m.id);
+            this.router.navigate(['/models/live']);
+        }
     };
     ModelsComponent.prototype.onProfile = function (m) {
     };
@@ -2080,7 +2250,7 @@ var ModelsComponent = /** @class */ (function () {
         var dialogRef = this.dialog.open(_common_ok_dialog_ok_dialog_component__WEBPACK_IMPORTED_MODULE_6__["OKDialogComponent"], {
             data: {
                 title: 'Sorry!',
-                content: 'The Request to Join feature was not been implemented yet',
+                content: 'The [Request to Join] feature was not been implemented yet',
                 okLabel: ':('
             }
         });
@@ -2126,7 +2296,7 @@ module.exports = "a {\r\n    text-decoration: none;\r\n    color:white;\r\n}\r\n
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<mat-toolbar color=\"primary\">\r\n          \r\n  <div>\r\n      <button mat-icon-button (click)=\"onToggleSidebar()\">\r\n      <mat-icon>menu</mat-icon>\r\n  </button></div>\r\n  \r\n  <div><a routerLink=\"/\">LOGO</a></div>\r\n\r\n  <div fxFlex fxLayout fxLayoutAlign=\"flex-end\" fxHide.xs >\r\n      <ul fxLayout fxLayoutGap=\"10px\" class=\"navigation-items\">\r\n        <li *ngIf=\"isAuth\">Hi <a routerLink=\"/profile\"><u>{{ displayName }}</u></a>!</li>\r\n        <li *ngIf=\"!isAuth\"><a routerLink=\"/signup\">Signup</a></li>\r\n        <li *ngIf=\"!isAuth\"><a routerLink=\"/login\">Login</a></li>\r\n        <li><a routerLink=\"/models\">Models</a></li>\r\n        <li *ngIf=\"isAuth && isModel\"><a routerLink=\"/member/session\">Session</a></li>\r\n        <li *ngIf=\"isAuth\" class=\"logout\" (click)=\"onLogout()\"><a>Logout</a></li>\r\n        <li>v 0.19.2320</li>\r\n    </ul>\r\n  </div>\r\n</mat-toolbar>"
+module.exports = "<mat-toolbar color=\"primary\">\r\n          \r\n  <div>\r\n      <button mat-icon-button (click)=\"onToggleSidebar()\">\r\n      <mat-icon>menu</mat-icon>\r\n  </button></div>\r\n  \r\n  <div><a routerLink=\"/\">LOGO</a></div>\r\n\r\n  <div fxFlex fxLayout fxLayoutAlign=\"flex-end\" fxHide.xs >\r\n      <ul fxLayout fxLayoutGap=\"10px\" class=\"navigation-items\">\r\n        <li *ngIf=\"isAuth\">Hi <a routerLink=\"/profile\"><u>{{ displayName }}</u></a>!</li>\r\n        <li *ngIf=\"!isAuth\"><a routerLink=\"/signup\">Signup</a></li>\r\n        <li *ngIf=\"!isAuth\"><a routerLink=\"/login\">Login</a></li>\r\n        <li><a routerLink=\"/models\">Models</a></li>\r\n        <li *ngIf=\"isAuth && isModel\"><a routerLink=\"/member/session\">Session</a></li>\r\n        <li *ngIf=\"isAuth\" class=\"logout\" (click)=\"onLogout()\"><a>Logout</a></li>\r\n    </ul>\r\n  </div>\r\n</mat-toolbar>"
 
 /***/ }),
 
@@ -2323,7 +2493,7 @@ module.exports = ".welcome {\r\n    text-align: center;\r\n}\r\n/*# sourceMappin
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"welcome\" fxLayout=\"column\" fxLayout.gt-md=\"row\" fxLayoutGap.gt-md=\"20px\" fxLayoutAlign=\"center center center\">\r\n  <section>\r\n    <h1>Welcome</h1>\r\n    <p>hi</p>\r\n  </section>\r\n  <section>\r\n    <h1>Welcome</h1>\r\n    <p>there</p>\r\n  </section>\r\n  <section>\r\n    <h1>Welcome</h1>\r\n    <p>How are you</p>\r\n  </section>   \r\n</div>"
+module.exports = "<div class=\"welcome\" fxLayout=\"column\" fxLayout.gt-md=\"row\" fxLayoutGap.gt-md=\"20px\" fxLayoutAlign=\"center center center\">\r\n  <section>\r\n    <h1>Alpha69 NG</h1>\r\n    <p>version {{version}}</p>\r\n  </section>\r\n\r\n</div>"
 
 /***/ }),
 
@@ -2338,6 +2508,7 @@ module.exports = "<div class=\"welcome\" fxLayout=\"column\" fxLayout.gt-md=\"ro
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "WelcomeComponent", function() { return WelcomeComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var src_environments_environment__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! src/environments/environment */ "./src/environments/environment.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -2348,10 +2519,12 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
+
 var WelcomeComponent = /** @class */ (function () {
     function WelcomeComponent() {
     }
     WelcomeComponent.prototype.ngOnInit = function () {
+        this.version = src_environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].version;
     };
     WelcomeComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
@@ -2390,7 +2563,8 @@ var environment = {
         projectId: 'alpha69-ng',
         storageBucket: 'alpha69-ng.appspot.com',
         messagingSenderId: '964085174298'
-    }
+    },
+    version: '0.20.2359'
 };
 /*
  * For easier debugging in development mode, you can import the following file
@@ -2440,7 +2614,7 @@ Object(_angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_1__["platformB
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\jpcop\code\alpha69-ng\src\main.ts */"./src/main.ts");
+module.exports = __webpack_require__(/*! C:\Users\jaxcph\code\alpha69-ng\src\main.ts */"./src/main.ts");
 
 
 /***/ })

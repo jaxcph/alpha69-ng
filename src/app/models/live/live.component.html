@@ -1,3 +1,62 @@
-<p>
-  live works!
-</p>
+<section class='page-title'>
+    <h3 *ngIf="model">Live with {{model.session.modelName}}</h3>
+</section>
+
+<section class="content">
+ missing PPM handling and transaction safe tipping
+<mat-accordion class="accordion" multi="true" fxLayout="row wrap" fxLayoutGap="10px">
+
+  <mat-expansion-panel  *ngIf="wallet" fxFlex.xs="100%" fxFlex="400px" expanded>
+      <mat-expansion-panel-header>
+          <mat-panel-title>
+              Wallet
+          </mat-panel-title>
+          <mat-panel-description>
+              &nbsp; 
+              <mat-icon>attach_money</mat-icon>
+          </mat-panel-description>
+       </mat-expansion-panel-header>
+      
+       <p class="wallet-balance-label">Balance</p>
+       <p class="wallet-balance">
+          {{wallet.balance}} <img src="https://firebasestorage.googleapis.com/v0/b/alpha69-ng.appspot.com/o/images%2Fcoin32.png?alt=media&token=f4b3f892-a7d1-4908-a2c5-54d3dbd02b22">
+      </p>
+    
+
+      <form fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px" #tipform="ngForm" (ngSubmit)="onTip(tipform)">
+
+          <mat-form-field>
+            <input type="number" matInput placeholder="tip amount" ngModel name="amount" required/>
+            <mat-hint align="end">minimum tip amount: {{model.session.minTipAmount? model.session.minTipAmount : 1}}</mat-hint>
+          </mat-form-field>
+      
+          <mat-form-field>
+            <input type="text" matInput placeholder="tip message" ngModel name="message" maxlength="140" />
+          </mat-form-field>
+      
+          <button type="submit" mat-raised-button color="primary" [disabled]="tipform.invalid ||
+            (tipform.value.amount > wallet.balance) ||
+            (tipform.value.amount < (model.session.minTipAmount? model.session.minTipAmount : 1) )">Tip</button>
+
+      </form>
+  </mat-expansion-panel>
+
+  <mat-expansion-panel  *ngIf="transactions" fxFlex.xs="100%" fxFlex="600px" expanded>
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                Tip wall
+            </mat-panel-title>
+            <mat-panel-description>
+                &nbsp; 
+                <mat-icon>attach_money</mat-icon>
+            </mat-panel-description>
+         </mat-expansion-panel-header>
+        
+         <ul class="tipwall-list">
+             <li *ngFor="let trans of transactions">{{trans.dt.toDate() | date: 'hh:mm:ss'}}, {{trans.nme}}: {{trans.amt}} {{trans.msg? trans.msg : ""}}</li>
+         </ul>
+    </mat-expansion-panel>
+
+</mat-accordion>
+
+</section>

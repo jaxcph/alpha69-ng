@@ -1,0 +1,46 @@
+mat-form-field {
+    width: 300px;
+  }
+
+
+  .page-title{
+    text-align: center
+  }
+  .accordion .mat-expansion-panel-header-title, 
+  .accordion .mat-expansion-panel-header-description {
+    flex-basis: 0;
+  }
+  
+  .accordion .mat-expansion-panel-header-description {
+    justify-content: space-between;
+    align-items: center;
+  }
+  mat-expansion-panel {
+    margin: 5px 5px 5px 5px;
+   }
+  
+ .content {
+     padding-left: 5px;
+     padding-right:5px;
+     padding-bottom: 10px;
+  
+   }
+
+   .wallet-balance {
+    font-size: 36pt;
+    font-weight: normal;
+    text-align: center;
+    margin:10px;
+   }
+
+   .wallet-balance-label {
+    font-size: 12pt;
+    font-weight: bold;
+    text-align: center;
+    margin:0px;
+   }
+
+   .tipwall-list {
+     list-style-type: none;
+     font-size: 10pt;
+   }
