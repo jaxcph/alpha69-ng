@@ -8,7 +8,6 @@ mat-form-field {
 
 
   
-/* http://www.colorzilla.com/gradient-editor/ */
 
 .goal-meter {
     background: #e4f5fc;
@@ -65,3 +64,19 @@ mat-expansion-panel {
    padding-bottom: 10px;
 
  }
+
+ .tipwall-list {
+  list-style-type: none;
+  font-size: 10pt;
+ }
+
+.tipwall {
+  background: #ebe9f9;
+background: -moz-linear-gradient(-45deg, #ebe9f9 0%, #c1bfea 100%);
+background: -webkit-gradient(left top, right bottom, color-stop(0%, #ebe9f9), color-stop(100%, #c1bfea));
+background: -webkit-linear-gradient(-45deg, #ebe9f9 0%, #c1bfea 100%);
+background: -o-linear-gradient(-45deg, #ebe9f9 0%, #c1bfea 100%);
+background: -ms-linear-gradient(-45deg, #ebe9f9 0%, #c1bfea 100%);
+background: linear-gradient(135deg, #ebe9f9 0%, #c1bfea 100%);
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ebe9f9', endColorstr='#c1bfea', GradientType=1 );
+}

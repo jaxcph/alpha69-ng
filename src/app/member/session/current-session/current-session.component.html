@@ -224,6 +224,41 @@
                       </div>
 
                     </mat-expansion-panel>
+
+
+                    <mat-expansion-panel  *ngIf="transactions" fxFlex.xs="100%" fxFlex="400px" expanded class="tipwall">
+                            <mat-expansion-panel-header>
+                                <mat-panel-title>
+                                    Tip wall
+                                </mat-panel-title>
+                                <mat-panel-description>
+                                    &nbsp; 
+                                    <mat-icon>attach_money</mat-icon>
+                                </mat-panel-description>
+                             </mat-expansion-panel-header>
+                             <mat-form-field>
+                                    <input type="number" matInput placeholder="number of transaction" [ngModel]="showNumberOfTransaction" />
+                                </mat-form-field>
+                             <ul class="tipwall-list">
+                                 <li *ngFor="let trans of transactions">{{trans.ppm ? "PPM - ": ""}}{{trans.dt.toDate() | date: 'hh:mm:ss'}}, {{trans.nme}}: {{trans.amt}} {{trans.msg? trans.msg : ""}}</li>
+                             </ul>
+                        </mat-expansion-panel>
+
+
+                        <mat-expansion-panel  *ngIf="viewers" fxFlex.xs="100%" fxFlex="400px" expanded class="viewers">
+                                <mat-expansion-panel-header>
+                                    <mat-panel-title>
+                                        Viewers
+                                    </mat-panel-title>
+                                    <mat-panel-description>
+                                        &nbsp; 
+                                        
+                                    </mat-panel-description>
+                                 </mat-expansion-panel-header>
+                                 <ul class="viewer-list">
+                                     <li *ngFor="let v of viewers">{{v.nme}}</li>
+                                 </ul>
+                            </mat-expansion-panel>
 </mat-accordion>
 
 </section>

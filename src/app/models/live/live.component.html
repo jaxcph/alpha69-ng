@@ -3,10 +3,10 @@
 </section>
 
 <section class="content">
- missing PPM handling and transaction safe tipping
+
 <mat-accordion class="accordion" multi="true" fxLayout="row wrap" fxLayoutGap="10px">
 
-  <mat-expansion-panel  *ngIf="wallet" fxFlex.xs="100%" fxFlex="400px" expanded>
+  <mat-expansion-panel  *ngIf="wallet && model" fxFlex.xs="100%" fxFlex="400px" expanded>
       <mat-expansion-panel-header>
           <mat-panel-title>
               Wallet
@@ -52,7 +52,7 @@
 
   </mat-expansion-panel>
 
-  <mat-expansion-panel  *ngIf="transactions" fxFlex.xs="100%" fxFlex="400px" expanded>
+  <mat-expansion-panel  *ngIf="transactions" fxFlex.xs="100%" fxFlex="400px" expanded class="tipwall">
         <mat-expansion-panel-header>
             <mat-panel-title>
                 Tip wall
@@ -67,6 +67,47 @@
              <li *ngFor="let trans of transactions">{{trans.ppm ? "PPM - ": ""}}{{trans.dt.toDate() | date: 'hh:mm:ss'}}, {{trans.nme}}: {{trans.amt}} {{trans.msg? trans.msg : ""}}</li>
          </ul>
     </mat-expansion-panel>
+
+
+    <mat-expansion-panel  *ngIf="goal" fxFlex.xs="100%" fxFlex="400px" expanded class="goal-meter">
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    Goal Meter
+                </mat-panel-title>
+                <mat-panel-description>
+                    {{goalCollectedPct}}% ({{goal.collected}}t / {{goal.amount}}t)&nbsp; 
+                    <mat-progress-spinner
+                    color="primary"
+                    mode="determinate"
+                    [value]="goalCollectedPct"
+                    strokeWidth=3
+                    diameter=20>
+                 </mat-progress-spinner>
+                </mat-panel-description>
+            </mat-expansion-panel-header>
+            
+            <div>
+                <table>
+                    <tr>
+                    <td>
+                        <mat-progress-spinner
+                        color="primary"
+                        mode="determinate"
+                        [value]="goalCollectedPct"
+                        strokeWidth=10
+                        diameter=80>
+                     </mat-progress-spinner></td>
+                    
+                    <td style="font-size: 48pt">{{goalCollectedPct}}%</td>
+                    <td style="font-size: 11pt;font-weight: normal;text-align: center;padding-left:10px">{{goal.collected}}<br/>out of<br/>{{goal.amount}} <img src="https://firebasestorage.googleapis.com/v0/b/alpha69-ng.appspot.com/o/images%2Fcoin16.png?alt=media&token=45502c9f-a9d4-4c2e-9671-aa92141db4f5"></td>
+                </tr>
+                <tr><td colspan="2" style="text-align:center;font-size:12pt;font-weight: bold">{{goal.descr}}</td></tr>
+                </table>
+            
+           
+            </div>
+            
+        </mat-expansion-panel>
 
 </mat-accordion>
 

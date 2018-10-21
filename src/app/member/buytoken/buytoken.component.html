@@ -1,0 +1,32 @@
+<section class="page-title">
+    <h1>Buy more tokens</h1>
+    <h3>TO BE DESIGNED, INCOMPLETE</h3>
+   </section>
+  
+  <section class="buy-form" *ngIf="wallet">
+    <form fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px" #f="ngForm" (ngSubmit)="onSubmit(f)">
+     
+      <p>Wallet balance: {{wallet.balance}}</p>
+      <p>Select amount of tokens to purchase:</p>
+       <mat-radio-group class="radio-group" ngModel name="tokens" required>
+              <mat-radio-button class="radio-button" value="200">200 Tokens for $19.99 (~$0.10 per token)</mat-radio-button>
+              <mat-radio-button class="radio-button" value="550">550 Tokens for $49.99 (~$0.09 per token)</mat-radio-button>
+              <mat-radio-button class="radio-button" value="1875">1875 Tokens for $149.99 (less than $0.08 per token)</mat-radio-button>
+              <mat-radio-button class="radio-button" value="3775">3775 Tokens for $299.99 (less than $0.08 per token)</mat-radio-button>
+              <mat-radio-button class="radio-button" value="7575">7575 Tokens for $599.99 (less than $0.08 per token)</mat-radio-button>
+          </mat-radio-group>
+    
+   
+      <button type="submit" mat-raised-button color="primary" [disabled]="f.invalid">Buy</button>
+    
+    </form>
+  </section>
+  
+  
+
+	
+	
+	
+
+
+(

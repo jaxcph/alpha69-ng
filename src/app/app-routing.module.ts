@@ -12,6 +12,7 @@ import { PastSessionComponent } from './member/session/past-session/past-session
 import { AccountComponent } from './member/account/account.component';
 import { LiveComponent } from './models/live/live.component';
 import { ModelsComponent } from './models/models.component';
+import { BuytokenComponent } from './member/buytoken/buytoken.component';
 
 
 
@@ -23,6 +24,7 @@ const routes: Routes = [
   { path: 'models/live', component: LiveComponent},
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]},
   { path: 'member/account', component: AccountComponent, canActivate: [AuthGuard]},
+  { path: 'member/buytoken', component: BuytokenComponent, canActivate: [AuthGuard]},
   { path: 'member/session', component: SessionComponent, canActivate: [AuthGuard]},
   { path: 'member/session/new', component: NewSessionComponent, canActivate: [AuthGuard]},
   { path: 'member/session/current', component: CurrentSessionComponent, canActivate: [AuthGuard]},

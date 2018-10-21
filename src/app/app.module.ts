@@ -36,6 +36,7 @@ import { YesNoDialogComponent } from 'src/app/common/yesno-dialog/yesno-dialog.c
 import { ModelsComponent } from './models/models.component';
 import { LiveComponent } from './models/live/live.component';
 import { OKDialogComponent } from './common/ok-dialog/ok-dialog.component';
+import { BuytokenComponent } from './member/buytoken/buytoken.component';
 
 
 
@@ -59,7 +60,8 @@ import { OKDialogComponent } from './common/ok-dialog/ok-dialog.component';
     YesNoDialogComponent,
     ModelsComponent,
     LiveComponent,
-    OKDialogComponent],
+    OKDialogComponent,
+    BuytokenComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

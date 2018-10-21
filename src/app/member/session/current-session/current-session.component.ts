@@ -28,6 +28,8 @@ export class CurrentSessionComponent implements OnInit, OnDestroy {
 
   public tipjar: Tipjar;
   public wallet: Wallet;
+  public transactions: any[];
+  public viewers: any[];
 
   public ppmUse: boolean;
   public ppmAmount: number;
@@ -36,7 +38,7 @@ export class CurrentSessionComponent implements OnInit, OnDestroy {
   public runtimeMinutes: number;
   public runtimeSeconds: number;
   public runtimeDays: number;
-
+  public showNumberOfTransaction: number;
   public clockHours: number;
   public clockMinutes: number;
   public timezone: string;
@@ -47,27 +49,51 @@ export class CurrentSessionComponent implements OnInit, OnDestroy {
   private tipjarSub: Subscription;
   private walletSub: Subscription;
   private clockSub: Subscription;
-
+  private transactionsSub: Subscription;
+  private viewersSub: Subscription;
 
   constructor(private db: AngularFirestore, private uiService: UIService, private ss: StreamService, private dialog: MatDialog) { }
 
   ngOnInit() {
-
+    this.showNumberOfTransaction = 30;
     this.runtimeHours = 0;
     this.runtimeMinutes = 0;
     this.clockHours = 0;
     this.clockMinutes = 0;
 
-    this.currentMemberSub = this.db.doc(`members/${localStorage.getItem('uid')}`).valueChanges().subscribe( (data: any) => {
+    this.currentMemberSub = this.db.doc(`members/${localStorage.getItem('uid')}`)
+    .valueChanges()
+    .subscribe( (data: any) => {
       this.session = {...data.session, created: data.session.created.toDate()   };
-      console.log(this.session);
+
+      this.viewersSub = this.db.collection('session-viewers', ref => ref.where('sid', '==' , this.session.id))
+        .valueChanges().subscribe( viewersdata => {
+          this.viewers = viewersdata;
+        });
+
+      this.transactionsSub =
+        this.db.collection('session-tips', ref => ref
+                .where('sid', '==' , this.session.id)
+                .where('ppm', '==' , false)
+                .orderBy('dt')
+                .limit(this.showNumberOfTransaction))
+        .valueChanges()
+        .subscribe( (items: any) => {
+            this.transactions = items;
+          });
     });
 
     this.goalSub = this.db.doc(`session-goals/${localStorage.getItem('uid')}`)
     .valueChanges()
     .subscribe( (data: StreamSessionGoal) => {
+
       this.goal = data;
-      this.goalCollectedPct = Number(((this.goal.collected / this.goal.amount) * 100).toFixed(1));
+
+      if (this.goal) {
+        this.goalCollectedPct = Number(((this.goal.collected / this.goal.amount) * 100).toFixed(1));
+      } else {
+        this.goalCollectedPct = 0;
+      }
 
     });
 
@@ -77,11 +103,12 @@ export class CurrentSessionComponent implements OnInit, OnDestroy {
       this.tipjar = data;
     });
 
-    this.tipjarSub = this.db.doc(`member-wallets/${localStorage.getItem('uid')}`)
+    this.walletSub = this.db.doc(`member-wallets/${localStorage.getItem('uid')}`)
     .valueChanges()
     .subscribe( (data: Wallet) => {
       this.wallet = data;
     });
+
 
     this.timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
     const source = interval(1000);
@@ -90,6 +117,7 @@ export class CurrentSessionComponent implements OnInit, OnDestroy {
           this.calculateTimes();
       }
     });
+
   }
 
   private calculateTimes() {
@@ -124,10 +152,8 @@ export class CurrentSessionComponent implements OnInit, OnDestroy {
       if (scope === 'session.useGoal') {
 
         if (this.session.useGoal === false) {
-            this.db.doc(`session-goals/${localStorage.getItem('uid')}`).delete().then( () => {
-
-            });
-            this.goal = null;
+            this.db.doc(`session-goals/${localStorage.getItem('uid')}`).delete();
+         //   this.goal = null;
         }
 
         if (this.session.useGoal === true && (this.goal === null || this.goal === undefined)) {
@@ -223,6 +249,9 @@ export class CurrentSessionComponent implements OnInit, OnDestroy {
     if (this.tipjarSub) { this.tipjarSub.unsubscribe(); }
     if (this.walletSub) {this.walletSub.unsubscribe(); }
     if (this.clockSub) {this.clockSub.unsubscribe(); }
+    if (this.transactionsSub) {this.transactionsSub.unsubscribe(); }
+    if (this.viewersSub) {this.viewersSub.unsubscribe(); }
+
   }
 
 }

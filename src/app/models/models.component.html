@@ -15,7 +15,7 @@
           <p>
               {{m.model.aboutMe?m.model.aboutMe : "&nbsp;"}}
           </p>
-          <div class="ppm" *ngIf="m.session.usePpm && m.session && m.session.ppm && m.session.ppm.amount>0">
+          <div class="ppm" *ngIf="m.session && m.session.usePpm && m.session.ppm && m.session.ppm.amount>0">
             <label class="ppm-label">Pay Per Minute:</label><span class="ppm-value">{{m.session.ppm.amount}} token</span>
           </div>
         </mat-card-content>

@@ -21,15 +21,7 @@ export class SignupComponent implements OnInit, OnDestroy {
 
   onSubmit(form: NgForm) {
 
-   /* let ok = false;
-
-    if (form.value.agreeMember === true && form.value.agree18yo === true ) {
-
-      if (form.value.isModel === true && form.value.agreeModel === true ) {
-        ok = true;
-      }
-    }*/
-    this.authService.signUp( form.value.email,
+     this.authService.signUp( form.value.email,
        form.value.password,
        form.value.displayName,
        (form.value.isModel === true ? true : false),

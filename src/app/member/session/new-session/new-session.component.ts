@@ -47,7 +47,8 @@ export class NewSessionComponent implements OnInit, OnDestroy {
           useGoal: hasGoal,
           stream: this.stream.fetchNewStream(),
           created: new Date(),
-          agreedStream: form.value.agree ? true : false
+          agreedStream: form.value.agree ? true : false,
+          minTipAmount: form.value.minTipAmount
         }
       }).catch( error => {
         this.uiService.showSnackbarError(error);
@@ -63,7 +64,9 @@ export class NewSessionComponent implements OnInit, OnDestroy {
         .catch( error => {
           this.uiService.showSnackbarError(error);
         });
-      }
+     }
+
+     // this.db.collection('model-tipjars').doc(localStorage.getItem('uid')).snapshotChanges().take(1).do(d => d.payload.exists);
 
 
       this.uiService.showSnackbar('new session setup', null, 3000);

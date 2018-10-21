@@ -48,7 +48,6 @@ export interface StreamSessionGoal {
     collected: number;
     descr: string;
     doneFx: string;
-    tippers?: Tipper[];
 }
 
 export interface StreamSessionPPM {
@@ -60,17 +59,9 @@ export interface StreamConnection {
     key: string;
 }
 
-/*export interface BlockedMember {
-    nme: string;
-    why?: string;
-    dt: Date;
-
-}*/
-
 
 export interface Tipjar {
     balance: number;
-    tippers?: Tipper[];
 }
 
 export interface Wallet {

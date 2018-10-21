@@ -1,13 +1,12 @@
 import { Subscription, timer, Observable } from 'rxjs';
 import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
-import { Member } from 'src/app/member/member.model';
+import { Member, Tipjar, Wallet, StreamSessionGoal } from 'src/app/member/member.model';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/auth/auth.service';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { NgForm } from '@angular/forms';
 import { throwMatDialogContentAlreadyAttachedError } from '@angular/material';
 import { UIService } from 'src/app/common/ui.service';
-import { BaseOptions } from 'vm';
 
 @Component({
   selector: 'app-live',
@@ -20,13 +19,15 @@ export class LiveComponent implements OnInit, OnDestroy {
   public member: Member;
 
 
+  public goalCollectedPct: number;
 
-  public wallet:  any;
-  public goal: any;
+  public wallet:  Wallet;
+  public goal: StreamSessionGoal;
   public transactions: any[];
 
-  public tipjarShade: any;
-  public goalShade: any;
+  public tipjar: Tipjar;
+
+
   public sessionViewer: any;
   public paidPPm: number;
   public ppmMinutesLeft: number;
@@ -130,33 +131,24 @@ onTip(form: NgForm) {
     // set new balance
     const newBalance = this.wallet.balance - amount;
 
+    // check if has the money
     if (newBalance < 0) {
       return false;
     }
 
-
+    // update personal wallet
     this.db.doc(`member-wallets/${this.uid}`).update({balance: newBalance });
 
-    // set the users shade on the tipjar
+    // update tipjar
+    this.db.doc(`model-tipjars/${this.mid}`).update({balance: this.tipjar.balance + amount});
 
-    const tipjarShadeAmount = this.tipjarShade ? this.tipjarShade.amt + amount : amount;
-    if (this.tipjarShade) {
-      this.db.doc(`model-tipjars/${this.mid}/tippers/${this.uid}`).update({amt: tipjarShadeAmount, nme: this.member.displayName});
-    } else {
-      this.db.doc(`model-tipjars/${this.mid}/tippers/${this.uid}`).set({amt: tipjarShadeAmount, nme: this.member.displayName});
-    }
-
-    // set the users shade on the goal, if there is goal for this session
+    // update the goal
     if (this.model.session.useGoal && this.goal) {
-      const goalShadeAmount = this.goalShade ? this.goalShade.amount + amount : amount;
-      if (this.goalShade) {
-        this.db.doc(`session-goals/${this.mid}/tippers/${this.uid}`).update({amt: goalShadeAmount, nme: this.member.displayName});
-      } else {
-        this.db.doc(`session-goals/${this.mid}/tippers/${this.uid}`).set({amt: goalShadeAmount, nme: this.member.displayName});
-      }
+      this.db.doc(`session-goals/${this.mid}`).update({collected: this.goal.collected + amount});
     }
 
-    // transactions
+
+    // record transaction
     if (message) {
       this.db.collection('session-tips').add( {
             dt: new Date(),
@@ -178,9 +170,9 @@ onTip(form: NgForm) {
           });
     }
 
+    // calculate ppm info
     if (isPpm) {
       this.paidPPm += amount;
-
     }
 
     if (this.model.session.usePpm && this.model.session.ppm && this.model.session.ppm.amount > 0)  {
@@ -202,7 +194,8 @@ onTip(form: NgForm) {
   }*/
 
   onBuyToken(m: Member) {
-
+    localStorage.setItem('buytoken.return.mid', this.mid);
+    this.router.navigate(['/member/buytoken']);
   }
 
 // /////////////////////////////////////////////////////////
@@ -211,6 +204,7 @@ onTip(form: NgForm) {
     this.showNumberOfTransaction = 30;
     this.uid = localStorage.getItem('uid');
     this.mid = localStorage.getItem('mid');
+    localStorage.removeItem('buytoken.return.mid');
 
     this.startTimer(10000, 59800); // delay 15 secs initial, to allow user to leave and objects to load also . calc with 200msec delay
 
@@ -275,43 +269,35 @@ onTip(form: NgForm) {
     this.subs$.push(
       this.db.doc(`member-wallets/${this.uid}`)
       .valueChanges()
-      .subscribe( (data: any) => {
+      .subscribe( (data: Wallet) => {
          this.wallet = data;
          console.log('WALLET=');
          console.log(this.wallet);
          })
     );
 
-    // users personal wallet
+    // users goal
     this.subs$.push(
       this.db.doc(`session-goals/${this.mid}`)
       .valueChanges()
-      .subscribe( (data: any) => {
+      .subscribe( (data: StreamSessionGoal) => {
           this.goal = data;
-          console.log('GOAL=');
-          console.log(this.goal);
+          if (this.goal) {
+            this.goalCollectedPct = Number(((this.goal.collected / this.goal.amount) * 100).toFixed(1));
+          } else {
+            this.goalCollectedPct = 0;
+          }
           })
     );
 
-    // tipjar shade
+    // tipjar
     this.subs$.push(
-      this.db.doc(`model-tipjars/${this.mid}/tippers/${this.uid}`)
+      this.db.doc(`model-tipjars/${this.mid}`)
       .valueChanges()
-      .subscribe( (data: any) => {
-         this.tipjarShade = data;
-         console.log('TIPJAR-SHADE=');
-         console.log(this.tipjarShade);
-         })
-    );
-
-    // goal shade
-    this.subs$.push(
-      this.db.doc(`session-goals/${this.mid}/tippers/${this.uid}`)
-      .valueChanges()
-      .subscribe( (data: any) => {
-         this.goalShade = data;
-         console.log('GOAL-SHADE=');
-         console.log(this.goalShade);
+      .subscribe( (data: Tipjar) => {
+         this.tipjar = data;
+         console.log('TIPJAR=');
+         console.log(this.tipjar);
          })
     );
   }
