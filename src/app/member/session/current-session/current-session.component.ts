@@ -124,7 +124,9 @@ export class CurrentSessionComponent implements OnInit, OnDestroy {
       if (scope === 'session.useGoal') {
 
         if (this.session.useGoal === false) {
-            this.db.doc(`session-goals/${localStorage.getItem('uid')}`).delete();
+            this.db.doc(`session-goals/${localStorage.getItem('uid')}`).delete().then( () => {
+
+            });
             this.goal = null;
         }
 

@@ -8,6 +8,7 @@ export interface Member {
     agreeMember: boolean;
     agree18yo: boolean;
     created: Date;
+    blocked?: string[];
  }
 
  export interface Model {
@@ -18,6 +19,7 @@ export interface Member {
      listingImg?: string;
      subtitle?: string;
      aboutMe?: string;
+
  }
 
  export interface StreamSession {
@@ -36,12 +38,17 @@ export interface Member {
     agreedStream: boolean;
 }
 
+export interface Tipper {
+    amt: number;
+    nme: string;
+}
 
 export interface StreamSessionGoal {
     amount: number;
     collected: number;
     descr: string;
     doneFx: string;
+    tippers?: Tipper[];
 }
 
 export interface StreamSessionPPM {
@@ -53,8 +60,17 @@ export interface StreamConnection {
     key: string;
 }
 
+/*export interface BlockedMember {
+    nme: string;
+    why?: string;
+    dt: Date;
+
+}*/
+
+
 export interface Tipjar {
     balance: number;
+    tippers?: Tipper[];
 }
 
 export interface Wallet {

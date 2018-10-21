@@ -44,3 +44,18 @@ mat-form-field {
      list-style-type: none;
      font-size: 10pt;
    }
+
+   .ppm {
+     text-align: center;
+   }
+
+   .ppm-label {
+    font-size: 12pt;
+   }
+
+   .ppm-charge {
+    font-size: 10pt;
+   }
+   .ppm-left {
+    font-size: 10pt;
+   }

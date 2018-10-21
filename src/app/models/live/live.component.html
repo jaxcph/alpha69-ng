@@ -20,8 +20,14 @@
        <p class="wallet-balance-label">Balance</p>
        <p class="wallet-balance">
           {{wallet.balance}} <img src="https://firebasestorage.googleapis.com/v0/b/alpha69-ng.appspot.com/o/images%2Fcoin32.png?alt=media&token=f4b3f892-a7d1-4908-a2c5-54d3dbd02b22">
+          
       </p>
     
+      <section class="ppm" *ngIf="model && model.session && model.session.usePpm">
+          <p class="ppm-label">Pay-Per-Minute is Enabled</p>
+          <p class="ppm-charge">You will be charged {{model.session.ppm.amount}} per minute.</p>
+          <p class="ppm-left" *ngIf="ppmMinutesLeft!=-1">{{ppmMinutesLeft}} minutes left on PPM</p>
+      </section>
 
       <form fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px" #tipform="ngForm" (ngSubmit)="onTip(tipform)">
 
@@ -34,14 +40,19 @@
             <input type="text" matInput placeholder="tip message" ngModel name="message" maxlength="140" />
           </mat-form-field>
       
-          <button type="submit" mat-raised-button color="primary" [disabled]="tipform.invalid ||
+          <section class="wallet-action-section" fxLayoutGap="20px">
+          <button type="submit" mat-raised-button color="accent" [disabled]="tipform.invalid ||
             (tipform.value.amount > wallet.balance) ||
             (tipform.value.amount < (model.session.minTipAmount? model.session.minTipAmount : 1) )">Tip</button>
-
+            <button mat-raised-button color="primary" (click)="onBuyToken(m)">Buy</button>
+          </section>
       </form>
+
+     
+
   </mat-expansion-panel>
 
-  <mat-expansion-panel  *ngIf="transactions" fxFlex.xs="100%" fxFlex="600px" expanded>
+  <mat-expansion-panel  *ngIf="transactions" fxFlex.xs="100%" fxFlex="400px" expanded>
         <mat-expansion-panel-header>
             <mat-panel-title>
                 Tip wall
@@ -53,7 +64,7 @@
          </mat-expansion-panel-header>
         
          <ul class="tipwall-list">
-             <li *ngFor="let trans of transactions">{{trans.dt.toDate() | date: 'hh:mm:ss'}}, {{trans.nme}}: {{trans.amt}} {{trans.msg? trans.msg : ""}}</li>
+             <li *ngFor="let trans of transactions">{{trans.ppm ? "PPM - ": ""}}{{trans.dt.toDate() | date: 'hh:mm:ss'}}, {{trans.nme}}: {{trans.amt}} {{trans.msg? trans.msg : ""}}</li>
          </ul>
     </mat-expansion-panel>
 

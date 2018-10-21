@@ -15,12 +15,16 @@
           <p>
               {{m.model.aboutMe?m.model.aboutMe : "&nbsp;"}}
           </p>
-          <div class="ppm" *ngIf="m.session && m.session.ppm && m.session.ppm.amount>0">
+          <div class="ppm" *ngIf="m.session.usePpm && m.session && m.session.ppm && m.session.ppm.amount>0">
             <label class="ppm-label">Pay Per Minute:</label><span class="ppm-value">{{m.session.ppm.amount}} token</span>
           </div>
         </mat-card-content>
         <mat-card-actions>
 
+        <ng-container *ngIf="analyzeJoinOption(m) =='blocked'">
+            <button mat-stroked-button class="live-button" color="link" (click)="onBlocked(m)">BLOCKED</button>
+        </ng-container>
+    
         <ng-container *ngIf="analyzeJoinOption(m) =='join'">
             <button mat-raised-button class="live-button" color="accent" (click)="onJoin(m)">JOIN</button>
         </ng-container>

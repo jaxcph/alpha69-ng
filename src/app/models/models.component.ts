@@ -61,29 +61,58 @@ export class ModelsComponent implements OnInit, OnDestroy {
   }
 
   analyzeJoinOption(m: Member): string {
+
     if (m.session) {
-      if ( m.session.accessType === 'public') {
-        return 'join';
-      } else if (m.session.accessType === 'member' ) {
-          return this.auth.isAuth() ? 'join' : 'login';
-      } else if (m.session.accessType === 'onrequest') {
-        return this.auth.isAuth() ? 'onrequest' : 'login';
-      } else if (m.session.accessType === 'level') {
-          if ( !this.auth.isAuth() ) {
-            return 'login';
-          } else {
-            return this.currentMember.level >= m.session.minLevel ? 'join' : 'lowscore';
-         }
+
+      if (this.isBlocked(m)) {
+        return 'blocked';
+      } else {
+          if ( m.session.accessType === 'public') {
+            return 'join';
+          } else if (m.session.accessType === 'member' ) {
+              return this.auth.isAuth() ? 'join' : 'login';
+          } else if (m.session.accessType === 'onrequest') {
+            return this.auth.isAuth() ? 'onrequest' : 'login';
+          } else if (m.session.accessType === 'level') {
+              if ( !this.auth.isAuth() ) {
+                return 'login';
+              } else {
+                return this.currentMember.level >= m.session.minLevel ? 'join' : 'lowscore';
+            }
+          }
       }
     } else {
       return 'none';
     }
   }
 
+  isBlocked(m: Member) {
+    const key = `${localStorage.getItem('uid')}/`;
+    if (m.blocked) {
+      for (const b of m.blocked) {
+        if ( b.startsWith(key) ) {
+          return true;
+        }
+      }
+    } else {
+      return false;
+    }
+  }
+
+  onBlocked(m: Member)  {
+    const dialogRef = this.dialog.open(OKDialogComponent, {
+      data: {
+         title: 'Information',
+         content: `${m.session.modelName} is streaming Live, but has blocked your access`,
+         okLabel: 'OK'
+        }
+    });
+  }
+
   onJoin(m: Member) {
 
 
-    if (m.session.ppm && m.session.ppm.amount > 0) {
+    if (m.session.usePpm && m.session.ppm && m.session.ppm.amount > 0) {
 
       const dialogRef = this.dialog.open(YesNoDialogComponent, {
         data: {
