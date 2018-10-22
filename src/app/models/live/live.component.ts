@@ -206,7 +206,7 @@ onTip(form: NgForm) {
     this.mid = localStorage.getItem('mid');
     localStorage.removeItem('buytoken.return.mid');
 
-    this.startTimer(10000, 59800); // delay 15 secs initial, to allow user to leave and objects to load also . calc with 200msec delay
+    this.startTimer(5000, 59800); // delay 15 secs initial, to allow user to leave and objects to load also . calc with 200msec delay
 
    // this user
     this.subs$.push(

@@ -1,11 +1,11 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { Member, StreamSession, StreamSessionGoal, Tipjar, Wallet } from '../../member.model';
+import { Member, StreamSession, StreamSessionGoal, Tipjar, Wallet, MemberBlock, Viewer } from '../../member.model';
 import { Subscription, interval } from 'rxjs';
 import { NgForm } from '@angular/forms';
 import { UIService } from 'src/app/common/ui.service';
 import { NumberFormatStyle } from '@angular/common';
-import { MatSlideToggleChange } from '@angular/material';
+import { MatSlideToggleChange, MatTableDataSource } from '@angular/material';
 import { StreamService } from '../stream.service';
 import { MatDialog } from '@angular/material';
 import { YesNoDialogComponent } from 'src/app/common/yesno-dialog/yesno-dialog.component';
@@ -19,8 +19,6 @@ import { YesNoDialogComponent } from 'src/app/common/yesno-dialog/yesno-dialog.c
 export class CurrentSessionComponent implements OnInit, OnDestroy {
 
 
-
-
   public session: StreamSession;
 
   public goal: StreamSessionGoal;
@@ -30,6 +28,11 @@ export class CurrentSessionComponent implements OnInit, OnDestroy {
   public wallet: Wallet;
   public transactions: any[];
   public viewers: any[];
+
+  public viewersDs: MatTableDataSource<Viewer>;
+
+  public blocked: MemberBlock[];
+  public currentMember: any;
 
   public ppmUse: boolean;
   public ppmAmount: number;
@@ -51,6 +54,7 @@ export class CurrentSessionComponent implements OnInit, OnDestroy {
   private clockSub: Subscription;
   private transactionsSub: Subscription;
   private viewersSub: Subscription;
+  private blockedSub: Subscription;
 
   constructor(private db: AngularFirestore, private uiService: UIService, private ss: StreamService, private dialog: MatDialog) { }
 
@@ -64,11 +68,22 @@ export class CurrentSessionComponent implements OnInit, OnDestroy {
     this.currentMemberSub = this.db.doc(`members/${localStorage.getItem('uid')}`)
     .valueChanges()
     .subscribe( (data: any) => {
+      this.currentMember = data;
       this.session = {...data.session, created: data.session.created.toDate()   };
 
+      this.blockedSub = this.db.collection('model-blocked', ref => ref.where('mid', '==', localStorage.getItem('uid')))
+      .valueChanges().subscribe( (blockdata: MemberBlock[]) => {
+        this.blocked = blockdata;
+        console.log(blockdata);
+      });
+
       this.viewersSub = this.db.collection('session-viewers', ref => ref.where('sid', '==' , this.session.id))
-        .valueChanges().subscribe( viewersdata => {
-          this.viewers = viewersdata;
+        .valueChanges().subscribe( (viewersdata: Viewer[]) => {
+          console.log(viewersdata.length > 0);
+          if (viewersdata) {
+            this.viewers = viewersdata;
+            this.viewersDs = new MatTableDataSource<Viewer>(viewersdata);
+          }
         });
 
       this.transactionsSub =
@@ -239,6 +254,10 @@ export class CurrentSessionComponent implements OnInit, OnDestroy {
   }
 
 
+  onViewerBlock(viewer: any) {
+    console.log('onViewerBlock:');
+    console.log(viewer);
+  }
 
 
 
@@ -251,6 +270,7 @@ export class CurrentSessionComponent implements OnInit, OnDestroy {
     if (this.clockSub) {this.clockSub.unsubscribe(); }
     if (this.transactionsSub) {this.transactionsSub.unsubscribe(); }
     if (this.viewersSub) {this.viewersSub.unsubscribe(); }
+    if (this.blockedSub) {this.blockedSub.unsubscribe(); }
 
   }
 

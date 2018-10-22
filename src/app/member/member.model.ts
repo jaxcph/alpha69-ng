@@ -1,3 +1,4 @@
+
 export interface Member {
     id: string;
     displayName: string;
@@ -66,4 +67,18 @@ export interface Tipjar {
 
 export interface Wallet {
     balance: number;
+}
+
+
+export interface MemberBlock {
+    mid: string;
+    uid: string;
+    why: string;
+}
+
+export interface Viewer {
+    sid: string;
+    nme: string;
+    startDt: Date;
+    aliveDt: Date;
 }

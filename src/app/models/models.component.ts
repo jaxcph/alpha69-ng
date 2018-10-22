@@ -2,7 +2,7 @@ import { Router } from '@angular/router';
 import { AuthService } from 'src/app/auth/auth.service';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Member } from '../member/member.model';
+import { Member, MemberBlock } from '../member/member.model';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -23,6 +23,9 @@ export class ModelsComponent implements OnInit, OnDestroy {
 
   private modelsSub: Subscription;
   private currentMemberSub: Subscription;
+  private myBlocks: MemberBlock[];
+  private myBlocksSub: Subscription;
+
 
   constructor(private db: AngularFirestore, private auth: AuthService, private router: Router, private dialog: MatDialog) { }
 
@@ -48,7 +51,14 @@ export class ModelsComponent implements OnInit, OnDestroy {
       }))
       .subscribe( (data: Member[]) => {
         this.models = data;
-        console.log(data);
+
+        this.myBlocksSub = this.db.collection('model-blocked', ref => ref.where('uid', '==', localStorage.getItem('uid')))
+        .valueChanges()
+        .subscribe( (blockdata: MemberBlock[]) => {
+          this.myBlocks = blockdata;
+        });
+
+
       }, error => {
         console.error(error);
       });
@@ -87,23 +97,33 @@ export class ModelsComponent implements OnInit, OnDestroy {
   }
 
   isBlocked(m: Member) {
-    const key = `${localStorage.getItem('uid')}/`;
-    if (m.blocked) {
-      for (const b of m.blocked) {
-        if ( b.startsWith(key) ) {
-          return true;
-        }
+
+    if (this.myBlocks) {
+      for (const block of this.myBlocks) {
+         if ( block.mid === m.id ) {
+           return true;
+         }
       }
-    } else {
-      return false;
-    }
+    } else {return false; }
   }
 
   onBlocked(m: Member)  {
+
+    // find block reason
+    let reason: string;
+    if (this.myBlocks) {
+      for (const block of this.myBlocks) {
+         if ( block.mid === m.id ) {
+            reason = block.why;
+         }
+      }
+    }
+
+    // show messagebox
     const dialogRef = this.dialog.open(OKDialogComponent, {
       data: {
          title: 'Information',
-         content: `${m.session.modelName} is streaming Live, but has blocked your access`,
+         content: `${m.session.modelName} has blocked your access, with the reason "${reason}"`,
          okLabel: 'OK'
         }
     });
@@ -171,6 +191,8 @@ export class ModelsComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     if ( this.modelsSub ) { this.modelsSub.unsubscribe(); }
     if ( this.currentMemberSub) { this.currentMemberSub.unsubscribe(); }
+    if ( this.myBlocksSub) { this.myBlocksSub.unsubscribe(); }
+
   }
 
 }

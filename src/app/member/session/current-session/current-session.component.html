@@ -131,7 +131,7 @@
     <h1>Live metrics</h1>
 </section>
 
-<mat-accordion class="accordion" multi="true" fxLayout="row wrap" fxLayoutGap="10px">
+<mat-accordion class="accordion_live" multi="true" fxLayout="row wrap" fxLayoutGap="10px">
 
         <mat-expansion-panel  *ngIf="goal" fxFlex.xs="100%" fxFlex="400px" expanded class="goal-meter">
             <mat-expansion-panel-header>
@@ -162,10 +162,10 @@
                         diameter=80>
                      </mat-progress-spinner></td>
                     
-                    <td style="font-size: 48pt">{{goalCollectedPct}}%</td>
-                    <td style="font-size: 11pt;font-weight: normal;text-align: center;padding-left:10px">{{goal.collected}}<br/>out of<br/>{{goal.amount}} <img src="https://firebasestorage.googleapis.com/v0/b/alpha69-ng.appspot.com/o/images%2Fcoin16.png?alt=media&token=45502c9f-a9d4-4c2e-9671-aa92141db4f5"></td>
+                    <td style="font-size: 48pt;color:black">{{goalCollectedPct}}%</td>
+                    <td style="font-size: 11pt;font-weight: normal;text-align: center;padding-left:10px;color:black">{{goal.collected}}<br/>out of<br/>{{goal.amount}} <img src="https://firebasestorage.googleapis.com/v0/b/alpha69-ng.appspot.com/o/images%2Fcoin16.png?alt=media&token=45502c9f-a9d4-4c2e-9671-aa92141db4f5"></td>
                 </tr>
-                <tr><td colspan="2" style="text-align:center;font-size:12pt;font-weight: bold">{{goal.descr}}</td></tr>
+                <tr><td colspan="2" style="text-align:center;font-size:12pt;font-weight: bold;color:black">{{goal.descr}}</td></tr>
                 </table>
             
            
@@ -183,7 +183,7 @@
                         <mat-icon>attach_money</mat-icon>
                     </mat-panel-description>
                 </mat-expansion-panel-header>
-              <div style="font-size: 48pt;padding-top:30px;text-align: center;">
+              <div style="font-size: 48pt;padding-top:30px;text-align: center;color:black">
                 {{tipjar.balance}}  <img src="https://firebasestorage.googleapis.com/v0/b/alpha69-ng.appspot.com/o/images%2Fcoin32.png?alt=media&token=f4b3f892-a7d1-4908-a2c5-54d3dbd02b22">
               </div>
             </mat-expansion-panel>
@@ -199,7 +199,7 @@
                             <mat-icon>attach_money</mat-icon>
                         </mat-panel-description>
                     </mat-expansion-panel-header>
-                  <div style="font-size: 48pt;padding-top:30px;text-align: center;">
+                  <div style="font-size: 48pt;padding-top:30px;text-align: center;color:black">
                     {{wallet.balance}} <img src="https://firebasestorage.googleapis.com/v0/b/alpha69-ng.appspot.com/o/images%2Fcoin32.png?alt=media&token=f4b3f892-a7d1-4908-a2c5-54d3dbd02b22">
                   </div>
                 </mat-expansion-panel>
@@ -215,11 +215,11 @@
                             </mat-panel-description>
                         </mat-expansion-panel-header>
                      
-                        <div style="font-size: 48pt;padding-top:30px;text-align: center;">
+                        <div style="font-size: 48pt;padding-top:30px;text-align: center;color:black;">
                         <ng-container *ngIf="runtimeDays>0"> {{runtimeDays}}d </ng-container> {{runtimeHours}}h {{runtimeMinutes}}m
                       </div>
 
-                      <div style="font-size: 14pt;padding-top:30px;text-align: center;">
+                      <div style="font-size: 14pt;padding-top:30px;text-align: center;color:black;">
                         {{clockHours}}:{{clockMinutes}} {{timezone}} 
                       </div>
 
@@ -255,8 +255,44 @@
                                         
                                     </mat-panel-description>
                                  </mat-expansion-panel-header>
+
+                                 <table mat-table [dataSource]="viewersDs">
+                                        
+                                    <!-- Name Column -->
+                                    <ng-container matColumnDef="name">
+                                            <th mat-header-cell *matHeaderCellDef> Name </th>
+                                            <td mat-cell *matCellDef="let viewer"> {{viewer.nme}} </td>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="block-action">
+                                            <th mat-header-cell *matHeaderCellDef></th>
+                                            <td mat-cell *matCellDef="let viewer">
+                                                <button mat-button color="warn" (click)="onViewerBlock(viewer)">block</button>
+                                            </td>
+                                    </ng-container>
+                                      
+
+                                    <tr mat-header-row *matHeaderRowDef="['name','block-action']"></tr>
+                                    <tr mat-row *matRowDef="let row; columns: ['name','block-action'];"></tr>
+
+                                 </table>
+                                 
+                                 
+                            </mat-expansion-panel>
+
+
+                            <mat-expansion-panel  *ngIf="blocked" fxFlex.xs="100%" fxFlex="400px" expanded class="blocked">
+                                <mat-expansion-panel-header>
+                                    <mat-panel-title>
+                                        Blocked Users
+                                    </mat-panel-title>
+                                    <mat-panel-description>
+                                        &nbsp; 
+                                        
+                                    </mat-panel-description>
+                                 </mat-expansion-panel-header>
                                  <ul class="viewer-list">
-                                     <li *ngFor="let v of viewers">{{v.nme}}</li>
+                                     <li *ngFor="let b of blocked">{{b.nme}}, because : {{b.why}}</li>
                                  </ul>
                             </mat-expansion-panel>
 </mat-accordion>

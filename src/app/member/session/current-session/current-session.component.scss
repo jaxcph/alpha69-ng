@@ -45,6 +45,7 @@ mat-form-field {
 .page-title{
   text-align: center
 }
+
 .accordion .mat-expansion-panel-header-title, 
 .accordion .mat-expansion-panel-header-description {
   flex-basis: 0;
@@ -54,6 +55,22 @@ mat-form-field {
   justify-content: space-between;
   align-items: center;
 }
+
+
+.accordion_live .mat-expansion-panel-header-title, 
+.accordion_live .mat-expansion-panel-header-description {
+  flex-basis: 0;
+  color:black;
+}
+
+.accordion_live .mat-expansion-panel-header-description {
+  justify-content: space-between;
+  align-items: center;
+  color:black;
+}
+
+
+
 mat-expansion-panel {
   margin: 5px 5px 5px 5px;
  }
