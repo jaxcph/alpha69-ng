@@ -256,24 +256,33 @@
                                     </mat-panel-description>
                                  </mat-expansion-panel-header>
 
-                                 <table mat-table [dataSource]="viewersDs">
-                                        
-                                    <!-- Name Column -->
-                                    <ng-container matColumnDef="name">
-                                            <th mat-header-cell *matHeaderCellDef> Name </th>
-                                            <td mat-cell *matCellDef="let viewer"> {{viewer.nme}} </td>
-                                    </ng-container>
+                                 <table mat-table [dataSource]="viewersDs" >
+                                
+                                        <ng-container matColumnDef="name">
+                                                <th mat-header-cell *matHeaderCellDef>Name</th>
+                                                <td mat-cell *matCellDef="let viewer" class="viewer-table-td" >{{viewer.nme}} </td>
+                                        </ng-container>
 
-                                    <ng-container matColumnDef="block-action">
-                                            <th mat-header-cell *matHeaderCellDef></th>
-                                            <td mat-cell *matCellDef="let viewer">
-                                                <button mat-button color="warn" (click)="onViewerBlock(viewer)">block</button>
-                                            </td>
-                                    </ng-container>
-                                      
+                                  
+                                        <ng-container matColumnDef="startDt">
+                                            <th mat-header-cell *matHeaderCellDef>Start</th>
+                                            <td mat-cell *matCellDef="let viewer" class="viewer-table-td"> {{viewer.startDt.toDate() | date: 'HH:mm'}} </td>
+                                        </ng-container>
 
-                                    <tr mat-header-row *matHeaderRowDef="['name','block-action']"></tr>
-                                    <tr mat-row *matRowDef="let row; columns: ['name','block-action'];"></tr>
+                                        <ng-container matColumnDef="aliveDt">
+                                                <th mat-header-cell *matHeaderCellDef>Alive</th>
+                                                <td mat-cell *matCellDef="let viewer"  class="viewer-table-td"> {{viewer.aliveDt.toDate() | date: 'HH:mm'}} </td>
+                                        </ng-container>
+                                          
+                                
+                                        <ng-container matColumnDef="action">
+                                                <th mat-header-cell *matHeaderCellDef></th>
+                                                <td mat-cell *matCellDef="let viewer">
+                                                    <button mat-button color="warn" (click)="onViewerBlock(viewer)">block</button>
+                                                </td>
+                                        </ng-container>
+                                    <tr mat-header-row *matHeaderRowDef="['name','startDt','aliveDt','action']"></tr>
+                                    <tr mat-row *matRowDef="let row; columns: ['name','startDt','aliveDt','action'];"></tr>
 
                                  </table>
                                  
@@ -281,7 +290,7 @@
                             </mat-expansion-panel>
 
 
-                            <mat-expansion-panel  *ngIf="blocked" fxFlex.xs="100%" fxFlex="400px" expanded class="blocked">
+                            <mat-expansion-panel  *ngIf="blocked" fxFlex.xs="100%" fxFlex="400px" expanded class="blocked" >
                                 <mat-expansion-panel-header>
                                     <mat-panel-title>
                                         Blocked Users
@@ -291,9 +300,36 @@
                                         
                                     </mat-panel-description>
                                  </mat-expansion-panel-header>
-                                 <ul class="viewer-list">
-                                     <li *ngFor="let b of blocked">{{b.nme}}, because : {{b.why}}</li>
-                                 </ul>
+
+                                 <table mat-table [dataSource]="blockedDs" >
+
+                                    <ng-container matColumnDef="name">
+                                            <th mat-header-cell *matHeaderCellDef> Name </th>
+                                            <td mat-cell *matCellDef="let user" class="block-table-td"> {{user.nme}} </td>
+                                    </ng-container>
+
+                                <!--   <ng-container matColumnDef="why">
+                                        <th mat-header-cell *matHeaderCellDef> Reason </th>
+                                        <td mat-cell *matCellDef="let user"> {{user.why}} </td>
+                                    </ng-container>
+                                    --> 
+                                    <ng-container matColumnDef="date">
+                                        <th mat-header-cell *matHeaderCellDef> Date </th>
+                                        <td mat-cell *matCellDef="let user"  class="block-table-td"> {{user.dt.toDate() | date: 'MMM d'}} </td>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="action">
+                                            <th mat-header-cell *matHeaderCellDef></th>
+                                            <td mat-cell *matCellDef="let user"  class="block-table-td">
+                                                <button mat-button color="warn" (click)="onUnBlock(user)">un-block</button>
+                                            </td>
+                                    </ng-container>
+                                      
+                                    <tr mat-header-row *matHeaderRowDef="['name','date','action']"></tr>
+                                    <tr mat-row *matRowDef="let row; columns: ['name','date','action'];"></tr>
+
+                                 </table>
+
                             </mat-expansion-panel>
 </mat-accordion>
 

@@ -123,7 +123,7 @@ export class ModelsComponent implements OnInit, OnDestroy {
     const dialogRef = this.dialog.open(OKDialogComponent, {
       data: {
          title: 'Information',
-         content: `${m.session.modelName} has blocked your access, with the reason "${reason}"`,
+         content: `${m.session.modelName} has blocked your access`,
          okLabel: 'OK'
         }
     });

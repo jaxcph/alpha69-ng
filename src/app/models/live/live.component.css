@@ -78,3 +78,16 @@ mat-form-field {
   background: linear-gradient(to bottom, #e4f5fc 0%,#7dc8e8 100%);
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e4f5fc', endColorstr='#7dc8e8',GradientType=0 );
 }
+
+
+.player {
+  margin-top: 20px;
+  background-color: gray;
+  border:4px solid black;
+}
+.chat {
+  
+  margin-top: 20px;
+  background-color:silver;
+  border:4px solid black;
+}

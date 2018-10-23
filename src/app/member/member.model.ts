@@ -71,12 +71,15 @@ export interface Wallet {
 
 
 export interface MemberBlock {
+    id: any;
     mid: string;
     uid: string;
+    nme: string;
     why: string;
 }
 
 export interface Viewer {
+    id: any;
     sid: string;
     nme: string;
     startDt: Date;

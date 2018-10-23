@@ -9,6 +9,7 @@ import { MatSlideToggleChange, MatTableDataSource } from '@angular/material';
 import { StreamService } from '../stream.service';
 import { MatDialog } from '@angular/material';
 import { YesNoDialogComponent } from 'src/app/common/yesno-dialog/yesno-dialog.component';
+import { map } from 'rxjs/operators';
 
 
 @Component({
@@ -30,6 +31,7 @@ export class CurrentSessionComponent implements OnInit, OnDestroy {
   public viewers: any[];
 
   public viewersDs: MatTableDataSource<Viewer>;
+  public blockedDs: MatTableDataSource<MemberBlock>;
 
   public blocked: MemberBlock[];
   public currentMember: any;
@@ -72,18 +74,47 @@ export class CurrentSessionComponent implements OnInit, OnDestroy {
       this.session = {...data.session, created: data.session.created.toDate()   };
 
       this.blockedSub = this.db.collection('model-blocked', ref => ref.where('mid', '==', localStorage.getItem('uid')))
-      .valueChanges().subscribe( (blockdata: MemberBlock[]) => {
+      .snapshotChanges()
+      .pipe(
+        map( result => {
+          return result.map( item => {
+            return {
+              id: item.payload.doc.id,
+              ...item.payload.doc.data()
+            };
+          });
+        })
+      )
+      .subscribe( (blockdata: MemberBlock[]) => {
         this.blocked = blockdata;
-        console.log(blockdata);
+
+        if (blockdata) {
+          this.blockedDs = new MatTableDataSource<MemberBlock>(blockdata);
+        } else {
+          this.blockedDs = null;
+        }
+
       });
 
       this.viewersSub = this.db.collection('session-viewers', ref => ref.where('sid', '==' , this.session.id))
-        .valueChanges().subscribe( (viewersdata: Viewer[]) => {
-          console.log(viewersdata.length > 0);
-          if (viewersdata) {
+        .snapshotChanges()
+        .pipe(
+          map( result => {
+            return result.map( item => {
+              return {
+                id: item.payload.doc.id,
+                ...item.payload.doc.data()
+              };
+            });
+          }))
+          .subscribe( (viewersdata: Viewer[]) => {
             this.viewers = viewersdata;
-            this.viewersDs = new MatTableDataSource<Viewer>(viewersdata);
-          }
+            if (viewersdata) {
+              this.viewersDs = new MatTableDataSource<Viewer>(viewersdata);
+            } else {
+              this.viewersDs = null;
+            }
+
         });
 
       this.transactionsSub =
@@ -254,9 +285,28 @@ export class CurrentSessionComponent implements OnInit, OnDestroy {
   }
 
 
-  onViewerBlock(viewer: any) {
+  onViewerBlock(viewer: Viewer) {
     console.log('onViewerBlock:');
     console.log(viewer);
+
+    const nme = viewer.nme;
+
+    this.db.collection('model-blocked').add( { mid: localStorage.getItem('uid'), uid: viewer.id, nme: viewer.nme, dt: new Date() })
+    .then( () => {
+      this.uiService.showSnackbar(`viewer ${nme} blocked. user is kicked out of the session` , null, 7000);
+    }).catch( error => {
+      this.uiService.showSnackbarError(error);
+    });
+  }
+
+  onUnBlock(user: MemberBlock) {
+    const nme = user.nme;
+
+    this.db.collection('model-blocked').doc(user.id).delete().then( () => {
+      this.uiService.showSnackbar(`${nme} unblocked` , null, 3000);
+    }).catch( error => {
+      this.uiService.showSnackbarError(error);
+    });
   }
 
 

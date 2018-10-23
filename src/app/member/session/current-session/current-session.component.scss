@@ -97,3 +97,13 @@ background: -ms-linear-gradient(-45deg, #ebe9f9 0%, #c1bfea 100%);
 background: linear-gradient(135deg, #ebe9f9 0%, #c1bfea 100%);
 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ebe9f9', endColorstr='#c1bfea', GradientType=1 );
 }
+
+.block-table-td { 
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.viewer-table-td { 
+  padding-left: 10px;
+  padding-right: 10px;
+}

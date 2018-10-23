@@ -1,12 +1,13 @@
 import { Subscription, timer, Observable } from 'rxjs';
 import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
-import { Member, Tipjar, Wallet, StreamSessionGoal } from 'src/app/member/member.model';
+import { Member, Tipjar, Wallet, StreamSessionGoal, MemberBlock } from 'src/app/member/member.model';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/auth/auth.service';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { NgForm } from '@angular/forms';
 import { throwMatDialogContentAlreadyAttachedError } from '@angular/material';
 import { UIService } from 'src/app/common/ui.service';
+import { collectExternalReferences } from '@angular/compiler';
 
 @Component({
   selector: 'app-live',
@@ -39,6 +40,7 @@ export class LiveComponent implements OnInit, OnDestroy {
 
   private subs$: Subscription[] = [];
   private minuteTimer: Observable<any>;
+
 
   @HostListener('window:unload', [ '$event' ])
   unloadHandler(event) {
@@ -108,7 +110,7 @@ export class LiveComponent implements OnInit, OnDestroy {
 
 // /////////////////////////////////////////////////////////
 
-onTip(form: NgForm) {
+  onTip(form: NgForm) {
     if (!this.submitTip(false, form.value.amount, form.value.message) ) {
       this.uiService.showSnackbar('You do not have enough money', null, 3000);
     }
@@ -205,6 +207,24 @@ onTip(form: NgForm) {
     this.uid = localStorage.getItem('uid');
     this.mid = localStorage.getItem('mid');
     localStorage.removeItem('buytoken.return.mid');
+
+
+    // check if blocked first
+    this.subs$.push(
+      this.db.collection('model-blocked', ref => ref
+      .where('uid', '==', this.uid)
+      .where('mid', '==', this.mid))
+    .valueChanges()
+    .subscribe(data => {
+
+      console.log('MODEL-BLOCKED:');
+      console.log(data);
+      if (data.length === 1) {
+        this.uiService.showSnackbar('You have been blocked', null, 7000);
+        this.router.navigate(['/models']);
+      }
+    }));
+
 
     this.startTimer(5000, 59800); // delay 15 secs initial, to allow user to leave and objects to load also . calc with 200msec delay
 
