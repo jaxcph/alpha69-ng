@@ -25,7 +25,7 @@
     
       <section class="ppm" *ngIf="model && model.session && model.session.usePpm">
           <p class="ppm-label">Pay-Per-Minute is Enabled</p>
-          <p class="ppm-charge">You will be charged {{model.session.ppm.amount}} per minute.</p>
+          <p class="ppm-charge">You will be charged {{model.session.ppmAmount}} per minute.</p>
           <p class="ppm-left" *ngIf="ppmMinutesLeft!=-1">{{ppmMinutesLeft}} minutes left on PPM</p>
       </section>
 

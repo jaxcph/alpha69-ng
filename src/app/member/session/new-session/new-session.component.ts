@@ -43,12 +43,14 @@ export class NewSessionComponent implements OnInit, OnDestroy {
           accessType: form.value.accessType,
           minLevel: (form.value.minLevel) ? form.value.minLevel : 0,
           usePpm: form.value.ppmUse ? true : false,
-          ppm: (form.value.ppmUse === true) ? {amount: form.value.ppmAmount} : null,
+          ppmAmount: (form.value.ppmUse === true) ? {amount: form.value.ppmAmount} : 0,
           useGoal: hasGoal,
           stream: this.stream.fetchNewStream(),
           created: new Date(),
           agreedStream: form.value.agree ? true : false,
-          minTipAmount: form.value.minTipAmount
+          minTipAmount: form.value.minTipAmount,
+          inclPpmInGoal: form.value.inclPpmInGoal ? true : false,
+          inclPpmInLeaderboard: form.value.inclPpmInLeaderboard ? true : false
         }
       }).catch( error => {
         this.uiService.showSnackbarError(error);

@@ -15,11 +15,15 @@
           <p>
               {{m.model.aboutMe?m.model.aboutMe : "&nbsp;"}}
           </p>
-          <div class="ppm" *ngIf="m.session && m.session.usePpm && m.session.ppm && m.session.ppm.amount>0">
-            <label class="ppm-label">Pay Per Minute:</label><span class="ppm-value">{{m.session.ppm.amount}} token</span>
+          <div class="ppm" *ngIf="m.session && m.session.usePpm && m.session.ppmAmount > 0">
+            <label class="ppm-label">Pay Per Minute:</label><span class="ppm-value">{{m.session.ppmAmount}} token</span>
           </div>
         </mat-card-content>
         <mat-card-actions>
+
+        <ng-container *ngIf="analyzeJoinOption(m) =='session'">
+            <button mat-raised-button class="live-button" color="primary" (click)="onGoMemberSession()">SESSION</button>
+        </ng-container>
 
         <ng-container *ngIf="analyzeJoinOption(m) =='blocked'">
             <button mat-stroked-button class="live-button" color="link" (click)="onBlocked(m)">BLOCKED</button>
@@ -33,7 +37,7 @@
             <button mat-raised-button class="live-button" color="warn" (click)="navLogin()">LOGIN</button>
         </ng-container>
 
-        <ng-container *ngIf="analyzeJoinOption(m) =='onrequest'">
+        <ng-container *ngIf="analyzeJoinOption(m) =='on-request'">
           <button mat-stroked-button class="live-button" color="warn" (click)="onRequestToJoin(m)">REQUEST</button>
         </ng-container>
 

@@ -4,7 +4,7 @@
 
 <section class="content">
 <mat-accordion class="accordion" multi="true" fxLayout="row wrap" fxLayoutGap="10px">
-
+<!-- --------------------------------------------------------------------------- -->
     <mat-expansion-panel  *ngIf="session" fxFlex.xs="100%" fxFlex="400px">
         <mat-expansion-panel-header>
             <mat-panel-title>
@@ -24,7 +24,7 @@
             <input type="text" matInput placeholder="Title"  [(ngModel)]="session.title"  (change)="saveSession('session.title')" />
         </mat-form-field>
     </mat-expansion-panel>
-
+<!-- --------------------------------------------------------------------------- -->
     <mat-expansion-panel fxFlex.xs="100%" fxFlex="400px" *ngIf="session" >
             <mat-expansion-panel-header>
                 <mat-panel-title>
@@ -35,21 +35,27 @@
                     <mat-icon>visibility</mat-icon>
                 </mat-panel-description>
             </mat-expansion-panel-header>
-            
+
+            <form fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px" #formAccess="ngForm" (ngSubmit)="onAccess(formAccess)">
+
             <mat-form-field>
-                <mat-select placeholder="Who can view?"  [(ngModel)]="session.accessType" (selectionChange)="saveSession('session.accessType')" >
+                <mat-select placeholder="Who can view?"  name="accessType" [(ngModel)]="session.accessType" >
                         <mat-option value="public"><u>Everyone</u> can view</mat-option>
-                        <mat-option value="member">all <u>Members</u> can view</mat-option>
-                        <mat-option value="level">only <u>Members</u> => <u>level</u> </mat-option>
-                        <mat-option value="onrequest"><u>Members</u> can <u>Request to join</u></mat-option>
+                        <mat-option value="member-only">all <u>Members</u> can view</mat-option>
+                        <mat-option value="user-level">only <u>Members</u> => <u>level</u> </mat-option>
+                        <mat-option value="on-request"><u>Members</u> can <u>Request to join</u></mat-option>
                 </mat-select>
             </mat-form-field>
-            <mat-form-field *ngIf="session.accessType === 'level'">
-                <input type="number" matInput placeholder="Required level?"  [(ngModel)]="session.minLevel"  (change)="saveSession('session.minLevel')" />  
+            <mat-form-field *ngIf="formAccess.value.accessType === 'user-level'">
+                <input type="number" matInput placeholder="Required level?" [(ngModel)]="session.minLevel" name="minLevel" />  
             </mat-form-field>
+            
+            <button type="submit" mat-raised-button color="primary" [disabled]="formAccess.invalid">Save</button>
+        </form>
+
     </mat-expansion-panel>
     
-
+<!-- --------------------------------------------------------------------------- -->
     <mat-expansion-panel fxFlex.xs="100%" fxFlex="400px" *ngIf="session">
             <mat-expansion-panel-header>
                 <mat-panel-title>
@@ -61,13 +67,19 @@
                 </mat-panel-description>
             </mat-expansion-panel-header>
             
-            <mat-slide-toggle labelPosition="before" color="accent" [(ngModel)]="session.usePpm" (change)="saveSession('session.usePpm')">Enable Pay-Per-Minute</mat-slide-toggle>
+            <form fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px" #formPpm="ngForm" (ngSubmit)="onPpm(formPpm)">
+     
+                <mat-slide-toggle labelPosition="before" color="accent"  name="usePpm" [(ngModel)]='session.usePpm'>Enable Pay-Per-Minute</mat-slide-toggle>
 
-            <mat-form-field *ngIf="session.usePpm">
-              <input type="number" matInput placeholder="Tokens to Pay-Per-Minute" [(ngModel)]="session.ppm.amount" (change)="saveSession('session.ppm.amount')"  />
-            </mat-form-field>
+                <mat-form-field *ngIf="formPpm.value.usePpm">
+                    <input type="number" matInput placeholder="Tokens to Pay-Per-Minute"  name="amount" [(ngModel)]="session.ppmAmount" />
+                </mat-form-field>
+            
+                <button type="submit" mat-raised-button color="primary" [disabled]="formPpm.invalid">Save</button>
+            </form>
+        
     </mat-expansion-panel>
-
+<!-- --------------------------------------------------------------------------- -->
     <mat-expansion-panel fxFlex.xs="100%" fxFlex="400px" *ngIf="session">
             <mat-expansion-panel-header>
                 <mat-panel-title>
@@ -98,7 +110,7 @@
               </mat-form-field>
          </ng-container>   
     </mat-expansion-panel>
-
+<!-- --------------------------------------------------------------------------- -->
     <mat-expansion-panel fxFlex.xs="100%" fxFlex="400px" *ngIf="session">
             <mat-expansion-panel-header>
                 <mat-panel-title>
@@ -130,7 +142,7 @@
 <section class='page-title'>
     <h1>Live metrics</h1>
 </section>
-
+<!-- ================================================================================= -->
 <mat-accordion class="accordion_live" multi="true" fxLayout="row wrap" fxLayoutGap="10px">
 
         <mat-expansion-panel  *ngIf="goal" fxFlex.xs="100%" fxFlex="400px" expanded class="goal-meter">
@@ -172,7 +184,7 @@
             </div>
             
         </mat-expansion-panel>
-
+<!-- ================================================================================= -->
         <mat-expansion-panel  *ngIf="tipjar" fxFlex.xs="100%" fxFlex="400px" expanded class="tipjar" >
                 <mat-expansion-panel-header>
                     <mat-panel-title>
@@ -188,7 +200,7 @@
               </div>
             </mat-expansion-panel>
 
-
+<!-- ================================================================================= -->
             <mat-expansion-panel  *ngIf="wallet" fxFlex.xs="100%" fxFlex="400px" expanded class="wallet">
                     <mat-expansion-panel-header>
                         <mat-panel-title>
@@ -203,7 +215,7 @@
                     {{wallet.balance}} <img src="https://firebasestorage.googleapis.com/v0/b/alpha69-ng.appspot.com/o/images%2Fcoin32.png?alt=media&token=f4b3f892-a7d1-4908-a2c5-54d3dbd02b22">
                   </div>
                 </mat-expansion-panel>
-
+<!-- ================================================================================= -->
                 <mat-expansion-panel  *ngIf="session" fxFlex.xs="100%" fxFlex="400px" expanded class="runtime">
                         <mat-expansion-panel-header>
                             <mat-panel-title>
@@ -225,7 +237,7 @@
 
                     </mat-expansion-panel>
 
-
+<!-- ================================================================================= -->
                     <mat-expansion-panel  *ngIf="transactions" fxFlex.xs="100%" fxFlex="400px" expanded class="tipwall">
                             <mat-expansion-panel-header>
                                 <mat-panel-title>
@@ -244,7 +256,7 @@
                              </ul>
                         </mat-expansion-panel>
 
-
+<!-- ================================================================================= -->
                         <mat-expansion-panel  *ngIf="viewers" fxFlex.xs="100%" fxFlex="400px" expanded class="viewers">
                                 <mat-expansion-panel-header>
                                     <mat-panel-title>
@@ -289,7 +301,7 @@
                                  
                             </mat-expansion-panel>
 
-
+<!-- ================================================================================= -->
                             <mat-expansion-panel  *ngIf="blocked" fxFlex.xs="100%" fxFlex="400px" expanded class="blocked" >
                                 <mat-expansion-panel-header>
                                     <mat-panel-title>

@@ -5,11 +5,12 @@ import { Subscription, interval } from 'rxjs';
 import { NgForm } from '@angular/forms';
 import { UIService } from 'src/app/common/ui.service';
 import { NumberFormatStyle } from '@angular/common';
-import { MatSlideToggleChange, MatTableDataSource } from '@angular/material';
+import { MatSlideToggleChange, MatTableDataSource, TransitionCheckState } from '@angular/material';
 import { StreamService } from '../stream.service';
 import { MatDialog } from '@angular/material';
 import { YesNoDialogComponent } from 'src/app/common/yesno-dialog/yesno-dialog.component';
 import { map } from 'rxjs/operators';
+import { ThrowStmt } from '@angular/compiler';
 
 
 @Component({
@@ -59,6 +60,8 @@ export class CurrentSessionComponent implements OnInit, OnDestroy {
   private blockedSub: Subscription;
 
   constructor(private db: AngularFirestore, private uiService: UIService, private ss: StreamService, private dialog: MatDialog) { }
+
+
 
   ngOnInit() {
     this.showNumberOfTransaction = 30;
@@ -189,11 +192,35 @@ export class CurrentSessionComponent implements OnInit, OnDestroy {
     this.runtimeDays = Math.floor(difference_ms / 24);
   }
 
-  saveSession(scope: string) {
+  onAccess(form: NgForm) {
 
-      if (scope === 'session.usePpm' && (this.session.ppm === null || this.session.ppm === undefined )) {
-           this.session.ppm = {amount: 1};
-      }
+    this.session.accessType = form.value.accessType;
+    this.session.minLevel = form.value.minLevel ? form.value.minLevel : 0;
+    this.session.modified = new Date();
+
+    this.db.doc(`members/${localStorage.getItem('uid')}`).update( {session: this.session});
+    this.uiService.showSnackbar('Access type settings saved', null, 3000);
+  }
+
+  onPpm(form: NgForm) {
+
+    const usePpm = form.value.usePpm ? true : false;
+    const amount = form.value.amount ? form.value.amount : 0;
+
+    if (usePpm && amount > 0) {
+      this.session.usePpm = true;
+      this.session.ppmAmount = amount ;
+    } else {
+      this.session.usePpm = false;
+      this.session.ppmAmount = 0;
+    }
+
+    this.session.modified = new Date();
+    this.db.doc(`members/${localStorage.getItem('uid')}`).update( {session: this.session});
+    this.uiService.showSnackbar('Pay-Per-Minute settings saved', null, 3000);
+  }
+
+  saveSession(scope: string) {
 
       if (scope === 'session.useGoal') {
 

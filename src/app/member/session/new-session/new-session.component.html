@@ -22,13 +22,13 @@
       <mat-form-field>
           <mat-select placeholder="Who can view?" ngModel name="accessType" required >
               <mat-option value="public"><u>Everyone</u> can view</mat-option>
-              <mat-option value="member">all <u>Members</u> can view</mat-option>
-              <mat-option value="level">only <u>Members</u> => <u>level</u> </mat-option>
-              <mat-option value="onrequest"><u>Members</u> can <u>Request to join</u></mat-option>
+              <mat-option value="member-only">all <u>Members</u> can view</mat-option>
+              <mat-option value="user-level">only <u>Members</u> => <u>level</u> </mat-option>
+              <mat-option value="on-request"><u>Members</u> can <u>Request to join</u></mat-option>
             </mat-select>
       </mat-form-field>
 
-      <mat-form-field *ngIf="f.value.accessType=='level'">
+      <mat-form-field *ngIf="f.value.accessType=='user-level'">
             <input type="number" matInput placeholder="Required level?" ngModel name="minLevel" value="0" />  
       </mat-form-field>
 
@@ -52,14 +52,24 @@
         </mat-form-field>
         <br>
       </ng-container>   
-    
+
+       
+     
+      
+      
+      
 
       <mat-slide-toggle labelPosition="after" color="accent" ngModel name="ppmUse"  value="false">Enable Pay-Per-Minute</mat-slide-toggle>
 
-      <mat-form-field *ngIf="f.value.ppmUse">
-          <input type="number" matInput placeholder="Tokens to Pay-Per-Minute" ngModel name="ppmAmount" value="0" />
-      </mat-form-field>
-      
+      <ng-container  *ngIf="f.value.ppmUse">
+          <mat-form-field>
+              <input type="number" matInput placeholder="Tokens to Pay-Per-Minute" ngModel name="ppmAmount" value="0" />
+          </mat-form-field>
+          <mat-checkbox color="accent" ngModel name="inclPpmInGoal" labelPosition="after" required>incl. in goal calculation</mat-checkbox>
+          <mat-checkbox color="accent" ngModel name="inclPpmInLeaderboard" labelPosition="after" required>incl. in leaderboard calculation</mat-checkbox>
+      </ng-container>
+
+      <br/>
       <mat-checkbox color="accent" ngModel name="agree" labelPosition="after" required>Agree to <a href="#">Terms and Conditions.</a></mat-checkbox>
 
       <button type="submit" mat-raised-button color="primary" [disabled]="f.invalid">Submit</button>

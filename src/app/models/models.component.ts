@@ -70,8 +70,18 @@ export class ModelsComponent implements OnInit, OnDestroy {
     this.router.navigate(['/login']);
   }
 
+  onGoMemberSession() {
+    this.router.navigate(['/member/session']);
+  }
+
   analyzeJoinOption(m: Member): string {
 
+    // check if your the model
+    if (m.id === localStorage.getItem('uid')) {
+      return 'session';
+    }
+
+    // check according to access type and block lists
     if (m.session) {
 
       if (this.isBlocked(m)) {
@@ -79,11 +89,11 @@ export class ModelsComponent implements OnInit, OnDestroy {
       } else {
           if ( m.session.accessType === 'public') {
             return 'join';
-          } else if (m.session.accessType === 'member' ) {
+          } else if (m.session.accessType === 'member-only' ) {
               return this.auth.isAuth() ? 'join' : 'login';
-          } else if (m.session.accessType === 'onrequest') {
-            return this.auth.isAuth() ? 'onrequest' : 'login';
-          } else if (m.session.accessType === 'level') {
+          } else if (m.session.accessType === 'on-request') {
+            return this.auth.isAuth() ? 'on-request' : 'login';
+          } else if (m.session.accessType === 'user-level') {
               if ( !this.auth.isAuth() ) {
                 return 'login';
               } else {
@@ -132,13 +142,13 @@ export class ModelsComponent implements OnInit, OnDestroy {
   onJoin(m: Member) {
 
 
-    if (m.session.usePpm && m.session.ppm && m.session.ppm.amount > 0) {
+    if (m.session.usePpm && m.session.ppmAmount > 0) {
 
       const dialogRef = this.dialog.open(YesNoDialogComponent, {
         data: {
            title: 'CONFIRM! Pay-Per-Minute',
-           content: `You will automatically be chardged ${m.session.ppm.amount} tokens per minut on this live session`,
-           yesLabel: `I Accept to ${m.session.ppm.amount} token pay per minute`,
+           content: `You will automatically be chardged ${m.session.ppmAmount} tokens per minut on this live session`,
+           yesLabel: `I Accept to ${m.session.ppmAmount} token pay per minute`,
            noLabel: 'No, I will leave'
           }
       });
