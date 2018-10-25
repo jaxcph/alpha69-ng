@@ -41,6 +41,7 @@ export class LiveComponent implements OnInit, OnDestroy {
   private subs$: Subscription[] = [];
   private minuteTimer: Observable<any>;
 
+  private sessionTipper: any;
 
   @HostListener('window:unload', [ '$event' ])
   unloadHandler(event) {
@@ -172,6 +173,22 @@ export class LiveComponent implements OnInit, OnDestroy {
           });
     }
 
+    //  session-tippers
+    if (this.sessionTipper) {
+      this.db.collection('session-tippers').doc(this.uid).update(
+        {
+          amt: (this.sessionTipper.amt + amount)
+        });
+    } else {
+      this.db.collection('session-tippers').doc(this.uid).set(
+        {
+          amt: this.sessionTipper.amt,
+          dt: new Date()
+        });
+    }
+
+
+
     // calculate ppm info
     if (isPpm) {
       this.paidPPm += amount;
@@ -235,7 +252,11 @@ export class LiveComponent implements OnInit, OnDestroy {
       .subscribe( (data: Member) => {
          this.member = data;
          console.log('MEMBER ' + this.uid + ' =');
-         console.log(this.member);
+
+         //  session-tippers
+          this.db.collection('session-tippers').doc(this.uid)
+          .valueChanges()
+          .subscribe( sessionTipperData => (this.sessionTipper = sessionTipperData));
          })
     );
 
