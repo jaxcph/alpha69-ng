@@ -30,7 +30,9 @@ export interface Member {
     accessType: string; // ['public', 'member', 'level', 'onrequest'];
     minLevel?: number;
     usePpm: boolean;
-    ppm?: StreamSessionPPM;
+    ppmAmount: number;
+    inclPpmInGoal: boolean;
+    inclPpmInLeaderboard: boolean;
     useGoal: boolean;
     minTipAmount: number;
     stream: StreamConnection;
@@ -51,9 +53,7 @@ export interface StreamSessionGoal {
     doneFx: string;
 }
 
-export interface StreamSessionPPM {
-    amount: number;
-}
+
 
 export interface StreamConnection {
     url: string;

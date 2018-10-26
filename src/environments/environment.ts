@@ -12,7 +12,7 @@ export const environment = {
     storageBucket: 'alpha69-ng.appspot.com',
     messagingSenderId: '964085174298'
   },
-  version: '0.21.2239'
+  version: '0.23.2350'
 };
 
 /*
