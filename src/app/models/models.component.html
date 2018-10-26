@@ -22,7 +22,7 @@
         <mat-card-actions>
 
         <ng-container *ngIf="analyzeJoinOption(m) =='session'">
-            <button mat-raised-button class="live-button" color="primary" (click)="onGoMemberSession()">SESSION</button>
+            <button mat-raised-button class="live-button" [color]="m.session ? 'accent':'primary'" (click)="onGoMemberSession()">SESSION</button>
         </ng-container>
 
         <ng-container *ngIf="analyzeJoinOption(m) =='blocked'">
@@ -34,11 +34,11 @@
         </ng-container>
 
         <ng-container *ngIf="analyzeJoinOption(m) =='login'">
-            <button mat-raised-button class="live-button" color="warn" (click)="navLogin()">LOGIN</button>
+            <button mat-raised-button class="live-button" color="primary" (click)="navLogin()">LOGIN</button>
         </ng-container>
 
         <ng-container *ngIf="analyzeJoinOption(m) =='on-request'">
-          <button mat-stroked-button class="live-button" color="warn" (click)="onRequestToJoin(m)">REQUEST</button>
+          <button mat-stroked-button class="live-button" color="primary" (click)="onRequestToJoin(m)">REQUEST</button>
         </ng-container>
 
         <ng-container *ngIf="analyzeJoinOption(m) =='lowscore'">

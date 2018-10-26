@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { Member, StreamSession, StreamSessionGoal, Tipjar, Wallet, MemberBlock, Viewer } from '../../member.model';
+import { Member, StreamSession, StreamSessionGoal, Tipjar, Wallet, MemberBlock, Viewer, LeaderboardMember } from '../../member.model';
 import { Subscription, interval } from 'rxjs';
 import { NgForm } from '@angular/forms';
 import { UIService } from 'src/app/common/ui.service';
@@ -36,6 +36,7 @@ export class CurrentSessionComponent implements OnInit, OnDestroy {
 
   public blocked: MemberBlock[];
   public currentMember: any;
+  public leaderboard: LeaderboardMember[];
 
   public ppmUse: boolean;
   public ppmAmount: number;
@@ -49,7 +50,6 @@ export class CurrentSessionComponent implements OnInit, OnDestroy {
   public clockMinutes: number;
   public timezone: string;
 
-
   private currentMemberSub: Subscription;
   private goalSub: Subscription;
   private tipjarSub: Subscription;
@@ -58,6 +58,7 @@ export class CurrentSessionComponent implements OnInit, OnDestroy {
   private transactionsSub: Subscription;
   private viewersSub: Subscription;
   private blockedSub: Subscription;
+  private leaderboardSub: Subscription;
 
   constructor(private db: AngularFirestore, private uiService: UIService, private ss: StreamService, private dialog: MatDialog) { }
 
@@ -75,6 +76,23 @@ export class CurrentSessionComponent implements OnInit, OnDestroy {
     .subscribe( (data: any) => {
       this.currentMember = data;
       this.session = {...data.session, created: data.session.created.toDate()   };
+
+
+      this.leaderboardSub = this.db.collection(`session-leaderboard/${this.session.id}/leaderboard`,
+      ref => ref.orderBy('amt', 'desc').limit(10))
+      .snapshotChanges()
+      .pipe(
+        map( result => {
+          return result.map( item => {
+            return {
+              uid: item.payload.doc.id,
+              ...item.payload.doc.data()
+            };
+          });
+        }))
+      .subscribe( (lb: LeaderboardMember[]) => {
+        this.leaderboard = lb;
+      });
 
       this.blockedSub = this.db.collection('model-blocked', ref => ref.where('mid', '==', localStorage.getItem('uid')))
       .snapshotChanges()
@@ -348,7 +366,7 @@ export class CurrentSessionComponent implements OnInit, OnDestroy {
     if (this.transactionsSub) {this.transactionsSub.unsubscribe(); }
     if (this.viewersSub) {this.viewersSub.unsubscribe(); }
     if (this.blockedSub) {this.blockedSub.unsubscribe(); }
-
+    if (this.leaderboardSub) { this.leaderboardSub.unsubscribe(); }
   }
 
 }

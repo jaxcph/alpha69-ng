@@ -85,3 +85,10 @@ export interface Viewer {
     startDt: Date;
     aliveDt: Date;
 }
+
+export interface LeaderboardMember {
+    uid: string;
+    amt: number;
+    nme: string;
+    dt: Date;
+}

@@ -1,6 +1,6 @@
 import { Subscription, timer, Observable } from 'rxjs';
 import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
-import { Member, Tipjar, Wallet, StreamSessionGoal, MemberBlock, StreamSession } from 'src/app/member/member.model';
+import { Member, Tipjar, Wallet, StreamSessionGoal, MemberBlock, StreamSession, LeaderboardMember } from 'src/app/member/member.model';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/auth/auth.service';
 import { AngularFirestore } from '@angular/fire/firestore';
@@ -10,11 +10,12 @@ import { UIService } from 'src/app/common/ui.service';
 import { collectExternalReferences } from '@angular/compiler';
 import { OKDialogComponent } from 'src/app/common/ok-dialog/ok-dialog.component';
 import { YesNoDialogComponent } from 'src/app/common/yesno-dialog/yesno-dialog.component';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-live',
   templateUrl: './live.component.html',
-  styleUrls: ['./live.component.css']
+  styleUrls: ['./live.component.scss']
 })
 export class LiveComponent implements OnInit, OnDestroy {
 
@@ -27,7 +28,7 @@ export class LiveComponent implements OnInit, OnDestroy {
   public wallet:  Wallet;
   public goal: StreamSessionGoal;
   public transactions: any[];
-
+  public leaderboard: LeaderboardMember[];
   public tipjar: Tipjar;
 
 
@@ -294,6 +295,24 @@ export class LiveComponent implements OnInit, OnDestroy {
               .valueChanges()
               .subscribe(lb => ( this.sessionLeaderboard = lb ))
           );
+
+
+      this.subs$.push( this.db.collection(`session-leaderboard/${this.model.session.id}/leaderboard`,
+      ref => ref.orderBy('amt', 'desc').limit(10))
+      .snapshotChanges()
+      .pipe(
+        map( result => {
+          return result.map( item => {
+            return {
+              uid: item.payload.doc.id,
+              ...item.payload.doc.data()
+            };
+          });
+        }))
+      .subscribe( (lb: LeaderboardMember[]) => {
+        this.leaderboard = lb;
+      }));
+
 
           // check if is blocked
           if (this.model.blocked) {

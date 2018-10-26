@@ -80,6 +80,19 @@ mat-form-field {
 }
 
 
+.leaderboard{
+  background: #fefcea;
+  background: -moz-linear-gradient(top, #fefcea 0%, #f1da36 100%);
+  background: -webkit-linear-gradient(top, #fefcea 0%,#f1da36 100%);
+  background: linear-gradient(to bottom, #fefcea 0%,#f1da36 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fefcea', endColorstr='#f1da36',GradientType=0 );
+
+  li {
+    list-style-type: decimal;
+  }
+}
+
+
 .player {
   margin-top: 20px;
   background-color: gray;

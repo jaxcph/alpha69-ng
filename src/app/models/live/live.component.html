@@ -109,6 +109,25 @@
             
         </mat-expansion-panel>
 
+
+                   <!-- ================================================================================= -->
+                   <mat-expansion-panel  *ngIf="leaderboard" fxFlex.xs="100%" fxFlex="400px" expanded class="leaderboard" >
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            leaderboard
+                        </mat-panel-title>
+                        <mat-panel-description>
+                            &nbsp; 
+                            
+                        </mat-panel-description>
+                        </mat-expansion-panel-header>
+
+                        <ul>
+                            <li *ngFor="let lb of leaderboard"><b>{{lb.nme}}</b></li>
+                        </ul>
+                        
+                </mat-expansion-panel>
+
 </mat-accordion>
 
 
