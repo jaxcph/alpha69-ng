@@ -37,6 +37,7 @@ import { ModelsComponent } from './models/models.component';
 import { LiveComponent } from './models/live/live.component';
 import { OKDialogComponent } from './common/ok-dialog/ok-dialog.component';
 import { BuytokenComponent } from './member/buytoken/buytoken.component';
+import { LovenseComponent } from './models/lovense/lovense.component';
 
 
 
@@ -61,7 +62,8 @@ import { BuytokenComponent } from './member/buytoken/buytoken.component';
     ModelsComponent,
     LiveComponent,
     OKDialogComponent,
-    BuytokenComponent],
+    BuytokenComponent,
+    LovenseComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
