@@ -220,17 +220,81 @@ export class CurrentSessionComponent implements OnInit, OnDestroy {
     this.uiService.showSnackbar('Access type settings saved', null, 3000);
   }
 
+  initGoal(useGoal) {
+    if (useGoal === true) {
+      this.db.doc(`session-goals/${localStorage.getItem('uid')}`)
+      .set({
+          amount: 0,
+          collected: 0,
+          descr: '',
+          doneFx: 'None'
+          });
+
+    } else {
+      this.db.doc(`session-goals/${localStorage.getItem('uid')}`).delete();
+
+    }
+    this.session.useGoal = false; // onlu the onGoal operation can set this to true
+    this.db.doc(`members/${localStorage.getItem('uid')}`).update( {session: this.session});
+  }
+
+  onGoal(form: NgForm) {
+
+    const useGoal = form.value.useGoal ? true : false;
+    const amount = form.value.amount ? form.value.amount : 0;
+    const descr = form.value.descr;
+    const doneFx = form.value.doneFx;
+
+      if (useGoal === false) {
+          this.db.doc(`session-goals/${localStorage.getItem('uid')}`).delete();
+      }
+
+      if (useGoal === true)  {
+
+         if ( this.goal === null || this.goal === undefined) { // new
+          this.db.doc(`session-goals/${localStorage.getItem('uid')}`)
+          .set({
+              amount: amount,
+              collected: 0,
+              descr: descr,
+              doneFx: doneFx
+              });
+        } else { // change existing
+          this.goal.amount = amount;
+          this.goal.descr = descr;
+          this.goal.doneFx = doneFx;
+          this.goal.collected = 0 ;
+          this.db.doc(`session-goals/${localStorage.getItem('uid')}`).update( this.goal);
+        }
+      }
+
+      this.session.useGoal = useGoal;
+      this.session.modified = new Date();
+      this.db.doc(`members/${localStorage.getItem('uid')}`).update( {session: this.session});
+      this.uiService.showSnackbar('Goal settings saved', null, 3000);
+  }
+
+
+
+
+
   onPpm(form: NgForm) {
 
     const usePpm = form.value.usePpm ? true : false;
+    const inclPpmInGoal = form.value.inclPpmInGoal ? true : false;
+    const inclPpmInLeaderboard = form.value.inclPpmInLeaderboard ? true : false;
     const amount = form.value.amount ? form.value.amount : 0;
 
     if (usePpm && amount > 0) {
       this.session.usePpm = true;
       this.session.ppmAmount = amount ;
+      this.session.inclPpmInGoal = inclPpmInGoal;
+      this.session.inclPpmInLeaderboard = inclPpmInLeaderboard;
     } else {
       this.session.usePpm = false;
       this.session.ppmAmount = 0;
+      this.session.inclPpmInGoal = false;
+      this.session.inclPpmInLeaderboard = false;
     }
 
     this.session.modified = new Date();
@@ -239,31 +303,6 @@ export class CurrentSessionComponent implements OnInit, OnDestroy {
   }
 
   saveSession(scope: string) {
-
-      if (scope === 'session.useGoal') {
-
-        if (this.session.useGoal === false) {
-            this.db.doc(`session-goals/${localStorage.getItem('uid')}`).delete();
-         //   this.goal = null;
-        }
-
-        if (this.session.useGoal === true && (this.goal === null || this.goal === undefined)) {
-            this.db.doc(`session-goals/${localStorage.getItem('uid')}`)
-            .set({
-                amount: 1000,
-                collected: 0,
-                descr: '',
-                doneFx: 'None'
-                });
-        }
-      }
-
-      if ( (scope === 'goal.amount' || scope === 'goal.descr' || scope === 'goal.doneFx') && (this.goal) ) {
-
-        if (scope === 'goal.amount' ) { this.goal.collected = 0; }
-
-        this.db.doc(`session-goals/${localStorage.getItem('uid')}`).update( this.goal);
-      }
 
       // TBD: log change
 

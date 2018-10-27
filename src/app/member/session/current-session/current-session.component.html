@@ -8,7 +8,7 @@
     <mat-expansion-panel  *ngIf="session" fxFlex.xs="100%" fxFlex="400px">
         <mat-expansion-panel-header>
             <mat-panel-title>
-                Name & Title
+                General
             </mat-panel-title>
             <mat-panel-description>
                  &nbsp; 
@@ -23,6 +23,11 @@
         <mat-form-field>
             <input type="text" matInput placeholder="Title"  [(ngModel)]="session.title"  (change)="saveSession('session.title')" />
         </mat-form-field>
+
+        <mat-form-field>
+            <input type="number" matInput placeholder="Minimum tip Amount"  [(ngModel)]="session.minTipAmount"  (change)="saveSession('session.minTipAmount')" required  value="1"/>
+          </mat-form-field>
+    
     </mat-expansion-panel>
 <!-- --------------------------------------------------------------------------- -->
     <mat-expansion-panel fxFlex.xs="100%" fxFlex="400px" *ngIf="session" >
@@ -71,9 +76,16 @@
      
                 <mat-slide-toggle labelPosition="before" color="accent"  name="usePpm" [(ngModel)]='session.usePpm'>Enable Pay-Per-Minute</mat-slide-toggle>
 
-                <mat-form-field *ngIf="formPpm.value.usePpm">
-                    <input type="number" matInput placeholder="Tokens to Pay-Per-Minute"  name="amount" [(ngModel)]="session.ppmAmount" />
-                </mat-form-field>
+                <ng-container  *ngIf="formPpm.value.usePpm">
+
+                    <mat-form-field>
+                        <input type="number" matInput placeholder="Tokens to Pay-Per-Minute"  name="amount" [(ngModel)]="session.ppmAmount" />
+                    </mat-form-field>
+     
+                    <mat-checkbox color="accent"  name="inclPpmInGoal" [(ngModel)]="session.inclPpmInGoal" labelPosition="after">incl. in goal calculation</mat-checkbox>
+                    <mat-checkbox color="accent" name="inclPpmInLeaderboard"  [(ngModel)]="session.inclPpmInLeaderboard" labelPosition="after">incl. in leaderboard calculation</mat-checkbox>
+           
+               </ng-container>
             
                 <button type="submit" mat-raised-button color="primary" [disabled]="formPpm.invalid">Save</button>
             </form>
@@ -90,25 +102,33 @@
                     <mat-icon>assistant_photo</mat-icon>
                 </mat-panel-description>
             </mat-expansion-panel-header>
-            
-            <mat-slide-toggle labelPosition="before" color="accent" [(ngModel)]="session.useGoal"  (change)="saveSession('session.useGoal')">Do you want to set a Goal?</mat-slide-toggle>
-          <ng-container *ngIf="goal">
-              <mat-form-field>
-                  <input type="number" matInput placeholder="Goal Amount token (Target)" [(ngModel)]="goal.amount"   (change)="saveSession('goal.amount')" />
-              </mat-form-field>
-              <mat-form-field>
-                  <input type="text"  matInput placeholder="Goal description" [(ngModel)]="goal.descr"  (change)="saveSession('goal.descr')" />
-              </mat-form-field>
-              <mat-form-field>
-                      <mat-select placeholder="Show Fx on goal complete?"  [(ngModel)]="goal.doneFx"  (selectionChange)="saveSession('goal.doneFx')" >
-                              <mat-option value="None">No</mat-option>
-                              <mat-option value="fx1">1 TBD</mat-option>
-                              <mat-option value="fx2">2 TBD</mat-option>
-                              <mat-option value="fx3">3 TBD</mat-option>
-                              <mat-option value="fx3">4 TBD</mat-option>
-                            </mat-select>
-              </mat-form-field>
-         </ng-container>   
+
+            <form fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px" #formGoal="ngForm" (ngSubmit)="onGoal(formGoal)">
+     
+                <mat-slide-toggle labelPosition="before" color="accent" name="useGoal" [(ngModel)]="session.useGoal"  (change)="initGoal(formGoal.value.useGoal)">Do you want to set a Goal?</mat-slide-toggle>
+                
+                <ng-container *ngIf="goal">
+                    <mat-form-field>
+                        <input type="number" matInput placeholder="Goal Amount token (Target):" name="amount"  step="100" [(ngModel)]="goal.amount" min=1 />
+                    </mat-form-field>
+                    <mat-form-field>
+                        <input type="text"  matInput placeholder="Goal description" name="descr" [(ngModel)]="goal.descr"/>
+                    </mat-form-field>
+                    <mat-form-field>
+                            <mat-select placeholder="Show Fx on goal complete?" name="doneFx" [(ngModel)]="goal.doneFx">
+                                    <mat-option value="None">No</mat-option>
+                                    <mat-option value="fx1">1 TBD</mat-option>
+                                    <mat-option value="fx2">2 TBD</mat-option>
+                                    <mat-option value="fx3">3 TBD</mat-option>
+                                    <mat-option value="fx3">4 TBD</mat-option>
+                                    </mat-select>
+                    </mat-form-field>
+                    <button type="submit" mat-raised-button color="primary" [disabled]="formGoal.invalid">Save</button>
+                </ng-container>   
+
+        
+        </form>
+    
     </mat-expansion-panel>
 <!-- --------------------------------------------------------------------------- -->
     <mat-expansion-panel fxFlex.xs="100%" fxFlex="400px" *ngIf="session">
@@ -145,7 +165,7 @@
 <!-- ================================================================================= -->
 <mat-accordion class="accordion_live" multi="true" fxLayout="row wrap" fxLayoutGap="10px">
 
-        <mat-expansion-panel  *ngIf="goal" fxFlex.xs="100%" fxFlex="400px" expanded class="goal-meter">
+        <mat-expansion-panel  *ngIf="(session && session.useGoal === true) && goal" fxFlex.xs="100%" fxFlex="400px" expanded class="goal-meter">
             <mat-expansion-panel-header>
                 <mat-panel-title>
                     Goal Meter
