@@ -1,0 +1,11 @@
+- add Moderator role
+X timer on Live yesno dialog
+- handle goal 0 action/events
+-in current-session only enable save button if is dirty
+X disable timer close by esc
+X fix change in visibily in live
+X change session current visibily to form submit
+X change session current general to form submit
+X public live make it work
+
+- when model logs off warning about session active

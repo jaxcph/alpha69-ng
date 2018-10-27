@@ -131,6 +131,9 @@ export class ModelsComponent implements OnInit, OnDestroy {
 
     // show messagebox
     const dialogRef = this.dialog.open(OKDialogComponent, {
+      disableClose: true,
+      autoFocus: true,
+      closeOnNavigation: false,
       data: {
          title: 'Information',
          content: `${m.session.modelName} has blocked your access`,
@@ -145,6 +148,9 @@ export class ModelsComponent implements OnInit, OnDestroy {
     if (m.session.usePpm && m.session.ppmAmount > 0) {
 
       const dialogRef = this.dialog.open(YesNoDialogComponent, {
+        disableClose: true,
+        autoFocus: true,
+        closeOnNavigation: false,
         data: {
            title: 'CONFIRM! Pay-Per-Minute',
            content: `You will automatically be chardged ${m.session.ppmAmount} tokens per minut on this live session`,
@@ -177,6 +183,9 @@ export class ModelsComponent implements OnInit, OnDestroy {
 
   onLowlevel(m: Member) {
     const dialogRef = this.dialog.open(OKDialogComponent, {
+      disableClose: true,
+      autoFocus: true,
+      closeOnNavigation: false,
       data: {
          title: 'Information',
          content: `${m.session.modelName} requires a minimum user-level
@@ -189,6 +198,9 @@ export class ModelsComponent implements OnInit, OnDestroy {
 
   onRequestToJoin(m: Member) {
     const dialogRef = this.dialog.open(OKDialogComponent, {
+      disableClose: true,
+      autoFocus: true,
+      closeOnNavigation: false,
       data: {
          title: 'Sorry!',
          content: 'The [Request to Join] feature was not been implemented yet',

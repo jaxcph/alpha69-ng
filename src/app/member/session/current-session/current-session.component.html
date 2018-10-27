@@ -16,18 +16,21 @@
             </mat-panel-description>
         </mat-expansion-panel-header>
         
-        <mat-form-field>
-            <input type="text" matInput placeholder="Model name to use" [(ngModel)]="session.modelName"  (change)="saveSession('session.modelName')"/> 
-        </mat-form-field>
-                 
-        <mat-form-field>
-            <input type="text" matInput placeholder="Title"  [(ngModel)]="session.title"  (change)="saveSession('session.title')" />
-        </mat-form-field>
+        <form fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px" #formGeneral="ngForm" (ngSubmit)="onGeneral(formGeneral)">
 
-        <mat-form-field>
-            <input type="number" matInput placeholder="Minimum tip Amount"  [(ngModel)]="session.minTipAmount"  (change)="saveSession('session.minTipAmount')" required  value="1"/>
-          </mat-form-field>
-    
+            <mat-form-field>
+                <input type="text" matInput placeholder="Model name to use" name="modelName" [(ngModel)]="session.modelName"/> 
+            </mat-form-field>
+                    
+            <mat-form-field>
+                <input type="text" matInput placeholder="Title"  name="title" [(ngModel)]="session.title"/>
+            </mat-form-field>
+
+            <mat-form-field>
+                <input type="number" matInput placeholder="Minimum tip Amount"  name="minTipAmount" [(ngModel)]="session.minTipAmount" required step="1" min=0/>
+            </mat-form-field>
+        <button type="submit" mat-raised-button color="primary" [disabled]="formGeneral.invalid">Save</button>
+        </form>
     </mat-expansion-panel>
 <!-- --------------------------------------------------------------------------- -->
     <mat-expansion-panel fxFlex.xs="100%" fxFlex="400px" *ngIf="session" >
@@ -74,7 +77,7 @@
             
             <form fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px" #formPpm="ngForm" (ngSubmit)="onPpm(formPpm)">
      
-                <mat-slide-toggle labelPosition="before" color="accent"  name="usePpm" [(ngModel)]='session.usePpm'>Enable Pay-Per-Minute</mat-slide-toggle>
+                <mat-slide-toggle labelPosition="before" color="accent"  name="usePpm" [(ngModel)]='session.usePpm' (change)='flagPpm(formPpm.value.usePpm)'>Enable Pay-Per-Minute</mat-slide-toggle>
 
                 <ng-container  *ngIf="formPpm.value.usePpm">
 
@@ -84,10 +87,10 @@
      
                     <mat-checkbox color="accent"  name="inclPpmInGoal" [(ngModel)]="session.inclPpmInGoal" labelPosition="after">incl. in goal calculation</mat-checkbox>
                     <mat-checkbox color="accent" name="inclPpmInLeaderboard"  [(ngModel)]="session.inclPpmInLeaderboard" labelPosition="after">incl. in leaderboard calculation</mat-checkbox>
-           
-               </ng-container>
+                    <button type="submit" mat-raised-button color="primary" [disabled]="formPpm.invalid">Save</button>
             
-                <button type="submit" mat-raised-button color="primary" [disabled]="formPpm.invalid">Save</button>
+                </ng-container>
+            
             </form>
         
     </mat-expansion-panel>
@@ -105,7 +108,7 @@
 
             <form fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px" #formGoal="ngForm" (ngSubmit)="onGoal(formGoal)">
      
-                <mat-slide-toggle labelPosition="before" color="accent" name="useGoal" [(ngModel)]="session.useGoal"  (change)="initGoal(formGoal.value.useGoal)">Do you want to set a Goal?</mat-slide-toggle>
+                <mat-slide-toggle labelPosition="before" color="accent" name="useGoal" [(ngModel)]="session.useGoal"  (change)="flagGoal(formGoal.value.useGoal)">Do you want to set a Goal?</mat-slide-toggle>
                 
                 <ng-container *ngIf="goal">
                     <mat-form-field>

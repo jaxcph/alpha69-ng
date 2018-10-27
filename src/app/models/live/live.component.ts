@@ -264,7 +264,7 @@ export class LiveComponent implements OnInit, OnDestroy {
     }));
 
 
-    this.startTimer(5000, 59800); // delay 15 secs initial, to allow user to leave and objects to load also . calc with 200msec delay
+    this.startTimer(3000, 59800); // delay 15 secs initial, to allow user to leave and objects to load also . calc with 200msec delay
 
    // this user
     this.subs$.push(
@@ -326,6 +326,27 @@ export class LiveComponent implements OnInit, OnDestroy {
             }
           }
 
+          // check user-level if is in user-level access type
+          if ( data.session.accessType === 'user-level'  && data.session.minLevel > this.member.level ) {
+
+              this.suspendPpmPay = true;
+
+              // show messagebox
+              const dialogRef = this.dialog.open(OKDialogComponent, {
+                disableClose: true,
+                autoFocus: true,
+                closeOnNavigation: false,
+                data: {
+                  title: 'Information',
+                  content: `${data.session.modelName} now required a minimum user-level of ${data.session.minLevel}
+                          which is higher then your current user-level of ${this.member.level}.
+                          You will need to leave this live session`,
+                  okLabel: 'OK'
+                  }
+              });
+              this.router.navigate(['/models']);
+          }
+
           if (this.originalSession === null || this.originalSession === undefined) {
             // is it the first time the member object has been fetched
              this.originalSession = data.session;
@@ -338,6 +359,32 @@ export class LiveComponent implements OnInit, OnDestroy {
               if (this.originalSession !== data.session ) {
                 console.log('session changed');
 
+                if (data.session.accessType !== this.originalSession.accessType) {
+                  // change in access type
+
+                  if ( data.session.accessType === 'on-request') {
+                    // request the user to request access
+                    this.suspendPpmPay = true;
+
+                     // show messagebox
+                    const dialogRef = this.dialog.open(OKDialogComponent, {
+                      disableClose: true,
+                      autoFocus: true,
+                      closeOnNavigation: false,
+                      data: {
+                        title: 'Information',
+                        content:  `${data.session.modelName} has swiched to Request-to-join.
+                        You will need to ask the model to get access to this session`,
+                        okLabel: 'OK'
+                        }
+                    });
+                    this.router.navigate(['/models']);
+                  }
+
+                }
+
+
+
                 // check ppm
                 if ( (!this.originalSession.usePpm && data.session.usePpm) ||
                      (data.session.usePpm && data.session.ppmAmount >  this.originalSessionPpmAmountLimit) ) {
@@ -345,12 +392,19 @@ export class LiveComponent implements OnInit, OnDestroy {
                   // ppm enabled after user joined
                   this.suspendPpmPay = true;
                   const dialogRef = this.dialog.open(YesNoDialogComponent, {
+                    disableClose: true,
+                    autoFocus: true,
+                    closeOnNavigation: false,
+                    hasBackdrop: false,
+                    backdropClass: 'yesno-dialog-backdrop',
                     data: {
                        title: 'PLEASE CONFIRM',
                        content: `${data.session.modelName} has Enabled Pay-Per-Minute or Increased the price.
                                You will charged ${data.session.ppmAmount} tokens per minute if you continue`,
                        yesLabel: 'Accept & Continue',
-                       noLabel: 'No, I will leave'
+                       noLabel: 'No, I will leave',
+                       timeoutSeconds: 60,
+                       onTimeoutNavigate: '/models'
                       }
                   });
 

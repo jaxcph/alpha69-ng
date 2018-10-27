@@ -220,7 +220,25 @@ export class CurrentSessionComponent implements OnInit, OnDestroy {
     this.uiService.showSnackbar('Access type settings saved', null, 3000);
   }
 
-  initGoal(useGoal) {
+
+  flagPpm(usePpm) {
+
+    if (usePpm === false) {
+      this.session.usePpm = false;
+      this.session.ppmAmount = 0;
+      this.session.inclPpmInGoal = false;
+      this.session.inclPpmInLeaderboard = false;
+      this.session.modified = new Date();
+      this.db.doc(`members/${localStorage.getItem('uid')}`).update( {session: this.session});
+      this.uiService.showSnackbar('Pay-Per-Minute settings saved', null, 3000);
+    } else {
+      this.session.usePpm = true;
+    }
+  }
+
+
+
+  flagGoal(useGoal) {
     if (useGoal === true) {
       this.db.doc(`session-goals/${localStorage.getItem('uid')}`)
       .set({
@@ -236,6 +254,17 @@ export class CurrentSessionComponent implements OnInit, OnDestroy {
     }
     this.session.useGoal = false; // onlu the onGoal operation can set this to true
     this.db.doc(`members/${localStorage.getItem('uid')}`).update( {session: this.session});
+  }
+
+  onGeneral(form: NgForm) {
+
+    this.session.minTipAmount = form.value.minTipAmount;
+    this.session.modelName = form.value.modelName;
+    this.session.title = form.value.title;
+    this.session.modified = new Date();
+    this.db.doc(`members/${localStorage.getItem('uid')}`).update( {session: this.session});
+    this.uiService.showSnackbar('General settings saved', null, 3000);
+
   }
 
   onGoal(form: NgForm) {
@@ -318,6 +347,9 @@ export class CurrentSessionComponent implements OnInit, OnDestroy {
 
 
     const dialogRef = this.dialog.open(YesNoDialogComponent, {
+      disableClose: true,
+      autoFocus: true,
+      closeOnNavigation: false,
       data: {
          title: 'Stop live session ?',
          content: 'Please confirm that you want to stop streaming this live session',
@@ -349,6 +381,9 @@ export class CurrentSessionComponent implements OnInit, OnDestroy {
 
   getNewStreamKey() {
     const dialogRef = this.dialog.open(YesNoDialogComponent, {
+      disableClose: true,
+      autoFocus: true,
+      closeOnNavigation: false,
       data: {
          title: 'Renew stream key?',
          content: 'Please confirm that you want a new key for the streaming service?',
