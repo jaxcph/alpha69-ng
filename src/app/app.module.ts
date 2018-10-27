@@ -38,6 +38,8 @@ import { LiveComponent } from './models/live/live.component';
 import { OKDialogComponent } from './common/ok-dialog/ok-dialog.component';
 import { BuytokenComponent } from './member/buytoken/buytoken.component';
 import { LovenseComponent } from './models/lovense/lovense.component';
+import { HttpClientModule } from '@angular/common/http';
+import { LovenseService } from './models/lovense/lovense.service';
 
 
 
@@ -74,9 +76,10 @@ import { LovenseComponent } from './models/lovense/lovense.component';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
     AngularFireAuthModule,
-    AngularFireStorageModule
+    AngularFireStorageModule,
+    HttpClientModule
   ],
-  providers: [AuthService, MemberService, StreamService],
+  providers: [AuthService, MemberService, StreamService, LovenseService],
   bootstrap: [AppComponent],
   entryComponents: [YesNoDialogComponent, OKDialogComponent]
 })

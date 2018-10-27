@@ -1,13 +1,9 @@
+export interface LovenseToy {
+    id: string;
+    name: string;
+    nickName: string;
+    status: number;
 
-
-
-
-export interface LovenseGetToysResponse {
-  domain: Map<string, LovenseDomain>;
-}
-
-export interface LovenseDomain {
-    deviceId: string;
     domain: string;
     httpPort: number;
     wsPort: number;
@@ -15,14 +11,6 @@ export interface LovenseDomain {
     wwsPort: number;
     platform: string;
     appVersion: string;
-    toys: Map<string, LovenseToysId>;
-}
-
-
-export interface LovenseToysId {
-    id: string;
-    name: string;
-    nickName: string;
 }
 
 

@@ -490,7 +490,7 @@ export class LiveComponent implements OnInit, OnDestroy {
     // unsubcribe all the subscriptions
     if (this.subs$) {
       for (const s of this.subs$) {
-        s.unsubscribe();
+        if (s) {s.unsubscribe(); }
       }
     }
 
