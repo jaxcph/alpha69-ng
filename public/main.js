@@ -1790,7 +1790,7 @@ module.exports = "mat-form-field {\r\n    width: 300px;\r\n  }\r\n\r\n  .new-ses
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<section class=\"page-title\">\r\n  <h1>Setup new live streaming session</h1>\r\n</section>\r\n<section class=\"new-session\">\r\n\r\n    <form fxLayout=\"column\" fxLayoutAlign=\"center center\" fxLayoutGap=\"10px\" #f=\"ngForm\" (ngSubmit)=\"onSubmit(f)\">\r\n     \r\n             \r\n      <mat-form-field *ngIf=\"currentMember\">\r\n        <input type=\"text\" matInput placeholder=\"Model name to use\" ngModel name=\"modelName\" required [(ngModel)]=\"currentMember.displayName\"/> \r\n      </mat-form-field>\r\n             \r\n      <mat-form-field>\r\n        <input type=\"text\" matInput placeholder=\"Title\" ngModel name=\"title\" required />\r\n      </mat-form-field>\r\n\r\n      <mat-form-field>\r\n          <input type=\"number\" matInput placeholder=\"Minimum tip Amount\" ngModel name=\"minTipAmount\" required  value=\"0\"/>\r\n        </mat-form-field>\r\n  \r\n           \r\n      <mat-form-field>\r\n          <mat-select placeholder=\"Who can view?\" ngModel name=\"accessType\" required >\r\n              <mat-option value=\"public\"><u>Everyone</u> can view</mat-option>\r\n              <mat-option value=\"member-only\">all <u>Members</u> can view</mat-option>\r\n              <mat-option value=\"user-level\">only <u>Members</u> => <u>level</u> </mat-option>\r\n              <mat-option value=\"on-request\"><u>Members</u> can <u>Request to join</u></mat-option>\r\n            </mat-select>\r\n      </mat-form-field>\r\n\r\n      <mat-form-field *ngIf=\"f.value.accessType=='user-level'\">\r\n            <input type=\"number\" matInput placeholder=\"Required level?\" ngModel name=\"minLevel\" value=\"0\" />  \r\n      </mat-form-field>\r\n\r\n      <mat-slide-toggle labelPosition=\"after\" color=\"accent\" ngModel name=\"goalUse\"  value=\"false\">Do you want to set a Goal?</mat-slide-toggle>\r\n      \r\n      <ng-container *ngIf=\"f.value.goalUse\">\r\n        <mat-form-field>\r\n            <input type=\"number\" matInput placeholder=\"Goal Amount token (Target)\" ngModel name=\"goalAmount\" value=\"0\" />\r\n        </mat-form-field>\r\n        <mat-form-field>\r\n            <input type=\"text\"  matInput placeholder=\"Goal description\" ngModel name=\"goalDescription\"  />\r\n        </mat-form-field>\r\n        <mat-form-field>\r\n                <mat-select placeholder=\"Show Fx on goal complete?\" ngModel name=\"goalDoneFx\" >\r\n                        <mat-option value=\"\">No</mat-option>\r\n                        <mat-option value=\"fx1\">1 TBD</mat-option>\r\n                        <mat-option value=\"fx2\">2 TBD</mat-option>\r\n                        <mat-option value=\"fx3\">3 TBD</mat-option>\r\n                        <mat-option value=\"fx3\">4 TBD</mat-option>\r\n                      </mat-select>\r\n        </mat-form-field>\r\n        <br>\r\n      </ng-container>   \r\n    \r\n\r\n      <mat-slide-toggle labelPosition=\"after\" color=\"accent\" ngModel name=\"ppmUse\"  value=\"false\">Enable Pay-Per-Minute</mat-slide-toggle>\r\n\r\n      <mat-form-field *ngIf=\"f.value.ppmUse\">\r\n          <input type=\"number\" matInput placeholder=\"Tokens to Pay-Per-Minute\" ngModel name=\"ppmAmount\" value=\"0\" />\r\n      </mat-form-field>\r\n      \r\n      <mat-checkbox color=\"accent\" ngModel name=\"agree\" labelPosition=\"after\" required>Agree to <a href=\"#\">Terms and Conditions.</a></mat-checkbox>\r\n\r\n      <button type=\"submit\" mat-raised-button color=\"primary\" [disabled]=\"f.invalid\">Submit</button>\r\n\r\n    </form>\r\n  </section>\r\n  \r\n  "
+module.exports = "<section class=\"page-title\">\r\n  <h1>Setup new live streaming session</h1>\r\n</section>\r\n<section class=\"new-session\">\r\n\r\n    <form fxLayout=\"column\" fxLayoutAlign=\"center center\" fxLayoutGap=\"10px\" #f=\"ngForm\" (ngSubmit)=\"onSubmit(f)\">\r\n     \r\n             \r\n      <mat-form-field *ngIf=\"currentMember\">\r\n        <input type=\"text\" matInput placeholder=\"Model name to use\" ngModel name=\"modelName\" required [(ngModel)]=\"currentMember.displayName\"/> \r\n      </mat-form-field>\r\n             \r\n      <mat-form-field>\r\n        <input type=\"text\" matInput placeholder=\"Title\" ngModel name=\"title\" required />\r\n      </mat-form-field>\r\n\r\n      <mat-form-field>\r\n          <input type=\"number\" matInput placeholder=\"Minimum tip Amount\" ngModel name=\"minTipAmount\" required  value=\"0\"/>\r\n        </mat-form-field>\r\n  \r\n           \r\n      <mat-form-field>\r\n          <mat-select placeholder=\"Who can view?\" ngModel name=\"accessType\" required >\r\n              <mat-option value=\"public\"><u>Everyone</u> can view</mat-option>\r\n              <mat-option value=\"member-only\">all <u>Members</u> can view</mat-option>\r\n              <mat-option value=\"user-level\">only <u>Members</u> => <u>level</u> </mat-option>\r\n              <mat-option value=\"on-request\"><u>Members</u> can <u>Request to join</u></mat-option>\r\n            </mat-select>\r\n      </mat-form-field>\r\n\r\n      <mat-form-field *ngIf=\"f.value.accessType=='user-level'\">\r\n            <input type=\"number\" matInput placeholder=\"Required level?\" ngModel name=\"minLevel\" value=\"0\" />  \r\n      </mat-form-field>\r\n\r\n      <mat-slide-toggle labelPosition=\"after\" color=\"accent\" ngModel name=\"goalUse\"  value=\"false\">Do you want to set a Goal?</mat-slide-toggle>\r\n      \r\n      <ng-container *ngIf=\"f.value.goalUse\">\r\n        <mat-form-field>\r\n            <input type=\"number\" matInput placeholder=\"Goal Amount token (Target)\" ngModel name=\"goalAmount\" value=\"0\" />\r\n        </mat-form-field>\r\n        <mat-form-field>\r\n            <input type=\"text\"  matInput placeholder=\"Goal description\" ngModel name=\"goalDescription\"  />\r\n        </mat-form-field>\r\n        <mat-form-field>\r\n                <mat-select placeholder=\"Show Fx on goal complete?\" ngModel name=\"goalDoneFx\" >\r\n                        <mat-option value=\"\">No</mat-option>\r\n                        <mat-option value=\"fx1\">1 TBD</mat-option>\r\n                        <mat-option value=\"fx2\">2 TBD</mat-option>\r\n                        <mat-option value=\"fx3\">3 TBD</mat-option>\r\n                        <mat-option value=\"fx3\">4 TBD</mat-option>\r\n                      </mat-select>\r\n        </mat-form-field>\r\n        <br>\r\n      </ng-container>   \r\n\r\n       \r\n     \r\n      \r\n      \r\n      \r\n\r\n      <mat-slide-toggle labelPosition=\"after\" color=\"accent\" ngModel name=\"ppmUse\"  value=\"false\">Enable Pay-Per-Minute</mat-slide-toggle>\r\n\r\n      <ng-container  *ngIf=\"f.value.ppmUse\">\r\n          <mat-form-field>\r\n              <input type=\"number\" matInput placeholder=\"Tokens to Pay-Per-Minute\" ngModel name=\"ppmAmount\" value=\"0\" />\r\n          </mat-form-field>\r\n          <mat-checkbox color=\"accent\" ngModel name=\"inclPpmInGoal\" labelPosition=\"after\" required>incl. in goal calculation</mat-checkbox>\r\n          <mat-checkbox color=\"accent\" ngModel name=\"inclPpmInLeaderboard\" labelPosition=\"after\" required>incl. in leaderboard calculation</mat-checkbox>\r\n      </ng-container>\r\n\r\n      <br/>\r\n      <mat-checkbox color=\"accent\" ngModel name=\"agree\" labelPosition=\"after\" required>Agree to <a href=\"#\">Terms and Conditions.</a></mat-checkbox>\r\n\r\n      <button type=\"submit\" mat-raised-button color=\"primary\" [disabled]=\"f.invalid\">Submit</button>\r\n\r\n    </form>\r\n  </section>\r\n  \r\n  "
 
 /***/ }),
 
@@ -1856,7 +1856,9 @@ var NewSessionComponent = /** @class */ (function () {
                 stream: this.stream.fetchNewStream(),
                 created: new Date(),
                 agreedStream: form.value.agree ? true : false,
-                minTipAmount: form.value.minTipAmount
+                minTipAmount: form.value.minTipAmount,
+                inclPpmInGoal: form.value.inclPpmInGoal ? true : false,
+                inclPpmInLeaderboard: form.value.inclPpmInLeaderboard ? true : false
             }
         }).catch(function (error) {
             _this.uiService.showSnackbarError(error);
@@ -2221,7 +2223,7 @@ var LiveComponent = /** @class */ (function () {
         // update tipjar
         this.db.doc("model-tipjars/" + this.mid).update({ balance: this.tipjar.balance + amount });
         // update the goal
-        if (this.model.session.useGoal && this.goal) {
+        if (!isPpm && this.model.session.useGoal && this.goal) {
             this.db.doc("session-goals/" + this.mid).update({ collected: this.goal.collected + amount });
         }
         // record transaction
@@ -2246,25 +2248,39 @@ var LiveComponent = /** @class */ (function () {
                 ppm: isPpm
             });
         }
-        // calculate ppm info
         if (isPpm) {
             this.paidPPm += amount;
+            if (this.model.session.inclPpmInGoal && this.model.session.useGoal && this.goal) {
+                this.db.doc("session-goals/" + this.mid).update({ collected: this.goal.collected + amount });
+            }
+            if (this.model.session.inclPpmInLeaderboard) {
+                this.registerLeaderboard(amount);
+            }
+        }
+        else {
+            this.registerLeaderboard(amount);
         }
         if (this.model.session.usePpm && this.model.session.ppmAmount > 0) {
             this.ppmMinutesLeft = Math.floor(this.wallet.balance / this.model.session.ppmAmount);
         }
         return true;
     };
-    /* testUpdateSpeed() {
-       for (let i = 1 ; i < 1000; i++) {
-         console.log(`SENT: ${i}`);
-         this.db.doc('tester/1').update({amount: i}).then(() => {
-           console.log(`OK: [${i}]`);
-         }).catch( error => {
-           console.log(`ERR: [${i}]`);
-         });
-       }
-     }*/
+    LiveComponent.prototype.registerLeaderboard = function (amount) {
+        if (this.sessionLeaderboard) {
+            this.db.doc("session-leaderboard/" + this.model.session.id + "/leaderboard/" + this.uid).update({
+                nme: this.member.displayName,
+                amt: (this.sessionLeaderboard.amt + amount),
+                dt: new Date()
+            });
+        }
+        else {
+            this.db.doc("session-leaderboard/" + this.model.session.id + "/leaderboard/" + this.uid).set({
+                nme: this.member.displayName,
+                amt: amount,
+                dt: new Date()
+            });
+        }
+    };
     LiveComponent.prototype.onBuyToken = function (m) {
         localStorage.setItem('buytoken.return.mid', this.mid);
         this.router.navigate(['/member/buytoken']);
@@ -2312,6 +2328,9 @@ var LiveComponent = /** @class */ (function () {
                 _this.uiService.showSnackbar('Live cam session has been terminated by the model. returning to model listings', null, 7000);
                 _this.router.navigate(['/models']);
             }
+            _this.subs$.push(_this.db.doc("session-leaderboard/" + _this.model.session.id + "/leaderboard/" + _this.uid)
+                .valueChanges()
+                .subscribe(function (lb) { return (_this.sessionLeaderboard = lb); }));
             // check if is blocked
             if (_this.model.blocked) {
                 var blockedKey = _this.uid + "/";
@@ -2470,7 +2489,7 @@ module.exports = ".page-title{\r\n    text-align: center\r\n}\r\n.content {\r\n 
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<section class='page-title'>\r\n    <h1>Models</h1>\r\n</section>\r\n\r\n<section class='content'  fxLayout=\"row wrap\" fxLayoutAlign=\"center\" *ngIf=\"models\" >\r\n\r\n    <mat-card class=\"model-card\" fxFlex.xs=\"100%\" fxFlex=\"400px\" *ngFor=\"let m of models\" >\r\n        <mat-card-header>\r\n          <img mat-card-avatar *ngIf=\"m.model.avatarImg\" [src]=\"m.model.avatarImg\">\r\n          <mat-card-title>{{m.session ? m.session.modelName : m.displayName }}</mat-card-title>\r\n          <mat-card-subtitle>{{m.session ? m.session.title: \"&nbsp;\"}}</mat-card-subtitle>\r\n        </mat-card-header>\r\n        <img mat-card-image [src]=\"m.model.listingImg\" alt=\"\">\r\n        <mat-card-content>\r\n          <p>\r\n              {{m.model.aboutMe?m.model.aboutMe : \"&nbsp;\"}}\r\n          </p>\r\n          <div class=\"ppm\" *ngIf=\"m.session && m.session.usePpm && m.session.ppmAmount > 0\">\r\n            <label class=\"ppm-label\">Pay Per Minute:</label><span class=\"ppm-value\">{{m.session.ppmAmount}} token</span>\r\n          </div>\r\n        </mat-card-content>\r\n        <mat-card-actions>\r\n\r\n        <ng-container *ngIf=\"analyzeJoinOption(m) =='session'\">\r\n            <button mat-raised-button class=\"live-button\" color=\"primary\" (click)=\"onGoMemberSession()\">SESSION</button>\r\n        </ng-container>\r\n\r\n        <ng-container *ngIf=\"analyzeJoinOption(m) =='blocked'\">\r\n            <button mat-stroked-button class=\"live-button\" color=\"link\" (click)=\"onBlocked(m)\">BLOCKED</button>\r\n        </ng-container>\r\n    \r\n        <ng-container *ngIf=\"analyzeJoinOption(m) =='join'\">\r\n            <button mat-raised-button class=\"live-button\" color=\"accent\" (click)=\"onJoin(m)\">JOIN</button>\r\n        </ng-container>\r\n\r\n        <ng-container *ngIf=\"analyzeJoinOption(m) =='login'\">\r\n            <button mat-raised-button class=\"live-button\" color=\"warn\" (click)=\"navLogin()\">LOGIN</button>\r\n        </ng-container>\r\n\r\n        <ng-container *ngIf=\"analyzeJoinOption(m) =='onrequest'\">\r\n          <button mat-stroked-button class=\"live-button\" color=\"warn\" (click)=\"onRequestToJoin(m)\">REQUEST</button>\r\n        </ng-container>\r\n\r\n        <ng-container *ngIf=\"analyzeJoinOption(m) =='lowscore'\">\r\n            <button mat-stroked-button class=\"live-button\" color=\"link\" (click)=\"onLowlevel(m)\"> <mat-icon>star</mat-icon>{{m.session.minLevel}}</button>\r\n\r\n        </ng-container>\r\n\r\n\r\n          <button mat-button (click)=\"onProfile(m)\" color=\"primary\">PROFILE</button>\r\n          <button mat-button (click)=\"onShare(m)\"  color=\"primary\">SHARE</button>\r\n        </mat-card-actions>\r\n      </mat-card>\r\n\r\n</section>\r\n"
+module.exports = "<section class='page-title'>\r\n    <h1>Models</h1>\r\n</section>\r\n\r\n<section class='content'  fxLayout=\"row wrap\" fxLayoutAlign=\"center\" *ngIf=\"models\" >\r\n\r\n    <mat-card class=\"model-card\" fxFlex.xs=\"100%\" fxFlex=\"400px\" *ngFor=\"let m of models\" >\r\n        <mat-card-header>\r\n          <img mat-card-avatar *ngIf=\"m.model.avatarImg\" [src]=\"m.model.avatarImg\">\r\n          <mat-card-title>{{m.session ? m.session.modelName : m.displayName }}</mat-card-title>\r\n          <mat-card-subtitle>{{m.session ? m.session.title: \"&nbsp;\"}}</mat-card-subtitle>\r\n        </mat-card-header>\r\n        <img mat-card-image [src]=\"m.model.listingImg\" alt=\"\">\r\n        <mat-card-content>\r\n          <p>\r\n              {{m.model.aboutMe?m.model.aboutMe : \"&nbsp;\"}}\r\n          </p>\r\n          <div class=\"ppm\" *ngIf=\"m.session && m.session.usePpm && m.session.ppmAmount > 0\">\r\n            <label class=\"ppm-label\">Pay Per Minute:</label><span class=\"ppm-value\">{{m.session.ppmAmount}} token</span>\r\n          </div>\r\n        </mat-card-content>\r\n        <mat-card-actions>\r\n\r\n        <ng-container *ngIf=\"analyzeJoinOption(m) =='session'\">\r\n            <button mat-raised-button class=\"live-button\" color=\"primary\" (click)=\"onGoMemberSession()\">SESSION</button>\r\n        </ng-container>\r\n\r\n        <ng-container *ngIf=\"analyzeJoinOption(m) =='blocked'\">\r\n            <button mat-stroked-button class=\"live-button\" color=\"link\" (click)=\"onBlocked(m)\">BLOCKED</button>\r\n        </ng-container>\r\n    \r\n        <ng-container *ngIf=\"analyzeJoinOption(m) =='join'\">\r\n            <button mat-raised-button class=\"live-button\" color=\"accent\" (click)=\"onJoin(m)\">JOIN</button>\r\n        </ng-container>\r\n\r\n        <ng-container *ngIf=\"analyzeJoinOption(m) =='login'\">\r\n            <button mat-raised-button class=\"live-button\" color=\"warn\" (click)=\"navLogin()\">LOGIN</button>\r\n        </ng-container>\r\n\r\n        <ng-container *ngIf=\"analyzeJoinOption(m) =='on-request'\">\r\n          <button mat-stroked-button class=\"live-button\" color=\"warn\" (click)=\"onRequestToJoin(m)\">REQUEST</button>\r\n        </ng-container>\r\n\r\n        <ng-container *ngIf=\"analyzeJoinOption(m) =='lowscore'\">\r\n            <button mat-stroked-button class=\"live-button\" color=\"link\" (click)=\"onLowlevel(m)\"> <mat-icon>star</mat-icon>{{m.session.minLevel}}</button>\r\n\r\n        </ng-container>\r\n\r\n\r\n          <button mat-button (click)=\"onProfile(m)\" color=\"primary\">PROFILE</button>\r\n          <button mat-button (click)=\"onShare(m)\"  color=\"primary\">SHARE</button>\r\n        </mat-card-actions>\r\n      </mat-card>\r\n\r\n</section>\r\n"
 
 /***/ }),
 
