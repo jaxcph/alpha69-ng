@@ -1,9 +1,10 @@
-<button color="primary" mat-raised-button (click)="onScan()">re-scan for toys</button>
+<button color="primary" mat-raised-button (click)="onScan()">Scan network for Toys</button>
 <ng-container *ngIf="toys">
 
 
 <ul>
   <li *ngFor="let toy of toys">
-    {{toy.name}}, {{toy.status==1 ? 'ON' : 'OFF'}} Test: <a href="https://{{toy.domain}}:{{toy.httpsPort}}/Vibrate?v=1&t={{toy.id}}">ON</a>|<a href="https://{{toy.domain}}:{{toy.httpsPort}}/Vibrate?v=0&t={{toy.id}}">OFF</a>  </li>
+    {{toy.name}} (Status: {{toy.status==1 ? 'ON' : 'OFF'}}) 
+    <!--Test: <a href="https://{{toy.domain}}:{{toy.httpsPort}}/Vibrate?v=1&t={{toy.id}}">ON</a>|<a href="https://{{toy.domain}}:{{toy.httpsPort}}/Vibrate?v=0&t={{toy.id}}">OFF</a>  </li>-->
 </ul>
 </ng-container>

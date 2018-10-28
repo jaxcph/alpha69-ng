@@ -51,7 +51,16 @@ mat-form-field {
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cdeb8b', endColorstr='#daeab4',GradientType=0 );
    }
 
-
+.lovense {
+  background: rgba(252,236,252,1);
+background: -moz-linear-gradient(top, rgba(252,236,252,1) 0%, rgba(252,236,252,1) 37%, rgba(255,189,236,1) 100%);
+background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(252,236,252,1)), color-stop(37%, rgba(252,236,252,1)), color-stop(100%, rgba(255,189,236,1)));
+background: -webkit-linear-gradient(top, rgba(252,236,252,1) 0%, rgba(252,236,252,1) 37%, rgba(255,189,236,1) 100%);
+background: -o-linear-gradient(top, rgba(252,236,252,1) 0%, rgba(252,236,252,1) 37%, rgba(255,189,236,1) 100%);
+background: -ms-linear-gradient(top, rgba(252,236,252,1) 0%, rgba(252,236,252,1) 37%, rgba(255,189,236,1) 100%);
+background: linear-gradient(to bottom, rgba(252,236,252,1) 0%, rgba(252,236,252,1) 37%, rgba(255,189,236,1) 100%);
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fcecfc', endColorstr='#ffbdec', GradientType=0 );
+}
 .page-title{
   text-align: center
 }

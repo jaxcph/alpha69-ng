@@ -3,6 +3,8 @@ import { LovenseService } from './lovense.service';
 import { Subscription } from 'rxjs';
 import { LovenseToy } from './lovense.model';
 import { map } from 'rxjs/operators';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { Member, StreamSession } from 'src/app/member/member.model';
 
 @Component({
   selector: 'app-lovense',
@@ -12,15 +14,35 @@ import { map } from 'rxjs/operators';
 export class LovenseComponent implements OnInit, OnDestroy {
 
   public toys: LovenseToy[] = [];
+  public sid: number;
+  public member: Member;
+  public session: StreamSession;
 
   private subs$: Subscription[] = [];
-  constructor(private lovenseService: LovenseService) { }
+  constructor(private lovenseService: LovenseService, private db: AngularFirestore) { }
 
   ngOnInit() {
+    this.subs$.push(
+      this.db.doc(`members/${localStorage.getItem('uid')}`)
+    .valueChanges()
+    .subscribe( (data: any) => {
+      this.member = data;
+      this.session = {...data.session, created: data.session.created.toDate()} ;
+
+      this.subs$.push(
+        this.db.collection('session-toys', ref => ref.where('sid', '==', this.session.id))
+      .valueChanges()
+      .subscribe( (ltdata: LovenseToy[]) => {
+        this.toys = ltdata;
+        console.log(ltdata);
+       }));
+
+      }));
+
+
   }
 
   onScan() {
-    console.log('onscan');
     this.getToys();
   }
 
@@ -28,7 +50,6 @@ export class LovenseComponent implements OnInit, OnDestroy {
     this.subs$.push(
 
      this.lovenseService.getToys().subscribe( data => {
-      console.log(data);
       this.toys = [];
       const apis = Object.keys(data).map(e => data[e]);
       for (const api of apis) {
@@ -37,7 +58,11 @@ export class LovenseComponent implements OnInit, OnDestroy {
         if (apiToys.length > 0) {
           for (const at of apiToys) {
             const t: LovenseToy = {
-              ...at,
+              did: at.id,
+              sid: this.session.id,
+              name: at.name,
+              nickName: at.nickName,
+              status: at.status,
               domain: api.domain,
               httpPort: api.httpPort,
               httpsPort: api.httpsPort,
@@ -45,8 +70,7 @@ export class LovenseComponent implements OnInit, OnDestroy {
               wwsPort: api.wssPort,
               platform: api.platform,
               appVersion: api.appVersion};
-            console.log(t);
-            this.toys.push(t);
+            this.db.collection('session-toys').doc(t.did).set(t);
           }
         }
       }

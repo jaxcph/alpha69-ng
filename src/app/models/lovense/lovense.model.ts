@@ -1,5 +1,6 @@
 export interface LovenseToy {
-    id: string;
+    did: string;
+    sid: number;
     name: string;
     nickName: string;
     status: number;
