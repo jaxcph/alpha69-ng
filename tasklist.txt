@@ -20,3 +20,4 @@ X public live make it work
 - openid login, google, twitter, facebook etc..
 - session timeout, require relogin after x days
 
++ added jquery and confetti npm
