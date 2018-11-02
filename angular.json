@@ -25,7 +25,9 @@
             "styles": [
               "src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [
+              "/node_modules/confetti-js/dist/index.min.js"
+            ]
           },
           "configurations": {
             "production": {

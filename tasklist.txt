@@ -13,8 +13,10 @@ X public live make it work
     https://stackoverflow.com/questions/39671568/how-do-i-overlay-a-canvas-over-a-video
     https://www.npmjs.com/package/confetti-js
     https://www.w3schools.com/html/html5_canvas.asp
+    https://agezao.github.io/confetti-js/
 
 - in current-session only enable save button if is dirty
 - add Moderator role
 - openid login, google, twitter, facebook etc..
+- session timeout, require relogin after x days
 
