@@ -40,6 +40,8 @@ import { BuytokenComponent } from './member/buytoken/buytoken.component';
 import { LovenseComponent } from './models/lovense/lovense.component';
 import { HttpClientModule } from '@angular/common/http';
 import { LovenseService } from './models/lovense/lovense.service';
+import { VideoplayerComponent } from './common/videoplayer/videoplayer.component';
+import { ChatComponent } from './common/chat/chat.component';
 
 
 
@@ -65,7 +67,9 @@ import { LovenseService } from './models/lovense/lovense.service';
     LiveComponent,
     OKDialogComponent,
     BuytokenComponent,
-    LovenseComponent],
+    LovenseComponent,
+    VideoplayerComponent,
+    ChatComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

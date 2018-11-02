@@ -1,7 +1,4 @@
-- add Moderator role
 X timer on Live yesno dialog
-- handle goal 0 action/events
--in current-session only enable save button if is dirty
 X disable timer close by esc
 X fix change in visibily in live
 X change session current visibily to form submit
@@ -10,3 +7,14 @@ X public live make it work
 
 - when model logs off warning about session active
 - lovense
+- video player , scaling and canvas overlay for fx
+- handle goal 0 action/events 
+    https://www.jqueryscript.net/animation/Confetti-Animation-jQuery-Canvas-Confetti-js.html
+    https://stackoverflow.com/questions/39671568/how-do-i-overlay-a-canvas-over-a-video
+    https://www.npmjs.com/package/confetti-js
+    https://www.w3schools.com/html/html5_canvas.asp
+
+- in current-session only enable save button if is dirty
+- add Moderator role
+- openid login, google, twitter, facebook etc..
+

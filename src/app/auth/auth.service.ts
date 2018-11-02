@@ -39,7 +39,7 @@ export class AuthService {
     });
   }
 
-  loginGoogle() {
+ /* loginGoogle() {
     this.afAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider())
     .then( (userCredential) => {
 
@@ -64,9 +64,9 @@ export class AuthService {
       };*/
 
       // check if has member record in firestore
-    });
+   // });
 
-  }
+//  }
 
   signUp(email: string, password: string,
      displayName: string, isModel: boolean,
