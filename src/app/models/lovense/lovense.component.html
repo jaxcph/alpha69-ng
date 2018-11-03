@@ -1,10 +1,17 @@
-<button color="primary" mat-raised-button (click)="onScan()">Scan network for Toys</button>
+<p>Re-scans every 15 seconds for toys and their status</p>
+<a href='#'><b>Guide:</b> How to link devices...</a><br/>
+<mat-divider></mat-divider>
 <ng-container *ngIf="toys">
+ <section class='toys-list'>
+  <table>
+  <tr *ngFor="let toy of toys | keyvalue">
+    <td><img [src]="toy.value.image"> </td>      
+       <td>
+        <button *ngIf="toy.value.status==1" mat-raised-button color="accent" (click)="navConfigure(toy.value.did)">Configure {{toy.value.name}}</button>
+        <h3 *ngIf="toy.value.status==0">{{toy.value.name}} is Offline</h3> 
+      </td>
+  </tr>
+</table>
+  </section>
 
-
-<ul>
-  <li *ngFor="let toy of toys">
-    {{toy.name}} (Status: {{toy.status==1 ? 'ON' : 'OFF'}}) 
-    <!--Test: <a href="https://{{toy.domain}}:{{toy.httpsPort}}/Vibrate?v=1&t={{toy.id}}">ON</a>|<a href="https://{{toy.domain}}:{{toy.httpsPort}}/Vibrate?v=0&t={{toy.id}}">OFF</a>  </li>-->
-</ul>
 </ng-container>

@@ -42,6 +42,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { LovenseService } from './models/lovense/lovense.service';
 import { VideoplayerComponent } from './common/videoplayer/videoplayer.component';
 import { ChatComponent } from './common/chat/chat.component';
+import { LovenseConfigComponent } from './models/lovense-config/lovense-config.component';
 
 
 
@@ -70,7 +71,8 @@ import { ChatComponent } from './common/chat/chat.component';
     BuytokenComponent,
     LovenseComponent,
     VideoplayerComponent,
-    ChatComponent],
+    ChatComponent,
+    LovenseConfigComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

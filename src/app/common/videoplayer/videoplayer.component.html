@@ -1,61 +1,14 @@
-
-<canvas  id="confetti-holder" style="position: absolute; top:0;left:0;z-index: 10;background-color:rgba(255,0,0,0.0); width: 100%;height: 100%;"></canvas>
-<script>
-		var confettiSettings = 
-		{  "target":"confetti-holder",
-		  "max":"80",
-		  "size":"1",
-		  "animate":true,
-		  "props":["circle"],
-		  "colors":[[165,104,246],[230,61,135],[0,199,228],[253,214,126]],
-		  "clock":"25",
-		  "rotate":false
-		  };
-		  
-		var confetti = new ConfettiGenerator(confettiSettings);
-		confetti.render()
-	  </script>
-  <script>
-  alert('heelowø')</script>
-<button onclick="confetti.render()">Confetti</button>
-
-<!--
-
-
-
 <div class="container">
 
 	<video class="video"
 		   id="videoplayer"
 		   autoPlay
 		   controls
-	   [src]="source">
+	   [src]="source" >
 	</video>
 
-	
-	<ng-container *ngIf="showCanvas">
-	</ng-container>
+	<canvas  id="fx-overlay"  class="fx-overlay-canvas"></canvas>
 </div>
--->
-	
-<!-- <button id="startConfetti">ST</button>
-<button id="stopConfetti">SP</button>
-<button id="restartConfetti">RE</button>
-
-<button  onclick="confetti.render()" >Start</button><br/>
-<button  onclick="confetti.clear()">Stop</button>
--->
-<!--
-<script>
-	function resize_video_and_canvas()
-	{
-	var newWidth=document.getElementById('widthSlider').value;
-	document.getElementById('videoplayer').width = newWidth;
-
-
-	document.getElementById("canvas").width = newWidth;
-	document.getElementById("canvas").height= document.getElementById('videoplayer').height;
-	}
-
-</script>
--->
+<button (click)="setVideoSize(1080)">FHD</button>
+<button (click)="setVideoSize(720)">HD</button>
+<button (click)="setVideoSize(360)">SD</button>

@@ -7,8 +7,15 @@ X public live make it work
 
 - when model logs off warning about session active
 - lovense
+     - fix scan and db toys registration
+     - make actions table
+
+
 - video player , scaling and canvas overlay for fx
 - handle goal 0 action/events 
+    + can show confetti on full, over video or in background
+    - cannot resize canvas to 1px after shown for x seconds
+
     https://www.jqueryscript.net/animation/Confetti-Animation-jQuery-Canvas-Confetti-js.html
     https://stackoverflow.com/questions/39671568/how-do-i-overlay-a-canvas-over-a-video
     https://www.npmjs.com/package/confetti-js
@@ -21,3 +28,51 @@ X public live make it work
 - session timeout, require relogin after x days
 
 + added jquery and confetti npm
+
+- jQWidgets docking panels
+
+
+-------------------
+export const LovenseCommandsPreset = Map<string, LovenseToyCommand[]>();
+
+    {
+        model: 'edge',
+        commands: [{action: 'Vibrate', value_min: 0, value_max: 20}, {action: 'Preset', value_min: 0, value_max: 3}]
+    },
+    {
+        model: 'lush',
+        commands: [{action: 'Vibrate', value_min: 0, value_max: 20}, {action: 'Preset', value_min: 0, value_max: 3}]
+    },
+    {
+        model: 'hush',
+        commands: [{action: 'Vibrate', value_min: 0, value_max: 20}, {action: 'Preset', value_min: 0, value_max: 3}]
+    },
+    {
+        model: 'ambi',
+        commands: [{action: 'Vibrate', value_min: 0, value_max: 20}, {action: 'Preset', value_min: 0, value_max: 3}]
+    },
+    {
+        model: 'domi',
+        commands: [{action: 'Vibrate', value_min: 0, value_max: 20}, {action: 'Preset', value_min: 0, value_max: 3}]
+    },
+    {
+        model: 'osci',
+        commands: [{action: 'Vibrate', value_min: 0, value_max: 20}, {action: 'Preset', value_min: 0, value_max: 3}]
+    },
+    {
+        model: 'nora',
+        commands: [
+         {action: 'Vibrate', value_min: 0, value_max: 20},
+         {action: 'RotateAntiClockwise', value_min: 0, value_max: 20},
+         {action: 'RotateClockwise', value_min: 0, value_max: 20},
+         {action: 'RotateChange', value_min: -1, value_max: -1 }]
+    },
+    {
+        model: 'max',
+        commands: [
+            {action: 'Vibrate', value_min: 0, value_max: 20},
+            {action: 'AirAuto', value_min: 0, value_max: 3},
+            {action: 'AirIn', value_min: -1, value_max: -1},
+            {action: 'AirOut', value_min: -1, value_max: -1}]
+    }
+];

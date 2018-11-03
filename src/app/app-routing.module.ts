@@ -14,6 +14,7 @@ import { LiveComponent } from './models/live/live.component';
 import { ModelsComponent } from './models/models.component';
 import { BuytokenComponent } from './member/buytoken/buytoken.component';
 import { LovenseComponent } from './models/lovense/lovense.component';
+import { LovenseConfigComponent } from './models/lovense-config/lovense-config.component';
 
 
 
@@ -24,6 +25,7 @@ const routes: Routes = [
   { path: 'models', component: ModelsComponent},
   { path: 'models/live', component: LiveComponent},
   { path: 'models/lovense', component: LovenseComponent,  canActivate: [AuthGuard]},
+  { path: 'models/lovense/config/:toyid', component: LovenseConfigComponent, canActivate: [AuthGuard]},
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]},
   { path: 'member/account', component: AccountComponent, canActivate: [AuthGuard]},
   { path: 'member/buytoken', component: BuytokenComponent, canActivate: [AuthGuard]},
