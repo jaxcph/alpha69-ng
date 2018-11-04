@@ -76,6 +76,7 @@ export class CurrentSessionComponent implements OnInit, OnDestroy {
     .subscribe( (data: any) => {
       this.currentMember = data;
       this.session = {...data.session, created: data.session.created.toDate()   };
+      localStorage.setItem('own-session-id', this.session.id.toString());
 
 
       this.leaderboardSub = this.db.collection(`session-leaderboard/${this.session.id}/leaderboard`,
@@ -367,6 +368,8 @@ export class CurrentSessionComponent implements OnInit, OnDestroy {
           this.goal = null;
 
           console.log('session stopped');
+          localStorage.removeItem('own-session-id');
+
           this.session = null;
           this.uiService.showSnackbar('Session stopped', null, 3000);
         })

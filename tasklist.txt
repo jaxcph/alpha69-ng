@@ -31,48 +31,6 @@ X public live make it work
 
 - jQWidgets docking panels
 
-
--------------------
-export const LovenseCommandsPreset = Map<string, LovenseToyCommand[]>();
-
-    {
-        model: 'edge',
-        commands: [{action: 'Vibrate', value_min: 0, value_max: 20}, {action: 'Preset', value_min: 0, value_max: 3}]
-    },
-    {
-        model: 'lush',
-        commands: [{action: 'Vibrate', value_min: 0, value_max: 20}, {action: 'Preset', value_min: 0, value_max: 3}]
-    },
-    {
-        model: 'hush',
-        commands: [{action: 'Vibrate', value_min: 0, value_max: 20}, {action: 'Preset', value_min: 0, value_max: 3}]
-    },
-    {
-        model: 'ambi',
-        commands: [{action: 'Vibrate', value_min: 0, value_max: 20}, {action: 'Preset', value_min: 0, value_max: 3}]
-    },
-    {
-        model: 'domi',
-        commands: [{action: 'Vibrate', value_min: 0, value_max: 20}, {action: 'Preset', value_min: 0, value_max: 3}]
-    },
-    {
-        model: 'osci',
-        commands: [{action: 'Vibrate', value_min: 0, value_max: 20}, {action: 'Preset', value_min: 0, value_max: 3}]
-    },
-    {
-        model: 'nora',
-        commands: [
-         {action: 'Vibrate', value_min: 0, value_max: 20},
-         {action: 'RotateAntiClockwise', value_min: 0, value_max: 20},
-         {action: 'RotateClockwise', value_min: 0, value_max: 20},
-         {action: 'RotateChange', value_min: -1, value_max: -1 }]
-    },
-    {
-        model: 'max',
-        commands: [
-            {action: 'Vibrate', value_min: 0, value_max: 20},
-            {action: 'AirAuto', value_min: 0, value_max: 3},
-            {action: 'AirIn', value_min: -1, value_max: -1},
-            {action: 'AirOut', value_min: -1, value_max: -1}]
-    }
-];
+- mute guest and basic members
+- bott like charles bott
+- topic (as title)

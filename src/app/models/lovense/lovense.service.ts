@@ -47,19 +47,19 @@ export class LovenseService {
     // tslint:disable-next-line:max-line-length
     this.images.set('edge', 'https://firebasestorage.googleapis.com/v0/b/alpha69-ng.appspot.com/o/images%2Flovense-edge.png?alt=media&token=b5bfb121-9256-4ebc-b315-77de642580ee');
     // tslint:disable-next-line:max-line-length
-    this.images.set('lush', 'https://firebasestorage.googleapis.com/v0/b/alpha69-ng.appspot.com/o/images%2Flovense-logo.png?alt=media&token=972dc95f-e83b-43c8-bab7-fb6d4903adff');
+    this.images.set('lush', 'https://firebasestorage.googleapis.com/v0/b/alpha69-ng.appspot.com/o/images%2Flovense-lush.png?alt=media&token=6891b882-f427-4756-96d9-c9f68976d363');
     // tslint:disable-next-line:max-line-length
-    this.images.set('hush', 'https://firebasestorage.googleapis.com/v0/b/alpha69-ng.appspot.com/o/images%2Flovense-logo.png?alt=media&token=972dc95f-e83b-43c8-bab7-fb6d4903adff');
+    this.images.set('hush', 'https://firebasestorage.googleapis.com/v0/b/alpha69-ng.appspot.com/o/images%2Flovense-hush.png?alt=media&token=bcd7102c-5aa2-4c6f-b7cb-eb697e76a995');
     // tslint:disable-next-line:max-line-length
-    this.images.set('ambi', 'https://firebasestorage.googleapis.com/v0/b/alpha69-ng.appspot.com/o/images%2Flovense-logo.png?alt=media&token=972dc95f-e83b-43c8-bab7-fb6d4903adff');
+    this.images.set('ambi', 'https://firebasestorage.googleapis.com/v0/b/alpha69-ng.appspot.com/o/images%2Flovense-ambi.png?alt=media&token=821ed57d-7402-4f3e-937e-c74ec5c73cac');
     // tslint:disable-next-line:max-line-length
-    this.images.set('domi', 'https://firebasestorage.googleapis.com/v0/b/alpha69-ng.appspot.com/o/images%2Flovense-logo.png?alt=media&token=972dc95f-e83b-43c8-bab7-fb6d4903adff');
+    this.images.set('domi', 'https://firebasestorage.googleapis.com/v0/b/alpha69-ng.appspot.com/o/images%2Flovense-domi.png?alt=media&token=1987777a-b00a-4c69-b8f3-48ea743406b5');
     // tslint:disable-next-line:max-line-length
-    this.images.set('osci', 'https://firebasestorage.googleapis.com/v0/b/alpha69-ng.appspot.com/o/images%2Flovense-logo.png?alt=media&token=972dc95f-e83b-43c8-bab7-fb6d4903adff');
+    this.images.set('osci', 'https://firebasestorage.googleapis.com/v0/b/alpha69-ng.appspot.com/o/images%2Flovense-osci.png?alt=media&token=98619722-fc02-4309-9ab5-37ce7da52cc5');
     // tslint:disable-next-line:max-line-length
-    this.images.set('nora', 'https://firebasestorage.googleapis.com/v0/b/alpha69-ng.appspot.com/o/images%2Flovense-logo.png?alt=media&token=972dc95f-e83b-43c8-bab7-fb6d4903adff');
+    this.images.set('nora', 'https://firebasestorage.googleapis.com/v0/b/alpha69-ng.appspot.com/o/images%2Flovense-nora.png?alt=media&token=fecadde4-60fe-4771-885a-e10cca75829b');
     // tslint:disable-next-line:max-line-length
-    this.images.set('max', 'https://firebasestorage.googleapis.com/v0/b/alpha69-ng.appspot.com/o/images%2Flovense-logo.png?alt=media&token=972dc95f-e83b-43c8-bab7-fb6d4903adff');
+    this.images.set('max', 'https://firebasestorage.googleapis.com/v0/b/alpha69-ng.appspot.com/o/images%2Flovense-max.png?alt=media&token=846f8907-7824-4a0e-a94c-7a2804d521db');
 
    }
 
