@@ -40,3 +40,5 @@ X public live make it work
 - lovense tipping
 - clientside overlay at buttoom or top of video, so can be fullsize on devices (using css and canvas)
 - terminate subscription for toy events, on session close
+- overlay animated gif
+- RxQueue
