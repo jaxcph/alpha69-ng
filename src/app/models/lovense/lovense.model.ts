@@ -32,6 +32,17 @@ export interface LovenseToyCommandRule {
     seconds: number;
 }
 
-
+export interface LovensenToyEvent {
+    id: string; // document id;
+    sid: number; // session id
+    did: string; // toy device id
+    act: string;
+    val: number;
+    secs: number;
+    nme: string; // from username
+    uid: string;
+    amt: number; // amount tipped, optional
+    ts: number; // us timestamp form server firebase.database['ServerValue']['TIMESTAMP']
+}
 
 

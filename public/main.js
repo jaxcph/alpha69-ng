@@ -48,6 +48,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _models_live_live_component__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./models/live/live.component */ "./src/app/models/live/live.component.ts");
 /* harmony import */ var _models_models_component__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./models/models.component */ "./src/app/models/models.component.ts");
 /* harmony import */ var _member_buytoken_buytoken_component__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./member/buytoken/buytoken.component */ "./src/app/member/buytoken/buytoken.component.ts");
+/* harmony import */ var _models_lovense_lovense_component__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./models/lovense/lovense.component */ "./src/app/models/lovense/lovense.component.ts");
+/* harmony import */ var _models_lovense_config_lovense_config_component__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./models/lovense-config/lovense-config.component */ "./src/app/models/lovense-config/lovense-config.component.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -69,12 +71,16 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 
 
 
+
+
 var routes = [
     { path: '', component: _welcome_welcome_component__WEBPACK_IMPORTED_MODULE_2__["WelcomeComponent"] },
     { path: 'signup', component: _auth_signup_signup_component__WEBPACK_IMPORTED_MODULE_3__["SignupComponent"] },
     { path: 'login', component: _auth_login_login_component__WEBPACK_IMPORTED_MODULE_4__["LoginComponent"] },
     { path: 'models', component: _models_models_component__WEBPACK_IMPORTED_MODULE_13__["ModelsComponent"] },
     { path: 'models/live', component: _models_live_live_component__WEBPACK_IMPORTED_MODULE_12__["LiveComponent"] },
+    { path: 'models/lovense', component: _models_lovense_lovense_component__WEBPACK_IMPORTED_MODULE_15__["LovenseComponent"], canActivate: [_auth_auth_guard__WEBPACK_IMPORTED_MODULE_5__["AuthGuard"]] },
+    { path: 'models/lovense/config/:toyid', component: _models_lovense_config_lovense_config_component__WEBPACK_IMPORTED_MODULE_16__["LovenseConfigComponent"], canActivate: [_auth_auth_guard__WEBPACK_IMPORTED_MODULE_5__["AuthGuard"]] },
     { path: 'profile', component: _auth_profile_profile_component__WEBPACK_IMPORTED_MODULE_6__["ProfileComponent"], canActivate: [_auth_auth_guard__WEBPACK_IMPORTED_MODULE_5__["AuthGuard"]] },
     { path: 'member/account', component: _member_account_account_component__WEBPACK_IMPORTED_MODULE_11__["AccountComponent"], canActivate: [_auth_auth_guard__WEBPACK_IMPORTED_MODULE_5__["AuthGuard"]] },
     { path: 'member/buytoken', component: _member_buytoken_buytoken_component__WEBPACK_IMPORTED_MODULE_14__["BuytokenComponent"], canActivate: [_auth_auth_guard__WEBPACK_IMPORTED_MODULE_5__["AuthGuard"]] },
@@ -215,12 +221,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _common_ok_dialog_ok_dialog_component__WEBPACK_IMPORTED_MODULE_33__ = __webpack_require__(/*! ./common/ok-dialog/ok-dialog.component */ "./src/app/common/ok-dialog/ok-dialog.component.ts");
 /* harmony import */ var _member_buytoken_buytoken_component__WEBPACK_IMPORTED_MODULE_34__ = __webpack_require__(/*! ./member/buytoken/buytoken.component */ "./src/app/member/buytoken/buytoken.component.ts");
 /* harmony import */ var _models_lovense_lovense_component__WEBPACK_IMPORTED_MODULE_35__ = __webpack_require__(/*! ./models/lovense/lovense.component */ "./src/app/models/lovense/lovense.component.ts");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_36__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
+/* harmony import */ var _models_lovense_lovense_service__WEBPACK_IMPORTED_MODULE_37__ = __webpack_require__(/*! ./models/lovense/lovense.service */ "./src/app/models/lovense/lovense.service.ts");
+/* harmony import */ var _common_videoplayer_videoplayer_component__WEBPACK_IMPORTED_MODULE_38__ = __webpack_require__(/*! ./common/videoplayer/videoplayer.component */ "./src/app/common/videoplayer/videoplayer.component.ts");
+/* harmony import */ var _common_chat_chat_component__WEBPACK_IMPORTED_MODULE_39__ = __webpack_require__(/*! ./common/chat/chat.component */ "./src/app/common/chat/chat.component.ts");
+/* harmony import */ var _models_lovense_config_lovense_config_component__WEBPACK_IMPORTED_MODULE_40__ = __webpack_require__(/*! ./models/lovense-config/lovense-config.component */ "./src/app/models/lovense-config/lovense-config.component.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
+
+
+
+
 
 
 
@@ -283,7 +299,10 @@ var AppModule = /** @class */ (function () {
                 _models_live_live_component__WEBPACK_IMPORTED_MODULE_32__["LiveComponent"],
                 _common_ok_dialog_ok_dialog_component__WEBPACK_IMPORTED_MODULE_33__["OKDialogComponent"],
                 _member_buytoken_buytoken_component__WEBPACK_IMPORTED_MODULE_34__["BuytokenComponent"],
-                _models_lovense_lovense_component__WEBPACK_IMPORTED_MODULE_35__["LovenseComponent"]
+                _models_lovense_lovense_component__WEBPACK_IMPORTED_MODULE_35__["LovenseComponent"],
+                _common_videoplayer_videoplayer_component__WEBPACK_IMPORTED_MODULE_38__["VideoplayerComponent"],
+                _common_chat_chat_component__WEBPACK_IMPORTED_MODULE_39__["ChatComponent"],
+                _models_lovense_config_lovense_config_component__WEBPACK_IMPORTED_MODULE_40__["LovenseConfigComponent"]
             ],
             imports: [
                 _angular_platform_browser__WEBPACK_IMPORTED_MODULE_0__["BrowserModule"],
@@ -295,9 +314,10 @@ var AppModule = /** @class */ (function () {
                 _angular_fire__WEBPACK_IMPORTED_MODULE_12__["AngularFireModule"].initializeApp(_environments_environment__WEBPACK_IMPORTED_MODULE_16__["environment"].firebase),
                 _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_13__["AngularFirestoreModule"],
                 _angular_fire_auth__WEBPACK_IMPORTED_MODULE_15__["AngularFireAuthModule"],
-                _angular_fire_storage__WEBPACK_IMPORTED_MODULE_14__["AngularFireStorageModule"]
+                _angular_fire_storage__WEBPACK_IMPORTED_MODULE_14__["AngularFireStorageModule"],
+                _angular_common_http__WEBPACK_IMPORTED_MODULE_36__["HttpClientModule"]
             ],
-            providers: [_auth_auth_service__WEBPACK_IMPORTED_MODULE_11__["AuthService"], _member_member_service__WEBPACK_IMPORTED_MODULE_24__["MemberService"], _member_session_stream_service__WEBPACK_IMPORTED_MODULE_29__["StreamService"]],
+            providers: [_auth_auth_service__WEBPACK_IMPORTED_MODULE_11__["AuthService"], _member_member_service__WEBPACK_IMPORTED_MODULE_24__["MemberService"], _member_session_stream_service__WEBPACK_IMPORTED_MODULE_29__["StreamService"], _models_lovense_lovense_service__WEBPACK_IMPORTED_MODULE_37__["LovenseService"]],
             bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_3__["AppComponent"]],
             entryComponents: [src_app_common_yesno_dialog_yesno_dialog_component__WEBPACK_IMPORTED_MODULE_30__["YesNoDialogComponent"], _common_ok_dialog_ok_dialog_component__WEBPACK_IMPORTED_MODULE_33__["OKDialogComponent"]]
         })
@@ -429,6 +449,32 @@ var AuthService = /** @class */ (function () {
             }
         });
     };
+    /* loginGoogle() {
+       this.afAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider())
+       .then( (userCredential) => {
+   
+   
+         // this.db.doc(`members/${userCredential.user.uid}`).ge
+   
+       /*  const data = {
+           displayName: displayName,
+           level: 0,
+           agree18yo: true,
+           agreeMember: true,
+           isModel: isModel,
+           created: new Date(),
+           model: (isModel) ? {
+             realname: realfullname,
+             dob: dob,
+             aboutMe: aboutMe,
+             avatarImg: avatarImg,
+             listingImg: listingImg,
+             agreeModel: true
+           } : null
+         };*/
+    // check if has member record in firestore
+    // });
+    //  }
     AuthService.prototype.signUp = function (email, password, displayName, isModel, dob, realfullname, aboutMe, avatarImg, listingImg) {
         var _this = this;
         this.uiService.loadingStateChange.next(true);
@@ -488,6 +534,7 @@ var AuthService = /** @class */ (function () {
     };
     AuthService.prototype.logout = function () {
         localStorage.removeItem('uid');
+        localStorage.removeItem('mid');
         this.afAuth.auth.signOut();
     };
     AuthService.prototype.isAuth = function () {
@@ -751,6 +798,69 @@ var SignupComponent = /** @class */ (function () {
 
 /***/ }),
 
+/***/ "./src/app/common/chat/chat.component.css":
+/*!************************************************!*\
+  !*** ./src/app/common/chat/chat.component.css ***!
+  \************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL2NvbW1vbi9jaGF0L2NoYXQuY29tcG9uZW50LmNzcyJ9 */"
+
+/***/ }),
+
+/***/ "./src/app/common/chat/chat.component.html":
+/*!*************************************************!*\
+  !*** ./src/app/common/chat/chat.component.html ***!
+  \*************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<p>\r\n  chat works!\r\n</p>\r\n"
+
+/***/ }),
+
+/***/ "./src/app/common/chat/chat.component.ts":
+/*!***********************************************!*\
+  !*** ./src/app/common/chat/chat.component.ts ***!
+  \***********************************************/
+/*! exports provided: ChatComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ChatComponent", function() { return ChatComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+var ChatComponent = /** @class */ (function () {
+    function ChatComponent() {
+    }
+    ChatComponent.prototype.ngOnInit = function () {
+    };
+    ChatComponent = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
+            selector: 'app-chat',
+            template: __webpack_require__(/*! ./chat.component.html */ "./src/app/common/chat/chat.component.html"),
+            styles: [__webpack_require__(/*! ./chat.component.css */ "./src/app/common/chat/chat.component.css")]
+        }),
+        __metadata("design:paramtypes", [])
+    ], ChatComponent);
+    return ChatComponent;
+}());
+
+
+
+/***/ }),
+
 /***/ "./src/app/common/ok-dialog/ok-dialog.component.ts":
 /*!*********************************************************!*\
   !*** ./src/app/common/ok-dialog/ok-dialog.component.ts ***!
@@ -841,6 +951,128 @@ var UIService = /** @class */ (function () {
         __metadata("design:paramtypes", [_angular_material__WEBPACK_IMPORTED_MODULE_2__["MatSnackBar"]])
     ], UIService);
     return UIService;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/common/videoplayer/videoplayer.component.css":
+/*!**************************************************************!*\
+  !*** ./src/app/common/videoplayer/videoplayer.component.css ***!
+  \**************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = ".container\r\n{\r\n    position: relative;\r\n}\r\n\r\n.video {\r\n    position: relative;\r\n    resize:both;\r\n    top:0;\r\n    left:0;\r\n    width: 100%;\r\n    height: 100%;\r\n}\r\n\r\n.fx-overlay-canvas {\r\n    position: absolute; \r\n    top:0;\r\n    left:0;\r\n    width: 100%;\r\n    height: 100%;\r\n    z-index:10;\r\n    background-color: rgb(255, 255, 255,0.3);\r\n}\r\n\r\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvY29tbW9uL3ZpZGVvcGxheWVyL3ZpZGVvcGxheWVyLmNvbXBvbmVudC5jc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7O0lBRUksbUJBQW1CO0NBQ3RCOztBQUVEO0lBQ0ksbUJBQW1CO0lBQ25CLFlBQVk7SUFDWixNQUFNO0lBQ04sT0FBTztJQUNQLFlBQVk7SUFDWixhQUFhO0NBQ2hCOztBQUdEO0lBQ0ksbUJBQW1CO0lBQ25CLE1BQU07SUFDTixPQUFPO0lBQ1AsWUFBWTtJQUNaLGFBQWE7SUFDYixXQUFXO0lBQ1gseUNBQXlDO0NBQzVDIiwiZmlsZSI6InNyYy9hcHAvY29tbW9uL3ZpZGVvcGxheWVyL3ZpZGVvcGxheWVyLmNvbXBvbmVudC5jc3MiLCJzb3VyY2VzQ29udGVudCI6WyIuY29udGFpbmVyXHJcbntcclxuICAgIHBvc2l0aW9uOiByZWxhdGl2ZTtcclxufVxyXG5cclxuLnZpZGVvIHtcclxuICAgIHBvc2l0aW9uOiByZWxhdGl2ZTtcclxuICAgIHJlc2l6ZTpib3RoO1xyXG4gICAgdG9wOjA7XHJcbiAgICBsZWZ0OjA7XHJcbiAgICB3aWR0aDogMTAwJTtcclxuICAgIGhlaWdodDogMTAwJTtcclxufVxyXG5cclxuXHJcbi5meC1vdmVybGF5LWNhbnZhcyB7XHJcbiAgICBwb3NpdGlvbjogYWJzb2x1dGU7IFxyXG4gICAgdG9wOjA7XHJcbiAgICBsZWZ0OjA7XHJcbiAgICB3aWR0aDogMTAwJTtcclxuICAgIGhlaWdodDogMTAwJTtcclxuICAgIHotaW5kZXg6MTA7XHJcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiByZ2IoMjU1LCAyNTUsIDI1NSwwLjMpO1xyXG59XHJcbiJdfQ== */"
+
+/***/ }),
+
+/***/ "./src/app/common/videoplayer/videoplayer.component.html":
+/*!***************************************************************!*\
+  !*** ./src/app/common/videoplayer/videoplayer.component.html ***!
+  \***************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"container\">\r\n\r\n\t<video class=\"video\"\r\n\t\t   id=\"videoplayer\"\r\n\t\t   autoPlay\r\n\t\t   controls\r\n\t   [src]=\"source\" >\r\n\t</video>\r\n\r\n\t<ng-container *ngIf=\"showCanvas\">\r\n\t\t<canvas id=\"fx-overlay\"  class=\"fx-overlay-canvas\"></canvas>\r\n\t</ng-container>\r\n</div>\r\n<button (click)=\"setVideoSize(1080)\">FHD</button>\r\n<button (click)=\"setVideoSize(720)\">HD</button>\r\n<button (click)=\"setVideoSize(360)\">SD</button>"
+
+/***/ }),
+
+/***/ "./src/app/common/videoplayer/videoplayer.component.ts":
+/*!*************************************************************!*\
+  !*** ./src/app/common/videoplayer/videoplayer.component.ts ***!
+  \*************************************************************/
+/*! exports provided: VideoplayerComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "VideoplayerComponent", function() { return VideoplayerComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var confetti_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! confetti-js */ "./node_modules/confetti-js/dist/index.js");
+/* harmony import */ var confetti_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(confetti_js__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm5/index.js");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+// https://github.com/mattlewis92/angular-resizable-element/tree/master/src
+var VideoplayerComponent = /** @class */ (function () {
+    function VideoplayerComponent() {
+    }
+    VideoplayerComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.showCanvas = false;
+        // tslint:disable-next-line:max-line-length
+        this.source = 'https://firebasestorage.googleapis.com/v0/b/alpha69-ng.appspot.com/o/trailerExtended-320p.mp4?alt=media&token=d4028ec7-6451-42a8-b368-24e0f4b2e542';
+        this.preFx().toPromise().then(function (b) {
+            _this.showFx().toPromise().then(function (done) {
+                _this.postFx();
+            });
+        });
+    };
+    VideoplayerComponent.prototype.setVideoSize = function (p) {
+        $('#videoplayer').width = p;
+        $('#videoplayer').height = Math.round(p * (16 / 9));
+    };
+    VideoplayerComponent.prototype.preFx = function () {
+        var _this = this;
+        return new rxjs__WEBPACK_IMPORTED_MODULE_2__["Observable"](function (observer) {
+            _this.showCanvas = true;
+            observer.next(true);
+            observer.complete();
+        });
+    };
+    VideoplayerComponent.prototype.postFx = function () {
+        this.showCanvas = false;
+    };
+    // returns true when completed
+    VideoplayerComponent.prototype.showFx = function (effect, seconds) {
+        var _this = this;
+        if (effect === void 0) { effect = 'confetti'; }
+        if (seconds === void 0) { seconds = 10; }
+        return new rxjs__WEBPACK_IMPORTED_MODULE_2__["Observable"](function (observer) {
+            // tslint:disable-next-line:no-shadowed-variable
+            var confettiSettings = {
+                target: 'fx-overlay',
+                max: 80,
+                size: 5,
+                animate: true,
+                props: ['circle'],
+                colors: [[165, 104, 246], [230, 61, 135], [0, 199, 228], [253, 214, 126]],
+                clock: 25,
+                rotate: false,
+            };
+            // tslint:disable-next-line:no-shadowed-variable
+            var confetti = new ConfettiGenerator(confettiSettings);
+            confetti.render();
+            _this.fxTimer = _this.fxTimer = Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["timer"])(seconds * 1000, 200);
+            _this.fxTimer$ = _this.fxTimer.subscribe(function (s) {
+                confetti.clear();
+                _this.fxTimer$.unsubscribe();
+                observer.next(true);
+                observer.complete();
+            });
+        });
+    };
+    VideoplayerComponent = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
+            selector: 'app-videoplayer',
+            template: __webpack_require__(/*! ./videoplayer.component.html */ "./src/app/common/videoplayer/videoplayer.component.html"),
+            styles: [__webpack_require__(/*! ./videoplayer.component.css */ "./src/app/common/videoplayer/videoplayer.component.css")]
+        }),
+        __metadata("design:paramtypes", [])
+    ], VideoplayerComponent);
+    return VideoplayerComponent;
 }());
 
 
@@ -1482,7 +1714,7 @@ var MemberService = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<section class='page-title'>\r\n    <h1>Session Control</h1>\r\n</section>\r\n\r\n<section class=\"content\">\r\n<mat-accordion class=\"accordion\" multi=\"true\" fxLayout=\"row wrap\" fxLayoutGap=\"10px\">\r\n<!-- --------------------------------------------------------------------------- -->\r\n    <mat-expansion-panel  *ngIf=\"session\" fxFlex.xs=\"100%\" fxFlex=\"400px\">\r\n        <mat-expansion-panel-header>\r\n            <mat-panel-title>\r\n                General\r\n            </mat-panel-title>\r\n            <mat-panel-description>\r\n                 &nbsp; \r\n                <mat-icon>face</mat-icon>\r\n            </mat-panel-description>\r\n        </mat-expansion-panel-header>\r\n        \r\n        <form fxLayout=\"column\" fxLayoutAlign=\"center center\" fxLayoutGap=\"10px\" #formGeneral=\"ngForm\" (ngSubmit)=\"onGeneral(formGeneral)\">\r\n\r\n            <mat-form-field>\r\n                <input type=\"text\" matInput placeholder=\"Model name to use\" name=\"modelName\" [(ngModel)]=\"session.modelName\"/> \r\n            </mat-form-field>\r\n                    \r\n            <mat-form-field>\r\n                <input type=\"text\" matInput placeholder=\"Title\"  name=\"title\" [(ngModel)]=\"session.title\"/>\r\n            </mat-form-field>\r\n\r\n            <mat-form-field>\r\n                <input type=\"number\" matInput placeholder=\"Minimum tip Amount\"  name=\"minTipAmount\" [(ngModel)]=\"session.minTipAmount\" required step=\"1\" min=0/>\r\n            </mat-form-field>\r\n        <button type=\"submit\" mat-raised-button color=\"primary\" [disabled]=\"formGeneral.invalid\">Save</button>\r\n        </form>\r\n    </mat-expansion-panel>\r\n<!-- --------------------------------------------------------------------------- -->\r\n    <mat-expansion-panel fxFlex.xs=\"100%\" fxFlex=\"400px\" *ngIf=\"session\" >\r\n            <mat-expansion-panel-header>\r\n                <mat-panel-title>\r\n                    View settings\r\n                </mat-panel-title>\r\n                <mat-panel-description>\r\n                    ({{session.accessType}})&nbsp;\r\n                    <mat-icon>visibility</mat-icon>\r\n                </mat-panel-description>\r\n            </mat-expansion-panel-header>\r\n\r\n            <form fxLayout=\"column\" fxLayoutAlign=\"center center\" fxLayoutGap=\"10px\" #formAccess=\"ngForm\" (ngSubmit)=\"onAccess(formAccess)\">\r\n\r\n            <mat-form-field>\r\n                <mat-select placeholder=\"Who can view?\"  name=\"accessType\" [(ngModel)]=\"session.accessType\" >\r\n                        <mat-option value=\"public\"><u>Everyone</u> can view</mat-option>\r\n                        <mat-option value=\"member-only\">all <u>Members</u> can view</mat-option>\r\n                        <mat-option value=\"user-level\">only <u>Members</u> => <u>level</u> </mat-option>\r\n                        <mat-option value=\"on-request\"><u>Members</u> can <u>Request to join</u></mat-option>\r\n                </mat-select>\r\n            </mat-form-field>\r\n            <mat-form-field *ngIf=\"formAccess.value.accessType === 'user-level'\">\r\n                <input type=\"number\" matInput placeholder=\"Required level?\" [(ngModel)]=\"session.minLevel\" name=\"minLevel\" />  \r\n            </mat-form-field>\r\n            \r\n            <button type=\"submit\" mat-raised-button color=\"primary\" [disabled]=\"formAccess.invalid\">Save</button>\r\n        </form>\r\n\r\n    </mat-expansion-panel>\r\n    \r\n<!-- --------------------------------------------------------------------------- -->\r\n    <mat-expansion-panel fxFlex.xs=\"100%\" fxFlex=\"400px\" *ngIf=\"session\">\r\n            <mat-expansion-panel-header>\r\n                <mat-panel-title>\r\n                  Pay Per Minute\r\n                </mat-panel-title>\r\n                <mat-panel-description>\r\n                    {{session.usePpm? '(Enabled)' :' ' }}&nbsp;\r\n                    <mat-icon>attach_money</mat-icon>\r\n                </mat-panel-description>\r\n            </mat-expansion-panel-header>\r\n            \r\n            <form fxLayout=\"column\" fxLayoutAlign=\"center center\" fxLayoutGap=\"10px\" #formPpm=\"ngForm\" (ngSubmit)=\"onPpm(formPpm)\">\r\n     \r\n                <mat-slide-toggle labelPosition=\"before\" color=\"accent\"  name=\"usePpm\" [(ngModel)]='session.usePpm' (change)='flagPpm(formPpm.value.usePpm)'>Enable Pay-Per-Minute</mat-slide-toggle>\r\n\r\n                <ng-container  *ngIf=\"formPpm.value.usePpm\">\r\n\r\n                    <mat-form-field>\r\n                        <input type=\"number\" matInput placeholder=\"Tokens to Pay-Per-Minute\"  name=\"amount\" [(ngModel)]=\"session.ppmAmount\" />\r\n                    </mat-form-field>\r\n     \r\n                    <mat-checkbox color=\"accent\"  name=\"inclPpmInGoal\" [(ngModel)]=\"session.inclPpmInGoal\" labelPosition=\"after\">incl. in goal calculation</mat-checkbox>\r\n                    <mat-checkbox color=\"accent\" name=\"inclPpmInLeaderboard\"  [(ngModel)]=\"session.inclPpmInLeaderboard\" labelPosition=\"after\">incl. in leaderboard calculation</mat-checkbox>\r\n                    <button type=\"submit\" mat-raised-button color=\"primary\" [disabled]=\"formPpm.invalid\">Save</button>\r\n            \r\n                </ng-container>\r\n            \r\n            </form>\r\n        \r\n    </mat-expansion-panel>\r\n<!-- --------------------------------------------------------------------------- -->\r\n    <mat-expansion-panel fxFlex.xs=\"100%\" fxFlex=\"400px\" *ngIf=\"session\">\r\n            <mat-expansion-panel-header>\r\n                <mat-panel-title>\r\n                  Goal\r\n                </mat-panel-title>\r\n                <mat-panel-description>\r\n                    {{session.useGoal? '(Enabled)' : '' }}&nbsp;\r\n                    <mat-icon>assistant_photo</mat-icon>\r\n                </mat-panel-description>\r\n            </mat-expansion-panel-header>\r\n\r\n            <form fxLayout=\"column\" fxLayoutAlign=\"center center\" fxLayoutGap=\"10px\" #formGoal=\"ngForm\" (ngSubmit)=\"onGoal(formGoal)\">\r\n     \r\n                <mat-slide-toggle labelPosition=\"before\" color=\"accent\" name=\"useGoal\" [(ngModel)]=\"session.useGoal\"  (change)=\"flagGoal(formGoal.value.useGoal)\">Do you want to set a Goal?</mat-slide-toggle>\r\n                \r\n                <ng-container *ngIf=\"goal\">\r\n                    <mat-form-field>\r\n                        <input type=\"number\" matInput placeholder=\"Goal Amount token (Target):\" name=\"amount\"  step=\"100\" [(ngModel)]=\"goal.amount\" min=1 />\r\n                    </mat-form-field>\r\n                    <mat-form-field>\r\n                        <input type=\"text\"  matInput placeholder=\"Goal description\" name=\"descr\" [(ngModel)]=\"goal.descr\"/>\r\n                    </mat-form-field>\r\n                    <mat-form-field>\r\n                            <mat-select placeholder=\"Show Fx on goal complete?\" name=\"doneFx\" [(ngModel)]=\"goal.doneFx\">\r\n                                    <mat-option value=\"None\">No</mat-option>\r\n                                    <mat-option value=\"fx1\">1 TBD</mat-option>\r\n                                    <mat-option value=\"fx2\">2 TBD</mat-option>\r\n                                    <mat-option value=\"fx3\">3 TBD</mat-option>\r\n                                    <mat-option value=\"fx3\">4 TBD</mat-option>\r\n                                    </mat-select>\r\n                    </mat-form-field>\r\n                    <button type=\"submit\" mat-raised-button color=\"primary\" [disabled]=\"formGoal.invalid\">Save</button>\r\n                </ng-container>   \r\n\r\n        \r\n        </form>\r\n    \r\n    </mat-expansion-panel>\r\n<!-- --------------------------------------------------------------------------- -->\r\n    <mat-expansion-panel fxFlex.xs=\"100%\" fxFlex=\"400px\" *ngIf=\"session\">\r\n            <mat-expansion-panel-header>\r\n                <mat-panel-title>\r\n                  Stream Control\r\n                </mat-panel-title>\r\n                <mat-panel-description>\r\n                    &nbsp;\r\n                    <mat-icon>cast</mat-icon>\r\n                </mat-panel-description>\r\n            </mat-expansion-panel-header>\r\n            \r\n            <mat-form-field>\r\n                    <input type=\"text\" matInput placeholder=\"Stream Url\" [ngModel]=\"session.stream.url\" readonly />\r\n                </mat-form-field>\r\n                <mat-form-field>\r\n                    <input type=\"text\"  matInput placeholder=\"Stream Key\" [ngModel]=\"session.stream.key\" readonly/>\r\n                </mat-form-field>\r\n            <button mat-raised-button color=\"primary\" (click)=\"getNewStreamKey()\">Get new stream key</button><br/><br/>\r\n            <button mat-raised-button color=\"accent\" (click)=\"stopSession()\">Stop Session!</button>\r\n        \r\n    </mat-expansion-panel>\r\n\r\n  \r\n</mat-accordion>\r\n\r\n\r\n<mat-divider></mat-divider>\r\n\r\n<section class='page-title'>\r\n    <h1>Live metrics</h1>\r\n</section>\r\n<!-- ================================================================================= -->\r\n<mat-accordion class=\"accordion_live\" multi=\"true\" fxLayout=\"row wrap\" fxLayoutGap=\"10px\">\r\n\r\n        <mat-expansion-panel  *ngIf=\"(session && session.useGoal === true) && goal\" fxFlex.xs=\"100%\" fxFlex=\"400px\" expanded class=\"goal-meter\">\r\n            <mat-expansion-panel-header>\r\n                <mat-panel-title>\r\n                    Goal Meter\r\n                </mat-panel-title>\r\n                <mat-panel-description>\r\n                    {{goalCollectedPct}}% ({{goal.collected}}t / {{goal.amount}}t)&nbsp; \r\n                    <mat-progress-spinner\r\n                    color=\"primary\"\r\n                    mode=\"determinate\"\r\n                    [value]=\"goalCollectedPct\"\r\n                    strokeWidth=3\r\n                    diameter=20>\r\n                 </mat-progress-spinner>\r\n                </mat-panel-description>\r\n            </mat-expansion-panel-header>\r\n            \r\n            <div>\r\n                <table>\r\n                    <tr>\r\n                    <td>\r\n                        <mat-progress-spinner\r\n                        color=\"primary\"\r\n                        mode=\"determinate\"\r\n                        [value]=\"goalCollectedPct\"\r\n                        strokeWidth=10\r\n                        diameter=80>\r\n                     </mat-progress-spinner></td>\r\n                    \r\n                    <td style=\"font-size: 48pt;color:black\">{{goalCollectedPct}}%</td>\r\n                    <td style=\"font-size: 11pt;font-weight: normal;text-align: center;padding-left:10px;color:black\">{{goal.collected}}<br/>out of<br/>{{goal.amount}} <img src=\"https://firebasestorage.googleapis.com/v0/b/alpha69-ng.appspot.com/o/images%2Fcoin16.png?alt=media&token=45502c9f-a9d4-4c2e-9671-aa92141db4f5\"></td>\r\n                </tr>\r\n                <tr><td colspan=\"2\" style=\"text-align:center;font-size:12pt;font-weight: bold;color:black\">{{goal.descr}}</td></tr>\r\n                </table>\r\n            \r\n           \r\n            </div>\r\n            \r\n        </mat-expansion-panel>\r\n<!-- ================================================================================= -->\r\n        <mat-expansion-panel  *ngIf=\"tipjar\" fxFlex.xs=\"100%\" fxFlex=\"400px\" expanded class=\"tipjar\" >\r\n                <mat-expansion-panel-header>\r\n                    <mat-panel-title>\r\n                       Tip jar\r\n                    </mat-panel-title>\r\n                    <mat-panel-description>\r\n                        {{tipjar.balance}} t &nbsp; \r\n                        <mat-icon>attach_money</mat-icon>\r\n                    </mat-panel-description>\r\n                </mat-expansion-panel-header>\r\n              <div style=\"font-size: 48pt;padding-top:30px;text-align: center;color:black\">\r\n                {{tipjar.balance}}  <img src=\"https://firebasestorage.googleapis.com/v0/b/alpha69-ng.appspot.com/o/images%2Fcoin32.png?alt=media&token=f4b3f892-a7d1-4908-a2c5-54d3dbd02b22\">\r\n              </div>\r\n            </mat-expansion-panel>\r\n\r\n<!-- ================================================================================= -->\r\n            <mat-expansion-panel  *ngIf=\"wallet\" fxFlex.xs=\"100%\" fxFlex=\"400px\" expanded class=\"wallet\">\r\n                    <mat-expansion-panel-header>\r\n                        <mat-panel-title>\r\n                           Personal Wallet\r\n                        </mat-panel-title>\r\n                        <mat-panel-description>\r\n                            {{wallet.balance}} t &nbsp; \r\n                            <mat-icon>attach_money</mat-icon>\r\n                        </mat-panel-description>\r\n                    </mat-expansion-panel-header>\r\n                  <div style=\"font-size: 48pt;padding-top:30px;text-align: center;color:black\">\r\n                    {{wallet.balance}} <img src=\"https://firebasestorage.googleapis.com/v0/b/alpha69-ng.appspot.com/o/images%2Fcoin32.png?alt=media&token=f4b3f892-a7d1-4908-a2c5-54d3dbd02b22\">\r\n                  </div>\r\n                </mat-expansion-panel>\r\n<!-- ================================================================================= -->\r\n                <mat-expansion-panel  *ngIf=\"session\" fxFlex.xs=\"100%\" fxFlex=\"400px\" expanded class=\"runtime\">\r\n                        <mat-expansion-panel-header>\r\n                            <mat-panel-title>\r\n                              Runtime & Clock\r\n                            </mat-panel-title>\r\n                            <mat-panel-description>\r\n                                {{runtimeHours}}h {{runtimeMinutes}}m  ({{clockHours}}:{{clockMinutes}})\r\n                                <mat-icon>access_time</mat-icon>\r\n                            </mat-panel-description>\r\n                        </mat-expansion-panel-header>\r\n                     \r\n                        <div style=\"font-size: 48pt;padding-top:30px;text-align: center;color:black;\">\r\n                        <ng-container *ngIf=\"runtimeDays>0\"> {{runtimeDays}}d </ng-container> {{runtimeHours}}h {{runtimeMinutes}}m\r\n                      </div>\r\n\r\n                      <div style=\"font-size: 14pt;padding-top:30px;text-align: center;color:black;\">\r\n                        {{clockHours}}:{{clockMinutes}} {{timezone}} \r\n                      </div>\r\n\r\n                    </mat-expansion-panel>\r\n\r\n<!-- ================================================================================= -->\r\n                    <mat-expansion-panel  *ngIf=\"transactions\" fxFlex.xs=\"100%\" fxFlex=\"400px\" expanded class=\"tipwall\">\r\n                            <mat-expansion-panel-header>\r\n                                <mat-panel-title>\r\n                                    Tip wall\r\n                                </mat-panel-title>\r\n                                <mat-panel-description>\r\n                                    &nbsp; \r\n                                    <mat-icon>attach_money</mat-icon>\r\n                                </mat-panel-description>\r\n                             </mat-expansion-panel-header>\r\n                             <mat-form-field>\r\n                                    <input type=\"number\" matInput placeholder=\"number of transaction\" [ngModel]=\"showNumberOfTransaction\" />\r\n                                </mat-form-field>\r\n                             <ul class=\"tipwall-list\">\r\n                                 <li *ngFor=\"let trans of transactions\">{{trans.ppm ? \"PPM - \": \"\"}}{{trans.dt.toDate() | date: 'hh:mm:ss'}}, {{trans.nme}}: {{trans.amt}} {{trans.msg? trans.msg : \"\"}}</li>\r\n                             </ul>\r\n                        </mat-expansion-panel>\r\n\r\n<!-- ================================================================================= -->\r\n                        <mat-expansion-panel  *ngIf=\"viewers\" fxFlex.xs=\"100%\" fxFlex=\"400px\" expanded class=\"viewers\">\r\n                                <mat-expansion-panel-header>\r\n                                    <mat-panel-title>\r\n                                        Viewers\r\n                                    </mat-panel-title>\r\n                                    <mat-panel-description>\r\n                                        &nbsp; \r\n                                        \r\n                                    </mat-panel-description>\r\n                                 </mat-expansion-panel-header>\r\n\r\n                                 <table mat-table [dataSource]=\"viewersDs\" >\r\n                                \r\n                                        <ng-container matColumnDef=\"name\">\r\n                                                <th mat-header-cell *matHeaderCellDef>Name</th>\r\n                                                <td mat-cell *matCellDef=\"let viewer\" class=\"viewer-table-td\" >{{viewer.nme}} </td>\r\n                                        </ng-container>\r\n\r\n                                  \r\n                                        <ng-container matColumnDef=\"startDt\">\r\n                                            <th mat-header-cell *matHeaderCellDef>Start</th>\r\n                                            <td mat-cell *matCellDef=\"let viewer\" class=\"viewer-table-td\"> {{viewer.startDt.toDate() | date: 'HH:mm'}} </td>\r\n                                        </ng-container>\r\n\r\n                                        <ng-container matColumnDef=\"aliveDt\">\r\n                                                <th mat-header-cell *matHeaderCellDef>Alive</th>\r\n                                                <td mat-cell *matCellDef=\"let viewer\"  class=\"viewer-table-td\"> {{viewer.aliveDt.toDate() | date: 'HH:mm'}} </td>\r\n                                        </ng-container>\r\n                                          \r\n                                \r\n                                        <ng-container matColumnDef=\"action\">\r\n                                                <th mat-header-cell *matHeaderCellDef></th>\r\n                                                <td mat-cell *matCellDef=\"let viewer\">\r\n                                                    <button mat-button color=\"warn\" (click)=\"onViewerBlock(viewer)\">block</button>\r\n                                                </td>\r\n                                        </ng-container>\r\n                                    <tr mat-header-row *matHeaderRowDef=\"['name','startDt','aliveDt','action']\"></tr>\r\n                                    <tr mat-row *matRowDef=\"let row; columns: ['name','startDt','aliveDt','action'];\"></tr>\r\n\r\n                                 </table>\r\n                                 \r\n                                 \r\n                            </mat-expansion-panel>\r\n\r\n<!-- ================================================================================= -->\r\n                            <mat-expansion-panel  *ngIf=\"blocked\" fxFlex.xs=\"100%\" fxFlex=\"400px\" expanded class=\"blocked\" >\r\n                                <mat-expansion-panel-header>\r\n                                    <mat-panel-title>\r\n                                        Blocked Users\r\n                                    </mat-panel-title>\r\n                                    <mat-panel-description>\r\n                                        &nbsp; \r\n                                        \r\n                                    </mat-panel-description>\r\n                                 </mat-expansion-panel-header>\r\n\r\n                                 <table mat-table [dataSource]=\"blockedDs\" >\r\n\r\n                                    <ng-container matColumnDef=\"name\">\r\n                                            <th mat-header-cell *matHeaderCellDef> Name </th>\r\n                                            <td mat-cell *matCellDef=\"let user\" class=\"block-table-td\"> {{user.nme}} </td>\r\n                                    </ng-container>\r\n\r\n                                    <ng-container matColumnDef=\"date\">\r\n                                        <th mat-header-cell *matHeaderCellDef> Date </th>\r\n                                        <td mat-cell *matCellDef=\"let user\"  class=\"block-table-td\"> {{user.dt.toDate() | date: 'MMM d'}} </td>\r\n                                    </ng-container>\r\n\r\n                                    <ng-container matColumnDef=\"action\">\r\n                                            <th mat-header-cell *matHeaderCellDef></th>\r\n                                            <td mat-cell *matCellDef=\"let user\"  class=\"block-table-td\">\r\n                                                <button mat-button color=\"warn\" (click)=\"onUnBlock(user)\">un-block</button>\r\n                                            </td>\r\n                                    </ng-container>\r\n                                      \r\n                                    <tr mat-header-row *matHeaderRowDef=\"['name','date','action']\"></tr>\r\n                                    <tr mat-row *matRowDef=\"let row; columns: ['name','date','action'];\"></tr>\r\n\r\n                                 </table>\r\n\r\n                            </mat-expansion-panel>\r\n\r\n                <!-- ================================================================================= -->\r\n                <mat-expansion-panel  *ngIf=\"leaderboard\" fxFlex.xs=\"100%\" fxFlex=\"400px\" expanded class=\"leaderboard\" >\r\n                    <mat-expansion-panel-header>\r\n                        <mat-panel-title>\r\n                            leaderboard\r\n                        </mat-panel-title>\r\n                        <mat-panel-description>\r\n                            &nbsp; \r\n                            \r\n                        </mat-panel-description>\r\n                        </mat-expansion-panel-header>\r\n\r\n                        <ul>\r\n                            <li *ngFor=\"let lb of leaderboard\"><b>{{lb.nme}}</b>     {{lb.amt}} token, last tip @ {{lb.dt.toDate() | date:'HH:mm'}}</li>\r\n                        </ul>\r\n                        \r\n                </mat-expansion-panel>\r\n</mat-accordion>\r\n\r\n</section>"
+module.exports = "<section class='page-title'>\r\n    <h1>Session Control</h1>\r\n</section>\r\n\r\n<section class=\"content\">\r\n<mat-accordion class=\"accordion\" multi=\"true\" fxLayout=\"row wrap\" fxLayoutGap=\"10px\">\r\n<!-- --------------------------------------------------------------------------- -->\r\n    <mat-expansion-panel  *ngIf=\"session\" fxFlex.xs=\"100%\" fxFlex=\"400px\">\r\n        <mat-expansion-panel-header>\r\n            <mat-panel-title>\r\n                General\r\n            </mat-panel-title>\r\n            <mat-panel-description>\r\n                 &nbsp; \r\n                <mat-icon>face</mat-icon>\r\n            </mat-panel-description>\r\n        </mat-expansion-panel-header>\r\n        \r\n        <form fxLayout=\"column\" fxLayoutAlign=\"center center\" fxLayoutGap=\"10px\" #formGeneral=\"ngForm\" (ngSubmit)=\"onGeneral(formGeneral)\">\r\n\r\n            <mat-form-field>\r\n                <input type=\"text\" matInput placeholder=\"Model name to use\" name=\"modelName\" [(ngModel)]=\"session.modelName\"/> \r\n            </mat-form-field>\r\n                    \r\n            <mat-form-field>\r\n                <input type=\"text\" matInput placeholder=\"Title\"  name=\"title\" [(ngModel)]=\"session.title\"/>\r\n            </mat-form-field>\r\n\r\n            <mat-form-field>\r\n                <input type=\"number\" matInput placeholder=\"Minimum tip Amount\"  name=\"minTipAmount\" [(ngModel)]=\"session.minTipAmount\" required step=\"1\" min=0/>\r\n            </mat-form-field>\r\n        <button type=\"submit\" mat-raised-button color=\"primary\" [disabled]=\"formGeneral.invalid\">Save</button>\r\n        </form>\r\n    </mat-expansion-panel>\r\n<!-- --------------------------------------------------------------------------- -->\r\n    <mat-expansion-panel fxFlex.xs=\"100%\" fxFlex=\"400px\" *ngIf=\"session\" >\r\n            <mat-expansion-panel-header>\r\n                <mat-panel-title>\r\n                    View settings\r\n                </mat-panel-title>\r\n                <mat-panel-description>\r\n                    ({{session.accessType}})&nbsp;\r\n                    <mat-icon>visibility</mat-icon>\r\n                </mat-panel-description>\r\n            </mat-expansion-panel-header>\r\n\r\n            <form fxLayout=\"column\" fxLayoutAlign=\"center center\" fxLayoutGap=\"10px\" #formAccess=\"ngForm\" (ngSubmit)=\"onAccess(formAccess)\">\r\n\r\n            <mat-form-field>\r\n                <mat-select placeholder=\"Who can view?\"  name=\"accessType\" [(ngModel)]=\"session.accessType\" >\r\n                        <mat-option value=\"public\"><u>Everyone</u> can view</mat-option>\r\n                        <mat-option value=\"member-only\">all <u>Members</u> can view</mat-option>\r\n                        <mat-option value=\"user-level\">only <u>Members</u> => <u>level</u> </mat-option>\r\n                        <mat-option value=\"on-request\"><u>Members</u> can <u>Request to join</u></mat-option>\r\n                </mat-select>\r\n            </mat-form-field>\r\n            <mat-form-field *ngIf=\"formAccess.value.accessType === 'user-level'\">\r\n                <input type=\"number\" matInput placeholder=\"Required level?\" [(ngModel)]=\"session.minLevel\" name=\"minLevel\" />  \r\n            </mat-form-field>\r\n            \r\n            <button type=\"submit\" mat-raised-button color=\"primary\" [disabled]=\"formAccess.invalid\">Save</button>\r\n        </form>\r\n\r\n    </mat-expansion-panel>\r\n    \r\n<!-- --------------------------------------------------------------------------- -->\r\n    <mat-expansion-panel fxFlex.xs=\"100%\" fxFlex=\"400px\" *ngIf=\"session\">\r\n            <mat-expansion-panel-header>\r\n                <mat-panel-title>\r\n                  Pay Per Minute\r\n                </mat-panel-title>\r\n                <mat-panel-description>\r\n                    {{session.usePpm? '(Enabled)' :' ' }}&nbsp;\r\n                    <mat-icon>attach_money</mat-icon>\r\n                </mat-panel-description>\r\n            </mat-expansion-panel-header>\r\n            \r\n            <form fxLayout=\"column\" fxLayoutAlign=\"center center\" fxLayoutGap=\"10px\" #formPpm=\"ngForm\" (ngSubmit)=\"onPpm(formPpm)\">\r\n     \r\n                <mat-slide-toggle labelPosition=\"before\" color=\"accent\"  name=\"usePpm\" [(ngModel)]='session.usePpm' (change)='flagPpm(formPpm.value.usePpm)'>Enable Pay-Per-Minute</mat-slide-toggle>\r\n\r\n                <ng-container  *ngIf=\"formPpm.value.usePpm\">\r\n\r\n                    <mat-form-field>\r\n                        <input type=\"number\" matInput placeholder=\"Tokens to Pay-Per-Minute\"  name=\"amount\" [(ngModel)]=\"session.ppmAmount\" />\r\n                    </mat-form-field>\r\n     \r\n                    <mat-checkbox color=\"accent\"  name=\"inclPpmInGoal\" [(ngModel)]=\"session.inclPpmInGoal\" labelPosition=\"after\">incl. in goal calculation</mat-checkbox>\r\n                    <mat-checkbox color=\"accent\" name=\"inclPpmInLeaderboard\"  [(ngModel)]=\"session.inclPpmInLeaderboard\" labelPosition=\"after\">incl. in leaderboard calculation</mat-checkbox>\r\n                    <button type=\"submit\" mat-raised-button color=\"primary\" [disabled]=\"formPpm.invalid\">Save</button>\r\n            \r\n                </ng-container>\r\n            \r\n            </form>\r\n        \r\n    </mat-expansion-panel>\r\n<!-- --------------------------------------------------------------------------- -->\r\n    <mat-expansion-panel fxFlex.xs=\"100%\" fxFlex=\"400px\" *ngIf=\"session\">\r\n            <mat-expansion-panel-header>\r\n                <mat-panel-title>\r\n                  Goal\r\n                </mat-panel-title>\r\n                <mat-panel-description>\r\n                    {{session.useGoal? '(Enabled)' : '' }}&nbsp;\r\n                    <mat-icon>assistant_photo</mat-icon>\r\n                </mat-panel-description>\r\n            </mat-expansion-panel-header>\r\n\r\n            <form fxLayout=\"column\" fxLayoutAlign=\"center center\" fxLayoutGap=\"10px\" #formGoal=\"ngForm\" (ngSubmit)=\"onGoal(formGoal)\">\r\n     \r\n                <mat-slide-toggle labelPosition=\"before\" color=\"accent\" name=\"useGoal\" [(ngModel)]=\"session.useGoal\"  (change)=\"flagGoal(formGoal.value.useGoal)\">Do you want to set a Goal?</mat-slide-toggle>\r\n                \r\n                <ng-container *ngIf=\"goal\">\r\n                    <mat-form-field>\r\n                        <input type=\"number\" matInput placeholder=\"Goal Amount token (Target):\" name=\"amount\"  step=\"100\" [(ngModel)]=\"goal.amount\" min=1 />\r\n                    </mat-form-field>\r\n                    <mat-form-field>\r\n                        <input type=\"text\"  matInput placeholder=\"Goal description\" name=\"descr\" [(ngModel)]=\"goal.descr\"/>\r\n                    </mat-form-field>\r\n                    <mat-form-field>\r\n                            <mat-select placeholder=\"Show Fx on goal complete?\" name=\"doneFx\" [(ngModel)]=\"goal.doneFx\">\r\n                                    <mat-option value=\"None\">No</mat-option>\r\n                                    <mat-option value=\"fx1\">1 TBD</mat-option>\r\n                                    <mat-option value=\"fx2\">2 TBD</mat-option>\r\n                                    <mat-option value=\"fx3\">3 TBD</mat-option>\r\n                                    <mat-option value=\"fx3\">4 TBD</mat-option>\r\n                                    </mat-select>\r\n                    </mat-form-field>\r\n                    <button type=\"submit\" mat-raised-button color=\"primary\" [disabled]=\"formGoal.invalid\">Save</button>\r\n                </ng-container>   \r\n\r\n        \r\n        </form>\r\n    \r\n    </mat-expansion-panel>\r\n<!-- --------------------------------------------------------------------------- -->\r\n    <mat-expansion-panel fxFlex.xs=\"100%\" fxFlex=\"400px\" *ngIf=\"session\">\r\n            <mat-expansion-panel-header>\r\n                <mat-panel-title>\r\n                  Stream Control\r\n                </mat-panel-title>\r\n                <mat-panel-description>\r\n                    &nbsp;\r\n                    <mat-icon>cast</mat-icon>\r\n                </mat-panel-description>\r\n            </mat-expansion-panel-header>\r\n            \r\n            <mat-form-field>\r\n                    <input type=\"text\" matInput placeholder=\"Stream Url\" [ngModel]=\"session.stream.url\" readonly />\r\n                </mat-form-field>\r\n                <mat-form-field>\r\n                    <input type=\"text\"  matInput placeholder=\"Stream Key\" [ngModel]=\"session.stream.key\" readonly/>\r\n                </mat-form-field>\r\n            <button mat-raised-button color=\"primary\" (click)=\"getNewStreamKey()\">Get new stream key</button><br/><br/>\r\n            <button mat-raised-button color=\"accent\" (click)=\"stopSession()\">Stop Session!</button>\r\n        \r\n    </mat-expansion-panel>\r\n\r\n  \r\n</mat-accordion>\r\n\r\n\r\n<mat-divider></mat-divider>\r\n\r\n<section class='page-title'>\r\n    <h1>Live metrics</h1>\r\n</section>\r\n<!-- ================================================================================= -->\r\n<mat-accordion class=\"accordion_live\" multi=\"true\" fxLayout=\"row wrap\" fxLayoutGap=\"10px\">\r\n\r\n        <mat-expansion-panel  *ngIf=\"(session && session.useGoal === true) && goal\" fxFlex.xs=\"100%\" fxFlex=\"400px\" expanded class=\"goal-meter\">\r\n            <mat-expansion-panel-header>\r\n                <mat-panel-title>\r\n                    Goal Meter\r\n                </mat-panel-title>\r\n                <mat-panel-description>\r\n                    {{goalCollectedPct}}% ({{goal.collected}}t / {{goal.amount}}t)&nbsp; \r\n                    <mat-progress-spinner\r\n                    color=\"primary\"\r\n                    mode=\"determinate\"\r\n                    [value]=\"goalCollectedPct\"\r\n                    strokeWidth=3\r\n                    diameter=20>\r\n                 </mat-progress-spinner>\r\n                </mat-panel-description>\r\n            </mat-expansion-panel-header>\r\n            \r\n            <div>\r\n                <table>\r\n                    <tr>\r\n                    <td>\r\n                        <mat-progress-spinner\r\n                        color=\"primary\"\r\n                        mode=\"determinate\"\r\n                        [value]=\"goalCollectedPct\"\r\n                        strokeWidth=10\r\n                        diameter=80>\r\n                     </mat-progress-spinner></td>\r\n                    \r\n                    <td style=\"font-size: 48pt;color:black\">{{goalCollectedPct}}%</td>\r\n                    <td style=\"font-size: 11pt;font-weight: normal;text-align: center;padding-left:10px;color:black\">{{goal.collected}}<br/>out of<br/>{{goal.amount}} <img src=\"https://firebasestorage.googleapis.com/v0/b/alpha69-ng.appspot.com/o/images%2Fcoin16.png?alt=media&token=45502c9f-a9d4-4c2e-9671-aa92141db4f5\"></td>\r\n                </tr>\r\n                <tr><td colspan=\"2\" style=\"text-align:center;font-size:12pt;font-weight: bold;color:black\">{{goal.descr}}</td></tr>\r\n                </table>\r\n            \r\n           \r\n            </div>\r\n            \r\n        </mat-expansion-panel>\r\n<!-- ================================================================================= -->\r\n        <mat-expansion-panel  *ngIf=\"tipjar\" fxFlex.xs=\"100%\" fxFlex=\"400px\" expanded class=\"tipjar\" >\r\n                <mat-expansion-panel-header>\r\n                    <mat-panel-title>\r\n                       Tip jar\r\n                    </mat-panel-title>\r\n                    <mat-panel-description>\r\n                        {{tipjar.balance}} t &nbsp; \r\n                        <mat-icon>attach_money</mat-icon>\r\n                    </mat-panel-description>\r\n                </mat-expansion-panel-header>\r\n              <div style=\"font-size: 48pt;padding-top:30px;text-align: center;color:black\">\r\n                {{tipjar.balance}}  <img src=\"https://firebasestorage.googleapis.com/v0/b/alpha69-ng.appspot.com/o/images%2Fcoin32.png?alt=media&token=f4b3f892-a7d1-4908-a2c5-54d3dbd02b22\">\r\n              </div>\r\n            </mat-expansion-panel>\r\n\r\n<!-- ================================================================================= -->\r\n            <mat-expansion-panel  *ngIf=\"wallet\" fxFlex.xs=\"100%\" fxFlex=\"400px\" expanded class=\"wallet\">\r\n                    <mat-expansion-panel-header>\r\n                        <mat-panel-title>\r\n                           Personal Wallet\r\n                        </mat-panel-title>\r\n                        <mat-panel-description>\r\n                            {{wallet.balance}} t &nbsp; \r\n                            <mat-icon>attach_money</mat-icon>\r\n                        </mat-panel-description>\r\n                    </mat-expansion-panel-header>\r\n                  <div style=\"font-size: 48pt;padding-top:30px;text-align: center;color:black\">\r\n                    {{wallet.balance}} <img src=\"https://firebasestorage.googleapis.com/v0/b/alpha69-ng.appspot.com/o/images%2Fcoin32.png?alt=media&token=f4b3f892-a7d1-4908-a2c5-54d3dbd02b22\">\r\n                  </div>\r\n                </mat-expansion-panel>\r\n<!-- ================================================================================= -->\r\n                <mat-expansion-panel  *ngIf=\"session\" fxFlex.xs=\"100%\" fxFlex=\"400px\" expanded class=\"runtime\">\r\n                        <mat-expansion-panel-header>\r\n                            <mat-panel-title>\r\n                              Runtime & Clock\r\n                            </mat-panel-title>\r\n                            <mat-panel-description>\r\n                                {{runtimeHours}}h {{runtimeMinutes}}m  ({{clockHours}}:{{clockMinutes}})\r\n                                <mat-icon>access_time</mat-icon>\r\n                            </mat-panel-description>\r\n                        </mat-expansion-panel-header>\r\n                     \r\n                        <div style=\"font-size: 48pt;padding-top:30px;text-align: center;color:black;\">\r\n                        <ng-container *ngIf=\"runtimeDays>0\"> {{runtimeDays}}d </ng-container> {{runtimeHours}}h {{runtimeMinutes}}m\r\n                      </div>\r\n\r\n                      <div style=\"font-size: 14pt;padding-top:30px;text-align: center;color:black;\">\r\n                        {{clockHours}}:{{clockMinutes}} {{timezone}} \r\n                      </div>\r\n\r\n                    </mat-expansion-panel>\r\n\r\n<!-- ================================================================================= -->\r\n                    <mat-expansion-panel  *ngIf=\"transactions\" fxFlex.xs=\"100%\" fxFlex=\"400px\" expanded class=\"tipwall\">\r\n                            <mat-expansion-panel-header>\r\n                                <mat-panel-title>\r\n                                    Tip wall\r\n                                </mat-panel-title>\r\n                                <mat-panel-description>\r\n                                    &nbsp; \r\n                                    <mat-icon>attach_money</mat-icon>\r\n                                </mat-panel-description>\r\n                             </mat-expansion-panel-header>\r\n                             <mat-form-field>\r\n                                    <input type=\"number\" matInput placeholder=\"number of transaction\" [ngModel]=\"showNumberOfTransaction\" />\r\n                                </mat-form-field>\r\n                             <ul class=\"tipwall-list\">\r\n                                 <li *ngFor=\"let trans of transactions\">{{trans.ppm ? \"PPM - \": \"\"}}{{trans.dt.toDate() | date: 'hh:mm:ss'}}, {{trans.nme}}: {{trans.amt}} {{trans.msg? trans.msg : \"\"}}</li>\r\n                             </ul>\r\n                        </mat-expansion-panel>\r\n\r\n<!-- ================================================================================= -->\r\n                        <mat-expansion-panel  *ngIf=\"viewers\" fxFlex.xs=\"100%\" fxFlex=\"400px\" expanded class=\"viewers\">\r\n                                <mat-expansion-panel-header>\r\n                                    <mat-panel-title>\r\n                                        Viewers\r\n                                    </mat-panel-title>\r\n                                    <mat-panel-description>\r\n                                        &nbsp; \r\n                                        \r\n                                    </mat-panel-description>\r\n                                 </mat-expansion-panel-header>\r\n\r\n                                 <table mat-table [dataSource]=\"viewersDs\" >\r\n                                \r\n                                        <ng-container matColumnDef=\"name\">\r\n                                                <th mat-header-cell *matHeaderCellDef>Name</th>\r\n                                                <td mat-cell *matCellDef=\"let viewer\" class=\"viewer-table-td\" >{{viewer.nme}} </td>\r\n                                        </ng-container>\r\n\r\n                                  \r\n                                        <ng-container matColumnDef=\"startDt\">\r\n                                            <th mat-header-cell *matHeaderCellDef>Start</th>\r\n                                            <td mat-cell *matCellDef=\"let viewer\" class=\"viewer-table-td\"> {{viewer.startDt.toDate() | date: 'HH:mm'}} </td>\r\n                                        </ng-container>\r\n\r\n                                        <ng-container matColumnDef=\"aliveDt\">\r\n                                                <th mat-header-cell *matHeaderCellDef>Alive</th>\r\n                                                <td mat-cell *matCellDef=\"let viewer\"  class=\"viewer-table-td\"> {{viewer.aliveDt.toDate() | date: 'HH:mm'}} </td>\r\n                                        </ng-container>\r\n                                          \r\n                                \r\n                                        <ng-container matColumnDef=\"action\">\r\n                                                <th mat-header-cell *matHeaderCellDef></th>\r\n                                                <td mat-cell *matCellDef=\"let viewer\">\r\n                                                    <button mat-button color=\"warn\" (click)=\"onViewerBlock(viewer)\">block</button>\r\n                                                </td>\r\n                                        </ng-container>\r\n                                    <tr mat-header-row *matHeaderRowDef=\"['name','startDt','aliveDt','action']\"></tr>\r\n                                    <tr mat-row *matRowDef=\"let row; columns: ['name','startDt','aliveDt','action'];\"></tr>\r\n\r\n                                 </table>\r\n                                 \r\n                                 \r\n                            </mat-expansion-panel>\r\n\r\n<!-- ================================================================================= -->\r\n                            <mat-expansion-panel  *ngIf=\"blocked\" fxFlex.xs=\"100%\" fxFlex=\"400px\" expanded class=\"blocked\" >\r\n                                <mat-expansion-panel-header>\r\n                                    <mat-panel-title>\r\n                                        Blocked Users\r\n                                    </mat-panel-title>\r\n                                    <mat-panel-description>\r\n                                        &nbsp; \r\n                                        \r\n                                    </mat-panel-description>\r\n                                 </mat-expansion-panel-header>\r\n\r\n                                 <table mat-table [dataSource]=\"blockedDs\" >\r\n\r\n                                    <ng-container matColumnDef=\"name\">\r\n                                            <th mat-header-cell *matHeaderCellDef> Name </th>\r\n                                            <td mat-cell *matCellDef=\"let user\" class=\"block-table-td\"> {{user.nme}} </td>\r\n                                    </ng-container>\r\n\r\n                                    <ng-container matColumnDef=\"date\">\r\n                                        <th mat-header-cell *matHeaderCellDef> Date </th>\r\n                                        <td mat-cell *matCellDef=\"let user\"  class=\"block-table-td\"> {{user.dt.toDate() | date: 'MMM d'}} </td>\r\n                                    </ng-container>\r\n\r\n                                    <ng-container matColumnDef=\"action\">\r\n                                            <th mat-header-cell *matHeaderCellDef></th>\r\n                                            <td mat-cell *matCellDef=\"let user\"  class=\"block-table-td\">\r\n                                                <button mat-button color=\"warn\" (click)=\"onUnBlock(user)\">un-block</button>\r\n                                            </td>\r\n                                    </ng-container>\r\n                                      \r\n                                    <tr mat-header-row *matHeaderRowDef=\"['name','date','action']\"></tr>\r\n                                    <tr mat-row *matRowDef=\"let row; columns: ['name','date','action'];\"></tr>\r\n\r\n                                 </table>\r\n\r\n                            </mat-expansion-panel>\r\n\r\n                <!-- ================================================================================= -->\r\n                <mat-expansion-panel  *ngIf=\"leaderboard\" fxFlex.xs=\"100%\" fxFlex=\"400px\" expanded class=\"leaderboard\" >\r\n                    <mat-expansion-panel-header>\r\n                        <mat-panel-title>\r\n                            leaderboard\r\n                        </mat-panel-title>\r\n                        <mat-panel-description>\r\n                            &nbsp; \r\n                            \r\n                        </mat-panel-description>\r\n                        </mat-expansion-panel-header>\r\n\r\n                        <ul>\r\n                            <li *ngFor=\"let lb of leaderboard\"><b>{{lb.nme}}</b>     {{lb.amt}} token, last tip @ {{lb.dt.toDate() | date:'HH:mm'}}</li>\r\n                        </ul>\r\n                        \r\n                </mat-expansion-panel>\r\n\r\n                <mat-expansion-panel fxFlex.xs=\"100%\" fxFlex=\"400px\" expanded class=\"lovense\" >\r\n                    <mat-expansion-panel-header>\r\n                        <mat-panel-title>\r\n                            <img src=\"https://firebasestorage.googleapis.com/v0/b/alpha69-ng.appspot.com/o/images%2Flovense-logo.png?alt=media&token=972dc95f-e83b-43c8-bab7-fb6d4903adff\">\r\n                        </mat-panel-title>\r\n                        <mat-panel-description>\r\n                            &nbsp; \r\n                        </mat-panel-description>\r\n                        </mat-expansion-panel-header>\r\n                \r\n                        <app-lovense></app-lovense>        \r\n                </mat-expansion-panel>\r\n                \r\n</mat-accordion>\r\n\r\n\r\n</section>"
 
 /***/ }),
 
@@ -1493,7 +1725,7 @@ module.exports = "<section class='page-title'>\r\n    <h1>Session Control</h1>\r
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "mat-form-field {\n  width: 300px; }\n\n.current-session {\n  padding-top: 30px; }\n\n.leaderboard {\n  background: #fefcea;\n  background: linear-gradient(to bottom, #fefcea 0%, #f1da36 100%);\n  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fefcea', endColorstr='#f1da36',GradientType=0 ); }\n\n.leaderboard li {\n    list-style-type: decimal; }\n\n.goal-meter {\n  background: #e4f5fc;\n  background: linear-gradient(to bottom, #e4f5fc 0%, #7dc8e8 100%);\n  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e4f5fc', endColorstr='#7dc8e8',GradientType=0 ); }\n\n.tipjar {\n  background: #fefcea;\n  background: linear-gradient(to bottom, #fefcea 0%, #ede4af 100%);\n  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fefcea', endColorstr='#ede4af',GradientType=0 ); }\n\n.wallet {\n  background: #eeeeee;\n  background: linear-gradient(to bottom, #eeeeee 0%, #cccccc 100%);\n  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eeeeee', endColorstr='#cccccc',GradientType=0 ); }\n\n.runtime {\n  background: #cdeb8b;\n  background: linear-gradient(to bottom, #cdeb8b 0%, #daeab4 100%);\n  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cdeb8b', endColorstr='#daeab4',GradientType=0 ); }\n\n.page-title {\n  text-align: center; }\n\n.accordion .mat-expansion-panel-header-title,\n.accordion .mat-expansion-panel-header-description {\n  flex-basis: 0; }\n\n.accordion .mat-expansion-panel-header-description {\n  justify-content: space-between;\n  align-items: center; }\n\n.accordion_live .mat-expansion-panel-header-title,\n.accordion_live .mat-expansion-panel-header-description {\n  flex-basis: 0;\n  color: black; }\n\n.accordion_live .mat-expansion-panel-header-description {\n  justify-content: space-between;\n  align-items: center;\n  color: black; }\n\nmat-expansion-panel {\n  margin: 5px 5px 5px 5px; }\n\n.content {\n  padding-left: 5px;\n  padding-right: 5px;\n  padding-bottom: 10px; }\n\n.tipwall-list {\n  list-style-type: none;\n  font-size: 10pt; }\n\n.tipwall {\n  background: #ebe9f9;\n  background: -webkit-gradient(left top, right bottom, color-stop(0%, #ebe9f9), color-stop(100%, #c1bfea));\n  background: linear-gradient(135deg, #ebe9f9 0%, #c1bfea 100%);\n  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ebe9f9', endColorstr='#c1bfea', GradientType=1 ); }\n\n.block-table-td {\n  padding-left: 10px;\n  padding-right: 10px; }\n\n.viewer-table-td {\n  padding-left: 10px;\n  padding-right: 10px; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvbWVtYmVyL3Nlc3Npb24vY3VycmVudC1zZXNzaW9uL0M6XFxVc2Vyc1xcamF4Y3BoXFxjb2RlXFxhbHBoYTY5LW5nL3NyY1xcYXBwXFxtZW1iZXJcXHNlc3Npb25cXGN1cnJlbnQtc2Vzc2lvblxcY3VycmVudC1zZXNzaW9uLmNvbXBvbmVudC5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0ksYUFBWSxFQUNiOztBQUVEO0VBQ0Usa0JBQ0YsRUFBQzs7QUFFRDtFQUNFLG9CQUFtQjtFQUduQixpRUFBK0Q7RUFDL0Qsb0hBQW1ILEVBS3BIOztBQVZEO0lBUUkseUJBQXdCLEVBQ3pCOztBQUlMO0VBQ0ksb0JBQW1CO0VBR25CLGlFQUErRDtFQUMvRCxvSEFBbUgsRUFDcEg7O0FBRUQ7RUFDRSxvQkFBbUI7RUFHbkIsaUVBQStEO0VBQy9ELG9IQUFtSCxFQUNwSDs7QUFFRDtFQUNFLG9CQUFtQjtFQUduQixpRUFBK0Q7RUFDL0Qsb0hBQW1ILEVBQ3BIOztBQUVEO0VBQ0Usb0JBQW1CO0VBR25CLGlFQUErRDtFQUMvRCxvSEFBbUgsRUFDbkg7O0FBR0o7RUFDRSxtQkFDRixFQUFDOztBQUVEOztFQUVFLGNBQWEsRUFDZDs7QUFFRDtFQUNFLCtCQUE4QjtFQUM5QixvQkFBbUIsRUFDcEI7O0FBR0Q7O0VBRUUsY0FBYTtFQUNiLGFBQVcsRUFDWjs7QUFFRDtFQUNFLCtCQUE4QjtFQUM5QixvQkFBbUI7RUFDbkIsYUFBVyxFQUNaOztBQUlEO0VBQ0Usd0JBQXVCLEVBQ3ZCOztBQUVEO0VBQ0Usa0JBQWlCO0VBQ2pCLG1CQUFpQjtFQUNqQixxQkFBb0IsRUFFckI7O0FBRUQ7RUFDQyxzQkFBcUI7RUFDckIsZ0JBQWUsRUFDZjs7QUFFRjtFQUNFLG9CQUFtQjtFQUVyQix5R0FBd0c7RUFJeEcsOERBQTZEO0VBQzdELHFIQUFvSCxFQUNuSDs7QUFFRDtFQUNFLG1CQUFrQjtFQUNsQixvQkFBbUIsRUFDcEI7O0FBRUQ7RUFDRSxtQkFBa0I7RUFDbEIsb0JBQW1CLEVBQ3BCIiwiZmlsZSI6InNyYy9hcHAvbWVtYmVyL3Nlc3Npb24vY3VycmVudC1zZXNzaW9uL2N1cnJlbnQtc2Vzc2lvbi5jb21wb25lbnQuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIm1hdC1mb3JtLWZpZWxkIHtcclxuICAgIHdpZHRoOiAzMDBweDtcclxuICB9XHJcbiAgXHJcbiAgLmN1cnJlbnQtc2Vzc2lvbiB7XHJcbiAgICBwYWRkaW5nLXRvcDogIDMwcHhcclxuICB9XHJcblxyXG4gIC5sZWFkZXJib2FyZHtcclxuICAgIGJhY2tncm91bmQ6ICNmZWZjZWE7XHJcbiAgICBiYWNrZ3JvdW5kOiAtbW96LWxpbmVhci1ncmFkaWVudCh0b3AsICNmZWZjZWEgMCUsICNmMWRhMzYgMTAwJSk7XHJcbiAgICBiYWNrZ3JvdW5kOiAtd2Via2l0LWxpbmVhci1ncmFkaWVudCh0b3AsICNmZWZjZWEgMCUsI2YxZGEzNiAxMDAlKTtcclxuICAgIGJhY2tncm91bmQ6IGxpbmVhci1ncmFkaWVudCh0byBib3R0b20sICNmZWZjZWEgMCUsI2YxZGEzNiAxMDAlKTtcclxuICAgIGZpbHRlcjogcHJvZ2lkOkRYSW1hZ2VUcmFuc2Zvcm0uTWljcm9zb2Z0LmdyYWRpZW50KCBzdGFydENvbG9yc3RyPScjZmVmY2VhJywgZW5kQ29sb3JzdHI9JyNmMWRhMzYnLEdyYWRpZW50VHlwZT0wICk7XHJcblxyXG4gICAgbGkge1xyXG4gICAgICBsaXN0LXN0eWxlLXR5cGU6IGRlY2ltYWw7XHJcbiAgICB9XHJcbiAgfVxyXG4gIFxyXG5cclxuLmdvYWwtbWV0ZXIge1xyXG4gICAgYmFja2dyb3VuZDogI2U0ZjVmYztcclxuICAgIGJhY2tncm91bmQ6IC1tb3otbGluZWFyLWdyYWRpZW50KHRvcCwgI2U0ZjVmYyAwJSwgIzdkYzhlOCAxMDAlKTtcclxuICAgIGJhY2tncm91bmQ6IC13ZWJraXQtbGluZWFyLWdyYWRpZW50KHRvcCwgI2U0ZjVmYyAwJSwjN2RjOGU4IDEwMCUpO1xyXG4gICAgYmFja2dyb3VuZDogbGluZWFyLWdyYWRpZW50KHRvIGJvdHRvbSwgI2U0ZjVmYyAwJSwjN2RjOGU4IDEwMCUpO1xyXG4gICAgZmlsdGVyOiBwcm9naWQ6RFhJbWFnZVRyYW5zZm9ybS5NaWNyb3NvZnQuZ3JhZGllbnQoIHN0YXJ0Q29sb3JzdHI9JyNlNGY1ZmMnLCBlbmRDb2xvcnN0cj0nIzdkYzhlOCcsR3JhZGllbnRUeXBlPTAgKTtcclxuICB9XHJcblxyXG4gIC50aXBqYXIgeyBcclxuICAgIGJhY2tncm91bmQ6ICNmZWZjZWE7XHJcbiAgICBiYWNrZ3JvdW5kOiAtbW96LWxpbmVhci1ncmFkaWVudCh0b3AsICNmZWZjZWEgMCUsICNlZGU0YWYgMTAwJSk7XHJcbiAgICBiYWNrZ3JvdW5kOiAtd2Via2l0LWxpbmVhci1ncmFkaWVudCh0b3AsICNmZWZjZWEgMCUsI2VkZTRhZiAxMDAlKTtcclxuICAgIGJhY2tncm91bmQ6IGxpbmVhci1ncmFkaWVudCh0byBib3R0b20sICNmZWZjZWEgMCUsI2VkZTRhZiAxMDAlKTtcclxuICAgIGZpbHRlcjogcHJvZ2lkOkRYSW1hZ2VUcmFuc2Zvcm0uTWljcm9zb2Z0LmdyYWRpZW50KCBzdGFydENvbG9yc3RyPScjZmVmY2VhJywgZW5kQ29sb3JzdHI9JyNlZGU0YWYnLEdyYWRpZW50VHlwZT0wICk7XHJcbiAgfVxyXG5cclxuICAud2FsbGV0IHsgXHJcbiAgICBiYWNrZ3JvdW5kOiAjZWVlZWVlO1xyXG4gICAgYmFja2dyb3VuZDogLW1vei1saW5lYXItZ3JhZGllbnQodG9wLCAjZWVlZWVlIDAlLCAjY2NjY2NjIDEwMCUpO1xyXG4gICAgYmFja2dyb3VuZDogLXdlYmtpdC1saW5lYXItZ3JhZGllbnQodG9wLCAjZWVlZWVlIDAlLCNjY2NjY2MgMTAwJSk7XHJcbiAgICBiYWNrZ3JvdW5kOiBsaW5lYXItZ3JhZGllbnQodG8gYm90dG9tLCAjZWVlZWVlIDAlLCNjY2NjY2MgMTAwJSk7XHJcbiAgICBmaWx0ZXI6IHByb2dpZDpEWEltYWdlVHJhbnNmb3JtLk1pY3Jvc29mdC5ncmFkaWVudCggc3RhcnRDb2xvcnN0cj0nI2VlZWVlZScsIGVuZENvbG9yc3RyPScjY2NjY2NjJyxHcmFkaWVudFR5cGU9MCApO1xyXG4gIH1cclxuXHJcbiAgLnJ1bnRpbWUgeyBcclxuICAgIGJhY2tncm91bmQ6ICNjZGViOGI7XHJcbiAgICBiYWNrZ3JvdW5kOiAtbW96LWxpbmVhci1ncmFkaWVudCh0b3AsICNjZGViOGIgMCUsICNkYWVhYjQgMTAwJSk7XHJcbiAgICBiYWNrZ3JvdW5kOiAtd2Via2l0LWxpbmVhci1ncmFkaWVudCh0b3AsICNjZGViOGIgMCUsI2RhZWFiNCAxMDAlKTtcclxuICAgIGJhY2tncm91bmQ6IGxpbmVhci1ncmFkaWVudCh0byBib3R0b20sICNjZGViOGIgMCUsI2RhZWFiNCAxMDAlKTtcclxuICAgIGZpbHRlcjogcHJvZ2lkOkRYSW1hZ2VUcmFuc2Zvcm0uTWljcm9zb2Z0LmdyYWRpZW50KCBzdGFydENvbG9yc3RyPScjY2RlYjhiJywgZW5kQ29sb3JzdHI9JyNkYWVhYjQnLEdyYWRpZW50VHlwZT0wICk7XHJcbiAgIH1cclxuXHJcblxyXG4ucGFnZS10aXRsZXtcclxuICB0ZXh0LWFsaWduOiBjZW50ZXJcclxufVxyXG5cclxuLmFjY29yZGlvbiAubWF0LWV4cGFuc2lvbi1wYW5lbC1oZWFkZXItdGl0bGUsIFxyXG4uYWNjb3JkaW9uIC5tYXQtZXhwYW5zaW9uLXBhbmVsLWhlYWRlci1kZXNjcmlwdGlvbiB7XHJcbiAgZmxleC1iYXNpczogMDtcclxufVxyXG5cclxuLmFjY29yZGlvbiAubWF0LWV4cGFuc2lvbi1wYW5lbC1oZWFkZXItZGVzY3JpcHRpb24ge1xyXG4gIGp1c3RpZnktY29udGVudDogc3BhY2UtYmV0d2VlbjtcclxuICBhbGlnbi1pdGVtczogY2VudGVyO1xyXG59XHJcblxyXG5cclxuLmFjY29yZGlvbl9saXZlIC5tYXQtZXhwYW5zaW9uLXBhbmVsLWhlYWRlci10aXRsZSwgXHJcbi5hY2NvcmRpb25fbGl2ZSAubWF0LWV4cGFuc2lvbi1wYW5lbC1oZWFkZXItZGVzY3JpcHRpb24ge1xyXG4gIGZsZXgtYmFzaXM6IDA7XHJcbiAgY29sb3I6YmxhY2s7XHJcbn1cclxuXHJcbi5hY2NvcmRpb25fbGl2ZSAubWF0LWV4cGFuc2lvbi1wYW5lbC1oZWFkZXItZGVzY3JpcHRpb24ge1xyXG4gIGp1c3RpZnktY29udGVudDogc3BhY2UtYmV0d2VlbjtcclxuICBhbGlnbi1pdGVtczogY2VudGVyO1xyXG4gIGNvbG9yOmJsYWNrO1xyXG59XHJcblxyXG5cclxuXHJcbm1hdC1leHBhbnNpb24tcGFuZWwge1xyXG4gIG1hcmdpbjogNXB4IDVweCA1cHggNXB4O1xyXG4gfVxyXG5cclxuIC5jb250ZW50IHtcclxuICAgcGFkZGluZy1sZWZ0OiA1cHg7XHJcbiAgIHBhZGRpbmctcmlnaHQ6NXB4O1xyXG4gICBwYWRkaW5nLWJvdHRvbTogMTBweDtcclxuXHJcbiB9XHJcblxyXG4gLnRpcHdhbGwtbGlzdCB7XHJcbiAgbGlzdC1zdHlsZS10eXBlOiBub25lO1xyXG4gIGZvbnQtc2l6ZTogMTBwdDtcclxuIH1cclxuXHJcbi50aXB3YWxsIHtcclxuICBiYWNrZ3JvdW5kOiAjZWJlOWY5O1xyXG5iYWNrZ3JvdW5kOiAtbW96LWxpbmVhci1ncmFkaWVudCgtNDVkZWcsICNlYmU5ZjkgMCUsICNjMWJmZWEgMTAwJSk7XHJcbmJhY2tncm91bmQ6IC13ZWJraXQtZ3JhZGllbnQobGVmdCB0b3AsIHJpZ2h0IGJvdHRvbSwgY29sb3Itc3RvcCgwJSwgI2ViZTlmOSksIGNvbG9yLXN0b3AoMTAwJSwgI2MxYmZlYSkpO1xyXG5iYWNrZ3JvdW5kOiAtd2Via2l0LWxpbmVhci1ncmFkaWVudCgtNDVkZWcsICNlYmU5ZjkgMCUsICNjMWJmZWEgMTAwJSk7XHJcbmJhY2tncm91bmQ6IC1vLWxpbmVhci1ncmFkaWVudCgtNDVkZWcsICNlYmU5ZjkgMCUsICNjMWJmZWEgMTAwJSk7XHJcbmJhY2tncm91bmQ6IC1tcy1saW5lYXItZ3JhZGllbnQoLTQ1ZGVnLCAjZWJlOWY5IDAlLCAjYzFiZmVhIDEwMCUpO1xyXG5iYWNrZ3JvdW5kOiBsaW5lYXItZ3JhZGllbnQoMTM1ZGVnLCAjZWJlOWY5IDAlLCAjYzFiZmVhIDEwMCUpO1xyXG5maWx0ZXI6IHByb2dpZDpEWEltYWdlVHJhbnNmb3JtLk1pY3Jvc29mdC5ncmFkaWVudCggc3RhcnRDb2xvcnN0cj0nI2ViZTlmOScsIGVuZENvbG9yc3RyPScjYzFiZmVhJywgR3JhZGllbnRUeXBlPTEgKTtcclxufVxyXG5cclxuLmJsb2NrLXRhYmxlLXRkIHsgXHJcbiAgcGFkZGluZy1sZWZ0OiAxMHB4O1xyXG4gIHBhZGRpbmctcmlnaHQ6IDEwcHg7XHJcbn1cclxuXHJcbi52aWV3ZXItdGFibGUtdGQgeyBcclxuICBwYWRkaW5nLWxlZnQ6IDEwcHg7XHJcbiAgcGFkZGluZy1yaWdodDogMTBweDtcclxufSJdfQ== */"
+module.exports = "mat-form-field {\n  width: 300px; }\n\n.current-session {\n  padding-top: 30px; }\n\n.leaderboard {\n  background: #fefcea;\n  background: linear-gradient(to bottom, #fefcea 0%, #f1da36 100%);\n  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fefcea', endColorstr='#f1da36',GradientType=0 ); }\n\n.leaderboard li {\n    list-style-type: decimal; }\n\n.goal-meter {\n  background: #e4f5fc;\n  background: linear-gradient(to bottom, #e4f5fc 0%, #7dc8e8 100%);\n  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e4f5fc', endColorstr='#7dc8e8',GradientType=0 ); }\n\n.tipjar {\n  background: #fefcea;\n  background: linear-gradient(to bottom, #fefcea 0%, #ede4af 100%);\n  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fefcea', endColorstr='#ede4af',GradientType=0 ); }\n\n.wallet {\n  background: #eeeeee;\n  background: linear-gradient(to bottom, #eeeeee 0%, #cccccc 100%);\n  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eeeeee', endColorstr='#cccccc',GradientType=0 ); }\n\n.runtime {\n  background: #cdeb8b;\n  background: linear-gradient(to bottom, #cdeb8b 0%, #daeab4 100%);\n  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cdeb8b', endColorstr='#daeab4',GradientType=0 ); }\n\n.lovense {\n  background: #fcecfc;\n  background: -webkit-gradient(left top, left bottom, color-stop(0%, #fcecfc), color-stop(37%, #fcecfc), color-stop(100%, #ffbdec));\n  background: linear-gradient(to bottom, #fcecfc 0%, #fcecfc 37%, #ffbdec 100%);\n  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fcecfc', endColorstr='#ffbdec', GradientType=0 ); }\n\n.page-title {\n  text-align: center; }\n\n.accordion .mat-expansion-panel-header-title,\n.accordion .mat-expansion-panel-header-description {\n  flex-basis: 0; }\n\n.accordion .mat-expansion-panel-header-description {\n  justify-content: space-between;\n  align-items: center; }\n\n.accordion_live .mat-expansion-panel-header-title,\n.accordion_live .mat-expansion-panel-header-description {\n  flex-basis: 0;\n  color: black; }\n\n.accordion_live .mat-expansion-panel-header-description {\n  justify-content: space-between;\n  align-items: center;\n  color: black; }\n\nmat-expansion-panel {\n  margin: 5px 5px 5px 5px; }\n\n.content {\n  padding-left: 5px;\n  padding-right: 5px;\n  padding-bottom: 10px; }\n\n.tipwall-list {\n  list-style-type: none;\n  font-size: 10pt; }\n\n.tipwall {\n  background: #ebe9f9;\n  background: -webkit-gradient(left top, right bottom, color-stop(0%, #ebe9f9), color-stop(100%, #c1bfea));\n  background: linear-gradient(135deg, #ebe9f9 0%, #c1bfea 100%);\n  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ebe9f9', endColorstr='#c1bfea', GradientType=1 ); }\n\n.block-table-td {\n  padding-left: 10px;\n  padding-right: 10px; }\n\n.viewer-table-td {\n  padding-left: 10px;\n  padding-right: 10px; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvbWVtYmVyL3Nlc3Npb24vY3VycmVudC1zZXNzaW9uL0M6XFxVc2Vyc1xcamF4Y3BoXFxjb2RlXFxhbHBoYTY5LW5nL3NyY1xcYXBwXFxtZW1iZXJcXHNlc3Npb25cXGN1cnJlbnQtc2Vzc2lvblxcY3VycmVudC1zZXNzaW9uLmNvbXBvbmVudC5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0ksYUFBWSxFQUNiOztBQUVEO0VBQ0Usa0JBQ0YsRUFBQzs7QUFFRDtFQUNFLG9CQUFtQjtFQUduQixpRUFBK0Q7RUFDL0Qsb0hBQW1ILEVBS3BIOztBQVZEO0lBUUkseUJBQXdCLEVBQ3pCOztBQUlMO0VBQ0ksb0JBQW1CO0VBR25CLGlFQUErRDtFQUMvRCxvSEFBbUgsRUFDcEg7O0FBRUQ7RUFDRSxvQkFBbUI7RUFHbkIsaUVBQStEO0VBQy9ELG9IQUFtSCxFQUNwSDs7QUFFRDtFQUNFLG9CQUFtQjtFQUduQixpRUFBK0Q7RUFDL0Qsb0hBQW1ILEVBQ3BIOztBQUVEO0VBQ0Usb0JBQW1CO0VBR25CLGlFQUErRDtFQUMvRCxvSEFBbUgsRUFDbkg7O0FBRUo7RUFDRSxvQkFBK0I7RUFFakMsa0lBQXFLO0VBSXJLLDhFQUFpSDtFQUNqSCxxSEFBb0gsRUFDbkg7O0FBQ0Q7RUFDRSxtQkFDRixFQUFDOztBQUVEOztFQUVFLGNBQWEsRUFDZDs7QUFFRDtFQUNFLCtCQUE4QjtFQUM5QixvQkFBbUIsRUFDcEI7O0FBR0Q7O0VBRUUsY0FBYTtFQUNiLGFBQVcsRUFDWjs7QUFFRDtFQUNFLCtCQUE4QjtFQUM5QixvQkFBbUI7RUFDbkIsYUFBVyxFQUNaOztBQUlEO0VBQ0Usd0JBQXVCLEVBQ3ZCOztBQUVEO0VBQ0Usa0JBQWlCO0VBQ2pCLG1CQUFpQjtFQUNqQixxQkFBb0IsRUFFckI7O0FBRUQ7RUFDQyxzQkFBcUI7RUFDckIsZ0JBQWUsRUFDZjs7QUFFRjtFQUNFLG9CQUFtQjtFQUVyQix5R0FBd0c7RUFJeEcsOERBQTZEO0VBQzdELHFIQUFvSCxFQUNuSDs7QUFFRDtFQUNFLG1CQUFrQjtFQUNsQixvQkFBbUIsRUFDcEI7O0FBRUQ7RUFDRSxtQkFBa0I7RUFDbEIsb0JBQW1CLEVBQ3BCIiwiZmlsZSI6InNyYy9hcHAvbWVtYmVyL3Nlc3Npb24vY3VycmVudC1zZXNzaW9uL2N1cnJlbnQtc2Vzc2lvbi5jb21wb25lbnQuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIm1hdC1mb3JtLWZpZWxkIHtcclxuICAgIHdpZHRoOiAzMDBweDtcclxuICB9XHJcbiAgXHJcbiAgLmN1cnJlbnQtc2Vzc2lvbiB7XHJcbiAgICBwYWRkaW5nLXRvcDogIDMwcHhcclxuICB9XHJcblxyXG4gIC5sZWFkZXJib2FyZHtcclxuICAgIGJhY2tncm91bmQ6ICNmZWZjZWE7XHJcbiAgICBiYWNrZ3JvdW5kOiAtbW96LWxpbmVhci1ncmFkaWVudCh0b3AsICNmZWZjZWEgMCUsICNmMWRhMzYgMTAwJSk7XHJcbiAgICBiYWNrZ3JvdW5kOiAtd2Via2l0LWxpbmVhci1ncmFkaWVudCh0b3AsICNmZWZjZWEgMCUsI2YxZGEzNiAxMDAlKTtcclxuICAgIGJhY2tncm91bmQ6IGxpbmVhci1ncmFkaWVudCh0byBib3R0b20sICNmZWZjZWEgMCUsI2YxZGEzNiAxMDAlKTtcclxuICAgIGZpbHRlcjogcHJvZ2lkOkRYSW1hZ2VUcmFuc2Zvcm0uTWljcm9zb2Z0LmdyYWRpZW50KCBzdGFydENvbG9yc3RyPScjZmVmY2VhJywgZW5kQ29sb3JzdHI9JyNmMWRhMzYnLEdyYWRpZW50VHlwZT0wICk7XHJcblxyXG4gICAgbGkge1xyXG4gICAgICBsaXN0LXN0eWxlLXR5cGU6IGRlY2ltYWw7XHJcbiAgICB9XHJcbiAgfVxyXG4gIFxyXG5cclxuLmdvYWwtbWV0ZXIge1xyXG4gICAgYmFja2dyb3VuZDogI2U0ZjVmYztcclxuICAgIGJhY2tncm91bmQ6IC1tb3otbGluZWFyLWdyYWRpZW50KHRvcCwgI2U0ZjVmYyAwJSwgIzdkYzhlOCAxMDAlKTtcclxuICAgIGJhY2tncm91bmQ6IC13ZWJraXQtbGluZWFyLWdyYWRpZW50KHRvcCwgI2U0ZjVmYyAwJSwjN2RjOGU4IDEwMCUpO1xyXG4gICAgYmFja2dyb3VuZDogbGluZWFyLWdyYWRpZW50KHRvIGJvdHRvbSwgI2U0ZjVmYyAwJSwjN2RjOGU4IDEwMCUpO1xyXG4gICAgZmlsdGVyOiBwcm9naWQ6RFhJbWFnZVRyYW5zZm9ybS5NaWNyb3NvZnQuZ3JhZGllbnQoIHN0YXJ0Q29sb3JzdHI9JyNlNGY1ZmMnLCBlbmRDb2xvcnN0cj0nIzdkYzhlOCcsR3JhZGllbnRUeXBlPTAgKTtcclxuICB9XHJcblxyXG4gIC50aXBqYXIgeyBcclxuICAgIGJhY2tncm91bmQ6ICNmZWZjZWE7XHJcbiAgICBiYWNrZ3JvdW5kOiAtbW96LWxpbmVhci1ncmFkaWVudCh0b3AsICNmZWZjZWEgMCUsICNlZGU0YWYgMTAwJSk7XHJcbiAgICBiYWNrZ3JvdW5kOiAtd2Via2l0LWxpbmVhci1ncmFkaWVudCh0b3AsICNmZWZjZWEgMCUsI2VkZTRhZiAxMDAlKTtcclxuICAgIGJhY2tncm91bmQ6IGxpbmVhci1ncmFkaWVudCh0byBib3R0b20sICNmZWZjZWEgMCUsI2VkZTRhZiAxMDAlKTtcclxuICAgIGZpbHRlcjogcHJvZ2lkOkRYSW1hZ2VUcmFuc2Zvcm0uTWljcm9zb2Z0LmdyYWRpZW50KCBzdGFydENvbG9yc3RyPScjZmVmY2VhJywgZW5kQ29sb3JzdHI9JyNlZGU0YWYnLEdyYWRpZW50VHlwZT0wICk7XHJcbiAgfVxyXG5cclxuICAud2FsbGV0IHsgXHJcbiAgICBiYWNrZ3JvdW5kOiAjZWVlZWVlO1xyXG4gICAgYmFja2dyb3VuZDogLW1vei1saW5lYXItZ3JhZGllbnQodG9wLCAjZWVlZWVlIDAlLCAjY2NjY2NjIDEwMCUpO1xyXG4gICAgYmFja2dyb3VuZDogLXdlYmtpdC1saW5lYXItZ3JhZGllbnQodG9wLCAjZWVlZWVlIDAlLCNjY2NjY2MgMTAwJSk7XHJcbiAgICBiYWNrZ3JvdW5kOiBsaW5lYXItZ3JhZGllbnQodG8gYm90dG9tLCAjZWVlZWVlIDAlLCNjY2NjY2MgMTAwJSk7XHJcbiAgICBmaWx0ZXI6IHByb2dpZDpEWEltYWdlVHJhbnNmb3JtLk1pY3Jvc29mdC5ncmFkaWVudCggc3RhcnRDb2xvcnN0cj0nI2VlZWVlZScsIGVuZENvbG9yc3RyPScjY2NjY2NjJyxHcmFkaWVudFR5cGU9MCApO1xyXG4gIH1cclxuXHJcbiAgLnJ1bnRpbWUgeyBcclxuICAgIGJhY2tncm91bmQ6ICNjZGViOGI7XHJcbiAgICBiYWNrZ3JvdW5kOiAtbW96LWxpbmVhci1ncmFkaWVudCh0b3AsICNjZGViOGIgMCUsICNkYWVhYjQgMTAwJSk7XHJcbiAgICBiYWNrZ3JvdW5kOiAtd2Via2l0LWxpbmVhci1ncmFkaWVudCh0b3AsICNjZGViOGIgMCUsI2RhZWFiNCAxMDAlKTtcclxuICAgIGJhY2tncm91bmQ6IGxpbmVhci1ncmFkaWVudCh0byBib3R0b20sICNjZGViOGIgMCUsI2RhZWFiNCAxMDAlKTtcclxuICAgIGZpbHRlcjogcHJvZ2lkOkRYSW1hZ2VUcmFuc2Zvcm0uTWljcm9zb2Z0LmdyYWRpZW50KCBzdGFydENvbG9yc3RyPScjY2RlYjhiJywgZW5kQ29sb3JzdHI9JyNkYWVhYjQnLEdyYWRpZW50VHlwZT0wICk7XHJcbiAgIH1cclxuXHJcbi5sb3ZlbnNlIHtcclxuICBiYWNrZ3JvdW5kOiByZ2JhKDI1MiwyMzYsMjUyLDEpO1xyXG5iYWNrZ3JvdW5kOiAtbW96LWxpbmVhci1ncmFkaWVudCh0b3AsIHJnYmEoMjUyLDIzNiwyNTIsMSkgMCUsIHJnYmEoMjUyLDIzNiwyNTIsMSkgMzclLCByZ2JhKDI1NSwxODksMjM2LDEpIDEwMCUpO1xyXG5iYWNrZ3JvdW5kOiAtd2Via2l0LWdyYWRpZW50KGxlZnQgdG9wLCBsZWZ0IGJvdHRvbSwgY29sb3Itc3RvcCgwJSwgcmdiYSgyNTIsMjM2LDI1MiwxKSksIGNvbG9yLXN0b3AoMzclLCByZ2JhKDI1MiwyMzYsMjUyLDEpKSwgY29sb3Itc3RvcCgxMDAlLCByZ2JhKDI1NSwxODksMjM2LDEpKSk7XHJcbmJhY2tncm91bmQ6IC13ZWJraXQtbGluZWFyLWdyYWRpZW50KHRvcCwgcmdiYSgyNTIsMjM2LDI1MiwxKSAwJSwgcmdiYSgyNTIsMjM2LDI1MiwxKSAzNyUsIHJnYmEoMjU1LDE4OSwyMzYsMSkgMTAwJSk7XHJcbmJhY2tncm91bmQ6IC1vLWxpbmVhci1ncmFkaWVudCh0b3AsIHJnYmEoMjUyLDIzNiwyNTIsMSkgMCUsIHJnYmEoMjUyLDIzNiwyNTIsMSkgMzclLCByZ2JhKDI1NSwxODksMjM2LDEpIDEwMCUpO1xyXG5iYWNrZ3JvdW5kOiAtbXMtbGluZWFyLWdyYWRpZW50KHRvcCwgcmdiYSgyNTIsMjM2LDI1MiwxKSAwJSwgcmdiYSgyNTIsMjM2LDI1MiwxKSAzNyUsIHJnYmEoMjU1LDE4OSwyMzYsMSkgMTAwJSk7XHJcbmJhY2tncm91bmQ6IGxpbmVhci1ncmFkaWVudCh0byBib3R0b20sIHJnYmEoMjUyLDIzNiwyNTIsMSkgMCUsIHJnYmEoMjUyLDIzNiwyNTIsMSkgMzclLCByZ2JhKDI1NSwxODksMjM2LDEpIDEwMCUpO1xyXG5maWx0ZXI6IHByb2dpZDpEWEltYWdlVHJhbnNmb3JtLk1pY3Jvc29mdC5ncmFkaWVudCggc3RhcnRDb2xvcnN0cj0nI2ZjZWNmYycsIGVuZENvbG9yc3RyPScjZmZiZGVjJywgR3JhZGllbnRUeXBlPTAgKTtcclxufVxyXG4ucGFnZS10aXRsZXtcclxuICB0ZXh0LWFsaWduOiBjZW50ZXJcclxufVxyXG5cclxuLmFjY29yZGlvbiAubWF0LWV4cGFuc2lvbi1wYW5lbC1oZWFkZXItdGl0bGUsIFxyXG4uYWNjb3JkaW9uIC5tYXQtZXhwYW5zaW9uLXBhbmVsLWhlYWRlci1kZXNjcmlwdGlvbiB7XHJcbiAgZmxleC1iYXNpczogMDtcclxufVxyXG5cclxuLmFjY29yZGlvbiAubWF0LWV4cGFuc2lvbi1wYW5lbC1oZWFkZXItZGVzY3JpcHRpb24ge1xyXG4gIGp1c3RpZnktY29udGVudDogc3BhY2UtYmV0d2VlbjtcclxuICBhbGlnbi1pdGVtczogY2VudGVyO1xyXG59XHJcblxyXG5cclxuLmFjY29yZGlvbl9saXZlIC5tYXQtZXhwYW5zaW9uLXBhbmVsLWhlYWRlci10aXRsZSwgXHJcbi5hY2NvcmRpb25fbGl2ZSAubWF0LWV4cGFuc2lvbi1wYW5lbC1oZWFkZXItZGVzY3JpcHRpb24ge1xyXG4gIGZsZXgtYmFzaXM6IDA7XHJcbiAgY29sb3I6YmxhY2s7XHJcbn1cclxuXHJcbi5hY2NvcmRpb25fbGl2ZSAubWF0LWV4cGFuc2lvbi1wYW5lbC1oZWFkZXItZGVzY3JpcHRpb24ge1xyXG4gIGp1c3RpZnktY29udGVudDogc3BhY2UtYmV0d2VlbjtcclxuICBhbGlnbi1pdGVtczogY2VudGVyO1xyXG4gIGNvbG9yOmJsYWNrO1xyXG59XHJcblxyXG5cclxuXHJcbm1hdC1leHBhbnNpb24tcGFuZWwge1xyXG4gIG1hcmdpbjogNXB4IDVweCA1cHggNXB4O1xyXG4gfVxyXG5cclxuIC5jb250ZW50IHtcclxuICAgcGFkZGluZy1sZWZ0OiA1cHg7XHJcbiAgIHBhZGRpbmctcmlnaHQ6NXB4O1xyXG4gICBwYWRkaW5nLWJvdHRvbTogMTBweDtcclxuXHJcbiB9XHJcblxyXG4gLnRpcHdhbGwtbGlzdCB7XHJcbiAgbGlzdC1zdHlsZS10eXBlOiBub25lO1xyXG4gIGZvbnQtc2l6ZTogMTBwdDtcclxuIH1cclxuXHJcbi50aXB3YWxsIHtcclxuICBiYWNrZ3JvdW5kOiAjZWJlOWY5O1xyXG5iYWNrZ3JvdW5kOiAtbW96LWxpbmVhci1ncmFkaWVudCgtNDVkZWcsICNlYmU5ZjkgMCUsICNjMWJmZWEgMTAwJSk7XHJcbmJhY2tncm91bmQ6IC13ZWJraXQtZ3JhZGllbnQobGVmdCB0b3AsIHJpZ2h0IGJvdHRvbSwgY29sb3Itc3RvcCgwJSwgI2ViZTlmOSksIGNvbG9yLXN0b3AoMTAwJSwgI2MxYmZlYSkpO1xyXG5iYWNrZ3JvdW5kOiAtd2Via2l0LWxpbmVhci1ncmFkaWVudCgtNDVkZWcsICNlYmU5ZjkgMCUsICNjMWJmZWEgMTAwJSk7XHJcbmJhY2tncm91bmQ6IC1vLWxpbmVhci1ncmFkaWVudCgtNDVkZWcsICNlYmU5ZjkgMCUsICNjMWJmZWEgMTAwJSk7XHJcbmJhY2tncm91bmQ6IC1tcy1saW5lYXItZ3JhZGllbnQoLTQ1ZGVnLCAjZWJlOWY5IDAlLCAjYzFiZmVhIDEwMCUpO1xyXG5iYWNrZ3JvdW5kOiBsaW5lYXItZ3JhZGllbnQoMTM1ZGVnLCAjZWJlOWY5IDAlLCAjYzFiZmVhIDEwMCUpO1xyXG5maWx0ZXI6IHByb2dpZDpEWEltYWdlVHJhbnNmb3JtLk1pY3Jvc29mdC5ncmFkaWVudCggc3RhcnRDb2xvcnN0cj0nI2ViZTlmOScsIGVuZENvbG9yc3RyPScjYzFiZmVhJywgR3JhZGllbnRUeXBlPTEgKTtcclxufVxyXG5cclxuLmJsb2NrLXRhYmxlLXRkIHsgXHJcbiAgcGFkZGluZy1sZWZ0OiAxMHB4O1xyXG4gIHBhZGRpbmctcmlnaHQ6IDEwcHg7XHJcbn1cclxuXHJcbi52aWV3ZXItdGFibGUtdGQgeyBcclxuICBwYWRkaW5nLWxlZnQ6IDEwcHg7XHJcbiAgcGFkZGluZy1yaWdodDogMTBweDtcclxufSJdfQ== */"
 
 /***/ }),
 
@@ -1563,6 +1795,7 @@ var CurrentSessionComponent = /** @class */ (function () {
             .subscribe(function (data) {
             _this.currentMember = data;
             _this.session = __assign({}, data.session, { created: data.session.created.toDate() });
+            localStorage.setItem('own-session-id', _this.session.id.toString());
             _this.leaderboardSub = _this.db.collection("session-leaderboard/" + _this.session.id + "/leaderboard", function (ref) { return ref.orderBy('amt', 'desc').limit(10); })
                 .snapshotChanges()
                 .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_7__["map"])(function (result) {
@@ -1784,6 +2017,7 @@ var CurrentSessionComponent = /** @class */ (function () {
                     _this.db.doc("session-goals/" + localStorage.getItem('uid')).delete();
                     _this.goal = null;
                     console.log('session stopped');
+                    localStorage.removeItem('own-session-id');
                     _this.session = null;
                     _this.uiService.showSnackbar('Session stopped', null, 3000);
                 })
@@ -2199,7 +2433,7 @@ var StreamService = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<section class='page-title'>\r\n    <h3 *ngIf=\"model\">Live with {{model.session.modelName}}</h3>\r\n</section>\r\n\r\n<section class=\"content\">\r\n\r\n<mat-accordion class=\"accordion\" multi=\"true\" fxLayout=\"row wrap\" fxLayoutGap=\"10px\">\r\n\r\n  <mat-expansion-panel  *ngIf=\"wallet && model\" fxFlex.xs=\"100%\" fxFlex=\"400px\" expanded>\r\n      <mat-expansion-panel-header>\r\n          <mat-panel-title>\r\n              Wallet\r\n          </mat-panel-title>\r\n          <mat-panel-description>\r\n              &nbsp; \r\n              <mat-icon>attach_money</mat-icon>\r\n          </mat-panel-description>\r\n       </mat-expansion-panel-header>\r\n      \r\n       <p class=\"wallet-balance-label\">Balance</p>\r\n       <p class=\"wallet-balance\">\r\n          {{wallet.balance}} <img src=\"https://firebasestorage.googleapis.com/v0/b/alpha69-ng.appspot.com/o/images%2Fcoin32.png?alt=media&token=f4b3f892-a7d1-4908-a2c5-54d3dbd02b22\">\r\n          \r\n      </p>\r\n    \r\n      <section class=\"ppm\" *ngIf=\"model && model.session && model.session.usePpm\">\r\n          <p class=\"ppm-label\">Pay-Per-Minute is Enabled</p>\r\n          <p class=\"ppm-charge\">You will be charged {{model.session.ppmAmount}} per minute.</p>\r\n          <p class=\"ppm-left\" *ngIf=\"ppmMinutesLeft!=-1\">{{ppmMinutesLeft}} minutes left on PPM</p>\r\n      </section>\r\n\r\n      <form fxLayout=\"column\" fxLayoutAlign=\"center center\" fxLayoutGap=\"10px\" #tipform=\"ngForm\" (ngSubmit)=\"onTip(tipform)\">\r\n\r\n          <mat-form-field>\r\n            <input type=\"number\" matInput placeholder=\"tip amount\" ngModel name=\"amount\" required/>\r\n            <mat-hint align=\"end\">minimum tip amount: {{model.session.minTipAmount? model.session.minTipAmount : 1}}</mat-hint>\r\n          </mat-form-field>\r\n      \r\n          <mat-form-field>\r\n            <input type=\"text\" matInput placeholder=\"tip message\" ngModel name=\"message\" maxlength=\"140\" />\r\n          </mat-form-field>\r\n      \r\n          <section class=\"wallet-action-section\" fxLayoutGap=\"20px\">\r\n          <button type=\"submit\" mat-raised-button color=\"accent\" [disabled]=\"tipform.invalid ||\r\n            (tipform.value.amount > wallet.balance) ||\r\n            (tipform.value.amount < (model.session.minTipAmount? model.session.minTipAmount : 1) )\">Tip</button>\r\n            <button mat-raised-button color=\"primary\" (click)=\"onBuyToken(m)\">Buy</button>\r\n          </section>\r\n      </form>\r\n\r\n     \r\n\r\n  </mat-expansion-panel>\r\n\r\n  <mat-expansion-panel  *ngIf=\"transactions\" fxFlex.xs=\"100%\" fxFlex=\"400px\" expanded class=\"tipwall\">\r\n        <mat-expansion-panel-header>\r\n            <mat-panel-title>\r\n                Tip wall\r\n            </mat-panel-title>\r\n            <mat-panel-description>\r\n                &nbsp; \r\n                <mat-icon>attach_money</mat-icon>\r\n            </mat-panel-description>\r\n         </mat-expansion-panel-header>\r\n        \r\n         <ul class=\"tipwall-list\">\r\n             <li *ngFor=\"let trans of transactions\">{{trans.ppm ? \"PPM - \": \"\"}}{{trans.dt.toDate() | date: 'hh:mm:ss'}}, {{trans.nme}}: {{trans.amt}} {{trans.msg? trans.msg : \"\"}}</li>\r\n         </ul>\r\n    </mat-expansion-panel>\r\n\r\n\r\n    <mat-expansion-panel  *ngIf=\"goal\" fxFlex.xs=\"100%\" fxFlex=\"400px\" expanded class=\"goal-meter\">\r\n            <mat-expansion-panel-header>\r\n                <mat-panel-title>\r\n                    Goal Meter\r\n                </mat-panel-title>\r\n                <mat-panel-description>\r\n                    {{goalCollectedPct}}% ({{goal.collected}}t / {{goal.amount}}t)&nbsp; \r\n                    <mat-progress-spinner\r\n                    color=\"primary\"\r\n                    mode=\"determinate\"\r\n                    [value]=\"goalCollectedPct\"\r\n                    strokeWidth=3\r\n                    diameter=20>\r\n                 </mat-progress-spinner>\r\n                </mat-panel-description>\r\n            </mat-expansion-panel-header>\r\n            \r\n            <div>\r\n                <table>\r\n                    <tr>\r\n                    <td>\r\n                        <mat-progress-spinner\r\n                        color=\"primary\"\r\n                        mode=\"determinate\"\r\n                        [value]=\"goalCollectedPct\"\r\n                        strokeWidth=10\r\n                        diameter=80>\r\n                     </mat-progress-spinner></td>\r\n                    \r\n                    <td style=\"font-size: 48pt\">{{goalCollectedPct}}%</td>\r\n                    <td style=\"font-size: 11pt;font-weight: normal;text-align: center;padding-left:10px\">{{goal.collected}}<br/>out of<br/>{{goal.amount}} <img src=\"https://firebasestorage.googleapis.com/v0/b/alpha69-ng.appspot.com/o/images%2Fcoin16.png?alt=media&token=45502c9f-a9d4-4c2e-9671-aa92141db4f5\"></td>\r\n                </tr>\r\n                <tr><td colspan=\"2\" style=\"text-align:center;font-size:12pt;font-weight: bold\">{{goal.descr}}</td></tr>\r\n                </table>\r\n            \r\n           \r\n            </div>\r\n            \r\n        </mat-expansion-panel>\r\n\r\n\r\n                   <!-- ================================================================================= -->\r\n                   <mat-expansion-panel  *ngIf=\"leaderboard\" fxFlex.xs=\"100%\" fxFlex=\"400px\" expanded class=\"leaderboard\" >\r\n                    <mat-expansion-panel-header>\r\n                        <mat-panel-title>\r\n                            leaderboard\r\n                        </mat-panel-title>\r\n                        <mat-panel-description>\r\n                            &nbsp; \r\n                            \r\n                        </mat-panel-description>\r\n                        </mat-expansion-panel-header>\r\n\r\n                        <ul>\r\n                            <li *ngFor=\"let lb of leaderboard\"><b>{{lb.nme}}</b></li>\r\n                        </ul>\r\n                        \r\n                </mat-expansion-panel>\r\n\r\n</mat-accordion>\r\n\r\n\r\n<section fxLayout=\"row\">\r\n    <article class=\"player\"  fxFlex=\"1280\">\r\n        Player    \r\n    </article>\r\n    <article class=\"chat\" fxFlex=\"720\">\r\n        Chat\r\n    </article>\r\n</section>"
+module.exports = "<section class='page-title'>\r\n    <h3 *ngIf=\"model\">Live with {{model.session.modelName}}</h3>\r\n</section>\r\n\r\n<section class=\"content\">\r\n\r\n<mat-accordion class=\"accordion\" multi=\"true\" fxLayout=\"row wrap\" fxLayoutGap=\"10px\">\r\n\r\n  <mat-expansion-panel  *ngIf=\"wallet && model\" fxFlex.xs=\"100%\" fxFlex=\"400px\" expanded>\r\n      <mat-expansion-panel-header>\r\n          <mat-panel-title>\r\n              Wallet\r\n          </mat-panel-title>\r\n          <mat-panel-description>\r\n              &nbsp; \r\n              <mat-icon>attach_money</mat-icon>\r\n          </mat-panel-description>\r\n       </mat-expansion-panel-header>\r\n      \r\n       <p class=\"wallet-balance-label\">Balance</p>\r\n       <p class=\"wallet-balance\">\r\n          {{wallet.balance}} <img src=\"https://firebasestorage.googleapis.com/v0/b/alpha69-ng.appspot.com/o/images%2Fcoin32.png?alt=media&token=f4b3f892-a7d1-4908-a2c5-54d3dbd02b22\">\r\n          \r\n      </p>\r\n    \r\n      <section class=\"ppm\" *ngIf=\"model && model.session && model.session.usePpm\">\r\n          <p class=\"ppm-label\">Pay-Per-Minute is Enabled</p>\r\n          <p class=\"ppm-charge\">You will be charged {{model.session.ppmAmount}} per minute.</p>\r\n          <p class=\"ppm-left\" *ngIf=\"ppmMinutesLeft!=-1\">{{ppmMinutesLeft}} minutes left on PPM</p>\r\n      </section>\r\n\r\n      <form fxLayout=\"column\" fxLayoutAlign=\"center center\" fxLayoutGap=\"10px\" #tipform=\"ngForm\" (ngSubmit)=\"onTip(tipform)\">\r\n\r\n          <mat-form-field>\r\n            <input type=\"number\" matInput placeholder=\"tip amount\" ngModel name=\"amount\" required/>\r\n            <mat-hint align=\"end\">minimum tip amount: {{model.session.minTipAmount? model.session.minTipAmount : 1}}</mat-hint>\r\n          </mat-form-field>\r\n      \r\n          <mat-form-field>\r\n            <input type=\"text\" matInput placeholder=\"tip message\" ngModel name=\"message\" maxlength=\"140\" />\r\n          </mat-form-field>\r\n      \r\n          <section class=\"wallet-action-section\" fxLayoutGap=\"20px\">\r\n          <button type=\"submit\" mat-raised-button color=\"accent\" [disabled]=\"tipform.invalid ||\r\n            (tipform.value.amount > wallet.balance) ||\r\n            (tipform.value.amount < (model.session.minTipAmount? model.session.minTipAmount : 1) )\">Tip</button>\r\n            <button mat-raised-button color=\"primary\" (click)=\"onBuyToken(m)\">Buy</button>\r\n          </section>\r\n      </form>\r\n\r\n     \r\n\r\n  </mat-expansion-panel>\r\n\r\n  <mat-expansion-panel  *ngIf=\"transactions\" fxFlex.xs=\"100%\" fxFlex=\"400px\" expanded class=\"tipwall\">\r\n        <mat-expansion-panel-header>\r\n            <mat-panel-title>\r\n                Tip wall\r\n            </mat-panel-title>\r\n            <mat-panel-description>\r\n                &nbsp; \r\n                <mat-icon>attach_money</mat-icon>\r\n            </mat-panel-description>\r\n         </mat-expansion-panel-header>\r\n        \r\n         <ul class=\"tipwall-list\">\r\n             <li *ngFor=\"let trans of transactions\">{{trans.ppm ? \"PPM - \": \"\"}}{{trans.dt.toDate() | date: 'hh:mm:ss'}}, {{trans.nme}}: {{trans.amt}} {{trans.msg? trans.msg : \"\"}}</li>\r\n         </ul>\r\n    </mat-expansion-panel>\r\n\r\n\r\n    <mat-expansion-panel  *ngIf=\"goal\" fxFlex.xs=\"100%\" fxFlex=\"400px\" expanded class=\"goal-meter\">\r\n            <mat-expansion-panel-header>\r\n                <mat-panel-title>\r\n                    Goal Meter\r\n                </mat-panel-title>\r\n                <mat-panel-description>\r\n                    {{goalCollectedPct}}% ({{goal.collected}}t / {{goal.amount}}t)&nbsp; \r\n                    <mat-progress-spinner\r\n                    color=\"primary\"\r\n                    mode=\"determinate\"\r\n                    [value]=\"goalCollectedPct\"\r\n                    strokeWidth=3\r\n                    diameter=20>\r\n                 </mat-progress-spinner>\r\n                </mat-panel-description>\r\n            </mat-expansion-panel-header>\r\n            \r\n            <div>\r\n                <table>\r\n                    <tr>\r\n                    <td>\r\n                        <mat-progress-spinner\r\n                        color=\"primary\"\r\n                        mode=\"determinate\"\r\n                        [value]=\"goalCollectedPct\"\r\n                        strokeWidth=10\r\n                        diameter=80>\r\n                     </mat-progress-spinner></td>\r\n                    \r\n                    <td style=\"font-size: 48pt\">{{goalCollectedPct}}%</td>\r\n                    <td style=\"font-size: 11pt;font-weight: normal;text-align: center;padding-left:10px\">{{goal.collected}}<br/>out of<br/>{{goal.amount}} <img src=\"https://firebasestorage.googleapis.com/v0/b/alpha69-ng.appspot.com/o/images%2Fcoin16.png?alt=media&token=45502c9f-a9d4-4c2e-9671-aa92141db4f5\"></td>\r\n                </tr>\r\n                <tr><td colspan=\"2\" style=\"text-align:center;font-size:12pt;font-weight: bold\">{{goal.descr}}</td></tr>\r\n                </table>\r\n            \r\n           \r\n            </div>\r\n            \r\n        </mat-expansion-panel>\r\n\r\n\r\n                   <!-- ================================================================================= -->\r\n                   <mat-expansion-panel  *ngIf=\"leaderboard\" fxFlex.xs=\"100%\" fxFlex=\"400px\" expanded class=\"leaderboard\" >\r\n                    <mat-expansion-panel-header>\r\n                        <mat-panel-title>\r\n                            leaderboard\r\n                        </mat-panel-title>\r\n                        <mat-panel-description>\r\n                            &nbsp; \r\n                            \r\n                        </mat-panel-description>\r\n                        </mat-expansion-panel-header>\r\n\r\n                        <ul>\r\n                            <li *ngFor=\"let lb of leaderboard\"><b>{{lb.nme}}</b></li>\r\n                        </ul>\r\n                        \r\n                </mat-expansion-panel>\r\n\r\n</mat-accordion>\r\n\r\n\r\n<section fxLayout=\"row\" fxLayoutAlign=\"start start\" class=\"video-chat-section\">\r\n    <article class=\"player\">\r\n        <app-videoplayer></app-videoplayer>\r\n    </article>\r\n    <article class=\"chat\">\r\n        <app-chat></app-chat>\r\n    </article>\r\n</section>"
 
 /***/ }),
 
@@ -2210,7 +2444,7 @@ module.exports = "<section class='page-title'>\r\n    <h3 *ngIf=\"model\">Live w
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "mat-form-field {\n  width: 300px; }\n\n.page-title {\n  text-align: center; }\n\n.accordion .mat-expansion-panel-header-title,\n.accordion .mat-expansion-panel-header-description {\n  flex-basis: 0; }\n\n.accordion .mat-expansion-panel-header-description {\n  justify-content: space-between;\n  align-items: center; }\n\nmat-expansion-panel {\n  margin: 5px 5px 5px 5px; }\n\n.content {\n  padding-left: 5px;\n  padding-right: 5px;\n  padding-bottom: 10px; }\n\n.wallet-balance {\n  font-size: 36pt;\n  font-weight: normal;\n  text-align: center;\n  margin: 10px; }\n\n.wallet-balance-label {\n  font-size: 12pt;\n  font-weight: bold;\n  text-align: center;\n  margin: 0px; }\n\n.tipwall-list {\n  list-style-type: none;\n  font-size: 10pt; }\n\n.ppm {\n  text-align: center; }\n\n.ppm-label {\n  font-size: 12pt; }\n\n.ppm-charge {\n  font-size: 10pt; }\n\n.ppm-left {\n  font-size: 10pt; }\n\n.tipwall {\n  background: #ebe9f9;\n  background: -webkit-gradient(left top, right bottom, color-stop(0%, #ebe9f9), color-stop(100%, #c1bfea));\n  background: linear-gradient(135deg, #ebe9f9 0%, #c1bfea 100%);\n  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ebe9f9', endColorstr='#c1bfea', GradientType=1 ); }\n\n.goal-meter {\n  background: #e4f5fc;\n  background: linear-gradient(to bottom, #e4f5fc 0%, #7dc8e8 100%);\n  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e4f5fc', endColorstr='#7dc8e8',GradientType=0 ); }\n\n.leaderboard {\n  background: #fefcea;\n  background: linear-gradient(to bottom, #fefcea 0%, #f1da36 100%);\n  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fefcea', endColorstr='#f1da36',GradientType=0 ); }\n\n.leaderboard li {\n    list-style-type: decimal; }\n\n.player {\n  margin-top: 20px;\n  background-color: gray;\n  border: 4px solid black; }\n\n.chat {\n  margin-top: 20px;\n  background-color: silver;\n  border: 4px solid black; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvbW9kZWxzL2xpdmUvQzpcXFVzZXJzXFxqYXhjcGhcXGNvZGVcXGFscGhhNjktbmcvc3JjXFxhcHBcXG1vZGVsc1xcbGl2ZVxcbGl2ZS5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNJLGFBQVksRUFDYjs7QUFHRDtFQUNFLG1CQUNGLEVBQUM7O0FBQ0Q7O0VBRUUsY0FBYSxFQUNkOztBQUVEO0VBQ0UsK0JBQThCO0VBQzlCLG9CQUFtQixFQUNwQjs7QUFDRDtFQUNFLHdCQUF1QixFQUN2Qjs7QUFFSDtFQUNJLGtCQUFpQjtFQUNqQixtQkFBaUI7RUFDakIscUJBQW9CLEVBRXJCOztBQUVEO0VBQ0MsZ0JBQWU7RUFDZixvQkFBbUI7RUFDbkIsbUJBQWtCO0VBQ2xCLGFBQVcsRUFDWDs7QUFFRDtFQUNDLGdCQUFlO0VBQ2Ysa0JBQWlCO0VBQ2pCLG1CQUFrQjtFQUNsQixZQUFVLEVBQ1Y7O0FBRUQ7RUFDRSxzQkFBcUI7RUFDckIsZ0JBQWUsRUFDZjs7QUFFRjtFQUNFLG1CQUFrQixFQUNuQjs7QUFFRDtFQUNDLGdCQUFlLEVBQ2Y7O0FBRUQ7RUFDQyxnQkFBZSxFQUNmOztBQUNEO0VBQ0MsZ0JBQWUsRUFDZjs7QUFFRDtFQUNDLG9CQUFtQjtFQUVuQix5R0FBd0c7RUFJeEcsOERBQTZEO0VBQzdELHFIQUFvSCxFQUNwSDs7QUFFSjtFQUNFLG9CQUFtQjtFQUduQixpRUFBK0Q7RUFDL0Qsb0hBQW1ILEVBQ3BIOztBQUdEO0VBQ0Usb0JBQW1CO0VBR25CLGlFQUErRDtFQUMvRCxvSEFBbUgsRUFLcEg7O0FBVkQ7SUFRSSx5QkFBd0IsRUFDekI7O0FBSUg7RUFDRSxpQkFBZ0I7RUFDaEIsdUJBQXNCO0VBQ3RCLHdCQUFzQixFQUN2Qjs7QUFDRDtFQUVFLGlCQUFnQjtFQUNoQix5QkFBdUI7RUFDdkIsd0JBQXNCLEVBQ3ZCIiwiZmlsZSI6InNyYy9hcHAvbW9kZWxzL2xpdmUvbGl2ZS5jb21wb25lbnQuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIm1hdC1mb3JtLWZpZWxkIHtcclxuICAgIHdpZHRoOiAzMDBweDtcclxuICB9XHJcblxyXG5cclxuICAucGFnZS10aXRsZXtcclxuICAgIHRleHQtYWxpZ246IGNlbnRlclxyXG4gIH1cclxuICAuYWNjb3JkaW9uIC5tYXQtZXhwYW5zaW9uLXBhbmVsLWhlYWRlci10aXRsZSwgXHJcbiAgLmFjY29yZGlvbiAubWF0LWV4cGFuc2lvbi1wYW5lbC1oZWFkZXItZGVzY3JpcHRpb24ge1xyXG4gICAgZmxleC1iYXNpczogMDtcclxuICB9XHJcbiAgXHJcbiAgLmFjY29yZGlvbiAubWF0LWV4cGFuc2lvbi1wYW5lbC1oZWFkZXItZGVzY3JpcHRpb24ge1xyXG4gICAganVzdGlmeS1jb250ZW50OiBzcGFjZS1iZXR3ZWVuO1xyXG4gICAgYWxpZ24taXRlbXM6IGNlbnRlcjtcclxuICB9XHJcbiAgbWF0LWV4cGFuc2lvbi1wYW5lbCB7XHJcbiAgICBtYXJnaW46IDVweCA1cHggNXB4IDVweDtcclxuICAgfVxyXG4gIFxyXG4gLmNvbnRlbnQge1xyXG4gICAgIHBhZGRpbmctbGVmdDogNXB4O1xyXG4gICAgIHBhZGRpbmctcmlnaHQ6NXB4O1xyXG4gICAgIHBhZGRpbmctYm90dG9tOiAxMHB4O1xyXG4gIFxyXG4gICB9XHJcblxyXG4gICAud2FsbGV0LWJhbGFuY2Uge1xyXG4gICAgZm9udC1zaXplOiAzNnB0O1xyXG4gICAgZm9udC13ZWlnaHQ6IG5vcm1hbDtcclxuICAgIHRleHQtYWxpZ246IGNlbnRlcjtcclxuICAgIG1hcmdpbjoxMHB4O1xyXG4gICB9XHJcblxyXG4gICAud2FsbGV0LWJhbGFuY2UtbGFiZWwge1xyXG4gICAgZm9udC1zaXplOiAxMnB0O1xyXG4gICAgZm9udC13ZWlnaHQ6IGJvbGQ7XHJcbiAgICB0ZXh0LWFsaWduOiBjZW50ZXI7XHJcbiAgICBtYXJnaW46MHB4O1xyXG4gICB9XHJcblxyXG4gICAudGlwd2FsbC1saXN0IHtcclxuICAgICBsaXN0LXN0eWxlLXR5cGU6IG5vbmU7XHJcbiAgICAgZm9udC1zaXplOiAxMHB0O1xyXG4gICAgfVxyXG5cclxuICAgLnBwbSB7XHJcbiAgICAgdGV4dC1hbGlnbjogY2VudGVyO1xyXG4gICB9XHJcblxyXG4gICAucHBtLWxhYmVsIHtcclxuICAgIGZvbnQtc2l6ZTogMTJwdDtcclxuICAgfVxyXG5cclxuICAgLnBwbS1jaGFyZ2Uge1xyXG4gICAgZm9udC1zaXplOiAxMHB0O1xyXG4gICB9XHJcbiAgIC5wcG0tbGVmdCB7XHJcbiAgICBmb250LXNpemU6IDEwcHQ7XHJcbiAgIH1cclxuXHJcbiAgIC50aXB3YWxsIHtcclxuICAgIGJhY2tncm91bmQ6ICNlYmU5Zjk7XHJcbiAgICBiYWNrZ3JvdW5kOiAtbW96LWxpbmVhci1ncmFkaWVudCgtNDVkZWcsICNlYmU5ZjkgMCUsICNjMWJmZWEgMTAwJSk7XHJcbiAgICBiYWNrZ3JvdW5kOiAtd2Via2l0LWdyYWRpZW50KGxlZnQgdG9wLCByaWdodCBib3R0b20sIGNvbG9yLXN0b3AoMCUsICNlYmU5ZjkpLCBjb2xvci1zdG9wKDEwMCUsICNjMWJmZWEpKTtcclxuICAgIGJhY2tncm91bmQ6IC13ZWJraXQtbGluZWFyLWdyYWRpZW50KC00NWRlZywgI2ViZTlmOSAwJSwgI2MxYmZlYSAxMDAlKTtcclxuICAgIGJhY2tncm91bmQ6IC1vLWxpbmVhci1ncmFkaWVudCgtNDVkZWcsICNlYmU5ZjkgMCUsICNjMWJmZWEgMTAwJSk7XHJcbiAgICBiYWNrZ3JvdW5kOiAtbXMtbGluZWFyLWdyYWRpZW50KC00NWRlZywgI2ViZTlmOSAwJSwgI2MxYmZlYSAxMDAlKTtcclxuICAgIGJhY2tncm91bmQ6IGxpbmVhci1ncmFkaWVudCgxMzVkZWcsICNlYmU5ZjkgMCUsICNjMWJmZWEgMTAwJSk7XHJcbiAgICBmaWx0ZXI6IHByb2dpZDpEWEltYWdlVHJhbnNmb3JtLk1pY3Jvc29mdC5ncmFkaWVudCggc3RhcnRDb2xvcnN0cj0nI2ViZTlmOScsIGVuZENvbG9yc3RyPScjYzFiZmVhJywgR3JhZGllbnRUeXBlPTEgKTtcclxuICAgfVxyXG4gICBcclxuLmdvYWwtbWV0ZXIge1xyXG4gIGJhY2tncm91bmQ6ICNlNGY1ZmM7XHJcbiAgYmFja2dyb3VuZDogLW1vei1saW5lYXItZ3JhZGllbnQodG9wLCAjZTRmNWZjIDAlLCAjN2RjOGU4IDEwMCUpO1xyXG4gIGJhY2tncm91bmQ6IC13ZWJraXQtbGluZWFyLWdyYWRpZW50KHRvcCwgI2U0ZjVmYyAwJSwjN2RjOGU4IDEwMCUpO1xyXG4gIGJhY2tncm91bmQ6IGxpbmVhci1ncmFkaWVudCh0byBib3R0b20sICNlNGY1ZmMgMCUsIzdkYzhlOCAxMDAlKTtcclxuICBmaWx0ZXI6IHByb2dpZDpEWEltYWdlVHJhbnNmb3JtLk1pY3Jvc29mdC5ncmFkaWVudCggc3RhcnRDb2xvcnN0cj0nI2U0ZjVmYycsIGVuZENvbG9yc3RyPScjN2RjOGU4JyxHcmFkaWVudFR5cGU9MCApO1xyXG59XHJcblxyXG5cclxuLmxlYWRlcmJvYXJke1xyXG4gIGJhY2tncm91bmQ6ICNmZWZjZWE7XHJcbiAgYmFja2dyb3VuZDogLW1vei1saW5lYXItZ3JhZGllbnQodG9wLCAjZmVmY2VhIDAlLCAjZjFkYTM2IDEwMCUpO1xyXG4gIGJhY2tncm91bmQ6IC13ZWJraXQtbGluZWFyLWdyYWRpZW50KHRvcCwgI2ZlZmNlYSAwJSwjZjFkYTM2IDEwMCUpO1xyXG4gIGJhY2tncm91bmQ6IGxpbmVhci1ncmFkaWVudCh0byBib3R0b20sICNmZWZjZWEgMCUsI2YxZGEzNiAxMDAlKTtcclxuICBmaWx0ZXI6IHByb2dpZDpEWEltYWdlVHJhbnNmb3JtLk1pY3Jvc29mdC5ncmFkaWVudCggc3RhcnRDb2xvcnN0cj0nI2ZlZmNlYScsIGVuZENvbG9yc3RyPScjZjFkYTM2JyxHcmFkaWVudFR5cGU9MCApO1xyXG5cclxuICBsaSB7XHJcbiAgICBsaXN0LXN0eWxlLXR5cGU6IGRlY2ltYWw7XHJcbiAgfVxyXG59XHJcblxyXG5cclxuLnBsYXllciB7XHJcbiAgbWFyZ2luLXRvcDogMjBweDtcclxuICBiYWNrZ3JvdW5kLWNvbG9yOiBncmF5O1xyXG4gIGJvcmRlcjo0cHggc29saWQgYmxhY2s7XHJcbn1cclxuLmNoYXQge1xyXG4gIFxyXG4gIG1hcmdpbi10b3A6IDIwcHg7XHJcbiAgYmFja2dyb3VuZC1jb2xvcjpzaWx2ZXI7XHJcbiAgYm9yZGVyOjRweCBzb2xpZCBibGFjaztcclxufSJdfQ== */"
+module.exports = "mat-form-field {\n  width: 300px; }\n\n.page-title {\n  text-align: center; }\n\n.accordion .mat-expansion-panel-header-title,\n.accordion .mat-expansion-panel-header-description {\n  flex-basis: 0; }\n\n.accordion .mat-expansion-panel-header-description {\n  justify-content: space-between;\n  align-items: center; }\n\nmat-expansion-panel {\n  margin: 5px 5px 5px 5px; }\n\n.content {\n  padding-left: 5px;\n  padding-right: 5px;\n  padding-bottom: 10px; }\n\n.wallet-balance {\n  font-size: 36pt;\n  font-weight: normal;\n  text-align: center;\n  margin: 10px; }\n\n.wallet-balance-label {\n  font-size: 12pt;\n  font-weight: bold;\n  text-align: center;\n  margin: 0px; }\n\n.tipwall-list {\n  list-style-type: none;\n  font-size: 10pt; }\n\n.ppm {\n  text-align: center; }\n\n.ppm-label {\n  font-size: 12pt; }\n\n.ppm-charge {\n  font-size: 10pt; }\n\n.ppm-left {\n  font-size: 10pt; }\n\n.tipwall {\n  background: #ebe9f9;\n  background: -webkit-gradient(left top, right bottom, color-stop(0%, #ebe9f9), color-stop(100%, #c1bfea));\n  background: linear-gradient(135deg, #ebe9f9 0%, #c1bfea 100%);\n  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ebe9f9', endColorstr='#c1bfea', GradientType=1 ); }\n\n.goal-meter {\n  background: #e4f5fc;\n  background: linear-gradient(to bottom, #e4f5fc 0%, #7dc8e8 100%);\n  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e4f5fc', endColorstr='#7dc8e8',GradientType=0 ); }\n\n.leaderboard {\n  background: #fefcea;\n  background: linear-gradient(to bottom, #fefcea 0%, #f1da36 100%);\n  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fefcea', endColorstr='#f1da36',GradientType=0 ); }\n\n.leaderboard li {\n    list-style-type: decimal; }\n\n.video-chat-section {\n  margin: 20px 20px 20px 20px; }\n\n.player {\n  border: 1px solid black; }\n\n.chat {\n  border: 1px solid black; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvbW9kZWxzL2xpdmUvQzpcXFVzZXJzXFxqYXhjcGhcXGNvZGVcXGFscGhhNjktbmcvc3JjXFxhcHBcXG1vZGVsc1xcbGl2ZVxcbGl2ZS5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNJLGFBQVksRUFDYjs7QUFHRDtFQUNFLG1CQUNGLEVBQUM7O0FBQ0Q7O0VBRUUsY0FBYSxFQUNkOztBQUVEO0VBQ0UsK0JBQThCO0VBQzlCLG9CQUFtQixFQUNwQjs7QUFDRDtFQUNFLHdCQUF1QixFQUN2Qjs7QUFFSDtFQUNJLGtCQUFpQjtFQUNqQixtQkFBaUI7RUFDakIscUJBQW9CLEVBRXJCOztBQUVEO0VBQ0MsZ0JBQWU7RUFDZixvQkFBbUI7RUFDbkIsbUJBQWtCO0VBQ2xCLGFBQVcsRUFDWDs7QUFFRDtFQUNDLGdCQUFlO0VBQ2Ysa0JBQWlCO0VBQ2pCLG1CQUFrQjtFQUNsQixZQUFVLEVBQ1Y7O0FBRUQ7RUFDRSxzQkFBcUI7RUFDckIsZ0JBQWUsRUFDZjs7QUFFRjtFQUNFLG1CQUFrQixFQUNuQjs7QUFFRDtFQUNDLGdCQUFlLEVBQ2Y7O0FBRUQ7RUFDQyxnQkFBZSxFQUNmOztBQUNEO0VBQ0MsZ0JBQWUsRUFDZjs7QUFFRDtFQUNDLG9CQUFtQjtFQUVuQix5R0FBd0c7RUFJeEcsOERBQTZEO0VBQzdELHFIQUFvSCxFQUNwSDs7QUFFSjtFQUNFLG9CQUFtQjtFQUduQixpRUFBK0Q7RUFDL0Qsb0hBQW1ILEVBQ3BIOztBQUdEO0VBQ0Usb0JBQW1CO0VBR25CLGlFQUErRDtFQUMvRCxvSEFBbUgsRUFLcEg7O0FBVkQ7SUFRSSx5QkFBd0IsRUFDekI7O0FBSUg7RUFDRSw0QkFBMEIsRUFDM0I7O0FBRUQ7RUFDRSx3QkFBc0IsRUFDdkI7O0FBQ0Q7RUFDRSx3QkFBc0IsRUFDdkIiLCJmaWxlIjoic3JjL2FwcC9tb2RlbHMvbGl2ZS9saXZlLmNvbXBvbmVudC5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsibWF0LWZvcm0tZmllbGQge1xyXG4gICAgd2lkdGg6IDMwMHB4O1xyXG4gIH1cclxuXHJcblxyXG4gIC5wYWdlLXRpdGxle1xyXG4gICAgdGV4dC1hbGlnbjogY2VudGVyXHJcbiAgfVxyXG4gIC5hY2NvcmRpb24gLm1hdC1leHBhbnNpb24tcGFuZWwtaGVhZGVyLXRpdGxlLCBcclxuICAuYWNjb3JkaW9uIC5tYXQtZXhwYW5zaW9uLXBhbmVsLWhlYWRlci1kZXNjcmlwdGlvbiB7XHJcbiAgICBmbGV4LWJhc2lzOiAwO1xyXG4gIH1cclxuICBcclxuICAuYWNjb3JkaW9uIC5tYXQtZXhwYW5zaW9uLXBhbmVsLWhlYWRlci1kZXNjcmlwdGlvbiB7XHJcbiAgICBqdXN0aWZ5LWNvbnRlbnQ6IHNwYWNlLWJldHdlZW47XHJcbiAgICBhbGlnbi1pdGVtczogY2VudGVyO1xyXG4gIH1cclxuICBtYXQtZXhwYW5zaW9uLXBhbmVsIHtcclxuICAgIG1hcmdpbjogNXB4IDVweCA1cHggNXB4O1xyXG4gICB9XHJcbiAgXHJcbiAuY29udGVudCB7XHJcbiAgICAgcGFkZGluZy1sZWZ0OiA1cHg7XHJcbiAgICAgcGFkZGluZy1yaWdodDo1cHg7XHJcbiAgICAgcGFkZGluZy1ib3R0b206IDEwcHg7XHJcbiAgXHJcbiAgIH1cclxuXHJcbiAgIC53YWxsZXQtYmFsYW5jZSB7XHJcbiAgICBmb250LXNpemU6IDM2cHQ7XHJcbiAgICBmb250LXdlaWdodDogbm9ybWFsO1xyXG4gICAgdGV4dC1hbGlnbjogY2VudGVyO1xyXG4gICAgbWFyZ2luOjEwcHg7XHJcbiAgIH1cclxuXHJcbiAgIC53YWxsZXQtYmFsYW5jZS1sYWJlbCB7XHJcbiAgICBmb250LXNpemU6IDEycHQ7XHJcbiAgICBmb250LXdlaWdodDogYm9sZDtcclxuICAgIHRleHQtYWxpZ246IGNlbnRlcjtcclxuICAgIG1hcmdpbjowcHg7XHJcbiAgIH1cclxuXHJcbiAgIC50aXB3YWxsLWxpc3Qge1xyXG4gICAgIGxpc3Qtc3R5bGUtdHlwZTogbm9uZTtcclxuICAgICBmb250LXNpemU6IDEwcHQ7XHJcbiAgICB9XHJcblxyXG4gICAucHBtIHtcclxuICAgICB0ZXh0LWFsaWduOiBjZW50ZXI7XHJcbiAgIH1cclxuXHJcbiAgIC5wcG0tbGFiZWwge1xyXG4gICAgZm9udC1zaXplOiAxMnB0O1xyXG4gICB9XHJcblxyXG4gICAucHBtLWNoYXJnZSB7XHJcbiAgICBmb250LXNpemU6IDEwcHQ7XHJcbiAgIH1cclxuICAgLnBwbS1sZWZ0IHtcclxuICAgIGZvbnQtc2l6ZTogMTBwdDtcclxuICAgfVxyXG5cclxuICAgLnRpcHdhbGwge1xyXG4gICAgYmFja2dyb3VuZDogI2ViZTlmOTtcclxuICAgIGJhY2tncm91bmQ6IC1tb3otbGluZWFyLWdyYWRpZW50KC00NWRlZywgI2ViZTlmOSAwJSwgI2MxYmZlYSAxMDAlKTtcclxuICAgIGJhY2tncm91bmQ6IC13ZWJraXQtZ3JhZGllbnQobGVmdCB0b3AsIHJpZ2h0IGJvdHRvbSwgY29sb3Itc3RvcCgwJSwgI2ViZTlmOSksIGNvbG9yLXN0b3AoMTAwJSwgI2MxYmZlYSkpO1xyXG4gICAgYmFja2dyb3VuZDogLXdlYmtpdC1saW5lYXItZ3JhZGllbnQoLTQ1ZGVnLCAjZWJlOWY5IDAlLCAjYzFiZmVhIDEwMCUpO1xyXG4gICAgYmFja2dyb3VuZDogLW8tbGluZWFyLWdyYWRpZW50KC00NWRlZywgI2ViZTlmOSAwJSwgI2MxYmZlYSAxMDAlKTtcclxuICAgIGJhY2tncm91bmQ6IC1tcy1saW5lYXItZ3JhZGllbnQoLTQ1ZGVnLCAjZWJlOWY5IDAlLCAjYzFiZmVhIDEwMCUpO1xyXG4gICAgYmFja2dyb3VuZDogbGluZWFyLWdyYWRpZW50KDEzNWRlZywgI2ViZTlmOSAwJSwgI2MxYmZlYSAxMDAlKTtcclxuICAgIGZpbHRlcjogcHJvZ2lkOkRYSW1hZ2VUcmFuc2Zvcm0uTWljcm9zb2Z0LmdyYWRpZW50KCBzdGFydENvbG9yc3RyPScjZWJlOWY5JywgZW5kQ29sb3JzdHI9JyNjMWJmZWEnLCBHcmFkaWVudFR5cGU9MSApO1xyXG4gICB9XHJcbiAgIFxyXG4uZ29hbC1tZXRlciB7XHJcbiAgYmFja2dyb3VuZDogI2U0ZjVmYztcclxuICBiYWNrZ3JvdW5kOiAtbW96LWxpbmVhci1ncmFkaWVudCh0b3AsICNlNGY1ZmMgMCUsICM3ZGM4ZTggMTAwJSk7XHJcbiAgYmFja2dyb3VuZDogLXdlYmtpdC1saW5lYXItZ3JhZGllbnQodG9wLCAjZTRmNWZjIDAlLCM3ZGM4ZTggMTAwJSk7XHJcbiAgYmFja2dyb3VuZDogbGluZWFyLWdyYWRpZW50KHRvIGJvdHRvbSwgI2U0ZjVmYyAwJSwjN2RjOGU4IDEwMCUpO1xyXG4gIGZpbHRlcjogcHJvZ2lkOkRYSW1hZ2VUcmFuc2Zvcm0uTWljcm9zb2Z0LmdyYWRpZW50KCBzdGFydENvbG9yc3RyPScjZTRmNWZjJywgZW5kQ29sb3JzdHI9JyM3ZGM4ZTgnLEdyYWRpZW50VHlwZT0wICk7XHJcbn1cclxuXHJcblxyXG4ubGVhZGVyYm9hcmR7XHJcbiAgYmFja2dyb3VuZDogI2ZlZmNlYTtcclxuICBiYWNrZ3JvdW5kOiAtbW96LWxpbmVhci1ncmFkaWVudCh0b3AsICNmZWZjZWEgMCUsICNmMWRhMzYgMTAwJSk7XHJcbiAgYmFja2dyb3VuZDogLXdlYmtpdC1saW5lYXItZ3JhZGllbnQodG9wLCAjZmVmY2VhIDAlLCNmMWRhMzYgMTAwJSk7XHJcbiAgYmFja2dyb3VuZDogbGluZWFyLWdyYWRpZW50KHRvIGJvdHRvbSwgI2ZlZmNlYSAwJSwjZjFkYTM2IDEwMCUpO1xyXG4gIGZpbHRlcjogcHJvZ2lkOkRYSW1hZ2VUcmFuc2Zvcm0uTWljcm9zb2Z0LmdyYWRpZW50KCBzdGFydENvbG9yc3RyPScjZmVmY2VhJywgZW5kQ29sb3JzdHI9JyNmMWRhMzYnLEdyYWRpZW50VHlwZT0wICk7XHJcblxyXG4gIGxpIHtcclxuICAgIGxpc3Qtc3R5bGUtdHlwZTogZGVjaW1hbDtcclxuICB9XHJcbn1cclxuXHJcblxyXG4udmlkZW8tY2hhdC1zZWN0aW9uIHtcclxuICBtYXJnaW46MjBweCAyMHB4IDIwcHggMjBweDtcclxufVxyXG5cclxuLnBsYXllciB7XHJcbiAgYm9yZGVyOjFweCBzb2xpZCBibGFjaztcclxufVxyXG4uY2hhdCB7XHJcbiAgYm9yZGVyOjFweCBzb2xpZCBibGFjaztcclxufSJdfQ== */"
 
 /***/ }),
 
@@ -2603,7 +2837,9 @@ var LiveComponent = /** @class */ (function () {
         if (this.subs$) {
             for (var _i = 0, _a = this.subs$; _i < _a.length; _i++) {
                 var s = _a[_i];
-                s.unsubscribe();
+                if (s) {
+                    s.unsubscribe();
+                }
             }
         }
         // unregister as viewer
@@ -2646,6 +2882,149 @@ var LiveComponent = /** @class */ (function () {
 
 /***/ }),
 
+/***/ "./src/app/models/lovense-config/lovense-config.component.css":
+/*!********************************************************************!*\
+  !*** ./src/app/models/lovense-config/lovense-config.component.css ***!
+  \********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = ".page-title{\r\n    text-align: center\r\n}\r\n\r\n.content {\r\n  \r\n}\r\n\r\n.addnewForm{\r\n\r\n}\r\n\r\nmat-form-field {\r\n    width: 150px;\r\n}\r\n\r\n.accordion .mat-expansion-panel-header-title, \r\n.accordion .mat-expansion-panel-header-description {\r\n  flex-basis: 0;\r\n}\r\n\r\n.accordion .mat-expansion-panel-header-description {\r\n  justify-content: space-between;\r\n  align-items: center;\r\n}\r\n\r\n.accordion_live .mat-expansion-panel-header-title, \r\n.accordion_live .mat-expansion-panel-header-description {\r\n  flex-basis: 0;\r\n  color:black;\r\n}\r\n\r\n.accordion_live .mat-expansion-panel-header-description {\r\n  justify-content: space-between;\r\n  align-items: center;\r\n  color:black;\r\n}\r\n\r\n.rules-table {\r\n  font-size: 9pt;\r\n  border-collapse:collapse;\r\n  border:1px solid gray;;\r\n}\r\n\r\n.rules-table td{\r\n  padding-left:10px;\r\n  padding-right:10px;\r\n  padding-top:2px;\r\n  padding-bottom:2px;\r\n  border-bottom:1px solid gray;\r\n  text-align: center;\r\n  color:black;\r\n  background-color: white;\r\n }\r\n\r\n.rules-table th{\r\n  padding-left:10px;\r\n  padding-right:10px;\r\n  padding-top:2px;\r\n  padding-bottom:2px;\r\n  border-bottom:1px solid gray;\r\n  text-align: center;\r\n  color:white;\r\n  background-color: black;\r\n }\r\n\r\nmat-expansion-panel {\r\n  margin: 5px 5px 5px 5px;\r\n }\r\n\r\n.content {\r\n   padding-left: 5px;\r\n   padding-right:5px;\r\n   padding-bottom: 10px;\r\n\r\n }\r\n\r\n\r\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvbW9kZWxzL2xvdmVuc2UtY29uZmlnL2xvdmVuc2UtY29uZmlnLmNvbXBvbmVudC5jc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7SUFDSSxrQkFBa0I7Q0FDckI7O0FBRUQ7O0NBRUM7O0FBRUQ7O0NBRUM7O0FBRUQ7SUFDSSxhQUFhO0NBQ2hCOztBQUdEOztFQUVFLGNBQWM7Q0FDZjs7QUFFRDtFQUNFLCtCQUErQjtFQUMvQixvQkFBb0I7Q0FDckI7O0FBR0Q7O0VBRUUsY0FBYztFQUNkLFlBQVk7Q0FDYjs7QUFFRDtFQUNFLCtCQUErQjtFQUMvQixvQkFBb0I7RUFDcEIsWUFBWTtDQUNiOztBQUVEO0VBQ0UsZUFBZTtFQUNmLHlCQUF5QjtFQUN6QixzQkFBc0I7Q0FDdkI7O0FBRUQ7RUFDRSxrQkFBa0I7RUFDbEIsbUJBQW1CO0VBQ25CLGdCQUFnQjtFQUNoQixtQkFBbUI7RUFDbkIsNkJBQTZCO0VBQzdCLG1CQUFtQjtFQUNuQixZQUFZO0VBQ1osd0JBQXdCO0VBQ3hCOztBQUVEO0VBQ0Msa0JBQWtCO0VBQ2xCLG1CQUFtQjtFQUNuQixnQkFBZ0I7RUFDaEIsbUJBQW1CO0VBQ25CLDZCQUE2QjtFQUM3QixtQkFBbUI7RUFDbkIsWUFBWTtFQUNaLHdCQUF3QjtFQUN4Qjs7QUFLRjtFQUNFLHdCQUF3QjtFQUN4Qjs7QUFFRDtHQUNFLGtCQUFrQjtHQUNsQixrQkFBa0I7R0FDbEIscUJBQXFCOztFQUV0QiIsImZpbGUiOiJzcmMvYXBwL21vZGVscy9sb3ZlbnNlLWNvbmZpZy9sb3ZlbnNlLWNvbmZpZy5jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLnBhZ2UtdGl0bGV7XHJcbiAgICB0ZXh0LWFsaWduOiBjZW50ZXJcclxufVxyXG5cclxuLmNvbnRlbnQge1xyXG4gIFxyXG59XHJcblxyXG4uYWRkbmV3Rm9ybXtcclxuXHJcbn1cclxuXHJcbm1hdC1mb3JtLWZpZWxkIHtcclxuICAgIHdpZHRoOiAxNTBweDtcclxufVxyXG5cclxuXHJcbi5hY2NvcmRpb24gLm1hdC1leHBhbnNpb24tcGFuZWwtaGVhZGVyLXRpdGxlLCBcclxuLmFjY29yZGlvbiAubWF0LWV4cGFuc2lvbi1wYW5lbC1oZWFkZXItZGVzY3JpcHRpb24ge1xyXG4gIGZsZXgtYmFzaXM6IDA7XHJcbn1cclxuXHJcbi5hY2NvcmRpb24gLm1hdC1leHBhbnNpb24tcGFuZWwtaGVhZGVyLWRlc2NyaXB0aW9uIHtcclxuICBqdXN0aWZ5LWNvbnRlbnQ6IHNwYWNlLWJldHdlZW47XHJcbiAgYWxpZ24taXRlbXM6IGNlbnRlcjtcclxufVxyXG5cclxuXHJcbi5hY2NvcmRpb25fbGl2ZSAubWF0LWV4cGFuc2lvbi1wYW5lbC1oZWFkZXItdGl0bGUsIFxyXG4uYWNjb3JkaW9uX2xpdmUgLm1hdC1leHBhbnNpb24tcGFuZWwtaGVhZGVyLWRlc2NyaXB0aW9uIHtcclxuICBmbGV4LWJhc2lzOiAwO1xyXG4gIGNvbG9yOmJsYWNrO1xyXG59XHJcblxyXG4uYWNjb3JkaW9uX2xpdmUgLm1hdC1leHBhbnNpb24tcGFuZWwtaGVhZGVyLWRlc2NyaXB0aW9uIHtcclxuICBqdXN0aWZ5LWNvbnRlbnQ6IHNwYWNlLWJldHdlZW47XHJcbiAgYWxpZ24taXRlbXM6IGNlbnRlcjtcclxuICBjb2xvcjpibGFjaztcclxufVxyXG5cclxuLnJ1bGVzLXRhYmxlIHtcclxuICBmb250LXNpemU6IDlwdDtcclxuICBib3JkZXItY29sbGFwc2U6Y29sbGFwc2U7XHJcbiAgYm9yZGVyOjFweCBzb2xpZCBncmF5OztcclxufVxyXG5cclxuLnJ1bGVzLXRhYmxlIHRke1xyXG4gIHBhZGRpbmctbGVmdDoxMHB4O1xyXG4gIHBhZGRpbmctcmlnaHQ6MTBweDtcclxuICBwYWRkaW5nLXRvcDoycHg7XHJcbiAgcGFkZGluZy1ib3R0b206MnB4O1xyXG4gIGJvcmRlci1ib3R0b206MXB4IHNvbGlkIGdyYXk7XHJcbiAgdGV4dC1hbGlnbjogY2VudGVyO1xyXG4gIGNvbG9yOmJsYWNrO1xyXG4gIGJhY2tncm91bmQtY29sb3I6IHdoaXRlO1xyXG4gfVxyXG5cclxuIC5ydWxlcy10YWJsZSB0aHtcclxuICBwYWRkaW5nLWxlZnQ6MTBweDtcclxuICBwYWRkaW5nLXJpZ2h0OjEwcHg7XHJcbiAgcGFkZGluZy10b3A6MnB4O1xyXG4gIHBhZGRpbmctYm90dG9tOjJweDtcclxuICBib3JkZXItYm90dG9tOjFweCBzb2xpZCBncmF5O1xyXG4gIHRleHQtYWxpZ246IGNlbnRlcjtcclxuICBjb2xvcjp3aGl0ZTtcclxuICBiYWNrZ3JvdW5kLWNvbG9yOiBibGFjaztcclxuIH1cclxuXHJcblxyXG5cclxuXHJcbm1hdC1leHBhbnNpb24tcGFuZWwge1xyXG4gIG1hcmdpbjogNXB4IDVweCA1cHggNXB4O1xyXG4gfVxyXG5cclxuIC5jb250ZW50IHtcclxuICAgcGFkZGluZy1sZWZ0OiA1cHg7XHJcbiAgIHBhZGRpbmctcmlnaHQ6NXB4O1xyXG4gICBwYWRkaW5nLWJvdHRvbTogMTBweDtcclxuXHJcbiB9XHJcblxyXG4iXX0= */"
+
+/***/ }),
+
+/***/ "./src/app/models/lovense-config/lovense-config.component.html":
+/*!*********************************************************************!*\
+  !*** ./src/app/models/lovense-config/lovense-config.component.html ***!
+  \*********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "\n<section class='page-title' *ngIf=\"toy\">\n  <h1>Lovense {{toy.name}} Tip configuration</h1>\n</section>\n\n<section class='content'  fxLayout=\"row wrap\" fxLayoutAlign=\"center\" *ngIf=\"toy\" >\n    <img [src]=\"toy.image\" height=\"128px\">\n\n    <mat-accordion class=\"accordion\" multi=\"true\" fxLayout=\"row wrap\" fxLayoutGap=\"10px\">\n        \n           <mat-expansion-panel *ngIf=\"rules\" fxFlex.xs=\"100%\" fxFlex=\"500px\" expanded>\n            <mat-expansion-panel-header>\n                <mat-panel-title>\n                    Rules\n                </mat-panel-title>\n                <mat-panel-description>\n                    &nbsp;\n                    <mat-icon>style</mat-icon>\n                </mat-panel-description>\n            </mat-expansion-panel-header>\n\n            <table class='rules-table'>\n              <tr><th>Tip</th><th>Action</th><th>Setting</th><th>Seconds</th><th></th></tr>\n              <tr *ngFor=\"let rule of rules\">\n                  <td>{{rule.tip}}</td>\n                  <td>{{rule.action}}</td>\n                  <td>{{rule.value}} </td>\n                  <td>{{rule.seconds}}</td>\n                  <td>\n                    <button mat-button color=\"accent\" (click)=\"onRemoveRule(rule.id)\">remove</button>  \n                    <button mat-button color=\"primary\" (click)=\"onTestRule(rule)\">test</button>\n                  </td>\n              </tr>\n            \n        </table>\n        </mat-expansion-panel>\n\n        <mat-expansion-panel fxFlex.xs=\"100%\" fxFlex=\"400px\" expanded>\n            <mat-expansion-panel-header>\n                <mat-panel-title>\n                    Add Rule\n                </mat-panel-title>\n                <mat-panel-description>\n                    &nbsp;\n                    <mat-icon>playlist_add</mat-icon>\n                </mat-panel-description>\n            </mat-expansion-panel-header>\n            <form fxLayout=\"column\" fxLayoutAlign=\"center center\" fxLayoutGap=\"10px\" fxFlex=\"200px\" #f=\"ngForm\" (ngSubmit)=\"onSubmitAddNew(f)\" class=\"addnewForm\">\n  \n                <h3>New Rule</h3>\n                <mat-form-field>\n                    <input type=\"number\" matInput placeholder=\"tip amount\" ngModel name=\"tip\" required min=1 max=9999 step=1/>\n                </mat-form-field>\n        \n                <mat-form-field>\n                    <mat-select placeholder=\"action\" ngModel name=\"action\" required >\n                        <mat-option *ngFor=\"let cmd of toy.commands\" [value]=\"cmd.action\">{{cmd.action}}</mat-option>\n                    </mat-select>\n                </mat-form-field>\n        \n                <mat-form-field *ngIf=\"f.value.action=='Vibrate' || f.value.action=='RotateAntiClockwise'  || f.value.action=='RotateClockwise'\" >\n                    <input type=\"number\" matInput placeholder=\"strength 1-20\" ngModel name=\"value\" required min=1 max=20 step=1/>\n                </mat-form-field>\n        \n                <mat-form-field *ngIf=\"f.value.action=='Preset'\" >\n                    <input type=\"number\" matInput placeholder=\"preset 1-3\" ngModel name=\"value\" required  min=1 max=3 step=1/>\n                </mat-form-field>\n        \n                <mat-form-field *ngIf=\"f.value.action=='RotateChange' || f.value.action=='AirIn' || f.value.action=='AirOut'\" >\n                    <input type=\"hidden\"  ngModel name=\"value\" value=-1/>\n                </mat-form-field>\n        \n                <mat-form-field *ngIf=\"f.value.action=='AirAuto'\" >\n                    <input type=\"number\" matInput placeholder=\"strength 1-3\" ngModel name=\"value\" required   min=1 max=3 step=1/>\n                </mat-form-field>\n        \n                <mat-form-field>\n                    <input type=\"number\" matInput placeholder=\"seconds\" ngModel name=\"seconds\" required  min=1 max=60 step=1/>\n                </mat-form-field>\n        \n                <button type=\"submit\" mat-raised-button color=\"primary\" [disabled]=\"f.invalid\">Add Rule to list</button>\n            </form>\n            \n        </mat-expansion-panel>\n        \n</mat-accordion>\n\n  \n\n</section>"
+
+/***/ }),
+
+/***/ "./src/app/models/lovense-config/lovense-config.component.ts":
+/*!*******************************************************************!*\
+  !*** ./src/app/models/lovense-config/lovense-config.component.ts ***!
+  \*******************************************************************/
+/*! exports provided: LovenseConfigComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LovenseConfigComponent", function() { return LovenseConfigComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/fire/firestore */ "./node_modules/@angular/fire/firestore/index.js");
+/* harmony import */ var src_app_common_ui_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/app/common/ui.service */ "./src/app/common/ui.service.ts");
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
+var __assign = (undefined && undefined.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+
+var LovenseConfigComponent = /** @class */ (function () {
+    function LovenseConfigComponent(router, route, db, uiService) {
+        this.router = router;
+        this.route = route;
+        this.db = db;
+        this.uiService = uiService;
+        this.rules = [];
+    }
+    LovenseConfigComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.toyid = this.route.snapshot.params.toyid;
+        this.sid = Number(localStorage.getItem('own-session-id'));
+        this.uid = localStorage.getItem('uid');
+        var toys = Array.from(JSON.parse(localStorage.getItem('toys')));
+        for (var i = 0; i < toys.length; i++) {
+            if (toys[i].did === this.toyid) {
+                this.toy = __assign({}, toys[i]);
+            }
+        }
+        this.rulesSub = this.db.collection('lovense-toy-rules', function (ref) { return ref.where('did', '==', _this.route.snapshot.params.toyid); })
+            .snapshotChanges()
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])(function (result) {
+            return result.map(function (item) {
+                return __assign({ id: item.payload.doc.id }, item.payload.doc.data());
+            });
+        }))
+            .subscribe(function (rulesdata) {
+            _this.rules = rulesdata;
+        });
+    };
+    LovenseConfigComponent.prototype.onRemoveRule = function (id) {
+        this.db.collection('lovense-toy-rules').doc(id).delete();
+    };
+    LovenseConfigComponent.prototype.onTestRule = function (rule) {
+        this.db.collection('session-toy-events').add({
+            sid: this.sid,
+            did: rule.did,
+            act: rule.action,
+            val: rule.value,
+            secs: rule.seconds,
+            nme: 'model-test',
+            uid: rule.uid,
+            amt: 0,
+            ts: new Date().getTime()
+        });
+        //   this.uiService.showSnackbar('Testing', null, (rule.seconds * 1000));
+    };
+    LovenseConfigComponent.prototype.onSubmitAddNew = function (form) {
+        this.db.collection('lovense-toy-rules').add({
+            uid: this.uid,
+            did: this.toyid,
+            action: form.value.action,
+            tip: form.value.tip,
+            value: form.value.value,
+            seconds: form.value.seconds
+        });
+        this.uiService.showSnackbar('Rule added', null, 3000);
+    };
+    LovenseConfigComponent.prototype.ngOnDestroy = function () {
+        if (this.rulesSub) {
+            this.rulesSub.unsubscribe();
+        }
+    };
+    LovenseConfigComponent = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
+            selector: 'app-lovense-config',
+            template: __webpack_require__(/*! ./lovense-config.component.html */ "./src/app/models/lovense-config/lovense-config.component.html"),
+            styles: [__webpack_require__(/*! ./lovense-config.component.css */ "./src/app/models/lovense-config/lovense-config.component.css")]
+        }),
+        __metadata("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"],
+            _angular_router__WEBPACK_IMPORTED_MODULE_1__["ActivatedRoute"],
+            _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_2__["AngularFirestore"],
+            src_app_common_ui_service__WEBPACK_IMPORTED_MODULE_3__["UIService"]])
+    ], LovenseConfigComponent);
+    return LovenseConfigComponent;
+}());
+
+
+
+/***/ }),
+
 /***/ "./src/app/models/lovense/lovense.component.css":
 /*!******************************************************!*\
   !*** ./src/app/models/lovense/lovense.component.css ***!
@@ -2653,7 +3032,7 @@ var LiveComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL21vZGVscy9sb3ZlbnNlL2xvdmVuc2UuY29tcG9uZW50LmNzcyJ9 */"
+module.exports = ".active-toy-event{\r\n    font-size: 11pt;\r\n    color:red;\r\n}\r\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvbW9kZWxzL2xvdmVuc2UvbG92ZW5zZS5jb21wb25lbnQuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0lBQ0ksZ0JBQWdCO0lBQ2hCLFVBQVU7Q0FDYiIsImZpbGUiOiJzcmMvYXBwL21vZGVscy9sb3ZlbnNlL2xvdmVuc2UuY29tcG9uZW50LmNzcyIsInNvdXJjZXNDb250ZW50IjpbIi5hY3RpdmUtdG95LWV2ZW50e1xyXG4gICAgZm9udC1zaXplOiAxMXB0O1xyXG4gICAgY29sb3I6cmVkO1xyXG59Il19 */"
 
 /***/ }),
 
@@ -2664,7 +3043,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<p>\r\n  lovense works!\r\n</p>\r\n"
+module.exports = "<p>Re-scans every 15 seconds for toys and their status</p>\r\n<a href='#'><b>Guide:</b> How to link devices...</a><br/>\r\n<mat-divider></mat-divider>\r\n\r\n\r\n<ng-container *ngIf=\"toys && session\">\r\n <section class='toys-list'>\r\n    <table>\r\n    <tr *ngFor=\"let toy of toys | keyvalue\">\r\n      <td><img [src]=\"toy.value.image\"> </td>      \r\n        <td>\r\n          <button *ngIf=\"toy.value.status==1\" mat-raised-button color=\"accent\" (click)=\"navConfigure(toy.value.did)\">Set tip rules</button>\r\n          <h3 *ngIf=\"toy.value.status==0\">{{toy.value.name}} is Offline</h3> \r\n        </td>\r\n    </tr>\r\n  \r\n    <tr> <td>\r\n      <mat-divider></mat-divider>\r\n      <form fxLayout=\"column\" fxLayoutAlign=\"center center\" fxLayoutGap=\"10px\" fxFlex=\"200px\" #f=\"ngForm\" (ngSubmit)=\"onSelectToyToUse(f)\" class=\"addnewForm\">\r\n          \r\n        <mat-form-field>\r\n            <mat-select placeholder=\"Select Toy to Use\" [(ngModel)]='session.useToyId' name=\"useToyId\">\r\n                <mat-option value=\"\">(disabled)</mat-option>\r\n                <mat-option *ngFor=\"let toy of toys | keyvalue\" [value]=\"toy.value.did\">{{toy.value.name}}</mat-option>\r\n            </mat-select>\r\n        </mat-form-field>\r\n        <button type=\"submit\" mat-raised-button color=\"primary\" [disabled]=\"f.invalid\">Save</button>\r\n      </form>\r\n    </td></tr>\r\n    <tr><td>\r\n    <p class=\"active-toy-event\" *ngIf=\"activeToyEvent\"><b>Now:</b>{{activeToyEvent.act}} @ {{activeToyEvent.val}} for {{activeToyEvent.secs}} seconds</p>\r\n    </td></tr>\r\n  </table>\r\n\r\n  </section>\r\n\r\n\r\n</ng-container>"
 
 /***/ }),
 
@@ -2679,6 +3058,284 @@ module.exports = "<p>\r\n  lovense works!\r\n</p>\r\n"
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LovenseComponent", function() { return LovenseComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _lovense_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./lovense.service */ "./src/app/models/lovense/lovense.service.ts");
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm5/index.js");
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
+/* harmony import */ var _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/fire/firestore */ "./node_modules/@angular/fire/firestore/index.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
+/* harmony import */ var src_app_common_ui_service__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! src/app/common/ui.service */ "./src/app/common/ui.service.ts");
+var __assign = (undefined && undefined.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+var __generator = (undefined && undefined.__generator) || function (thisArg, body) {
+    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
+    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+    function verb(n) { return function (v) { return step([n, v]); }; }
+    function step(op) {
+        if (f) throw new TypeError("Generator is already executing.");
+        while (_) try {
+            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
+            if (y = 0, t) op = [op[0] & 2, t.value];
+            switch (op[0]) {
+                case 0: case 1: t = op; break;
+                case 4: _.label++; return { value: op[1], done: false };
+                case 5: _.label++; y = op[1]; op = [0]; continue;
+                case 7: op = _.ops.pop(); _.trys.pop(); continue;
+                default:
+                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
+                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
+                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
+                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
+                    if (t[2]) _.ops.pop();
+                    _.trys.pop(); continue;
+            }
+            op = body.call(thisArg, _);
+        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
+        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
+    }
+};
+
+
+
+
+
+
+
+
+var LovenseComponent = /** @class */ (function () {
+    function LovenseComponent(lovenseService, db, router, http, uiService, ls) {
+        this.lovenseService = lovenseService;
+        this.db = db;
+        this.router = router;
+        this.http = http;
+        this.uiService = uiService;
+        this.ls = ls;
+        this.subs$ = [];
+        this.httpOptions = {
+            headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_6__["HttpHeaders"]({
+                'Content-Type': 'application/json'
+            })
+        };
+    }
+    LovenseComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.toys = new Map();
+        this.subs$.push(Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["timer"])(1000, 15000)
+            .subscribe(function (x) {
+            _this.scanForToys();
+        }));
+        this.subs$.push(this.db.doc("members/" + localStorage.getItem('uid'))
+            .valueChanges()
+            .subscribe(function (data) {
+            _this.member = data;
+            _this.session = __assign({}, data.session, { created: data.session.created.toDate() });
+            // see if we should setup subscription to session-toy-events, or unsubscribe
+            if (!_this.session.useToyId && _this.eventSub) {
+                _this.eventSub.unsubscribe();
+                console.log('un-subscripted from toy event listener');
+            }
+            if (_this.session.useToyId) {
+                console.log('subscripted to toy event listener');
+                _this.eventSub = _this.db.collection('session-toy-events', function (ref) { return ref.where('sid', '==', _this.session.id).orderBy('ts'); })
+                    .snapshotChanges()
+                    .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (result) {
+                    return result.map(function (item) {
+                        return __assign({ id: item.payload.doc.id }, item.payload.doc.data());
+                    });
+                }))
+                    .subscribe(function (events) {
+                    if (events.length > 0) {
+                        setTimeout(function () {
+                            console.log('*');
+                            _this.doEvent(events[0]).then();
+                        }, 100); // delay 1 sec
+                    }
+                });
+            }
+        }));
+    };
+    LovenseComponent.prototype.doEvent = function (event) {
+        return __awaiter(this, void 0, void 0, function () {
+            var _this = this;
+            return __generator(this, function (_a) {
+                return [2 /*return*/, new Promise(function (resolve) {
+                        if (!_this.toyInUse && _this.session.useToyId) {
+                            var toy_1 = _this.toys.get(_this.session.useToyId);
+                            if (toy_1.status === 1) {
+                                _this.toyInUse = true;
+                                _this.activeToyEvent = event;
+                                if (event.act === 'Vibrate' ||
+                                    event.act === 'Rotate' ||
+                                    event.act === 'RotateAntiClockwise' ||
+                                    event.act === 'RotateClockwise' ||
+                                    event.act === 'AirAuto' ||
+                                    event.act === 'Preset') {
+                                    console.log("+ ts: " + event.ts);
+                                    var urlOn = "https://" + toy_1.domain + ":" + toy_1.httpsPort + "/" + event.act + "?v=" + event.val + "&t=" + event.did;
+                                    _this.ls.sendCommand(urlOn)
+                                        .toPromise()
+                                        .then(function (resp) { console.log(resp); })
+                                        .catch(function (error) { console.error(error); });
+                                    if (event.secs <= 1) {
+                                        event.secs = 1;
+                                    }
+                                    if (event.secs > 60) {
+                                        event.secs = 60;
+                                    }
+                                    setTimeout(function () {
+                                        var urlOff = "https://" + toy_1.domain + ":" + toy_1.httpsPort + "/" + event.act + "?v=0&t=" + event.did;
+                                        _this.ls.sendCommand(urlOff)
+                                            .toPromise()
+                                            .then(function (resp) { console.log(resp); })
+                                            .catch(function (error) { console.error(error); });
+                                        _this.db.collection('session-toy-events').doc(event.id).delete();
+                                        _this.toyInUse = false;
+                                        _this.activeToyEvent = null;
+                                        console.log("- ts: " + event.ts);
+                                    }, event.secs * 1000);
+                                }
+                                else {
+                                    // RotateChange, AirIn, AirOut
+                                    var url = "https://" + toy_1.domain + ":" + toy_1.httpsPort + "/" + event.act + "?t=" + event.did;
+                                    _this.ls.sendCommand(url)
+                                        .toPromise()
+                                        .then(function (resp) { console.log(resp); })
+                                        .catch(function (error) { console.error(error); });
+                                    _this.db.collection('session-toy-events').doc(event.id).delete();
+                                    _this.toyInUse = false;
+                                    _this.activeToyEvent = null;
+                                    console.log("- ts: " + event.ts);
+                                }
+                            }
+                        }
+                    })];
+            });
+        });
+    };
+    LovenseComponent.prototype.onSelectToyToUse = function (form) {
+        this.session.useToyId = form.value.useToyId ? form.value.useToyId : null;
+        this.session.modified = new Date();
+        this.db.doc("members/" + localStorage.getItem('uid')).update({ session: this.session });
+        this.uiService.showSnackbar('Toy selection change saved', null, 3000);
+    };
+    LovenseComponent.prototype.navConfigure = function (toyid) {
+        this.router.navigate(['/models/lovense/config/', toyid]);
+    };
+    LovenseComponent.prototype.extractData = function (res) {
+        var body = res;
+        return body || {};
+    };
+    LovenseComponent.prototype.scanForToys = function () {
+        var _this = this;
+        var endpoint = 'https://api.lovense.com/api/lan/getToys';
+        this.http.get(endpoint).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(this.extractData)).toPromise().then(function (data) {
+            var apis = Object.keys(data).map(function (e) { return data[e]; });
+            var _loop_1 = function (api) {
+                var apiToys = Object.keys(api.toys).map(function (e) { return api.toys[e]; });
+                if (apiToys.length > 0) {
+                    for (var _i = 0, apiToys_1 = apiToys; _i < apiToys_1.length; _i++) {
+                        var at = apiToys_1[_i];
+                        var t = {
+                            did: at.id,
+                            sid: _this.session.id,
+                            name: at.name,
+                            nickName: at.nickName,
+                            status: at.status,
+                            domain: api.domain,
+                            httpPort: api.httpPort,
+                            httpsPort: api.httpsPort,
+                            wsPort: api.wsPort,
+                            wwsPort: api.wssPort,
+                            platform: api.platform,
+                            appVersion: api.appVersion,
+                            commands: _this.lovenseService.getToyCommands(at.name),
+                            image: _this.lovenseService.getToyImage(at.name)
+                        };
+                        _this.toys.set(t.did, t);
+                    }
+                }
+            };
+            for (var _i = 0, apis_1 = apis; _i < apis_1.length; _i++) {
+                var api = apis_1[_i];
+                _loop_1(api);
+            }
+            var toyArray = Array.from(_this.toys.values());
+            localStorage.setItem('toys', JSON.stringify(toyArray));
+        }).catch(function (error) {
+            console.error(error);
+        });
+    };
+    LovenseComponent.prototype.ngOnDestroy = function () {
+        // unsubcribe all the subscriptions
+        if (this.subs$) {
+            for (var _i = 0, _a = this.subs$; _i < _a.length; _i++) {
+                var s = _a[_i];
+                if (s) {
+                    s.unsubscribe();
+                }
+            }
+        }
+    };
+    LovenseComponent = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
+            selector: 'app-lovense',
+            template: __webpack_require__(/*! ./lovense.component.html */ "./src/app/models/lovense/lovense.component.html"),
+            styles: [__webpack_require__(/*! ./lovense.component.css */ "./src/app/models/lovense/lovense.component.css")]
+        }),
+        __metadata("design:paramtypes", [_lovense_service__WEBPACK_IMPORTED_MODULE_1__["LovenseService"],
+            _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_4__["AngularFirestore"],
+            _angular_router__WEBPACK_IMPORTED_MODULE_5__["Router"],
+            _angular_common_http__WEBPACK_IMPORTED_MODULE_6__["HttpClient"],
+            src_app_common_ui_service__WEBPACK_IMPORTED_MODULE_7__["UIService"],
+            _lovense_service__WEBPACK_IMPORTED_MODULE_1__["LovenseService"]])
+    ], LovenseComponent);
+    return LovenseComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/models/lovense/lovense.service.ts":
+/*!***************************************************!*\
+  !*** ./src/app/models/lovense/lovense.service.ts ***!
+  \***************************************************/
+/*! exports provided: LovenseService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LovenseService", function() { return LovenseService; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm5/index.js");
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -2689,20 +3346,92 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
-var LovenseComponent = /** @class */ (function () {
-    function LovenseComponent() {
+
+
+
+var LovenseService = /** @class */ (function () {
+    function LovenseService(http) {
+        this.http = http;
+        this.httpOptions = {
+            headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpHeaders"]({
+                'Content-Type': 'application/json'
+            })
+        };
+        // the supported commands
+        this.commands = new Map();
+        this.commands.set('edge', [{ action: 'Vibrate', value_min: 0, value_max: 20 }, { action: 'Preset', value_min: 0, value_max: 3 }]);
+        this.commands.set('lush,', [{ action: 'Vibrate', value_min: 0, value_max: 20 }, { action: 'Preset', value_min: 0, value_max: 3 }]);
+        this.commands.set('hush', [{ action: 'Vibrate', value_min: 0, value_max: 20 }, { action: 'Preset', value_min: 0, value_max: 3 }]);
+        this.commands.set('ambi', [{ action: 'Vibrate', value_min: 0, value_max: 20 }, { action: 'Preset', value_min: 0, value_max: 3 }]);
+        this.commands.set('domi', [{ action: 'Vibrate', value_min: 0, value_max: 20 }, { action: 'Preset', value_min: 0, value_max: 3 }]);
+        this.commands.set('osci', [{ action: 'Vibrate', value_min: 0, value_max: 20 }, { action: 'Preset', value_min: 0, value_max: 3 }]);
+        this.commands.set('nora', [
+            { action: 'Vibrate', value_min: 0, value_max: 20 },
+            { action: 'RotateAntiClockwise', value_min: 0, value_max: 20 },
+            { action: 'RotateClockwise', value_min: 0, value_max: 20 },
+            { action: 'RotateChange', value_min: -1, value_max: -1 }
+        ]);
+        this.commands.set('max', [
+            { action: 'Vibrate', value_min: 0, value_max: 20 },
+            { action: 'AirAuto', value_min: 0, value_max: 3 },
+            { action: 'AirIn', value_min: -1, value_max: -1 },
+            { action: 'AirOut', value_min: -1, value_max: -1 }
+        ]);
+        this.images = new Map();
+        // tslint:disable-next-line:max-line-length
+        this.images.set('edge', 'https://firebasestorage.googleapis.com/v0/b/alpha69-ng.appspot.com/o/images%2Flovense-edge.png?alt=media&token=b5bfb121-9256-4ebc-b315-77de642580ee');
+        // tslint:disable-next-line:max-line-length
+        this.images.set('lush', 'https://firebasestorage.googleapis.com/v0/b/alpha69-ng.appspot.com/o/images%2Flovense-lush.png?alt=media&token=6891b882-f427-4756-96d9-c9f68976d363');
+        // tslint:disable-next-line:max-line-length
+        this.images.set('hush', 'https://firebasestorage.googleapis.com/v0/b/alpha69-ng.appspot.com/o/images%2Flovense-hush.png?alt=media&token=bcd7102c-5aa2-4c6f-b7cb-eb697e76a995');
+        // tslint:disable-next-line:max-line-length
+        this.images.set('ambi', 'https://firebasestorage.googleapis.com/v0/b/alpha69-ng.appspot.com/o/images%2Flovense-ambi.png?alt=media&token=821ed57d-7402-4f3e-937e-c74ec5c73cac');
+        // tslint:disable-next-line:max-line-length
+        this.images.set('domi', 'https://firebasestorage.googleapis.com/v0/b/alpha69-ng.appspot.com/o/images%2Flovense-domi.png?alt=media&token=1987777a-b00a-4c69-b8f3-48ea743406b5');
+        // tslint:disable-next-line:max-line-length
+        this.images.set('osci', 'https://firebasestorage.googleapis.com/v0/b/alpha69-ng.appspot.com/o/images%2Flovense-osci.png?alt=media&token=98619722-fc02-4309-9ab5-37ce7da52cc5');
+        // tslint:disable-next-line:max-line-length
+        this.images.set('nora', 'https://firebasestorage.googleapis.com/v0/b/alpha69-ng.appspot.com/o/images%2Flovense-nora.png?alt=media&token=fecadde4-60fe-4771-885a-e10cca75829b');
+        // tslint:disable-next-line:max-line-length
+        this.images.set('max', 'https://firebasestorage.googleapis.com/v0/b/alpha69-ng.appspot.com/o/images%2Flovense-max.png?alt=media&token=846f8907-7824-4a0e-a94c-7a2804d521db');
     }
-    LovenseComponent.prototype.ngOnInit = function () {
+    LovenseService.prototype.getToyCommands = function (toyModel) {
+        return this.commands.get(toyModel);
     };
-    LovenseComponent = __decorate([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
-            selector: 'app-lovense',
-            template: __webpack_require__(/*! ./lovense.component.html */ "./src/app/models/lovense/lovense.component.html"),
-            styles: [__webpack_require__(/*! ./lovense.component.css */ "./src/app/models/lovense/lovense.component.css")]
+    LovenseService.prototype.getToyImage = function (toyModel) {
+        return this.images.get(toyModel);
+    };
+    LovenseService.prototype.extractData = function (res) {
+        var body = res;
+        return body || {};
+    };
+    LovenseService.prototype.getToys = function () {
+        var endpoint = 'https://api.lovense.com/api/lan/getToys';
+        return this.http.get(endpoint).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(this.extractData));
+    };
+    LovenseService.prototype.sendCommand = function (endpoint) {
+        console.log(endpoint);
+        return this.http.get(endpoint).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(this.extractData));
+    };
+    // https://www.djamware.com/post/5b87894280aca74669894414/angular-6-httpclient-consume-restful-api-example
+    LovenseService.prototype.handleError = function (operation, result) {
+        if (operation === void 0) { operation = 'operation'; }
+        return function (error) {
+            // TODO: send the error to remote logging infrastructure
+            console.error(error); // log to console instead
+            // TODO: better job of transforming error for user consumption
+            console.log(operation + " failed: " + error.message);
+            // Let the app keep running by returning an empty result.
+            return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["of"])(result);
+        };
+    };
+    LovenseService = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({
+            providedIn: 'root'
         }),
-        __metadata("design:paramtypes", [])
-    ], LovenseComponent);
-    return LovenseComponent;
+        __metadata("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"]])
+    ], LovenseService);
+    return LovenseService;
 }());
 
 
@@ -3254,9 +3983,6 @@ var WelcomeComponent = /** @class */ (function () {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "environment", function() { return environment; });
-// This file can be replaced during build by using the `fileReplacements` array.
-// `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
-// The list of file replacements can be found in `angular.json`.
 var environment = {
     production: false,
     firebase: {
@@ -3267,16 +3993,8 @@ var environment = {
         storageBucket: 'alpha69-ng.appspot.com',
         messagingSenderId: '964085174298'
     },
-    version: '0.27.1556'
+    version: '0.114.1825'
 };
-/*
- * For easier debugging in development mode, you can import the following file
- * to ignore zone related error stack frames such as `zone.run`, `zoneDelegate.invokeTask`.
- *
- * This import should be commented out in production mode because it will have a negative impact
- * on performance if an error is thrown.
- */
-// import 'zone.js/dist/zone-error';  // Included with Angular CLI.
 
 
 /***/ }),

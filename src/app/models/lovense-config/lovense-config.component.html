@@ -8,7 +8,7 @@
 
     <mat-accordion class="accordion" multi="true" fxLayout="row wrap" fxLayoutGap="10px">
         
-           <mat-expansion-panel *ngIf="rules" fxFlex.xs="100%" fxFlex="400px" expanded>
+           <mat-expansion-panel *ngIf="rules" fxFlex.xs="100%" fxFlex="500px" expanded>
             <mat-expansion-panel-header>
                 <mat-panel-title>
                     Rules
@@ -19,10 +19,20 @@
                 </mat-panel-description>
             </mat-expansion-panel-header>
 
-            <ul>
-              <li *ngFor="let rule of rules" [value]="rule.id">tip {{rule.tip}} to {{rule.action}} for {{rule.seconds}} at {{rule.value}} <button mat-button color="accent" (click)="onRemoveRule(rule.id)">delete</button></li>
-            </ul>
+            <table class='rules-table'>
+              <tr><th>Tip</th><th>Action</th><th>Setting</th><th>Seconds</th><th></th></tr>
+              <tr *ngFor="let rule of rules">
+                  <td>{{rule.tip}}</td>
+                  <td>{{rule.action}}</td>
+                  <td>{{rule.value}} </td>
+                  <td>{{rule.seconds}}</td>
+                  <td>
+                    <button mat-button color="accent" (click)="onRemoveRule(rule.id)">remove</button>  
+                    <button mat-button color="primary" (click)="onTestRule(rule)">test</button>
+                  </td>
+              </tr>
             
+        </table>
         </mat-expansion-panel>
 
         <mat-expansion-panel fxFlex.xs="100%" fxFlex="400px" expanded>

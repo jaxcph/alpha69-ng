@@ -34,3 +34,9 @@ X public live make it work
 - mute guest and basic members
 - bott like charles bott
 - topic (as title)
+- confetti on tips (configuable)
+- model can send confetti to individual viewer
+- invite , access on request logic
+- lovense tipping
+- clientside overlay at buttoom or top of video, so can be fullsize on devices (using css and canvas)
+- terminate subscription for toy events, on session close

@@ -38,6 +38,35 @@ mat-form-field {
   color:black;
 }
 
+.rules-table {
+  font-size: 9pt;
+  border-collapse:collapse;
+  border:1px solid gray;;
+}
+
+.rules-table td{
+  padding-left:10px;
+  padding-right:10px;
+  padding-top:2px;
+  padding-bottom:2px;
+  border-bottom:1px solid gray;
+  text-align: center;
+  color:black;
+  background-color: white;
+ }
+
+ .rules-table th{
+  padding-left:10px;
+  padding-right:10px;
+  padding-top:2px;
+  padding-bottom:2px;
+  border-bottom:1px solid gray;
+  text-align: center;
+  color:white;
+  background-color: black;
+ }
+
+
 
 
 mat-expansion-panel {

@@ -1,12 +1,11 @@
 import { Component, OnInit, Input, OnDestroy } from '@angular/core';
-import { LovenseToy, LovenseToyCommandRule } from '../lovense/lovense.model';
+import { LovenseToy, LovenseToyCommandRule, LovensenToyEvent } from '../lovense/lovense.model';
 import { Router, ActivatedRoute } from '@angular/router';
 import { NgForm } from '@angular/forms';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { UIService } from 'src/app/common/ui.service';
 import { Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
-
 
 @Component({
   selector: 'app-lovense-config',
@@ -56,7 +55,6 @@ export class LovenseConfigComponent implements OnInit, OnDestroy {
           }))
           .subscribe( (rulesdata: any[]) => {
             this.rules = rulesdata;
-            console.log(this.rules);
         });
 
   }
@@ -65,9 +63,22 @@ export class LovenseConfigComponent implements OnInit, OnDestroy {
     this.db.collection('lovense-toy-rules').doc(id).delete();
   }
 
-  onSubmitAddNew(form: NgForm) {
-    console.log(form);
+  onTestRule(rule: LovenseToyCommandRule) {
+       this.db.collection('session-toy-events').add( {
+                  sid: this.sid,
+                  did: rule.did,
+                  act: rule.action,
+                  val: rule.value,
+                  secs: rule.seconds,
+                  nme: 'model-test',
+                  uid: rule.uid,
+                  amt: 0,
+                  ts: new Date().getTime()
+              });
+ //   this.uiService.showSnackbar('Testing', null, (rule.seconds * 1000));
+  }
 
+  onSubmitAddNew(form: NgForm) {
       this.db.collection('lovense-toy-rules').add({
         uid: this.uid,
         did: this.toyid,
@@ -78,7 +89,6 @@ export class LovenseConfigComponent implements OnInit, OnDestroy {
       });
 
       this.uiService.showSnackbar('Rule added', null, 3000);
-    console.log(this.rules);
   }
 
   ngOnDestroy(): void {

@@ -7,7 +7,9 @@
 	   [src]="source" >
 	</video>
 
-	<canvas  id="fx-overlay"  class="fx-overlay-canvas"></canvas>
+	<ng-container *ngIf="showCanvas">
+		<canvas id="fx-overlay"  class="fx-overlay-canvas"></canvas>
+	</ng-container>
 </div>
 <button (click)="setVideoSize(1080)">FHD</button>
 <button (click)="setVideoSize(720)">HD</button>

@@ -39,7 +39,7 @@ export interface Member {
     created: Date;
     modified?: Date;
     agreedStream: boolean;
-    useToyId?: string;
+    useToyId: string;
 }
 
 export interface Tipper {

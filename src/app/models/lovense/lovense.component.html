@@ -20,14 +20,18 @@
           
         <mat-form-field>
             <mat-select placeholder="Select Toy to Use" [(ngModel)]='session.useToyId' name="useToyId">
-                <mat-option value="false">(disabled)</mat-option>
+                <mat-option value="">(disabled)</mat-option>
                 <mat-option *ngFor="let toy of toys | keyvalue" [value]="toy.value.did">{{toy.value.name}}</mat-option>
             </mat-select>
         </mat-form-field>
         <button type="submit" mat-raised-button color="primary" [disabled]="f.invalid">Save</button>
       </form>
     </td></tr>
+    <tr><td>
+    <p class="active-toy-event" *ngIf="activeToyEvent"><b>Now:</b>{{activeToyEvent.act}} @ {{activeToyEvent.val}} for {{activeToyEvent.secs}} seconds</p>
+    </td></tr>
   </table>
+
   </section>
 
 

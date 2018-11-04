@@ -7,5 +7,41 @@
         "workspacePath": null,
         "id": "UBi7zedowQf60ZVY",
         "fsPath": "c:\\Users\\jaxcph\\code\\alpha69-ng\\tasklist.txt"
+    },
+    {
+        "type": "File",
+        "name": "c:\\Users\\jaxcph\\code\\alpha69-ng\\src\\app\\models\\lovense\\lovense.model.ts",
+        "parent_id": null,
+        "fsPath": "c:\\Users\\jaxcph\\code\\alpha69-ng\\src\\app\\models\\lovense\\lovense.model.ts",
+        "workspaceRoot": null,
+        "workspacePath": null,
+        "id": "XWyPzlxGvFSu52wD"
+    },
+    {
+        "type": "File",
+        "name": "c:\\Users\\jaxcph\\code\\alpha69-ng\\src\\app\\member\\member.model.ts",
+        "parent_id": null,
+        "fsPath": "c:\\Users\\jaxcph\\code\\alpha69-ng\\src\\app\\member\\member.model.ts",
+        "workspaceRoot": null,
+        "workspacePath": null,
+        "id": "UzGE7khfRiqCWeau"
+    },
+    {
+        "type": "File",
+        "name": "c:\\Users\\jaxcph\\code\\alpha69-ng\\src\\app\\member\\session\\current-session\\current-session.component.ts",
+        "parent_id": null,
+        "fsPath": "c:\\Users\\jaxcph\\code\\alpha69-ng\\src\\app\\member\\session\\current-session\\current-session.component.ts",
+        "workspaceRoot": null,
+        "workspacePath": null,
+        "id": "N9BUL4EurP2Kn8zQ"
+    },
+    {
+        "type": "File",
+        "name": "c:\\Users\\jaxcph\\code\\alpha69-ng\\src\\app\\models\\lovense\\lovense.component.ts",
+        "parent_id": null,
+        "fsPath": "c:\\Users\\jaxcph\\code\\alpha69-ng\\src\\app\\models\\lovense\\lovense.component.ts",
+        "workspaceRoot": null,
+        "workspacePath": null,
+        "id": "nDBWsmI6eXz4kwUg"
     }
 ]

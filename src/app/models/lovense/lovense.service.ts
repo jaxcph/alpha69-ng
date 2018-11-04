@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClientModule, HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { LovenseToyCommand } from './lovense.model';
+import { LovenseToyCommand, LovensenToyEvent } from './lovense.model';
 
 import { stringify } from '@angular/compiler/src/util';
 
@@ -63,6 +63,8 @@ export class LovenseService {
 
    }
 
+
+
    getToyCommands(toyModel: string) {
     return this.commands.get(toyModel);
    }
@@ -82,6 +84,11 @@ export class LovenseService {
       map(this.extractData));
   }
 
+  sendCommand(endpoint: string) {
+    console.log(endpoint);
+    return this.http.get(endpoint).pipe(
+      map(this.extractData));
+  }
 
 // https://www.djamware.com/post/5b87894280aca74669894414/angular-6-httpclient-consume-restful-api-example
   private handleError<T> (operation = 'operation', result?: T) {
