@@ -67,7 +67,10 @@ export class LovenseComponent implements OnInit, OnDestroy {
           }
           if (this.session.useToyId)  {
             console.log('subscripted to toy event listener');
-            this.eventSub = this.db.collection('session-toy-events', ref => ref.where('sid', '==', this.session.id).orderBy('ts'))
+            this.eventSub = this.db.collection('session-toy-events', ref => ref
+            .where('sid', '==', this.session.id)
+            .orderBy('ts')
+            .limit(1))
             .snapshotChanges()
             .pipe(
               map( result => {

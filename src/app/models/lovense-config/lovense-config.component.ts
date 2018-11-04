@@ -83,7 +83,8 @@ export class LovenseConfigComponent implements OnInit, OnDestroy {
         uid: this.uid,
         did: this.toyid,
         action: form.value.action,
-        tip: form.value.tip,
+        tip_from: form.value.tip_from,
+        tip_to: form.value.tip_to,
         value: form.value.value,
         seconds: form.value.seconds
       });

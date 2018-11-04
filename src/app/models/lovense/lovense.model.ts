@@ -27,7 +27,8 @@ export interface LovenseToyCommandRule {
     did: string;
     id: number;
     action: string;
-    tip: number;
+    tip_from: number;
+    tip_to: number;
     value: number;
     seconds: number;
 }
