@@ -42,3 +42,4 @@ X public live make it work
 - terminate subscription for toy events, on session close
 - overlay animated gif
 - RxQueue
+- light control. philpis vue
